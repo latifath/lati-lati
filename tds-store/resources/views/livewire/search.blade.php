@@ -1,14 +1,14 @@
 <div class="inline-block relative " x-data="{ open: true}" >
     <form action="">
         <div class="input-group">
-            <input @click.away="open = false; @this.resetIndex();" @click="open = true" type="text" class="form-control focus:outline-none" placeholder="Recherche" wire:model="query"
+            <input @click.away="open = false; @this.resetIndex();" @click="open = true" type="text" class="form-control focus:outline-none " placeholder="Recherche" wire:model="query"
             wire:keydown.arrow-down.prevent="incrementIndex"
             wire:keydown.arrow-up.prevent="decrementIndex"
             wire:keydown.backspace="resetIndex"
             wire:keydown.enter.prevent="showproduit"
             >
             <div class="input-group-append" style="{{ couleur_background_1() }}">
-                <span class="input-group-text bg-transparent text-primary">
+                <span class="input-group-text bg-transparent text-primary pt-2">
                     <i class="fa fa-search" ></i>
                 </span>
             </div>

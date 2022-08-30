@@ -8,9 +8,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-
         <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="{{ asset('assets/img/tds.png') }}">
 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -26,12 +25,20 @@
         @yield('style')
 
         <style>
+            .tx:hover{
+            color: #fff !important;
+        }
 
         @media (min-width: 640px){
             .div_form_jetstream{
                 margin-top: 200px !important;
             }
         }
+
+        .div-logo{
+            text-left : 20px;
+        }
+
         </style>
 
         <!-- Styles -->
@@ -39,6 +46,7 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
     </head>
     <body>
         @yield('head')
@@ -73,7 +81,7 @@
 
     <!-- Contact Javascript File -->
     <script src="{{ asset('assets/mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src=" {{ asset('asets/mail/contact.js') }}"></script>
+    <script src=" {{ asset('assets/mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/js/main.js') }}"></script>

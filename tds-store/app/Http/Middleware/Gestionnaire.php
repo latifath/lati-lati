@@ -23,5 +23,6 @@ class Gestionnaire
             return $next($request);
         }
 
-        return redirect()->route('root_index');    }
+        return redirect()->route('root_index');
+    }
 }
