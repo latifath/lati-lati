@@ -94,14 +94,6 @@ Route::post('verification-coupon', [PromotionController::class, 'verification_co
 
 Route::delete('promotion/delete', [PromotionController::class, 'delete'])->name('site_public_delete_promotion');
 
-// favoris
-
-Route::delete('/favoris/{id}/delete', [HomeController::class, 'delete'])->name('site_public_delete_favoris');
-
-Route::post('/favoris/ajouter', [HomeController::class, 'add_favoris'])->name('site_public_add_favoris');
-
-Route::get('site-public/favoris/compter', [FavorisAdminController::class, 'compte'])->name('root_site_public_favoris_compte');
-
 
 
 //Espace Client

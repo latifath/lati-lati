@@ -48,32 +48,4 @@ class HomeController extends Controller
         return redirect()->back();
     }
     // End
-
-    public function add_favoris(Request $request){
-        $request->validate([
-            'produit_id' => 'required',
-        ]);
-             Favoris::create([
-            'produit_id' =>$request->produit_id,
-            'user_id' =>auth()->user()->id,
-        ]);
-
-        flashy()->success('produit ajouté en favoris avec succès');
-
-        return redirect()->back();
-    }
-
-    public function delete(Request $request){
-        $delete = Favoris::findOrfail($request->id);
-        $delete -> delete();
-
-    flashy()->error('produit retiré du favoris avec succès');
-
-    return redirect()->back();
-     }
-
-     public function compte(Request $request){
-       $compte =  Favoris::where('user_id', auth()->user()->$request->id)->get();
-       return $compte;
-     }
 }
