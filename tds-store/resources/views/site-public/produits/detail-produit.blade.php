@@ -51,25 +51,6 @@
                 <div class="col-lg-8 pb-5">
                     <div class="">
                         @livewire('like', ['produit' => $produit])
-
-                       @if(!auth()->check())
-                        @else
-                            @if(exist_favoris($produit->id) == null)
-                                <form action="{{ route('site_public_add_favoris') }}" method="POST">
-                                    @csrf
-                                    <input class="" name="produit_id" type="hidden" value="{{ $produit->id }}" >
-                                    <button type="submit" class="border-0 bg-white"><i class="fa fa-heart"></i>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('site_public_delete_favoris', exist_favoris($produit->id)->id ) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="border-0 bg-white"><i class="fa fa-heart" style="{{  couleur_text_2() }}"></i>
-                                    </button>
-                                </form>
-                            @endif
-                        @endif
                     </div>
                     <h3 class="font-weight-semi-bold mt-3">{{ $produit->nom}}</h3>
 
