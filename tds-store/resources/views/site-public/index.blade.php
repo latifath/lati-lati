@@ -11,7 +11,7 @@
                     <div class="carousel-inner">
 
                         <div class="carousel-item active" style="height: 410px;">
-                            @if($publicite_latest == " ")
+                            @if($publicite_latest == null)
                                <img class="img-fluid" src="{{ asset('storage/publicites/server.jpg') }}" alt="Image">
                             @else
                                 <img class="img-fluid" src="{{ asset('storage/' . $publicite_latest->path) }}" alt="Image">

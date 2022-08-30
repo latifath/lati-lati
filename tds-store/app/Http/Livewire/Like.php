@@ -6,9 +6,12 @@ use Livewire\Component;
 
 class Like extends Component
 {
+    public $produit;
 
     public function addLike(){
-        auth()->user()->favoris()->toggle(1);
+        if (auth()->check()) {
+            auth()->user()->likes()->toggle($this->produit->id);
+        }
     }
 
     public function render()

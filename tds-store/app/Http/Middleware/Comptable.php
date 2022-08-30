@@ -24,5 +24,5 @@ class Comptable
 
         }
 
-        return redirect()->route('root_espace_admin_index');    }
+        return redirect()->route('root_index');    }
 }

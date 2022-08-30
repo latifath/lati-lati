@@ -58,16 +58,16 @@ class Produit extends Model
     return $this->hasMany(CommandeProduit::class);
     }
 
-    public function favoris()
+    public function likes()
     {
         return $this->belongsToMany(User::class);
     }
 
-    // public function isLiked()
-    // {
-    //     if(auth()->check()){
-    //         return auth()->user()->favoris()->contains('id', $this->id);
-    //     }
-    // }
+    public function isLiked()
+    {
+        if(auth()->check()){
+            return auth()->user()->likes->contains('id', $this->id);
+        }
+    }
 }
 

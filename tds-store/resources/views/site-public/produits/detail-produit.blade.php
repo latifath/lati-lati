@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-lg-8 pb-5">
                     <div class="">
-                        {{-- @livewire('like') --}}
+                        @livewire('like', ['produit' => $produit])
 
                        @if(!auth()->check())
                         @else
