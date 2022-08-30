@@ -19,6 +19,6 @@ class FavorisAdminController extends Controller
 
     flashy()->success('favoris retiré avec succès');
 
-    return redirect()->back();
+    return redirect()->route('root_site_public_favoris_index');
    }
 }
