@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {{-- <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description"> --}}
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'TDS-store') }}</title>
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="{{ asset('assets/img/tds.png') }}">
@@ -29,9 +29,16 @@
             color: #fff !important;
         }
 
+        img {
+            display: inline-block !important;
+        }
+
         @media (min-width: 640px){
             .div_form_jetstream{
                 margin-top: 200px !important;
+            }
+            .sm\:max-w-md {
+                max-width: 38rem !important;
             }
         }
 
@@ -86,6 +93,5 @@
     <!-- Template Javascript -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    @livewireScripts
     </body>
 </html>
