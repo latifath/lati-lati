@@ -61,7 +61,7 @@
 
                                                 <tr>
                                                     <td class="border-0 float-left">Solde: <span
-                                                        style="{{ couleur_text_2() }}">{{ number_format(montant_ttc(montant_apres_reduction_sans_session(account_commande($commande->id)->montant, $commande->promotion), $commande->adresse_livraison_id), '0', '.', ' ') ?? '' }} F CFA</span>
+                                                        style="{{ couleur_text_2() }}">{{ number_format(account_commande($commande->id)->montant, '0', '.', ' ') }} F CFA</span>
                                                     </td>
                                                 </tr>
                                                 @endif

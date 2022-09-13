@@ -47,7 +47,6 @@ class CommandeController extends Controller
 
         if(session('panier')){
 
-
             $clt = AdresseClient::Create(
                 [
                 'nom'=> request('nom'),

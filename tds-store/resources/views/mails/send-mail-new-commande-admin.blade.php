@@ -1,7 +1,6 @@
 
 @component('mail::message')
 
-#
 <h2>Une commande passée par Mlle/Mr <strong> {{ $clt->nom }}</strong></h2>
 @component('mail::panel')
 
@@ -38,20 +37,19 @@
 
 <div class="card-body">
 <h2>Id commande: {{ $commande->id }}</h2>
-<h2>Date de commande: {{ $commande->created_at->format('d-m-Y') }} </h2>
-<h2>Montant Total TTC: </h2>
+<h2>Date commande: {{ $commande->created_at->format('d-m-Y') }} </h2>
+<h2>Montant Total: {{ number_format(total_commande($commande->id), '0', '.', ' ') }} F CFA</h2>
 </div>
 
 <div class="card-body">
-<h2>Remise: {{ $commande->remise }}</h2>
-
- @if(exist_commande_paiement($commande->id) != null)
-<h2>Mode de paiement: {{ $commande->paiements->type_paiement }}</h2>
-<h2>Montant Total TTC: {{ $commande->paiements->montant }}</h2>
-@else
-
-@endif
-</div>
+    @if ($commande->promotion != null)
+    <h2>Remise: {{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</h2>
+    @endif
+    @if(exist_commande_paiement($commande->id) != null)
+    <h2>Mode de paiement: {{ paiements()->type_paiement }}</h2>
+    @else
+    @endif
+    {{-- <h2>Montant Total: {{ $commande->paiements->montant }}</h2> --}}
 
 
 

@@ -158,11 +158,11 @@
                                             <p>{{ configuration()->tva == 1 ? '18%' : '0%' }}</p> --}}
 
                                         </div>
-                                        <div class="card-footer border-secondary bg-transparent">
+                                        <div class="card-footer border-secondary bg-transparent" style="padding: 0px">
                                             <div class="d-flex justify-content-between mt-2">
                                                 @if(!request()->session()->has('coupon'))
-                                                <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">Montant TTC</h5>
-                                                <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">{{  number_format($sub_total,  0, '.', ' ' ) }} F CFA</h5>
+                                                <h5 class="font-weight-medium " style="{{ couleur_text_2() }}">Montant TTC</h5>
+                                                <h5 class="font-weight-medium" style="{{ couleur_text_2() }}">{{  number_format($sub_total,  0, '.', ' ' ) }} F CFA</h5>
                                                 </h5>
 
                                                 @else
@@ -209,7 +209,7 @@
                                     </div>
                                     {!! $errors->first('payment', '<p class="text-danger">:message</p>') !!}
                                 </div>
-                                <div class="card-footer border-secondary bg-transparent">
+                                <div class="card-footer border-secondary bg-transparent" style="padding: 0px">
                                     <a href="{{ route('root_site_public_validation') }}"></a><button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Passer la commande</button>
                                 </div>
                             </div>

@@ -16,9 +16,7 @@
 
 <div class="row">
     <div class="col-6 offset-sm-3">
-        <a href="{{ route('root_espace_admin_valider_commande', $commande->id) }}">
-            <button  class="btn-success my-2 py-2"><i class="fa fa-check">Accepter la commande</i> </button>
-        </a>
+            <button  id="confirmation" data-id="{{ $commande->id }}" class="btn-success my-2 py-2"><i class="fa fa-check">Accepter la commande</i> </button>
 
         <a href="{{ route('root_espace_admin_annuler_commande', $commande->id) }}">
             <button class="btn-secondary my-2 py-2 mx-2" type="submit" style="border: 1px solid;">Annuler la commande</button>
@@ -213,6 +211,30 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="ConfirmationModalCenter" aria-labelledby="ConfirmationModalCenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Acceptation commande</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('root_espace_admin_valider_commande', $commande->id) }}"  method="POST">
+                @csrf
+                <div class="modal-body">
+                    <input  class="form-control"  type="hidden" id="item_id" placeholder="" name="id" >
+                    <h5 class="text-center">Etes-vous sûr de vouloir marquer la commande comme terminée ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-success">Oui, Accepter</button>
+                </div>
+            </form>
+       </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -224,5 +246,12 @@
         $('#DeleteModalCenter').modal('show');
     });
 
+    $(document).on('click', '#confirmation', function(){
+       var id = $(this).attr('data-id');
+
+       $('#item_id').val(id);
+
+       $('#ConfirmationModalCenter').modal('show');
+   });
 </script>
 @endsection

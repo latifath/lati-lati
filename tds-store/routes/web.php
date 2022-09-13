@@ -157,7 +157,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/paiement/ajouter', [PaiementAdminController::class, 'create'])->name('root_espace_admin_paiement_create');
 
-    Route::get('espace-admin/commande-valider/{id}', [CommandeAdminController::class, 'valider_commande'])->name('root_espace_admin_valider_commande');
+    Route::post('espace-admin/commande-valider/{id}', [CommandeAdminController::class, 'valider_commande'])->name('root_espace_admin_valider_commande');
 
     Route::get('espace-admin/commande-annuler/{id}', [CommandeAdminController::class, 'annuler_commande'])->name('root_espace_admin_annuler_commande');
 

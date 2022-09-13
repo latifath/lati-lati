@@ -14,11 +14,11 @@ class CreateProduitNonLivrersTable extends Migration
     public function up()
     {
         Schema::create('produit_non_livrers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('commande_id')->unsigned();
-            $table->foreign('commande_id')->references('id')->on('commandes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('commande_id')->references('id')->on('commandes');
             $table->integer('produit_id')->unsigned();
-            $table->foreign('produit_id')->references('id')->on('produits')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('produit_id')->references('id')->on('produits');
             $table->string('quantite');
             $table->string('status');
             $table->timestamps();

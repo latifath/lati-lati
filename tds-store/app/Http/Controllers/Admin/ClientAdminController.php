@@ -53,7 +53,7 @@ class ClientAdminController extends Controller
             'password' => 'required|string|min:6|max:12',
             'password_confirm' => 'required|same:password|min:6',
         ]);
-        dd('d');
+
         User::create(['name' => $request->name, 'email' =>$request->email, 'role' => $request->role, 'password' => Hash::make($request->password), 'password_confirm' => Hash::make($request->password_confirm)]);
 
         flashy()->info('Client crée avec succès.');

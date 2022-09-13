@@ -17,11 +17,19 @@ class PanierSessionRepository implements PanierInterfaceRepository
 		$panier = session()->get("panier"); // On récupère le panier en session
 
 		// Les informations du produit à ajouter
+        if($produit->prix_promotionnel != null){
 		$produit_details = [
 			'name' => $produit->nom,
-			'price' => $produit->prix,
+			'price' => $produit->prix_promotionnel,
 			'quantity' => $quantite
 		];
+        }else{
+        $produit_details = [
+            'name' => $produit->nom,
+            'price' => $produit->prix,
+            'quantity' => $quantite
+        ];
+        }
 
 		$panier[$produit->id] = $produit_details; // On ajoute ou on met à jour le produit au panier
 		session()->put("panier", $panier); // On enregistre le panier

@@ -1,7 +1,7 @@
 
 @component('mail::message')
 
-#Bonjour cher(e) {{ $clt['nom'] }}
+Bonjour cher(e) {{ $clt['nom'] }}
 <p>Nous avons reçue votre commande!, merci de continuer le processus.</p>
 
 #
@@ -41,7 +41,14 @@
 
 @endcomponent
 
-
+<div class="card-body">
+    <h2>Id commande: {{ $commande->id }}</h2>
+    <h2>Date commande: {{ $commande->created_at->format('d-m-Y') }} </h2>
+    <h2>Montant Total: {{ number_format(total_commande($commande->id), '0', '.', ' ') }} F CFA</h2>
+    @if ($commande->promotion != null)
+    <h2>Remise: {{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</h2>
+    @endif
+</div>
 
 
  {{-- @component('mail::promotion')
@@ -65,7 +72,3 @@
 {{ config('app.name') }}
 
 @endcomponent
-
-{{-- data: [
-    'data' = $this->data
-] --}}

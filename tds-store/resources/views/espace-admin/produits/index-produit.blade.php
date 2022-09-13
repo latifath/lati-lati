@@ -29,23 +29,20 @@
                             <th>Nom</th>
                             <th>Quantité</th>
                             <th>Prix</th>
+                            <th>Prix promo</th>
                             <th>Description</th>
                             <th>Sous-catégorie</th>
                             <th style="width: 15%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
-                                $nbChar = 5;
-                                if ( strlen($chaine) >= $nbChar)
-                                return $chaine;
-                            @endphp --}}
                             @foreach ($produits as $produit)
                             <tr>
                                 <td>{{ $produit->id }}</td>
                                 <td>{{ $produit->nom }}</td>
                                 <td>{{ $produit->quantite }}</td>
                                 <td>{{ $produit->prix }}</td>
+                                <td>{{ $produit->prix_promotionnel }}</td>
                                 <td>{!! $produit->description !!}</td>
                                 <td>{{ $produit->sous_categorie->nom }}</td>
                                 <td>
