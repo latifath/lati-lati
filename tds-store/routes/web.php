@@ -57,6 +57,8 @@ Route::get('panier/vider', [PanierController::class, 'empty'])->name('root_empty
 
 Route::get('validation-commande', [CommandeController::class, 'valider_commande'])->name('root_site_public_validation_commande')->middleware('auth');
 
+Route::post('test', [CommandeController::class, 'test'])->name('test')->middleware('auth');
+
 Route::post('validation-commande/create', [CommandeController::class, 'validation'])->name('root_site_public_validation');
 
 Route::post('validation-commande/update/adresse-facturation', [CommandeController::class, 'edit_adresse_facturation'])->name('root_site_public_edit_adresse_facturation');

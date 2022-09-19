@@ -7,7 +7,7 @@
             <div class="form-check">
                 <label class="form-check-label check-form-livraison" >
                     {{-- <input type="checkbox" class="form-check-input" value=""  onchange="valueChanged()">Adresse de livraison différente de adresse de facturation --}}
-                    <input type="checkbox" class="form-check-input" value="" name="check" wire:click = change>Adresse de livraison différente de adresse de facturation
+                    <input type="checkbox" class="form-check-input" value="" name="check" wire:click = change()>Adresse de livraison différente de adresse de facturation
                 </label>
             </div>
         </div>

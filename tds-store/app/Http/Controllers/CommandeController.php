@@ -27,23 +27,39 @@ class CommandeController extends Controller
         return view("site-public.commandes.validation-commande", compact('adresseclient'));
     }
 
-    public function validation(CreateValidationCommandeFormRequest $request) {
-
+    public function test(Request $request){
         $request->validate([
+            'latitude'=> 'required',
+        ]);
+    }
+
+    public function validation(Request $request) {
+
+        // dd('e');
+        $request->validate([
+            'nom'=> 'required',
+            'prenom'=> 'required|min:3',
+            'email'=> 'required|email',
+            'telephone'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
+            'pays'=> 'required',
+            'rue'=> 'required|min:4',
+            'ville'=> 'required|min:3',
+            'code_postal'=> 'required',
             'payment' => 'required',
         ]);
-        if($request->nomLivraison != null ) {
-            $request->validate([
-                'nomLivraison'=> 'required',
-                'prenomLivraison'=> 'required|min:3',
-                'emailLivraison'=> 'required|email',
-                'telephoneLivraison'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
-                'paysLivraison'=> 'required',
-                'rueLivraison'=> 'required|min:4',
-                'villeLivraison'=> 'required|min:3',
-                'code_postalLivraison'=> 'required|number',
-            ]);
-        }
+
+        // if($request->nomLivraison != null ) {
+        //     $request->validate([
+        //         'nomLivraison'=> 'required',
+        //         'prenomLivraison'=> 'required|min:3',
+        //         'emailLivraison'=> 'required|email',
+        //         'telephoneLivraison'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
+        //         'paysLivraison'=> 'required',
+        //         'rueLivraison'=> 'required|min:4',
+        //         'villeLivraison'=> 'required|min:3',
+        //         'code_postalLivraison'=> 'required|number',
+        //     ]);
+        // }
 
         if(session('panier')){
 
