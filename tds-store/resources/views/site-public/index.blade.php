@@ -12,9 +12,9 @@
 
                         <div class="carousel-item active" style="height: 410px;">
                             @if($publicite_latest == null)
-                               <img class="img-fluid" src="{{ asset('storage/publicites/server.jpg') }}" alt="Image">
+                               <img class="img-fluid" src="{{ asset('publicites/server.jpg') }}" alt="Image">
                             @else
-                                <img class="img-fluid" src="{{ asset('storage/' . $publicite_latest->path) }}" alt="Image">
+                                <img class="img-fluid" src="{{ asset('publicites/' . $publicite_latest->path) }}" alt="Image">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
                                         <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ $publicite_latest->message }}
@@ -28,7 +28,7 @@
                         @foreach($publicites as $publicite)
                             @if ($publicite_latest->id != $publicite->id)
                                 <div class="carousel-item" style="height: 410px;">
-                                    <img class="img-fluid" src="{{asset('storage/' . $publicite->path) }}" alt="Image">
+                                    <img class="img-fluid" src="{{asset('publicites/' . $publicite->path) }}" alt="Image">
                                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                         <div class="p-3" style="max-width: 700px;">
                                             <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ $publicite->message }}

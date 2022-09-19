@@ -40,7 +40,7 @@
                                 <td>{{ $publicite->message }}</td>
                                 <td>
                                     <figure class="figure px-4 pt-5">
-                                        <img src="{{ asset('storage/' . $publicite->path) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                        <img src="{{ asset('publicites/' . $publicite->path) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                         <div class="row pt-3">
                                             <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                         </div>

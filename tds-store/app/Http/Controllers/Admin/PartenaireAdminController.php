@@ -19,20 +19,21 @@ class PartenaireAdminController extends Controller
             'nom' => 'required|unique:partenaires,nom,except,id',
             'logo' => 'required|image|dimensions:min_width=1',
         ]);
-        $extension = new SplFileInfo($request->logo->getClientOriginalName());
 
-        $filepath = $request->file('logo')->storeAs('logo', $request->nom . '.' . $extension->getExtension(), 'public');
+        $newImageName = time() . '-' . $request->nom . '.' . $request->logo->extension();
 
+        // location chemin image
+        $request->logo->move(public_path('partenaires'), $newImageName);
 
         Partenaire::findOrfail($request->id)->update([
             "nom" => $request->nom,
-            "logo" => $filepath,
+            "logo" => $newImageName ,
         ]);
 
 
-        flashy()->success('Partenaire #'. $request->id . 'modifiée avec succès');
+        flashy()->success('Partenaire #'. $request->id . ' modifiée avec succès');
 
-        return redirect()->back();
+        return redirect()->route('root_espace_admin_index_partenaire');
     }
 
     public function create(Request $request)
@@ -43,17 +44,18 @@ class PartenaireAdminController extends Controller
             'logo' => 'required|image|dimensions:min_width=1',
         ]);
 
-        $extension = new SplFileInfo($request->logo->getClientOriginalName());
+        $newImageName = time() . '-' . $request->nom . '.' . $request->logo->extension();
 
-        $filepath = $request->file('logo')->storeAs('logo', $request->nom . '.' . $extension->getExtension(), 'public');
-
+        // location chemin image
+        $request->logo->move(public_path('partenaires'), $newImageName);
         Partenaire::create([
             'nom' =>$request->nom,
-            'logo' => $filepath,
+            'logo' => $newImageName ,
         ]);
 
         flashy()->info('Partenaire créée avec succès.');
-        return redirect()->back();
+
+        return redirect()->route('root_espace_admin_index_partenaire');
     }
 
     public function delete(Request $request){
@@ -62,7 +64,7 @@ class PartenaireAdminController extends Controller
 
         $partenaire->delete();
 
-        flashy()->error('Partenaire #'. $request->id . 'supprimée avec succès');
+        flashy()->error('Partenaire #'. $request->id . ' supprimée avec succès');
 
         return redirect()->back();
     }

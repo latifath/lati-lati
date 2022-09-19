@@ -5,9 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                @client
+                {{-- @client
                 <a href="{{ route('root_espace_client_index') }}" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
-                @endclient
+                @endclient --}}
 
                 <a href="{{ route('root_espace_admin_index') }}" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
               </div>
@@ -77,7 +77,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" style="border: 1px solid;" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -157,7 +157,7 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover border-solid" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" style="border: solid;" />
+                        <img class="h-10 w-10 rounded-full object-cover border-solid" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" style="border: 1px solid;" />
                     </div>
                 @endif
 

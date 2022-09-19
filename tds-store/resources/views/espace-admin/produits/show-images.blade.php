@@ -14,7 +14,7 @@
     <div class="col-md-12 col-12">
         @foreach ($produit_images as $produit_image)
             <figure class="figure px-4 pt-5">
-                <img src="{{ asset('storage/' . $produit_image->path) }}" class="figure-img img-fluid rounded" alt="" height="300" width="300">
+                <img src="{{ asset('img/' . $produit_image->path ) }}" class="figure-img img-fluid rounded" alt="" height="300" width="300">
                 <div class="row pt-3">
                     <figcaption class="figure-caption mx-3" style="font-size: 18px;">{{ $produit_image->nom }}</figcaption>
                     <button id="btn_edit_image" data-id="{{ $produit_image->id }}" data-nom="{{ $produit_image->nom }}" data-toggle="tooltip" title="Editer" class="btn btn-primary"><i class="fa fa-edit"></i></button>

@@ -245,7 +245,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/partenaires', [PartenaireAdminController::class, 'index'])->name('root_espace_admin_index_partenaire');
 
-    Route::post('espace-admin/partenaires/update', [PartenaireAdminController::class, 'update'])->name('root_espace_admin_edit_partenaire');
+    Route::put('espace-admin/partenaires/update', [PartenaireAdminController::class, 'update'])->name('root_espace_admin_edit_partenaire');
 
     Route::post('espace-admin/partenaires/ajouter', [PartenaireAdminController::class, 'create'])->name('root_espace_admin_partenaire_create');
 
@@ -296,7 +296,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/publicites/ajouter', [PubliciteAdminController::class, 'create'])->name('root_espace_admin_ajouter_publicites');
 
-    Route::post('espace-admin/publicites/modifier', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
+    Route::put('espace-admin/publicites/modifier', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
 
     Route::delete('espace-admin/publicites/{id}/publicites', [PubliciteAdminController::class, 'delete'])->name('root_espace_admin_supprimer_publicites');
 

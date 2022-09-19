@@ -3,12 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
-use App\Models\Stock;
-use App\Models\Client;
 use App\Models\Produit;
-use App\Models\Commande;
-use App\Models\Paiement;
-use Illuminate\Http\Request;
 use App\Models\SousCategorie;
 
 class SitepublicController extends Controller
