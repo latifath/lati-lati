@@ -121,19 +121,20 @@ class ProduitAdminController extends Controller
 
         $request->validate([
             'nom'=> 'required|unique:images,nom,except,id',
-            'path' => 'required|image',
+            'path' => 'required|image|mimes:jpg,png,jpeg|max:5048',
             'produit_id' => 'required',
         ]);
 
-        $extension = new SplFileInfo($request->path->getClientOriginalName());
+        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
 
-        $filepath = $request->file('path')->storeAs('articles', $request->nom . '.' . $extension->getExtension(), 'public');
+        // location chemin image
+        $request->path->move(public_path('img'), $newImageName);
+
         Image::create([
             'nom' => $request->nom,
-            'path' => $filepath,
+            'path' => $newImageName,
             'produit_id' =>  $request->produit_id,
         ]);
-
 
         flashy()->info('Image ajoutée avec succès.');
 
@@ -150,22 +151,23 @@ class ProduitAdminController extends Controller
 
         $request->validate([
             'nom'=> 'required',
-            'path' => 'required|image',
+            'path' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $extension = new SplFileInfo($request->path->getClientOriginalName());
+        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
 
-        $filepath = $request->file('path')->storeAs('articles', $request->nom . '.' . $extension->getExtension(), 'public');
+        // location chemin image
+        $request->path->move(public_path('img'), $newImageName);
 
         Image::findOrfail($request->id)->update([
             "nom" => $request->nom,
-            "path" => $filepath,
+            "path" => $newImageName,
 
         ]);
 
         flashy()->success('Image #'. $request->id . 'modifiée avec succès');
 
-        return redirect()->route('root_espace_admin_show_images');
+        return redirect()->route('root_espace_admin_images');
     }
 
     public function delete_image(Request $request){

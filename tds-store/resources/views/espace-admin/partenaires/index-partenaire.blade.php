@@ -38,7 +38,7 @@
                             {{-- <td>{{ $partenaire->logo }}</td> --}}
                             <td>
                                 <figure class="figure px-4 pt-5">
-                                    <img src="{{ asset('storage/' . $partenaire->logo) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                    <img src="{{ asset('partenaires/' . $partenaire->logo) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                     <div class="row pt-3">
                                         <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                     </div>
@@ -71,6 +71,7 @@
             </div>
             <form action="{{ route('root_espace_admin_edit_partenaire')}}"  method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="modal-body" style="background-color: #f0f0f0;">
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;"  type="hidden" placeholder="" name="id" >

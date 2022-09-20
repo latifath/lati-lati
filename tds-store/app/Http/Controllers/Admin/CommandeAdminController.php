@@ -89,7 +89,6 @@ class CommandeAdminController extends Controller
             $produit->update([
                 'quantite' => $produit->quantite,
             ]);
-
         }
 
         Mail::to($commande->adresse_client->email)->send(new SendMailCommandeAnnuleeClient($commande));
@@ -115,4 +114,6 @@ class CommandeAdminController extends Controller
         flashy()->error('Commande #'. $request->id . 'supprimée avec succès');
         return redirect()->route('root_espace_admin_commandes_index');
     }
+
+
 }

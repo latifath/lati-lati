@@ -49,12 +49,16 @@
                     </div>
                 </div>
                 <div class="col-lg-8 pb-5">
+
                     <div class="">
                         @livewire('like', ['produit' => $produit])
                     </div>
                     <h3 class="font-weight-semi-bold mt-3">{{ $produit->nom}}</h3>
-
-                    <h3 class="font-weight-semi-bold mb-4 mt-3">{{ number_format($produit->prix, '0', '.', ' ') }} F CFA</h3>
+                    @if($produit->prix_promotionnel != null)
+                    <h3 class="font-weight-semi-bold mb-4 mt-3">{{ number_format($produit->prix_promotionnel, '0', '.', ' ') }} F CFA</h3>
+                    @else
+                    <h3 class="font-weight-semi-bold mb-4 mt-3">{{ number_format($produit->prix , '0', '.', ' ') }} F CFA</h3>
+                    @endif
                     <form action="{{ route('root_create_panier', $produit) }}" method="POST">
                         @csrf
                         <div class="d-flex align-items-center mb-4 pt-2">
@@ -151,8 +155,13 @@
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">{{ $produit->nom }}</h6>
                         <div class="d-flex justify-content-center">
-                            <h6>{{ number_format($produit->prix, 0,'.', ' ')}} F CFA</h6>
-                            <h6 class="text-muted ml-2"><del>{{ $produit->prix }}</del></h6>
+                            @if($produit->prix_promotionnel != null)
+                                <h6 class="text-muted"><del>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA </del></h6>
+                                <h6 class="ml-3"> {{ number_format($produit->prix_promotionnel, 0, '.', ' ') }} F CFA</h6>
+                            @else
+                                <h6>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA</h6>
+
+                            @endif
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border" style="m-auto">

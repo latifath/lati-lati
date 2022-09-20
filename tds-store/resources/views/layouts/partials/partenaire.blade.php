@@ -6,7 +6,7 @@
                 <div class="owl-carousel vendor-carousel">
                     @foreach (partenaires_logo() as $pl)
                         <div class="vendor-item border p-4">
-                            <img src="{{ asset('storage/' . $pl->logo) }}" alt="" width="60" height="100">
+                            <img src="{{ asset('partenaires/' . $pl->logo) }}" alt="" width="60" height="100">
                         </div>
                     @endforeach
                 </div>

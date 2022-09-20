@@ -57,8 +57,6 @@ Route::get('panier/vider', [PanierController::class, 'empty'])->name('root_empty
 
 Route::get('validation-commande', [CommandeController::class, 'valider_commande'])->name('root_site_public_validation_commande')->middleware('auth');
 
-Route::post('test', [CommandeController::class, 'test'])->name('test')->middleware('auth');
-
 Route::post('validation-commande/create', [CommandeController::class, 'validation'])->name('root_site_public_validation');
 
 Route::post('validation-commande/update/adresse-facturation', [CommandeController::class, 'edit_adresse_facturation'])->name('root_site_public_edit_adresse_facturation');
@@ -159,7 +157,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/paiement/ajouter', [PaiementAdminController::class, 'create'])->name('root_espace_admin_paiement_create');
 
-    Route::get('espace-admin/commande-valider/{id}', [CommandeAdminController::class, 'valider_commande'])->name('root_espace_admin_valider_commande');
+    Route::post('espace-admin/commande-valider/{id}', [CommandeAdminController::class, 'valider_commande'])->name('root_espace_admin_valider_commande');
 
     Route::get('espace-admin/commande-annuler/{id}', [CommandeAdminController::class, 'annuler_commande'])->name('root_espace_admin_annuler_commande');
 
@@ -247,7 +245,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/partenaires', [PartenaireAdminController::class, 'index'])->name('root_espace_admin_index_partenaire');
 
-    Route::post('espace-admin/partenaires/update', [PartenaireAdminController::class, 'update'])->name('root_espace_admin_edit_partenaire');
+    Route::put('espace-admin/partenaires/update', [PartenaireAdminController::class, 'update'])->name('root_espace_admin_edit_partenaire');
 
     Route::post('espace-admin/partenaires/ajouter', [PartenaireAdminController::class, 'create'])->name('root_espace_admin_partenaire_create');
 
@@ -298,7 +296,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/publicites/ajouter', [PubliciteAdminController::class, 'create'])->name('root_espace_admin_ajouter_publicites');
 
-    Route::post('espace-admin/publicites/modifier', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
+    Route::put('espace-admin/publicites/modifier', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
 
     Route::delete('espace-admin/publicites/{id}/publicites', [PubliciteAdminController::class, 'delete'])->name('root_espace_admin_supprimer_publicites');
 

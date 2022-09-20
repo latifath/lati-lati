@@ -25,14 +25,14 @@ class PubliciteAdminController extends Controller
             'path' => 'required|image',
 
         ]);
-        $extension = new SplFileInfo($request->path->getClientOriginalName());
+        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
 
-        $filepath = $request->file('path')->storeAs('publicites', $request->nom . '.' . $extension->getExtension(), 'public');
-
+        // location chemin image
+        $request->path->move(public_path('publicites'), $newImageName);
         Publicite::create([
             'nom' => $request->nom,
             'message' => $request->message,
-            'path' => $filepath,
+            'path' => $newImageName,
         ]);
 
         flashy()->info('Publicité ajoutée avec succès.');
@@ -48,19 +48,20 @@ class PubliciteAdminController extends Controller
                 'path' => 'required|image',
             ]);
 
-            $extension = new SplFileInfo($request->path->getClientOriginalName());
+            $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
 
-            $filepath = $request->file('path')->storeAs('publicites', $request->nom . '.' . $extension->getExtension(), 'public');
+            // location chemin image
+            $request->path->move(public_path('publicites'), $newImageName);
 
             Publicite::findOrfail($request->id)->update([
                 'nom' => $request->nom,
                 'message' => $request->message,
-                'path' => $filepath,
+                'path' => $newImageName,
             ]);
 
             flashy()->success('Publicité modifiée avec succès');
 
-            return redirect()->back();
+            return redirect()->route('root_espace_admin_publicites');
 
         }
 

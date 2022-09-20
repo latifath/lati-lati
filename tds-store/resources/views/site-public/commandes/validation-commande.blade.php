@@ -9,6 +9,14 @@
         .iti{
             display : block !important;
         }
+        fieldset{
+            border-color: #212529!important;
+        }
+
+        .select2-selection--single{
+            height: 50px !important;
+            border: 1px solid #EDF1FF !important;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -35,9 +43,9 @@
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="mb-4 col-12">
-                            <fieldset class="border p-2 mr-auto ml-2" style="border-color: #212529!important;">
-                                <legend>
-                                    <h4 class="font-weight-semi-bold mb-4">Adresse de facturation</h4>
+                            <fieldset class="border p-3" style="border-color: #212529!important;">
+                                <legend class="float-none w-auto p-2">
+                                    Adresse de facturation
                                 </legend>
                                  <div class="row">
                                     <div class="col-md-6 form-group">
@@ -49,19 +57,19 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Prénom</label>
-                                        <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->prenom : '' }}" type="text" placeholder="" name="prenom">
+                                        <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->prenom : (old('prenom') ?? '' )  }}" type="text" placeholder="" name="prenom">
                                         {!! $errors->first('prenom', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>E-mail</label>
-                                        <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->email : '' }}" type="text" placeholder="" name="email">
+                                        <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->email : (old('email') ?? '' )  }}" type="text" placeholder="" name="email">
                                         {!! $errors->first('email', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>Téléphone</label>
-                                        <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->telephone : '' }}"  placeholder="" name="telephone">
+                                        <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->telephone : (old('telephone') ?? '' )  }}"  placeholder="" name="telephone">
                                         {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
 
                                        <div class="alert alert-info" style="display: none;"></div>
@@ -70,7 +78,7 @@
                                     <div class="col-md-6 form-group">
                                         <label>Pays</label>
                                         <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" style="height: 50px;" name="pays">
-                                            <option style="{{ couleur_background_1() }}" value="{{ information_client() ? information_client()->pays  : '' }}">{{ information_client() ? information_client()->pays  : 'Choisissez le pays' }}</option>
+                                            <option style="{{ couleur_background_1() }}" value="{{ information_client() ? information_client()->pays  : (old('pays') ?? '') }}">{{ information_client() ? information_client()->pays  : (old('pays') ?? 'Choisissez le pays') }}</option>
                                             @foreach(pays() as $item)
                                                 <option value="{{ $item->nom }}">{{ $item->nom }}</option>
 
@@ -82,63 +90,59 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Rue</label>
-                                        <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue : '' }}" type="text" placeholder="Numero de la voie et nom de la rue" name="rue">
+                                        <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue : (old('rue') ?? '' )  }}" type="text" placeholder="Numero de la voie et nom de la rue" name="rue">
                                         {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>Ville</label>
-                                        <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->ville : '' }}" type="text" placeholder="" name="ville">
+                                        <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->ville : (old('ville') ?? '' )  }}" type="text" placeholder="" name="ville">
                                         {!! $errors->first('ville', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                      <div class="col-md-6 form-group">
                                         <label>Code postal</label>
-                                        <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal : '' }}" type="text" placeholder="123" name="code_postal" >
+                                        <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal : (old('code_postal') ?? '' ) }}" type="text" placeholder="123" name="code_postal" >
                                         {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
-                                        {{-- isset($adresseclient) ? $adresseclient->code_postal : --}}
                                     </div>
                                 </div>
                             </fieldset>
-                        </div>
 
-                        <div class="mb-4 col-12">
-                            <fieldset class="border p-2 mr-auto ml-2" style="border-color: #212529!important;">
-                                <legend>
-                                    <h4 class="font-weight-semi-bold mb-4">Adresse de livraison</h4>
+                            <fieldset class="border p-2 mt-5" style="border-color: #212529!important;">
+                                <legend class="float-none w-auto p-2">
+                                    Adresse de livraison
                                 </legend>
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="form-check">
                                         <label class="form-check-label check-form-livraison" >
-                                            <input type="checkbox" class="form-check-input" value=""  onchange="valueChanged()" name="t" {{ $t == 1 ? 'checked' : '' }}>Adresse de livraison différente de adresse de facturation
-                                            {{-- <input type="checkbox" class="form-check-input" value="" name="check" wire:click = change()>Adresse de livraison différente de adresse de facturation --}}
+                                            <input type="checkbox" class="form-check-input" value="1" onchange="valueChanged()" name="check" {{ old('check') == '1' ? 'checked' : '' }}>Adresse de livraison différente de adresse de facturation
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row form-livraison">
+                                <div class="row form-livraison" style="display: none">
                                     <div class="col-md-6 form-group">
                                         <label>Nom</label>
-                                        <input class="form-control {{ $errors->has('nomLivraison') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="" name="nomLivraison" >
+                                        <input class="form-control {{ $errors->has('nomLivraison') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="" value="{{ old('nomLivraison') ?? '' }}" name="nomLivraison" >
                                         {!! $errors->first('nomLivraison', '<p class="text-danger">:message</p>') !!}
 
                                    </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>Prénom</label>
-                                        <input class="form-control {{ $errors->has('prenomLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="prenomLivraison">
+                                        <input class="form-control {{ $errors->has('prenomLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('prenomLivraison') ?? '' }}" name="prenomLivraison">
                                         {!! $errors->first('prenomLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>E-mail</label>
-                                        <input class="form-control {{ $errors->has('emailLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="emailLivraison">
+                                        <input class="form-control {{ $errors->has('emailLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('emailLivraison') ?? '' }}" name="emailLivraison">
                                         {!! $errors->first('emailLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
 
                                     <div class="col-md-6 form-group">
                                         <label>Téléphone</label>
-                                        <input id="phone2" type="tel" class="form-control {{ $errors->has('telephoneLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" placeholder="" name="telephoneLivraison">
+                                        <input id="phone2" type="tel" class="form-control {{ $errors->has('telephoneLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" placeholder="" value="{{ old('telephoneLivraison') ?? '' }}" name="telephoneLivraison">
                                         {!! $errors->first('telephoneLivraison', '<p class="text-danger">:message</p>') !!}
                                         <div class="alert alert-info" style="display: none;"></div>
                                     </div>
@@ -149,7 +153,6 @@
                                             <option  value="{{ old('paysLivraison') ?? '' }}">{{ old('paysLivraison') ?? 'Choisissez le pays' }}</option>
                                             @foreach(pays() as $item)
                                                 <option value="{{ $item->nom }}">{{ $item->nom }}</option>
-
                                             @endforeach
                                         </select>
                                         {!! $errors->first('paysLivraison', '<p class="text-danger">:message</p>') !!}
@@ -157,30 +160,25 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Rue</label>
-                                        <input class="form-control {{ $errors->has('rueLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Numero de la voie et nom de la rue" name="rueLivraison">
+                                        <input class="form-control {{ $errors->has('rueLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Numero de la voie et nom de la rue" value="{{ old('rueLivraison') ?? '' }}" name="rueLivraison">
                                         {!! $errors->first('rueLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>Ville</label>
-                                        <input  style="border: 1px, solid" class="form-control {{ $errors->has('villeLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="villeLivraison">
+                                        <input class="form-control {{ $errors->has('villeLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('villeLivraison') ?? '' }}" name="villeLivraison">
                                         {!! $errors->first('villeLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
                                     <div class="col-md-6 form-group">
                                         <label>Code postal</label>
-                                        <input class="form-control {{ $errors->has('code_postalLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="123" name="code_postalLivraison" >
+                                        <input class="form-control {{ $errors->has('code_postalLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="123" value="{{ old('code_postalLivraison') ?? '' }}" name="code_postalLivraison" >
                                         {!! $errors->first('code_postalLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
                                 </div>
 
                             </fieldset>
                         </div>
-
-
-
-                        {{-- @livewire('show-adr-livr-information') --}}
-
                     </div>
                     {{-- stock insuffisant --}}
                     @if (session()->has('stock'))
@@ -234,11 +232,11 @@
                                             <p>{{ configuration()->tva == 1 ? '18%' : '0%' }}</p> --}}
 
                                         </div>
-                                        <div class="card-footer border-secondary bg-transparent">
+                                        <div class="card-footer border-secondary bg-transparent" style="padding: 0px">
                                             <div class="d-flex justify-content-between mt-2">
                                                 @if(!request()->session()->has('coupon'))
-                                                <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">Montant TTC</h5>
-                                                <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">{{  number_format($sub_total,  0, '.', ' ' ) }} F CFA</h5>
+                                                <h5 class="font-weight-medium " style="{{ couleur_text_2() }}">Montant TTC</h5>
+                                                <h5 class="font-weight-medium" style="{{ couleur_text_2() }}">{{  number_format($sub_total,  0, '.', ' ' ) }} F CFA</h5>
                                                 </h5>
 
                                                 @else
@@ -259,35 +257,34 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="carte_bancaire" name="payment" id="cart">
+                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="carte_bancaire" {{ old('payment') == 'carte_bancaire' ? 'checked' : '' }} name="payment" id="cart">
                                             <label class="custom-control-label" for="cart">Carte Bancaire</label>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="momo" name="payment" id="mobile">
+                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="momo" {{ old('payment') == 'momo' ? 'checked' : '' }} name="payment" id="mobile">
                                             <label class="custom-control-label" for="mobile">Mobile Money</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="paypal" name="payment" id="paypal">
+                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="paypal" {{ old('payment') == 'paypal' ? 'checked' : '' }} name="payment" id="paypal">
                                             <label class="custom-control-label" for="paypal">PayPal</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="livraison" name="payment" id="livraison">
+                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="livraison" {{ old('payment') == 'livraison' ? 'checked' : '' }} name="payment" id="livraison">
                                             <label class="custom-control-label" for="livraison">Paiement à la livraison</label>
                                         </div>
                                     </div>
                                     {!! $errors->first('payment', '<p class="text-danger">:message</p>') !!}
                                 </div>
                                 <div class="card-footer border-secondary bg-transparent">
-                                    {{-- <a href="{{ route('root_site_public_validation') }}"></a> --}}
-                                    <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Passer la commande</button>
+                                    <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Passer la commande</button>
                                 </div>
                             </div>
                         </div>
@@ -297,26 +294,6 @@
             </div>
         </form>
     </div>
-    <!-- Checkout End -->
-
-    {{-- <form action="{{ route('test') }}" method="POST">
-
-        @csrf
-
-        <div class="form-group">
-            <label>Latitude</label>
-            <input type="text" class="form-control {{ $errors->has('latitude') ? 'is-invalid' : '' }}" name="latitude" id="item_lat">
-            {!! $errors->first('latitude', '<p class="error">:message</p>') !!}
-        </div>
-
-        <button type="reset" class="btn btn-secondary btn-lg waves-effect waves-light">
-            Annuler
-        </button>
-        <button type="submit" class="btn btn-lg pull-right waves-effect waves-light text-white btn-primary" name="valider" >
-            Sauvegarder
-        </button>
-
-    </form> --}}
 @endsection
 
 <script>
@@ -344,6 +321,8 @@
     window.onload = function () {
         valueChanged()
     }
+
+
 
 </script>
 @section('js')

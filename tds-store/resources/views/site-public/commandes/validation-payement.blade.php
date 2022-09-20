@@ -44,9 +44,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="row">
-                        <h2 class="pt-4">Adresse de facturation </h2>
+                        <h2 class="pt-4">Adresse facturation </h2>
                         <button id="btn_edit_adr_fact" class="btn pt-4"><i class="fa fa-edit" aria-hidden="true"></i></button>
                     </div>
                   <table class="table table-bordered text-center">
@@ -69,9 +69,9 @@
                     </div>
                  </table>
                 </div>
-                <div class=col-6 >
+                <div class=col-sm-6 >
                     <div class="row">
-                        <h2 class="pt-4">Adresse de livraison </h2>
+                        <h2 class="pt-4">Adresse livraison </h2>
                         <button id="btn_edit_adr_livr" class="btn pt-4"><i class="fa fa-edit" aria-hidden="true"></i></button>
                     </div>
                     <table class="table table-bordered text-center">
@@ -98,7 +98,7 @@
             </div>
             <p class="pt-3">Merci pour votre commande, Cliquez sur le boutton <strong>Procéder au paiement</strong></p>
             <div class="mb-4">
-                <div class="col-md-12">
+                <div class="col-sm-12">
 
                     <a href="{{ route('root_site_public_annuler_commande', $commande->id) }}">
                         <button class="btn btn-primary my-3 py-3">Annuler la commande</button>

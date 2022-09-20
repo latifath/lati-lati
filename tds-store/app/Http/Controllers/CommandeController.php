@@ -27,15 +27,8 @@ class CommandeController extends Controller
         return view("site-public.commandes.validation-commande", compact('adresseclient'));
     }
 
-    public function test(Request $request){
-        $request->validate([
-            'latitude'=> 'required',
-        ]);
-    }
-
     public function validation(Request $request) {
 
-        // dd('e');
         $request->validate([
             'nom'=> 'required',
             'prenom'=> 'required|min:3',
@@ -48,21 +41,20 @@ class CommandeController extends Controller
             'payment' => 'required',
         ]);
 
-        // if($request->nomLivraison != null ) {
-        //     $request->validate([
-        //         'nomLivraison'=> 'required',
-        //         'prenomLivraison'=> 'required|min:3',
-        //         'emailLivraison'=> 'required|email',
-        //         'telephoneLivraison'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
-        //         'paysLivraison'=> 'required',
-        //         'rueLivraison'=> 'required|min:4',
-        //         'villeLivraison'=> 'required|min:3',
-        //         'code_postalLivraison'=> 'required|number',
-        //     ]);
-        // }
+        if($request->check == 1 ) {
+            $request->validate([
+                'nomLivraison'=> 'required',
+                'prenomLivraison'=> 'required|min:3',
+                'emailLivraison'=> 'required|email',
+                'telephoneLivraison'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
+                'paysLivraison'=> 'required',
+                'rueLivraison'=> 'required|min:4',
+                'villeLivraison'=> 'required|min:3',
+                'code_postalLivraison'=> 'required|number',
+            ]);
+        }
 
         if(session('panier')){
-
 
             $clt = AdresseClient::Create(
                 [
@@ -78,7 +70,7 @@ class CommandeController extends Controller
             ]);
 
 
-            if($request->nomLivraison != null ) {
+            if($request->check == 1 ) {
                 $adr = AdresseLivraison::Create([
                     'nom'=> request('nomLivraison'),
                     'prenom'=> request('prenomLivraison'),
@@ -143,7 +135,6 @@ class CommandeController extends Controller
                 }else{
                     $stock_restant = $produit->quantite - $value['quantity'];
                 }
-
 
                 $produit->update([
                     'quantite' => $stock_restant,
