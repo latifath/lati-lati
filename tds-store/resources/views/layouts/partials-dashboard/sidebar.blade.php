@@ -46,6 +46,11 @@
                             <li><a href="{{ route('profile.show') }}" class="waves-effect">Profil</a></li>
                         </ul>
                     </li>
+
+                    <li class="">
+                        <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <span>Favoris</span></a>
+                     </li>
                 @endclient
 
                 @admin
@@ -127,14 +132,15 @@
                         <a href="{{ route('root_espace_admin_index_partenaire') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Mon profil</span></a>
                      </li>
 
-                     <li class="">
-                        <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                            <span>Favoris</span></a>
-                     </li>
+                     <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Récaptulatif</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}">Récap vente</a></li>
+                            <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}">Récap paiement</a></li>
+                        </ul>
+                    </li>
 
-                     <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>Récap vente</a></li>
 
-                     <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>Récap paiement</a></li>
 
 
                 @endadmin
@@ -147,10 +153,13 @@
                     </a>
                 </li>
 
-                <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>Récap vente</a></li>
-
-                <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i>Récap paiement</a></li>
-
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Récaptulatif</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}">Récap vente</a></li>
+                        <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}">Récap paiement</a></li>
+                    </ul>
+                </li>
 
                 @endcomptable
             </ul>

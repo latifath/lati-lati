@@ -16,7 +16,6 @@
                 <button id="btn_ajout_partenaire" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}">Ajouter un partenaire</button>
             </div>
 
-
             <div class="card-body">
                 <div class="table-responsive">
                 <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
@@ -38,7 +37,7 @@
                             {{-- <td>{{ $partenaire->logo }}</td> --}}
                             <td>
                                 <figure class="figure px-4 pt-5">
-                                    <img src="{{ asset('partenaires/' . $partenaire->logo) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                    <img src="{{ asset(path_image_partenaire() . path_image($partenaire->image)->filename )}}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                     <div class="row pt-3">
                                         <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                     </div>
@@ -46,13 +45,12 @@
                             </td>
                             <td>{{ $partenaire->created_at }}</td>
                             <td>
-                                <button  id="btn_edit_partenaire" data-id="{{ $partenaire->id }}" data-nom = "{{ $partenaire->nom }}" class="btn btn-primary"><i class="fa fa-edit"></i>Editer</button>
-                                <button  id="btn_delete_partenaire" data-id="{{ $partenaire->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i>Supprimer</button>
-
+                                <button  id="btn_edit_partenaire" data-id="{{ $partenaire->id }}" data-nom = "{{ $partenaire->nom }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
+                                <button  id="btn_edit_image_partenaire" data-id="{{ $partenaire->id }}" class="btn btn-info"><i class="fa fa-image"></i> Upload</button>
+                                <button  id="btn_delete_partenaire" data-id="{{ $partenaire->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button>
                             </td>
                         </tr>
                         @endforeach
-
                     </tbody>
                 </table>
                 </div>
@@ -60,79 +58,8 @@
         </div>
     </div>
 </div>
- <div class="modal fade" id="ModalModifiePartenaire" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifiePartenaire" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modifier un partenaire</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_edit_partenaire')}}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
-                    <div class="">
-                        <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;"  type="hidden" placeholder="" name="id" >
-                        <div class="form-group">
-                            <label for="">Nom</label>
-                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="entrez le nom" name="nom" id="edit_nom">
-                            {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                        </div>
 
-                        <div class="form-group">
-                            <label for="">Logo</label>
-                            <input class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" style="height: 50px;"  type="file" placeholder="" name="logo" id="edit_logo">
-                            {!! $errors->first('logo', '<p class="text-danger">:message</p>') !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}">Modifier</button>
-
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-
- <div class="modal fade" id="ModalAjoutPartenaire" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalAjoutPartenaire" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un partenaire</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_partenaire_create')}}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
-                    <div class="form-group">
-                        <label for="">Nom</label>
-                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez le nom" name="nom">
-                        {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                     <div class="form-group">
-                        <label for="">Logo</label>
-                        <input class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="Entrez le logo" name="logo">
-                        {!! $errors->first('logo', '<p class="text-danger">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}">Ajouter</button>
-
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
+@include('espace-admin.partenaires._modal')
 {{-- supprimer --}}
 @include('layouts.modal', ["route" => route('root_espace_admin_partenaire_delete', 0), 'nom'=>'cet paretenaire'])
 
@@ -144,12 +71,17 @@
         var id = $(this).attr('data-id');
         var nom = $(this).attr('data-nom');
 
-
         $('#edit_id').val(id);
         $('#edit_nom').val(nom);
 
-
         $('#ModalModifiePartenaire').modal('show');
+    });
+    $(document).on('click', '#btn_edit_image_partenaire', function(){
+        var id = $(this).attr('data-id');
+
+        $('#edit_image_id').val(id);
+
+        $('#ModalModifieImagePartenaire').modal('show');
     });
 
     $(document).on('click', '#btn_delete_partenaire', function(){

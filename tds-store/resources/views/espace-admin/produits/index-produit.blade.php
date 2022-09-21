@@ -46,19 +46,19 @@
                                 <td>{!! $produit->description !!}</td>
                                 <td>{{ $produit->sous_categorie->nom }}</td>
                                 <td>
+                                    <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
+                                        <button   data-toggle="tooltip" title="voir produit" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+                                    </a>
+
                                     <a href="{{ route('root_espace_admin_show_images', $produit->id) }}">
                                         <button   data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i></button>
                                     </a>
                                     <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i></button>
 
-                                    <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
-                                        <button   data-toggle="tooltip" title="voir produit" class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-eye"></i></button>
-                                    </a>
-
-                                    <a href="{{ route('root_espace_admin_modifie_vue', $produit->id) }}">
+                                    {{-- <a href="{{ route('root_espace_admin_modifie_vue', $produit->id) }}">
                                         <button data-toggle="tooltip" title="Editer produit" class="btn btn-primary"><i class="fa fa-edit"></i></button>
                                     </a>
-                                    <button  data-toggle="tooltip" title="Supprimer" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button  data-toggle="tooltip" title="Supprimer" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button> --}}
                                 </td>
                             </tr>
                             @endforeach

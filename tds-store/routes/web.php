@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\PaiementAdminController;
 use App\Http\Controllers\Admin\RecapitutatifController;
 use App\Http\Controllers\Admin\PromotionAdminController;
 use App\Http\Controllers\Admin\PubliciteAdminController;
+use App\Http\Controllers\Client\FavorisClientController;
 use App\Http\Controllers\Admin\PartenaireAdminController;
 use App\Http\Controllers\Client\CommandeClientController;
 use App\Http\Controllers\Client\PaiementClientController;
@@ -115,6 +116,12 @@ Route::middleware('client')->group(function () {
     Route::post('espace-client/information-client/validation', [InformationClientController::class, 'store'])->name('root_espace_client_create_information_client');
 
     Route::post('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
+
+    // favoris
+
+    Route::get('site-public/favoris', [FavorisClientController::class, 'index'])->name('root_site_public_favoris_index');
+
+    Route::delete('site-public/favoris/{id}/supprimer', [FavorisClientController::class, 'delete'])->name('root_site_public_favoris_delete');
 
 });
 
@@ -222,7 +229,9 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/produits/{id}/modifier', [ProduitAdminController::class, 'edit'])->name('root_espace_admin_modifie_vue');
 
-    Route::post('espace-admin/produits/{id}/update', [ProduitAdminController::class, 'update'])->name('root_espace_admin_modifie_produit');
+    Route::put('espace-admin/produits/{id}/update', [ProduitAdminController::class, 'update'])->name('root_espace_admin_modifie_produit');
+
+    Route::put('espace-admin/produits/update-image', [ProduitAdminController::class, 'update_image'])->name('root_espace_admin_modifie_image_produit');
 
     Route::get('espace-admin/produits/ajouter', [ProduitAdminController::class, 'add_vue'])->name('root_espace_admin_add_vue');
 
@@ -247,7 +256,9 @@ Route::middleware('admin')->group(function () {
 
     Route::put('espace-admin/partenaires/update', [PartenaireAdminController::class, 'update'])->name('root_espace_admin_edit_partenaire');
 
-    Route::post('espace-admin/partenaires/ajouter', [PartenaireAdminController::class, 'create'])->name('root_espace_admin_partenaire_create');
+    Route::put('espace-admin/partenaires/update-image', [PartenaireAdminController::class, 'update_image'])->name('root_espace_admin_edit_image_partenaire');
+
+    Route::post('espace-admin/partenaires/ajouter', [PartenaireAdminController::class, 'store'])->name('root_espace_admin_partenaire_create');
 
     Route::delete('espace-admin/partenaires/{id}/supprimer', [PartenaireAdminController::class, 'delete'])->name('root_espace_admin_partenaire_delete');
 
@@ -259,7 +270,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/stock/store', [StockAdminController::class, 'store'])->name('root_espace_admin_stock_create');
 
-    Route::post('espace-admin/stock/update', [StockAdminController::class, 'update'])->name('root_espace_admin_edit_stock');
+    Route::put('espace-admin/stock/update', [StockAdminController::class, 'update'])->name('root_espace_admin_edit_stock');
 
     Route::delete('espace-admin/stock/{id}/supprimer', [StockAdminController::class, 'delete'])->name('root_espace_admin_delete_stock');
 
@@ -267,7 +278,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/stocks/correction-stock', [StockAdminController::class, 'index_correction'])->name('root_espace_admin_index_correction');
 
-    Route::Post('espace-admin/stocks/correction-stock/update', [StockAdminController::class, 'edit_correction'])->name('root_espace_admin_edit_correction');
+    Route::put('espace-admin/stocks/correction-stock/update', [StockAdminController::class, 'edit_correction'])->name('root_espace_admin_edit_correction');
 
 
     // Image associé à un produit
@@ -294,22 +305,15 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/publicites', [PubliciteAdminController::class, 'index'])->name('root_espace_admin_publicites');
 
-    Route::post('espace-admin/publicites/ajouter', [PubliciteAdminController::class, 'create'])->name('root_espace_admin_ajouter_publicites');
+    Route::post('espace-admin/publicites/ajouter', [PubliciteAdminController::class, 'store'])->name('root_espace_admin_ajouter_publicites');
 
-    Route::put('espace-admin/publicites/modifier', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
+    Route::put('espace-admin/publicites/update', [PubliciteAdminController::class, 'update'])->name('root_espace_admin_modifier_publicites');
+
+    Route::put('espace-admin/publicites/update-image', [PubliciteAdminController::class, 'update_image'])->name('root_espace_admin_modifier_image_publicites');
 
     Route::delete('espace-admin/publicites/{id}/publicites', [PubliciteAdminController::class, 'delete'])->name('root_espace_admin_supprimer_publicites');
 
     Route::get('site-public/publicites', [PubliciteAdminController::class, 'index'])->name('root_site_public_publicite_index');
-
-    // favoris
-
-    Route::get('site-public/favoris', [FavorisAdminController::class, 'index'])->name('root_site_public_favoris_index');
-
-    Route::delete('site-public/favoris/{id}/supprimer', [FavorisAdminController::class, 'delete'])->name('root_site_public_favoris_delete');
-
-
-    // Route::get('site-public', [FavorisAdminController::class, 'addLike'])->name('root_site_public_favoris_index');
 
     // produit non livré
 

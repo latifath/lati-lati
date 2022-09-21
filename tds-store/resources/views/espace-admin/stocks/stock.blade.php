@@ -80,6 +80,7 @@ use Illuminate\Support\Carbon;
             </div>
             <form action="{{ route('root_espace_admin_edit_stock')}}"  method="POST">
                 @csrf
+                @method('put')
                 <div class="modal-body" style="background-color: #f0f0f0;">
 
                     <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id" >

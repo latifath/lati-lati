@@ -12,13 +12,11 @@
 <div class="row">
     <button  id="btn_add_image" data-id={{ $produit->id}} class="btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}">Ajouter une image au produit</button>
     <div class="col-md-12 col-12">
-        @foreach ($produit_images as $produit_image)
+        @foreach ($produit->images as $img)
             <figure class="figure px-4 pt-5">
-                <img src="{{ asset('img/' . $produit_image->path ) }}" class="figure-img img-fluid rounded" alt="" height="300" width="300">
+                <img src="{{ $img->filename ? asset(path_image_produit() . $img->filename) : '' }}" class="figure-img img-fluid rounded" alt="" height="300" width="300">
                 <div class="row pt-3">
-                    <figcaption class="figure-caption mx-3" style="font-size: 18px;">{{ $produit_image->nom }}</figcaption>
-                    <button id="btn_edit_image" data-id="{{ $produit_image->id }}" data-nom="{{ $produit_image->nom }}" data-toggle="tooltip" title="Editer" class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                    <button  id="btn_delete_image" data-id="{{ $produit_image->id }}" data-toggle="tooltip"  title="Supprimer" id="btn_delete_image" class="btn mx-3" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button  id="btn_delete_image" data-id="{{ $img->id }}" data-toggle="tooltip"  title="Supprimer" id="btn_delete_image" class="btn mx-3" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
             </figure>
         @endforeach
@@ -41,16 +39,16 @@
 
                 <input class="form-control  {{ $errors->has('produit_id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit_id" id="add_image_id">
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="">Nom</label>
                     <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom">
                     {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                </div>
+                </div> --}}
 
                 <div class="form-group">
-                    <label for="">Path</label>
-                    <input class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="path">
-                    {!! $errors->first('path', '<p class="text-danger">:message</p>') !!}
+                    <label for="">Image</label>
+                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
+                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
                 </div>
 
                 <div class="modal-footer float-right">
@@ -62,43 +60,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalModifieImage" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifieImage" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modifier l'image</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_update_images')}}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
-
-                    <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id">
-                    <div class="form-group">
-                        <label for="">Nom</label>
-                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom" id="edit_nom">
-                        {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Path</label>
-                        <input class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="path" id="">
-                        {!! $errors->first('path', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}">Modifier</button>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-
 @include('layouts.modal', ["route" => route('root_espace_admin_delete_images', 0), 'nom'=>'cette image'])
 
 
@@ -109,22 +70,10 @@
 
         var ID = $(this).attr('data-id');
 
-
         $('#add_image_id').val(ID);
 
         $('#ModalAjoutImage').modal('show');
 
-    });
-
-    $(document).on('click', '#btn_edit_image', function(){
-        var ID = $(this).attr('data-id');
-        var nom = $(this).attr('data-nom');
-
-        $('#edit_id').val(ID);
-        $('#edit_nom').val(nom);
-
-
-        $('#ModalModifieImage').modal('show');
     });
 
     $(document).on('click', '#btn_delete_image', function(){
@@ -134,6 +83,7 @@
         $('#item_id').val(ID);
 
         $('#DeleteModalCenter').modal('show');
-        });
+    });
+
 </script>
 @endsection

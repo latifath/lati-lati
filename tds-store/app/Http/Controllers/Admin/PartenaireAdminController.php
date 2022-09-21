@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use SplFileInfo;
+use App\Models\Image;
 use App\Models\Partenaire;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,46 +15,70 @@ class PartenaireAdminController extends Controller
         return view('espace-admin.partenaires.index-partenaire', compact('partenaires'));
     }
 
-    public function update(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'nom' => 'required|unique:partenaires,nom,except,id',
-            'logo' => 'required|image|dimensions:min_width=1',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $newImageName = time() . '-' . $request->nom . '.' . $request->logo->extension();
+        $save = save_image(public_path('images/partenaires'), $request->image);
 
-        // location chemin image
-        $request->logo->move(public_path('partenaires'), $newImageName);
+        if ($save != null) {
+            Partenaire::create([
+                'nom' =>$request->nom,
+                'image' => $save->id,
+            ]);
+        }
 
-        Partenaire::findOrfail($request->id)->update([
-            "nom" => $request->nom,
-            "logo" => $newImageName ,
-        ]);
-
-
-        flashy()->success('Partenaire #'. $request->id . ' modifiée avec succès');
+        flashy()->info('Partenaire créée avec succès.');
 
         return redirect()->route('root_espace_admin_index_partenaire');
     }
 
-    public function create(Request $request)
-    {
+
+    public function update(Request $request){
+
         $request->validate([
-
             'nom' => 'required|unique:partenaires,nom,except,id',
-            'logo' => 'required|image|dimensions:min_width=1',
         ]);
 
-        $newImageName = time() . '-' . $request->nom . '.' . $request->logo->extension();
+        $partenaire = Partenaire::findOrfail($request->id);
 
-        // location chemin image
-        $request->logo->move(public_path('partenaires'), $newImageName);
-        Partenaire::create([
-            'nom' =>$request->nom,
-            'logo' => $newImageName ,
+        $partenaire->update([
+            'nom' => $request->nom,
         ]);
 
-        flashy()->info('Partenaire créée avec succès.');
+        flashy()->success('Partenaire #'. $request->id . ' modifié avec succès');
+
+        return redirect()->route('root_espace_admin_index_partenaire');
+    }
+
+    public function update_image(Request $request){
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
+        ]);
+
+        $partenaire = Partenaire::findOrfail($request->id);
+
+        $image = Image::findOrfail($partenaire->image);
+
+        unlink(path_image_partenaire() . $image->filename);
+
+        $image->delete();
+
+        // 'required|image|dimensions:min_width=1',
+
+        $save = save_image(public_path('images/partenaires'), $request->image);
+
+        if ($save != null) {
+            $partenaire->update([
+                'image' => $save->id
+            ]);
+        }
+
+        flashy()->success('Image moddifiée avec succès');
 
         return redirect()->route('root_espace_admin_index_partenaire');
     }
@@ -62,11 +87,17 @@ class PartenaireAdminController extends Controller
 
         $partenaire = Partenaire::findOrfail($request->id);
 
+        $image = Image::findOrfail($partenaire->image);
+
+        unlink(path_image_partenaire() . $image->filename);
+
+        $image->delete();
+
         $partenaire->delete();
 
-        flashy()->error('Partenaire #'. $request->id . ' supprimée avec succès');
+        flashy()->error('Partenaire #'. $request->id . ' supprimé avec succès');
 
         return redirect()->back();
     }
-
+    // signin on github  et me connecter sur mon compte github
 }

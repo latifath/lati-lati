@@ -113,7 +113,7 @@
 
                         @yield('publicites')
 
-                        @yield('admin-favoris')
+                        @yield('client-favoris')
 
                         @yield('produit-non-livrer')
 

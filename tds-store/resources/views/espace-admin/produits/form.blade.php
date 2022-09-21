@@ -17,8 +17,8 @@
 
  <div class=" form-group">
     <label for="">Catégorie</label>
-    <select class="custom-select {{ $errors->has('categorie') ? 'is-invalid' : '' }}" style="height: 50px;" name="categorie"  >
-        <option value="{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->id ?? '') }}">{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->nom ?? 'Choississez une catégorie') }}</option>
+    <select class="custom-select {{ $errors->has('categorie') ? 'is-invalid' : '' }}"  name="categorie"  >
+        <option style="height: 50px;" value="{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->id ?? '') }}">{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->nom ?? 'Choississez une catégorie') }}</option>
         @foreach ($categories as $item)
         <option value="{{ $item->id }}">{{ $item->nom }}</option>
         @endforeach
@@ -28,7 +28,7 @@
 
 <div class=" form-group">
     <label for="">Sous-Catégorie</label>
-    <select class="custom-select {{ $errors->has('sous_categorie') ? 'is-invalid' : '' }}" style="height: 50px;" name="sous_categorie" >
+    <select class="custom-select h-50 {{ $errors->has('sous_categorie') ? 'is-invalid' : '' }}" style="height: 50px;" name="sous_categorie" >
         <option value="{{ old('sous_categorie') ? old('sous_categorie') : ($produit->sous_categorie->id ?? '') }}"> {{ old('sous_categorie') ? old('sous_categorie') : ($produit->sous_categorie->nom ?? 'Choississez une sous catégorie' ) }}</option>
         @foreach ($sous_categories as $item)
         <option value="{{ $item->id }}">{{ $item->nom }}</option>
@@ -36,6 +36,7 @@
     </select>
     {!! $errors->first('sous_categorie', '<p class="text-danger">:message</p>') !!}
 </div>
+
 <div class="form-group">
     <label for="description">Description</label>
     <textarea class="elm1 form-control {{ $errors->has('description') ? 'is-invalid' : '' }} " name="description">

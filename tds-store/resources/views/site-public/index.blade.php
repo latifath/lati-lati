@@ -14,7 +14,7 @@
                             @if($publicite_latest == null)
                                <img class="img-fluid" src="{{ asset('publicites/server.jpg') }}" alt="Image">
                             @else
-                                <img class="img-fluid" src="{{ asset('publicites/' . $publicite_latest->path) }}" alt="Image">
+                                <img class="img-fluid" src="{{ asset(path_image_publicite() . path_image($publicite_latest->image)->filename) }}" alt="Image">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
                                         <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ $publicite_latest->message }}
@@ -28,7 +28,7 @@
                         @foreach($publicites as $publicite)
                             @if ($publicite_latest->id != $publicite->id)
                                 <div class="carousel-item" style="height: 410px;">
-                                    <img class="img-fluid" src="{{asset('publicites/' . $publicite->path) }}" alt="Image">
+                                    <img class="img-fluid" src="{{asset(path_image_publicite() . path_image($publicite->image)->filename) }}" alt="Image">
                                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                         <div class="p-3" style="max-width: 700px;">
                                             <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ $publicite->message }}
@@ -63,13 +63,9 @@
                         @foreach ($produits_latest as $produit)
                             <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                                 <div class="card product-item border-0 mb-4" style="width: 20rem ;">
-                                    <div
-                                        class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        {{-- @if($produits_latest != " ")
-                                        <img class="img-fluid w-100" src="{{ asset('storage/' . $produit->path) }}" alt="">
-                                        @else --}}
-                                        <img class="img-fluid w-100" src="{{ asset('assets/img/product-1.jpg') }}" alt="">
-                                        {{-- @endif --}}
+                                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                        {{-- @dd(path_image($produit->image)->filename) --}}
+                                        <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : '' }}" alt="">
                                     </div>
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3" style="{{ couleur_text_2() }}">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>
@@ -79,7 +75,6 @@
                                                 <h6 class="ml-3"> {{ number_format($produit->prix_promotionnel, 0, '.', ' ') }} F CFA</h6>
                                             @else
                                             <h6>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA</h6>
-
                                             @endif
                                         </div>
                                     </div>

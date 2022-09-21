@@ -16,7 +16,7 @@
                                 <div class="card product-item border-0 mb-4 " style="{{ couleur_text_2()  }}">
                                     <div
                                         class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img class="img-fluid w-100" src="{{ asset('assets/img/product-1.jpg') }}" alt="">
+                                        <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
                                     </div>
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 color-red">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>

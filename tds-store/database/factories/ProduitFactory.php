@@ -38,6 +38,7 @@ class ProduitFactory extends Factory
             'prix_vente_5000000' => $this->faker->numberBetween($min = 10000, $max = 5000000),
             'prix_vente_10000000' => $this->faker->numberBetween($min = 10000, $max = 10000000),
             'prix_vente_10000000_+' => $this->faker->numberBetween($min = 10000, $max = 20000000),
+            'image' => $this->faker->randomNumber($nbDigits = NULL, $strict = false),
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
         ];

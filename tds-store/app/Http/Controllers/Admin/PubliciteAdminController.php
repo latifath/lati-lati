@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use SplFileInfo;
+use App\Models\Image;
 use App\Models\Publicite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,27 +14,26 @@ class PubliciteAdminController extends Controller
 
         $publicites = Publicite::all();
 
-
         return view('espace-admin.publicites.index', compact('publicites'));
 
        }
 
-       public function create(Request $request){
+       public function store(Request $request){
         $request->validate([
             'nom' => 'required',
             'message' => 'required',
-            'path' => 'required|image',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
 
         ]);
-        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
+        $save = save_image(public_path('images/publicites'), $request->image);
 
-        // location chemin image
-        $request->path->move(public_path('publicites'), $newImageName);
+        if ($save != null) {
         Publicite::create([
-            'nom' => $request->nom,
-            'message' => $request->message,
-            'path' => $newImageName,
-        ]);
+                'nom' => $request->nom,
+                'message' => $request->message,
+                'image' => $save->id,
+            ]);
+        }
 
         flashy()->info('Publicité ajoutée avec succès.');
 
@@ -45,18 +45,11 @@ class PubliciteAdminController extends Controller
             $request->validate([
                 'nom' => 'required',
                 'message' => 'required',
-                'path' => 'required|image',
             ]);
-
-            $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
-
-            // location chemin image
-            $request->path->move(public_path('publicites'), $newImageName);
 
             Publicite::findOrfail($request->id)->update([
                 'nom' => $request->nom,
                 'message' => $request->message,
-                'path' => $newImageName,
             ]);
 
             flashy()->success('Publicité modifiée avec succès');
@@ -65,8 +58,39 @@ class PubliciteAdminController extends Controller
 
         }
 
-        public function delete(Request $request){
+        public function update_image(Request $request){
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
+            ]);
+
             $delete = Publicite::findOrfail($request->id);
+
+            $image = Image::findOrfail($delete->image);
+
+            unlink(path_image_publicite() . $image->filename);
+
+            $image->delete();
+
+            $save = save_image(public_path('images/publicites'), $request->image);
+
+            Publicite::findOrfail($request->id)->update([
+                'image' => $save->id,
+            ]);
+
+            flashy()->success('Image modifiée avec succès');
+
+            return redirect()->route('root_espace_admin_publicites');
+
+        }
+
+        public function delete(Request $request){
+            $delete = Publicite::find($request->id);
+
+            $image = Image::find($delete->image);
+
+            unlink(path_image_publicite() . $image->filename);
+
+            $image->delete();
 
             $delete->delete();
 

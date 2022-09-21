@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Publicite extends Model
 {
     use HasFactory;
-    protected $fillable = ['nom', 'message', 'path', 'created_at', 'updated_at'];
+    protected $fillable = ['nom', 'message', 'image', 'created_at', 'updated_at'];
 
 }
-

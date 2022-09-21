@@ -28,6 +28,7 @@ class CreateProduitsTable extends Migration
             $table->decimal('prix_vente_5000000',10, 2)->nullable();
             $table->decimal('prix_vente_10000000',10, 2)->nullable();
             $table->decimal('prix_vente_10000000_+',10, 2)->nullable();
+            $table->integer('image');
             $table->timestamps();
 
         });

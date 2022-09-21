@@ -17,7 +17,7 @@ class CreatePartenairesTable extends Migration
             $table->increments('id');
             $table->string('nom');
             $table->string('slug')->unique();
-            $table->string('logo');
+            $table->integer('image');
             $table->timestamps();
         });
     }

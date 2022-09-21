@@ -19,9 +19,8 @@
             <div class="card-body">
                 <form action="{{ route('root_espace_admin_modifie_produit', $produit->id)}}"  method="POST">
                     @csrf
-
+                    @method('put')
                     @include('espace-admin.produits.form', ['SubmitName' => 'Modifier'])
-
                 </form>
             </div>
         </div>

@@ -26,7 +26,7 @@
                             <th>Nom</th>
                             <th>Message</th>
                             <th>Path</th>
-                            <th style="width: 15%">Action</th>
+                            <th style="width: 20%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                                 <td>{{ $publicite->message }}</td>
                                 <td>
                                     <figure class="figure px-4 pt-5">
-                                        <img src="{{ asset('publicites/' . $publicite->path) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                        <img src="{{ asset(path_image_publicite() . path_image($publicite->image)->filename) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                         <div class="row pt-3">
                                             <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                         </div>
@@ -48,6 +48,7 @@
                                 </td>
                                 <td>
                                     <button id="btn_edit_publicite" data-id="{{ $publicite->id }}" data-nom="{{ $publicite->nom }}" data-message="{{ $publicite->message }}" class="btn btn-primary"><i class="fa fa-edit"></i>Editer</button>
+                                    <button id="btn_edit_image_publicite" data-id="{{ $publicite->id }}" class="btn btn-info"><i class="fa fa-image"></i>Upload</button>
                                     <button id="btn_delete_publicite" data-id="{{ $publicite->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash"></i>Supprimer</button>
                                 </td>
 
@@ -64,90 +65,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalAjoutPublicite" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalAjoutPublicite" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajout publicité</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <br>
-            <form action="{{ route('root_espace_admin_ajouter_publicites') }}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+@include('espace-admin.publicites._modal')
 
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
-
-                <div class="form-group">
-                    <label for="">Nom</label>
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom">
-                    {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                 <div class="form-group">
-                    <label for="">Message</label>
-                    <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message">
-                    {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Path</label>
-                    <input class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="path">
-                    {!! $errors->first('path', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </div>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalModifiepublicite" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifiepublicite" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modification publicité </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_modifier_publicites') }}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
-
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_id">
-
-                <div class="form-group">
-                    <label for="">Nom</label>
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom" id="edit_nom">
-                    {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                 <div class="form-group">
-                    <label for="">Message</label>
-                    <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message" id="edit_message">
-                    {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Path</label>
-                    <input class="form-control {{ $errors->has('path') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="path" id="edit_path">
-                    {!! $errors->first('path', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Modifier</button>
-                </div>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
 
 @include('layouts.modal', ["route" => route('root_espace_admin_supprimer_publicites', 0), 'nom'=>'cette publicitée'])
 
@@ -177,16 +96,27 @@ $(document).on('click', '#btn_edit_publicite', function(){
         $('#edit_message').val(message);
 
         $('#ModalModifiepublicite').modal('show');
-    });
+});
 
-    $(document).on('click', '#btn_delete_publicite', function(){
+$(document).on('click', '#btn_edit_image_publicite', function(){
 
-        var ID = $(this).attr('data-id');
+var id = $(this).attr('data-id');
 
-        $('#item_id').val(ID);
 
-        $('#DeleteModalCenter').modal('show');
-    });
+$('#edit_image_id').val(id);
+
+$('#ModalModifieImagepublicite').modal('show');
+});
+
+
+$(document).on('click', '#btn_delete_publicite', function(){
+
+    var ID = $(this).attr('data-id');
+
+    $('#item_id').val(ID);
+
+    $('#DeleteModalCenter').modal('show');
+});
 
 
 </script>

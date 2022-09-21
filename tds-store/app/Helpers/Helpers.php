@@ -313,3 +313,5 @@ if(!function_exists('paiements')){
         return  Paiement::all();
     }
 }
+
+

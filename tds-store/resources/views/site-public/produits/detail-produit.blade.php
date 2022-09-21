@@ -24,21 +24,13 @@
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner border" style="height: 400px;">
                             <div class="carousel-item active">
-                                @if($last_image == null)
-                                    <img class="img-fluid" src="{{ asset('storage/articles/product-1.jpg') }}" alt="Image" style="width: 100% !important; height: auto;">
-                                @else
-                                    <img class="img-fluid" src="{{ asset('storage/' . $last_image->path) }}" alt="Image">
-                                @endif
+                                    <img class="img-fluid" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="Image">
                             </div>
-                            @if ($images->count() > 0)
-                                @foreach($images as $image)
-                                    @if ($last_image->id != $image->id)
-                                        <div class="carousel-item">
-                                            <img class="w-100 h-100" src="{{ asset('storage/' . $image->path)  }}" alt="Image">
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
+                            @foreach($produit->images as $image)
+                                <div class="carousel-item">
+                                    <img class="w-100 h-100" src="{{ $image ? asset(path_image_produit() . $image->filename) : ''}}" alt="Image">
+                                </div>
+                            @endforeach
                         </div>
                         <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                             <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -146,10 +138,10 @@
                 @foreach ($sous_categories_produits as $produit)
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        @if (last_image_produit($produit->id) == "")
+                        @if ($produit == "")
                             <img class="img-fluid w-100" src="https://cdn.pixabay.com/photo/2022/05/10/11/12/tree-7186835__480.jpg" alt="" style="width: 100% !important; height: auto;">
                         @else
-                            <img class="img-fluid w-100" src="{{ asset('storage/'. last_image_produit($produit->id)->path )}}" alt="" style="width: 100% !important; height: auto;">
+                            <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="" style="width: 100% !important; height: auto;">
                         @endif
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">

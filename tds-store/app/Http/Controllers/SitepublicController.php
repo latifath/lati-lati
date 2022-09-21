@@ -27,18 +27,18 @@ class SitepublicController extends Controller
     public function show_produit_par_sous_categorie($cat, $sous_cat, $pdt){
 
         $produit = Produit::where('slug', $pdt)->first();
-        $images = Image::where('produit_id', $produit->id)->get();
-        $last_image = Image::where('produit_id', $produit->id)->first();
+
+        $produit->with('images');
         $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
         $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
 
-
-        return view ('site-public.produits.detail-produit', compact('produit', 'images', 'last_image', 'cat', 'sous_cat', 'sous_categories_produits' ));
+        return view ('site-public.produits.detail-produit', compact('produit', 'cat', 'sous_cat', 'sous_categories_produits'));
 
     }
 
     public function verification(){
         return  view('/verification-auth');
     }
+
 
 }

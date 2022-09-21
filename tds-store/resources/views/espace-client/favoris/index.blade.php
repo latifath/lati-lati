@@ -1,6 +1,6 @@
 @extends('layouts.master-dashboard')
 
-@section('admin-favoris')
+@section('client-favoris')
 @include('layouts.partials-dashboard.entête-page', [
     'infos1' => 'Favoris',
     'infos2' => 'Favoris',
@@ -19,16 +19,14 @@
                 <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
-                        <th>Id utilisateur</th>
-                        <th>Id produit</th>
-                        <th style="width: 15%">Action</th>
+                        <th>Identifiant produit</th>
+                        <th style="width: 20%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($favoris as $favori)
                         <tr>
                             <td>{{ $favori->produit_id }}</td>
-                            <td>{{ $favori->user_id}}</td>
                             <td>
                                 <button data-toggle="tooltip" data-id={{ $favori->id }} title="Supprimer" id="btn_delete_favoris"  class="btn text-white" style="{{ couleur_background_2() }}"><i class="fa fa-trash" aria-hidden="true"></i>Supprimer</button>
                            </td>

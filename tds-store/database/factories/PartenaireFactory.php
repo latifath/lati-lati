@@ -25,14 +25,7 @@ class PartenaireFactory extends Factory
     {
         return [
             'nom' => $this->faker->lastName(),
-            'logo' => $this->faker->randomElement($array = [
-                'https://cdn.pixabay.com/photo/2022/05/05/14/57/rice-7176354__340.jpg',
-                'https://cdn.pixabay.com/photo/2022/05/10/11/12/tree-7186835__480.jpg',
-                'https://cdn.pixabay.com/photo/2022/05/13/16/22/lake-7194103__340.jpg',
-                'https://cdn.pixabay.com/photo/2022/05/14/06/12/leaves-7194981__340.jpg',
-                'https://cdn.pixabay.com/photo/2022/05/07/06/35/candle-7179556__340.jpg',
-                'https://cdn.pixabay.com/photo/2020/01/06/10/16/train-4745050__340.jpg',
-            ]),
+            'image' => $this->faker->randomNumber($nbDigits = NULL, $strict = false),
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
 

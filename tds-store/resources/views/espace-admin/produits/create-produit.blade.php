@@ -17,7 +17,7 @@
                 <h4 class="mt-2 header-title text-dark" style="font-size: 24px">Ajouter un nouveau produit</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('root_espace_admin_produit_create')}}"  method="POST">
+                <form action="{{ route('root_espace_admin_produit_create')}}"  method="POST" enctype="multipart/form-data">
                     @csrf
                     @include('espace-admin.produits.form', ['SubmitName' => 'Ajouter'])
 

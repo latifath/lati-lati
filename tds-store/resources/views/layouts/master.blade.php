@@ -38,7 +38,6 @@
         .tx:hover{
             color: #fff !important;
         }
-
     </style>
 
     @livewireStyles

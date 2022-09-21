@@ -14,10 +14,10 @@ class CreatePublicitesTable extends Migration
     public function up()
     {
         Schema::create('publicites', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nom')->unique();
             $table->string('message');
-            $table->string('path');
+            $table->integer('image');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Models\Categorie;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use App\Models\SousCategorie;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailProduitNewsletter;
@@ -40,32 +41,6 @@ class ProduitAdminController extends Controller
         return view('espace-admin.produits.show-produit', compact('produit'));
     }
 
-    public function update(Request $request){
-        $request->validate([
-            'nom'=> 'required',
-            'quantite' => 'required',
-            'prix' => 'required',
-            'description' => 'required',
-            'categorie' => 'required',
-            'sous_categorie' => 'required'
-
-        ]);
-
-        Produit::findOrfail($request->id)->update([
-            "nom" => $request->nom,
-            "quantite" => $request->quantite,
-            "prix" => $request->prix,
-            "description" => $request->description,
-            'categorie_id' => $request->categorie,
-            'sous_categorie_id' => $request->sous_categorie
-
-        ]);
-        flashy()->success('Produit #'. $request->id . 'modifiée avec succès');
-
-        return redirect()->route('root_espace_admin_show_produit', $request->id);
-    }
-
-
     public function add_vue(){
 
         $sous_categories = SousCategorie::all();
@@ -80,16 +55,29 @@ class ProduitAdminController extends Controller
     public function store(Request $request){
 
         $request->validate([
-
             'nom'=> 'required',
             'quantite' => 'required',
             'prix' => 'required',
             'description' => 'required',
             'categorie' => 'required',
-            'sous_categorie' => 'required'
+            'sous_categorie' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $produit = Produit::create(['nom' => $request->nom, 'quantite' => $request->quantite, 'prix' => $request->prix, 'description' => $request->description, 'categorie_id' => $request->categorie, 'sous_categorie_id' => $request->sous_categorie]);
+
+        $save = save_image(public_path('images/produits'), $request->image);
+
+        if ($save != null) {
+            $produit = Produit::create([
+                'nom' => $request->nom,
+                'quantite' => $request->quantite,
+                'prix' => $request->prix,
+                'description' => $request->description,
+                'categorie_id' => $request->categorie,
+                'sous_categorie_id' => $request->sous_categorie,
+                'image' => $save->id
+            ]);
+        }
 
         $newsletters = Newsletter::where('status', 'active')->get();
 
@@ -98,43 +86,105 @@ class ProduitAdminController extends Controller
             Mail::to($newsletter->email)->send(new SendMailProduitNewsletter($newsletter, $produit));
         }
 
-        flashy()->info('Produit créée avec succès.');
+        flashy()->info('Produit créé avec succès.');
 
         return redirect()->route('root_espace_admin_index_produit');
+    }
+
+    public function update(Request $request){
+
+        $request->validate([
+            'nom'=> 'required',
+            'quantite' => 'required',
+            'prix' => 'required',
+            'description' => 'required',
+            'categorie' => 'required',
+            'sous_categorie' => 'required',
+
+        ]);
+
+        Produit::findOrfail($request->id)->update([
+            "nom" => $request->nom,
+            "quantite" => $request->quantite,
+            "prix" => $request->prix,
+            "description" => $request->description,
+            'categorie_id' => $request->categorie,
+            'sous_categorie_id' => $request->sous_categorie
+        ]);
+
+        flashy()->success('Produit #'. $request->id . 'modifié avec succès');
+
+        return redirect()->route('root_espace_admin_show_produit', $request->id);
+    }
+
+    public function update_image(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
+        ]);
+
+        $produit = Produit::find($request->id);
+
+        $image = Image::find($produit->image);
+
+        unlink(path_image_produit() . $image->filename);
+
+        $image->delete();
+
+        $save = save_image(public_path('images/produits'), $request->image);
+
+        if ($save != null) {
+            Produit::findOrfail($request->id)->update([
+                'image' => $save->id
+            ]);
+        }
+        flashy()->success('Image modifiée avec succès');
+
+        return redirect()->route('root_espace_admin_show_produit', $request->id);
+
     }
 
     public function delete(Request $request){
 
         $produit = Produit::findOrfail($request->id);
 
+        $image = Image::findOrfail($produit->image);
+
+        unlink(path_image_produit() . $image->filename);
+
+        $image->delete();
+
         $produit->delete();
 
-        flashy()->error('Produit #'. $request->id . 'supprimée avec succès');
+        flashy()->error('Produit #'. $request->id . 'supprimé avec succès');
 
         return redirect()->route('root_espace_admin_index_produit');
     }
 
-
     // pour les images
+    public function show_images($id){
+
+        $produit = Produit::findOrfail($id);
+
+        $produit->with('images')->get();
+
+        return view('espace-admin.produits.show-images', compact('produit'));
+    }
 
     public function create_image(Request $request){
 
         $request->validate([
-            'nom'=> 'required|unique:images,nom,except,id',
-            'path' => 'required|image|mimes:jpg,png,jpeg|max:5048',
             'produit_id' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
+        $save = save_image(public_path('images/produits'), $request->image);
 
-        // location chemin image
-        $request->path->move(public_path('img'), $newImageName);
+        if ($save != null) {
 
-        Image::create([
-            'nom' => $request->nom,
-            'path' => $newImageName,
-            'produit_id' =>  $request->produit_id,
-        ]);
+            $produit = Produit::findOrfail($request->produit_id);
+
+            $produit->images()->attach($save->id);
+       }
 
         flashy()->info('Image ajoutée avec succès.');
 
@@ -147,47 +197,18 @@ class ProduitAdminController extends Controller
         return view('espace-admin.produits.images', compact('images'));
     }
 
-    public function update_image(Request $request){
-
-        $request->validate([
-            'nom'=> 'required',
-            'path' => 'required|image|mimes:jpg,png,jpeg|max:5048',
-        ]);
-
-        $newImageName = time() . '-' . $request->nom . '.' . $request->path->extension();
-
-        // location chemin image
-        $request->path->move(public_path('img'), $newImageName);
-
-        Image::findOrfail($request->id)->update([
-            "nom" => $request->nom,
-            "path" => $newImageName,
-
-        ]);
-
-        flashy()->success('Image #'. $request->id . 'modifiée avec succès');
-
-        return redirect()->route('root_espace_admin_images');
-    }
 
     public function delete_image(Request $request){
 
         $image = Image::findOrfail($request->id);
+
+        unlink(path_image_produit() . $image->filename);
 
         $image->delete();
 
         flashy()->error('Image #'. $request->id . 'supprimée avec succès');
 
         return redirect()->route('root_espace_admin_index_produit');
-    }
-
-    public function show_images($id){
-
-        $produit = Produit::findOrfail($id);
-
-        $produit_images = Image::where('produit_id', $id)->get();
-
-        return view('espace-admin.produits.show-images', compact('produit_images', 'produit'));
     }
 
 }

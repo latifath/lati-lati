@@ -15,8 +15,10 @@ class CreateProduitUserTable extends Migration
     {
         Schema::create('produit_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('produit_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->integer('produit_id')->unsigned();
+            $table->foreign('produit_id')->references('id')->on('produits')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
