@@ -60,7 +60,7 @@
             <a href="#" class="btn border">
                 <i class="fas fa-heart" style="{{ couleur_text_2() }}"></i>
                 @if (auth()->check())
-                    <span class="badge">{{ nombre()->count() }}</span>
+                    <span class="badge"></span>
                 @else
                     <span class="badge">0</span>
                 @endif

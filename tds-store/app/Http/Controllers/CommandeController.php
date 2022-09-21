@@ -27,12 +27,21 @@ class CommandeController extends Controller
         return view("site-public.commandes.validation-commande", compact('adresseclient'));
     }
 
-    public function validation(CreateValidationCommandeFormRequest $request) {
+    public function validation(Request $request) {
 
         $request->validate([
+            'nom'=> 'required',
+            'prenom'=> 'required|min:3',
+            'email'=> 'required|email',
+            'telephone'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
+            'pays'=> 'required',
+            'rue'=> 'required|min:4',
+            'ville'=> 'required|min:3',
+            'code_postal'=> 'required',
             'payment' => 'required',
         ]);
-        if($request->nomLivraison != null ) {
+
+        if($request->check == 1 ) {
             $request->validate([
                 'nomLivraison'=> 'required',
                 'prenomLivraison'=> 'required|min:3',
@@ -61,7 +70,7 @@ class CommandeController extends Controller
             ]);
 
 
-            if($request->nomLivraison != null ) {
+            if($request->check == 1 ) {
                 $adr = AdresseLivraison::Create([
                     'nom'=> request('nomLivraison'),
                     'prenom'=> request('prenomLivraison'),
@@ -126,7 +135,6 @@ class CommandeController extends Controller
                 }else{
                     $stock_restant = $produit->quantite - $value['quantity'];
                 }
-
 
                 $produit->update([
                     'quantite' => $stock_restant,

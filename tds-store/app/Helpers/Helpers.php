@@ -292,6 +292,7 @@ if(!function_exists('information_client')){
     }
 }
 
+
 // pour le nmbre total de like
 
 if(!function_exists('nombre')){

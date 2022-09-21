@@ -6,7 +6,7 @@
             wire:keydown.arrow-up.prevent="decrementIndex"
             wire:keydown.backspace="resetIndex"
             wire:keydown.enter.prevent="showproduit"
-            >
+             style="border: 1px solid #EDF1FF !important">
             <div class="input-group-append" style="{{ couleur_background_1() }}">
                 <span class="input-group-text bg-transparent text-primary pt-2">
                     <i class="fa fa-search" ></i>
@@ -20,8 +20,8 @@
      x-show="open">
         @if(count($produits) > 0)
         @foreach($produits as $index => $produit)
-            <h4  class="{{ $index == $selectedIndex  ? 'text-black' : ''}} "> {{ $produit->nom }}</h4>
-            <p class="{{ $index == $selectedIndex ? 'text-black' : '' }}"> {{ Str::substr($produit->description, 0, 100) }} {{ Str::length($produit->description) > 100 ? '...' : ''}} <span ></span></p>
+            <h4  class="{{ $index == $selectedIndex  ? 'text-success' : ''}} "> {{ $produit->nom }}</h4>
+            <p class="{{ $index == $selectedIndex ? 'text-success' : '' }}"> {{ Str::substr($produit->description, 0, 100) }} {{ Str::length($produit->description) > 100 ? '...' : ''}} <span ></span></p>
         @endforeach
         @else
         <span class=" p-1 ">0 résultats pour "{{ $query }}"</span>
