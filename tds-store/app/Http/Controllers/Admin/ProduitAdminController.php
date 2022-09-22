@@ -64,7 +64,6 @@ class ProduitAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-
         $save = save_image(public_path('images/produits'), $request->image);
 
         if ($save != null) {

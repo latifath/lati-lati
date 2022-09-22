@@ -111,6 +111,7 @@
             </div>
             <form action="{{ route('root_espace_admin_modifie_produits_non_livre', $item->id) }}"  method="POST">
                 @csrf
+                @method('put')
                 <div class="modal-body">
                     <input  class="form-control"  type="hidden" id="item_id" placeholder="" name="id" >
                     <h5 class="text-center">Etes-vous sûr de vouloir livrer le produit? </h5>

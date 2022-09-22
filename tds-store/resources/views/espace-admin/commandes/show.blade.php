@@ -8,28 +8,19 @@
     'infos3' => 'Détails commande',
 ])
 <br>
-@if($commande->status == 'terminee')
-
-@elseif($commande->status == "annulee")
-
-@else
 
 <div class="row">
     <div class="col-6 offset-sm-3">
-            <button  id="confirmation" data-id="{{ $commande->id }}" class="btn-success my-2 py-2"><i class="fa fa-check">Accepter la commande</i> </button>
+        <button  id="confirmation" data-id="{{ $commande->id }}" class="btn-success my-2 py-2" {{ disabled_button_commande($commande->status, 'terminee') }}><i class="fa fa-check">Accepter la commande</i> </button>
 
-        <a href="{{ route('root_espace_admin_annuler_commande', $commande->id) }}">
-            <button class="btn-secondary my-2 py-2 mx-2" type="submit" style="border: 1px solid;">Annuler la commande</button>
-        </a>
-        <a href="{{ route('root_espace_admin_en_attente_commande', $commande->id) }}">
-            <button class="btn-light my-2 py-2" type="submit" style="border: 1px solid;">Mettre en attente</button>
-        </a>
+        <button id="btn_annule_commande"  data-id="{{ $commande->id }}" class="btn-secondary my-2 py-2 mx-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'annulee') }}>Annuler la commande</button>
+
+        <button id="btn_commande_en_attente" data-id="{{ $commande->id }}" class="btn-light my-2 py-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'en cours') }}>Mettre en attente</button>
 
         <button id="btn_delete_commande" data-id="{{ $commande->id }}" class="btn-danger my-2 py-2  mx-2" type="submit">Supprimer la commande</button>
 
     </div>
 </div>
-@endif
 
 @include('layouts.modal', ["route" => route('root_espace_admin_delete_commande', 0), 'nom'=>'cette commande'])
 
@@ -168,7 +159,6 @@
                                     <td colspan="4" class="text-right"><strong>Montant TTC</strong></td>
                                     <td class="">{{ number_format(montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id),  0, '.', ' ' ) }} F CFA</td>
                                 </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -210,31 +200,7 @@
         </div>
     </div>
 </div>
-
-
-<div class="modal fade" id="ConfirmationModalCenter" aria-labelledby="ConfirmationModalCenter" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Acceptation commande</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_valider_commande', $commande->id) }}"  method="POST">
-                @csrf
-                <div class="modal-body">
-                    <input  class="form-control"  type="hidden" id="item_id" placeholder="" name="id" >
-                    <h5 class="text-center">Etes-vous sûr de vouloir marquer la commande comme terminée ?</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                    <button type="submit" class="btn btn-success">Oui, Accepter</button>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
+@include('espace-admin.commandes._modal');
 @endsection
 @section('js')
 <script>
@@ -253,5 +219,21 @@
 
        $('#ConfirmationModalCenter').modal('show');
    });
+
+   $(document).on('click', '#btn_annule_commande', function(){
+        var ID = $(this).attr('data-id');
+
+        $('#item_id').val(ID);
+
+        $('#AnnulerModalCenter').modal('show');
+    });
+
+    $(document).on('click', '#btn_commande_en_attente', function(){
+        var ID = $(this).attr('data-id');
+
+        $('#item_id').val(ID);
+
+        $('#CommandeAttenteModalCenter').modal('show');
+    });
 </script>
 @endsection

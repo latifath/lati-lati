@@ -102,13 +102,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modifier une sous-catégorie</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Modification paiement</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="{{ route('root_espace_admin_edit_paiement')}}" method="POST">
                 @csrf
+                @method('put')
                 <div class="modal-body" style="background-color: #f0f0f0;">
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id">

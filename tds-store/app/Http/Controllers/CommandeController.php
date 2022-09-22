@@ -50,7 +50,7 @@ class CommandeController extends Controller
                 'paysLivraison'=> 'required',
                 'rueLivraison'=> 'required|min:4',
                 'villeLivraison'=> 'required|min:3',
-                'code_postalLivraison'=> 'required|number',
+                'code_postalLivraison'=> 'required',
             ]);
         }
 

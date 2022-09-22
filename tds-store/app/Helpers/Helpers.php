@@ -315,4 +315,14 @@ if(!function_exists('paiements')){
     }
 }
 
+if(!function_exists('disabled_button_commande')){
+    function disabled_button_commande($param1, $param2){
+        if($param1 == $param2){
 
+            return "disabled";
+
+        }else{
+
+        }
+    }
+}

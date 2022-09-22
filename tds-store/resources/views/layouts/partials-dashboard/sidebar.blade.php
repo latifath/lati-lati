@@ -35,7 +35,7 @@
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Paiement </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{ route('root_espace_client_index') }}">Dernier Paiement</a></li>
+                            {{-- <li><a href="{{ route('root_espace_client_index') }}">Dernier Paiement</a></li> --}}
                             <li><a href="{{ route('root_espace_client_paiement_index') }}">Tous les paiements </a></li>
                         </ul>
                     </li>
@@ -97,6 +97,14 @@
                     </li>
 
                     <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Récaptulatif</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}">Récap vente</a></li>
+                            <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}">Récap paiement</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-houzz"></i><span>Stock</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{ route('root_espace_admin_index_stock') }}">Tous les stocks</a></li>
@@ -109,36 +117,25 @@
                     </li>
 
                     <li class="">
-                       <a href="{{ route('root_espace_admin_index_utilisateur') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Tous les utilisateurs</span></a>
-                    </li>
-
-                    <li class="">
                         <a href="{{ route('root_espace_admin_index_livraison') }}" class="waves-effect"><i class="fa fa-truck" aria-hidden="true"></i><span>Livraisons</span></a>
-                     </li>
+                    </li>
 
                      <li class="">
                         <a href="{{ route('root_espace_admin_index_partenaire') }}" class="waves-effect"><i class="fa fa-handshake-o" aria-hidden="true"></i><span>Partenaires</span></a>
                      </li>
 
-                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bullhorn"></i><span>Promotions</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="{{ route('root_espace_admin_index_promotion') }}">Promotions</a></li>
-                            <li><a href="{{ route('root_espace_admin_publicites') }}">Publicites</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ route('root_espace_admin_index_promotion') }}"><i class="fa fa-bullhorn"></i>Promotions</a></li>
+
+                    <li><a href="{{ route('root_espace_admin_publicites') }}"><i class="fa fa-bullhorn"></i>Publicites</a></li>
+
+                    <li class="">
+                        <a href="{{ route('root_espace_admin_index_utilisateur') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Tous les utilisateurs</span></a>
+                     </li>
 
                     <li class="">
                         <a href="{{ route('root_espace_admin_index_partenaire') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Mon profil</span></a>
                      </li>
 
-                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Récaptulatif</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="{{ route('root_espace_admin_recapitutatif_index') }}">Récap vente</a></li>
-                            <li><a href="{{ route('root_espace_admin_recapitutatif_paiement_index') }}">Récap paiement</a></li>
-                        </ul>
-                    </li>
 
 
 

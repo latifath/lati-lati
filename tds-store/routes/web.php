@@ -106,16 +106,22 @@ Route::middleware('client')->group(function () {
 
     Route ::get('/espace-client/commande/{id}/detail', [CommandeClientController:: class, 'show'])->name('root_espace_client_commande_show');
 
+    Route::get('/espace-client/commandes/{id}/facturation', [CommandeClientController:: class, 'facture'])->name('root_espace_client_commande_facture');
+
     Route::get('/espace-client/paiement', [PaiementClientController:: class, 'index'])->name('root_espace_client_paiement_index');
 
-    Route::get('/espace-client/commandes/{id}/facturation', [CommandeClientController:: class, 'facture'])->name('root_espace_client_commande_facture');
+    Route::get('/espace-client/page-paiement', [PaiementClientController:: class, 'payer_index'])->name('root_espace_client_payer_index');
+
+    Route::post('/espace-client/payer_commande', [PaiementClientController:: class, 'store'])->name('root_espace_client_payer_commande');
+
 
     // information client
     Route::get('espace-client/information-client', [InformationClientController::class, 'index'])->name('root_espace_client_information_client');
 
     Route::post('espace-client/information-client/validation', [InformationClientController::class, 'store'])->name('root_espace_client_create_information_client');
 
-    Route::post('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
+    Route::put('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
+
 
     // favoris
 
@@ -152,7 +158,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/paiements/{id}', [PaiementAdminController::class, 'show'])->name('root_espace_admin_paiements_show');
 
-    Route::post('espace-admin/paiement/update', [PaiementAdminController::class, 'edit'])->name('root_espace_admin_edit_paiement');
+    Route::put('espace-admin/paiement/update', [PaiementAdminController::class, 'edit'])->name('root_espace_admin_edit_paiement');
 
     Route::delete('espace-admin/paiement/{id}/supprimer', [PaiementAdminController::class, 'delete'])->name('root_espace_admin_delete_paiement');
 
@@ -166,18 +172,19 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/commande-valider/{id}', [CommandeAdminController::class, 'valider_commande'])->name('root_espace_admin_valider_commande');
 
-    Route::get('espace-admin/commande-annuler/{id}', [CommandeAdminController::class, 'annuler_commande'])->name('root_espace_admin_annuler_commande');
+    Route::post('espace-admin/commande-annuler/{id}', [CommandeAdminController::class, 'annuler_commande'])->name('root_espace_admin_annuler_commande');
 
-    Route::get('espace-admin/commande-mise-en-attente/{id}', [CommandeAdminController::class, 'en_attente__commande'])->name('root_espace_admin_en_attente_commande');
+    Route::post('espace-admin/commande-mise-en-attente/{id}', [CommandeAdminController::class, 'en_attente__commande'])->name('root_espace_admin_en_attente_commande');
 
     Route::delete('espace-admin/commande/{id}/supprimer', [CommandeAdminController::class, 'delete_commande'])->name('root_espace_admin_delete_commande');
 
-
     Route::get('espace-admin/commandes/{id}/show', [CommandeAdminController::class, 'show'])->name('root_espace_admin_commandes_show');
+
+    // gestion users
 
     Route::get('espace-admin/utilisateurs', [UserController::class, 'index_utilisateur'])->name('root_espace_admin_index_utilisateur');
 
-    Route::post('espace-admin/utilisateur/update', [UserController::class, 'edit_utilisateur'])->name('root_espace_admin_edit_utilisateur');
+    Route::put('espace-admin/utilisateur/update', [UserController::class, 'edit_utilisateur'])->name('root_espace_admin_edit_utilisateur');
 
     Route::delete('espace-admin/utilisateur/{id}/supprimer', [UserController::class, 'delete'])->name('root_espace_admin_delete_utilisateur');
 
@@ -197,7 +204,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/categories/{id}/details', [CategorieController::class, 'show'])->name('root_espace_admin_details_categorie');
 
-    Route::post('espace-admin/categorie/update', [CategorieController::class, 'update'])->name('root_espace_admin_edit');
+    Route::put('espace-admin/categorie/update', [CategorieController::class, 'update'])->name('root_espace_admin_edit');
 
     Route::delete('espace-admin/categorie/{id}/supprimer', [CategorieController::class, 'delete'])->name('root_espace_admin_delete_categorie');
 
@@ -214,7 +221,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/sous-categories', [SousCategorieAdminController::class, 'index_sous_categorie'])->name('root_espace_admin_index_sous_categorie');
 
-    Route::post('espace-admin/sous-categorie/update', [SousCategorieAdminController::class, 'Update'])->name('root_espace_admin_edit_sous_categorie');
+    Route::put('espace-admin/sous-categorie/update', [SousCategorieAdminController::class, 'Update'])->name('root_espace_admin_edit_sous_categorie');
 
     Route::post('espace-admin/sous-categorie/ajouter', [SousCategorieAdminController::class, 'create'])->name('root_espace_admin_create_sous_categorie');
 
@@ -297,7 +304,7 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/promotions/ajouter', [PromotionAdminController::class, 'store'])->name('root_espace_admin_promotion_ajouter');
 
-    Route::post('espace-admin/promotions/update', [PromotionAdminController::class, 'update'])->name('root_espace_admin_promotion_update');
+    Route::put('espace-admin/promotions/update', [PromotionAdminController::class, 'update'])->name('root_espace_admin_promotion_update');
 
     Route::delete('espace-admin/promotions/delete', [PromotionAdminController::class, 'delete'])->name('root_espace_admin_promotion_delete');
 
@@ -319,7 +326,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/produits-non-livre', [ProduitNonLivrerAdminContoller::class, 'index'])->name('root_espace_admin_produits_non_livrer');
 
-    Route::post('espace-admin/produits-non-livre/{id}/modifier', [ProduitNonLivrerAdminContoller::class, 'validation_produit_livre'])->name('root_espace_admin_modifie_produits_non_livre');
+    Route::put('espace-admin/produits-non-livre/{id}/modifier', [ProduitNonLivrerAdminContoller::class, 'validation_produit_livre'])->name('root_espace_admin_modifie_produits_non_livre');
 
     Route::post('espace-admin/produits-non-livre/{id}/retirer', [ProduitNonLivrerAdminContoller::class, 'validation_produit_non_livre'])->name('root_espace_admin_retirer_produits_non_livre');
 

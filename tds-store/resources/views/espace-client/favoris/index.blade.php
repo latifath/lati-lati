@@ -20,7 +20,7 @@
                     <thead>
                     <tr>
                         <th>Identifiant produit</th>
-                        <th style="width: 20%">Action</th>
+                        <th style="width: 20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -39,10 +39,11 @@ class CommandeClientController extends Controller
         // Facture
 
         public function facture($id){
+
             $cmde = Commande::where('id', $id)->first();
+
             $pay = Paiement::where('commande_id', $cmde->id)->first();
 
             return view('espace-client.facture', compact('cmde', 'pay'));
-
         }
 }

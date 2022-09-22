@@ -200,11 +200,14 @@
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
+                                    <a href="{{ route('root_espace_client_payer_index', $item->id) }}">
+                                        <button class="btn" style="background-color:#ffc107; border: #ffc107; color: white;" ><i class="fa fa-money" aria-hidden="true"></i> Payer</button>
+                                    </a>
 
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
-
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
+
                                 </td>
                             </tr>
                             @php

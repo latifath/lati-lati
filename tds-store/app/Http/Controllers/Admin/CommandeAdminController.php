@@ -40,9 +40,9 @@ class CommandeAdminController extends Controller
 
         $commande = Commande::where('id', $id)->first();
 
-       $adr_cli = AdresseClient::where('id', $commande->adresse_client_id)->first();
+        $adr_cli = AdresseClient::where('id', $commande->adresse_client_id)->first();
 
-       $adr_livr = AdresseLivraison::where('id', $commande->adresse_livraison_id)->first();
+        $adr_livr = AdresseLivraison::where('id', $commande->adresse_livraison_id)->first();
 
         $commande_produit = CommandeProduit::where('commande_id', $id)->get();
 
@@ -102,7 +102,7 @@ class CommandeAdminController extends Controller
         $cmde_attente ['status'] = 'en cours';
         $cmde_attente ->save();
 
-        flashy()->warning('commande mise en attente avec succès');
+        flashy()->info('commande mise en attente avec succès');
         return redirect()->back();
     }
 

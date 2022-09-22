@@ -53,6 +53,8 @@
 
                          @yield('contenu-commande')
 
+                         @yield('payer-commande')
+
                          @yield('detail')
 
                          @yield('gestion-paiement')
