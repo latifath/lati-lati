@@ -40,6 +40,22 @@
                             <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
+                                <div class="col-6 text-right">
+                                    <form action="">
+                                        <input type="hidden" name="mode" value="">
+                                        {{-- @if ($type_paiement == "momo")
+                                        <button class="kkiapay-button btn btn-primary my-3 py-3">Procéder au paiement</button>
+                                        @elseif($type_paiement == "carte_bancaire")
+                                        <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
+                                        @elseif($type_paiement == "paypal")
+                                            <div id="paypal-button-container">
+                                        <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
+                                        </div>
+                                        @endif --}}
+                                         <button  type="submit" class="btn bg-success text-white">payer maintenant</button>
+                                    </form>
+                                </div>
+                                <br>
                             @endif
                         </div>
                         <div class="small-text">
@@ -79,12 +95,28 @@
                     </div>
                     <div class="col-6 text-right">
                         <strong>Mode de paiement</strong>
-                        <form action="">
-                            <input type="hidden" name="mode" value="">
-                            <select class="custom-select w-auto" name="mode">s
-                                <option selected>{{ $pay->type_paiement ?? '' }}</option>
-                            </select>
-                        </form>
+                        @if (exist_commande_paiement($cmde->id) != null)
+                            <form action="">
+
+                                <input type="hidden" name="mode" value="">
+                                <select class="custom-select w-auto" name="mode">
+                                    <option selected>{{ $pay->type_paiement ?? '' }}</option>
+                                </select>
+                            </form>
+                        @else
+                            <form action="">
+                                <input type="hidden" name="mode" value="">
+                                <select class="custom-select w-auto" name="mode">
+                                    <option  value="selected">choisissez le type</option>
+                                    <option selected value="momo">Momo</option>
+                                    <option selected value="carte_bancaire">Carte Bancaire</option>
+                                    <option selected value="paypal">Paypal</option>
+
+                                </select>
+
+
+                            </form>
+                        @endif
                     </div>
 
                     <div class="card col-12 p-0 mt-5">
