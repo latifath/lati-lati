@@ -27,12 +27,15 @@ class SitepublicController extends Controller
     public function show_produit_par_sous_categorie($cat, $sous_cat, $pdt){
 
         $produit = Produit::where('slug', $pdt)->first();
+        if($produit == null){
 
-        $produit->with('images');
-        $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
-        $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
+        }else{
+            $produit->with('images');
+            $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
+            $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
 
-        return view ('site-public.produits.detail-produit', compact('produit', 'cat', 'sous_cat', 'sous_categories_produits'));
+            return view ('site-public.produits.detail-produit', compact('produit', 'cat', 'sous_cat', 'sous_categories_produits'));
+        }
 
     }
 

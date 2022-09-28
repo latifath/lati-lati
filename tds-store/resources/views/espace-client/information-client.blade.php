@@ -23,7 +23,6 @@
             <div class="card-body">
                 <form method="POST" action={{ information_client() ? route('root_espace_client_update_information_client')  : route('root_espace_client_create_information_client') }}>
                     @csrf
-                    @method('put')
                     <div class=row>
                         <div class="col-md-6 form-group">
                             <label>Nom</label>

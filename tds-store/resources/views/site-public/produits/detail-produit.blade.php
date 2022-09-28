@@ -138,8 +138,8 @@
                 @foreach ($sous_categories_produits as $produit)
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        @if ($produit == "")
-                            <img class="img-fluid w-100" src="https://cdn.pixabay.com/photo/2022/05/10/11/12/tree-7186835__480.jpg" alt="" style="width: 100% !important; height: auto;">
+                        @if ($produit == " ")
+                            <img class="img-fluid w-100" src="{{ asset('assets/img/product-1.jpg') }}" alt="" style="width: 100% !important; height: auto;">
                         @else
                             <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="" style="width: 100% !important; height: auto;">
                         @endif

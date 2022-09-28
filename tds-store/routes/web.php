@@ -122,7 +122,7 @@ Route::middleware('client')->group(function () {
 
     Route::post('espace-client/information-client/validation', [InformationClientController::class, 'store'])->name('root_espace_client_create_information_client');
 
-    Route::put('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
+    Route::post('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
 
 
     // favoris
