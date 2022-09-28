@@ -12,7 +12,7 @@
 
                         <div class="carousel-item active" style="height: 410px;">
                             @if($publicite_latest == null)
-                               <img class="img-fluid" src="{{ asset('publicites/server.jpg') }}" alt="Image">
+                               <img class="img-fluid" src="{{ asset('assets/img/server.jpg') }}" alt="Image">
                             @else
                                 <img class="img-fluid" src="{{ asset(path_image_publicite() . path_image($publicite_latest->image)->filename) }}" alt="Image">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">

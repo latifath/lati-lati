@@ -158,7 +158,7 @@
                         <tr>
                             <td>{{ number_format($paiement->montant, '0', '.', ' ') }} F CFA</td>
                             <td>{{ $paiement->created_at }}</td>
-                            <td>{{  $paiement->type_paiement  }}</td>
+                            <td>{{ $paiement->type_paiement }}</td>
                         </tr>
                         @else
                         <tr>

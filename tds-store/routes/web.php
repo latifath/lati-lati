@@ -114,6 +114,8 @@ Route::middleware('client')->group(function () {
 
     Route::post('/espace-client/payer_commande', [PaiementClientController:: class, 'store'])->name('root_espace_client_payer_commande');
 
+    Route::post('/espace-client/commandes/{id}/facturation/type_paiement/?', [PaiementClientController:: class, 'store_paiement'])->name('root_espace_client_paiement');
+
 
     // information client
     Route::get('espace-client/information-client', [InformationClientController::class, 'index'])->name('root_espace_client_information_client');
