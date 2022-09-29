@@ -228,8 +228,8 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ' )}} F CFA</td>
-                                <td>{{ account_commande($item->id)->type_paiement}}</td>
+                                <td>{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id),  0, '.', ' ' )}}</td>
+                                <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : ' '}}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
