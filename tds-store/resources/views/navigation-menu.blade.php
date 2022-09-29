@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                <a href="{{ route('root_espace_admin_index') }}" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
+                <a href="" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
               </div>
 
                 <!-- Navigation Links -->

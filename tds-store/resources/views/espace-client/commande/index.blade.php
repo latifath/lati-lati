@@ -7,14 +7,30 @@
     'infos3' => 'Toutes les commandes',
 ])
 <br>
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-b-30">
-                <div class="card-header bg-success">
-                    <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Commande terminée</h4>
-                </div>
 
-                <div class="card-body">
+<div class="">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="terminee-tab" data-toggle="tab" href="#terminee" role="tab" aria-controls="terminee" aria-selected="true">Terminée</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="encours-tab" data-toggle="tab" href="#encours" role="tab" aria-controls="encours" aria-selected="false">En cours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="non-payee-tab" data-toggle="tab" href="#non-payee" role="tab" aria-controls="non-payee" aria-selected="false">Non payee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="attente-paiement-tab" data-toggle="tab" href="#attente-paiement" role="tab" aria-controls="attente-paiement" aria-selected="false">En attente de paiement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="annulee-tab" data-toggle="tab" href="#annulee" role="tab" aria-controls="annulee" aria-selected="false">Annulée</a>
+        </li>
+    </ul>
+
+    <div class="tab-content bg-white" id="myTabContent">
+        <div class="tab-pane fade show active" id="terminee" role="tabpanel" aria-labelledby="terminee-tab">
+            <div class="card-body">
+                <div class="table-responsive">
                     <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
@@ -55,17 +71,10 @@
                     </table>
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-b-30">
-                <div class="card-header bg-success">
-                    <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;"> Commande en cours</h4>
-                </div>
-
-                <div class="card-body">
+        </div>
+        <div class="tab-pane fade" id="encours" role="tabpanel" aria-labelledby="encours-tab">
+            <div class="card-body">
+                <div class="table-responsive">
                     <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
@@ -90,11 +99,11 @@
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
-                                     </a>
+                                    </a>
 
-                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
+                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
-                                     </a>
+                                    </a>
                                 </td>
 
 
@@ -102,80 +111,17 @@
                             @php
                                 $i++;
                             @endphp
-                           @endforeach
+                        @endforeach
 
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
-
-    {{-- tableau commande annuler  --}}
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-b-30">
-                <div class="card-header bg-success">
-                    <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Commande annulée</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
-                        <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>Date</th>
-                            <th>Montant</th>
-                            <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $i= 1;
-                            @endphp
-                            @foreach($list_commandes_annulee as $item)
-
-                            <tr>
-                                <td>{{ $i}}</td>
-                                <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ' )}} F CFA</td>
-                                <td>{{ account_commande($item->id)->type_paiement}}</td>
-                                <td>
-                                    <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
-                                        <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
-                                    </a>
-
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
-
-                                        <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
-                                    </a>
-                                </td>
-                           </tr>
-                           @php
-                                $i++;
-                            @endphp
-                           @endforeach
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end col -->
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-b-30">
-                <div class="card-header bg-success">
-                    <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Commande non payée</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <table id="datatable3" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }};">
+        </div>
+        <div class="tab-pane fade" id="non-payee" role="tabpanel" aria-labelledby="non-payee-tab">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }};">
                         <thead>
                         <tr>
                             <th>N°</th>
@@ -211,24 +157,15 @@
                             @php
                                 $i++;
                             @endphp
-                           @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
-                </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card m-b-30">
-                <div class="card-header bg-success">
-                    <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Commande en attente de paiement</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
+        </div>
+        <div class="tab-pane fade" id="attente-paiement" role="tabpanel" aria-labelledby="attente-paiement-tab">
+            <div class="card-body">
+                <div class="table-responsive">
                     <table id="datatable3" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }};">
                         <thead>
                         <tr>
@@ -264,28 +201,71 @@
                             @php
                                 $i++;
                             @endphp
-                           @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="annulee" role="tabpanel" aria-labelledby="annulee-tab">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatable4" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Date</th>
+                                <th>Montant</th>
+                                <th>Type de paiement</th>
+                                <th style="width: 8%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i= 1;
+                            @endphp
+                            @foreach($list_commandes_annulee as $item)
+
+                            <tr>
+                                <td>{{ $i}}</td>
+                                <td>{{ $item->created_at}}</td>
+                                <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ' )}} F CFA</td>
+                                <td>{{ account_commande($item->id)->type_paiement}}</td>
+                                <td>
+                                    <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
+                                        <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
+                                    </a>
+
+                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
+
+                                        <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
+                                    </a>
+                                </td>
+                        </tr>
+                        @php
+                                $i++;
+                            @endphp
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+        </div>
+        </div>
+    </div>
+
 
 @endsection
 
-{{-- pour eviter les confusion avec les id au niveau des tables --}}
+{{-- pour eviter les confusions avec les id au niveau des tables --}}
 @section('js')
+
 <script>
     $(document).ready(function() {
         $('#datatable1').DataTable();
-    });
-    $(document).ready(function() {
         $('#datatable2').DataTable();
-    });
-    $(document).ready(function() {
         $('#datatable3').DataTable();
+        $('#datatable4').DataTable();
     });
 </script>
 @endsection

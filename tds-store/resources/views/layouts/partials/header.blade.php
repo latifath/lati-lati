@@ -60,12 +60,11 @@
             <a href="#" class="btn border">
                 <i class="fas fa-heart" style="{{ couleur_text_2() }}"></i>
                 @if (auth()->check())
-                    <span class="badge"></span>
+                    <span class="badge">{{ count_favoris() }}</span>
                 @else
                     <span class="badge">0</span>
                 @endif
             </a>
-
             <a href="{{ route('root_show_panier') }}" class="btn border">
                 <i class="fas fa-shopping-cart" style="{{ couleur_text_2() }}"></i>
                 <span class="badge">

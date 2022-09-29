@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section ('detail_produit')
 
 <!-- Page Header Start -->
@@ -55,19 +56,19 @@
                         @csrf
                         <div class="d-flex align-items-center mb-4 pt-2">
                             <div class="input-group quantity mr-3" style="width: 130px;">
-                                <div class="input-group-btn" type="number" id="quantity" name="quantity" min="1">
-                                    <button class="btn btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
+                                <div class="input-group-btn">
+                                    <a class="btn btn-primary a:hover" id="remove" >
+                                        <i class="fa fa-minus text-white"></i>
+                                    </a>
                                 </div>
                                 <input type="hidden" id="id" name="id" value="{{ $produit->id }}">
-                                <input type="text" class="form-control bg-secondary text-center" value="1" name="quantite">
+                                <input type="text" class="form-control bg-secondary text-center" value="1" name="quantite" id="qty" min="1">
                                 <div class="input-group-btn">
                                     {{-- <input type="number" id="quantity" name="quantity" min="1" max="5"> --}}
 
-                                    <button class="btn btn-primary" type="number" id="quantity" name="quantity"  max="10">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                    <a class="btn btn-primary" id="add">
+                                        <i class="fa fa-plus text-white"></i>
+                                    </a>
 
                                 </div>
                             </div>
@@ -229,4 +230,20 @@
             });
         @endif
     </script> --}}
+
+    <script type="text/javascript">
+        $("#add").click(function() {
+            var $input = $('#qty');
+
+            $input.val( +$input.val() + 1 );
+
+        });
+        $("#remove").click(function() {
+            var $input = $('#qty');
+
+            if($input.val() > 1){
+                $input.val( +$input.val() - 1 );
+            }
+        });
+    </script>
 @endsection

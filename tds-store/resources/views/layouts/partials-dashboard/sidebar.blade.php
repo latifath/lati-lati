@@ -24,21 +24,18 @@
                             <span> Tableau de bord <span class="badge badge-success badge-pill float-right"></span></span>
                         </a>
                     </li>
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-shopping-cart"></i> <span> Commande </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="/">Ajouter commande</a></li>
-                            <li><a href="{{ route('root_espace_client_commande_index') }}">Liste commandes</a></li>
-                        </ul>
+                    <li class="">
+                        <a href="{{ route('root_espace_client_commande_index') }}" class="waves-effect"><i class="fa fa-shopping-cart"></i> <span> Commande </span></a>
                     </li>
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Paiement </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="list-unstyled">
-                            {{-- <li><a href="{{ route('root_espace_client_index') }}">Dernier Paiement</a></li> --}}
-                            <li><a href="{{ route('root_espace_client_paiement_index') }}">Tous les paiements </a></li>
-                        </ul>
+                    <li class="">
+                        <a href="{{ route('root_espace_client_paiement_index') }}" class="waves-effect"><i class="fa fa-money"></i> <span> Paiement </span> </a>
                     </li>
+
+                    <li class="">
+                        <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <span>Favoris</span></a>
+                     </li>
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user"></i><span> Mon Profil</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
@@ -46,11 +43,6 @@
                             <li><a href="{{ route('profile.show') }}" class="waves-effect">Profil</a></li>
                         </ul>
                     </li>
-
-                    <li class="">
-                        <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                            <span>Favoris</span></a>
-                     </li>
                 @endclient
 
                 @admin

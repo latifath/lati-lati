@@ -3,6 +3,12 @@
 @section('head')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+<style>
+    .select2-selection--single{
+            height: 50px !important;
+            border: 1px solid #ced4da !important;
+        }
+</style>
 @endsection
 
 @section('compte')
@@ -12,8 +18,6 @@
     'infos3' => 'Compte',
 ])
 <br>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
 <div class="row">
     <div class="col-md-12 ">
         <div class="card m-b-30">
@@ -23,13 +27,11 @@
             <div class="card-body">
                 <form method="POST" action={{ information_client() ? route('root_espace_client_update_information_client')  : route('root_espace_client_create_information_client') }}>
                     @csrf
-                    @method('put')
-                    <div class=row>
+                    <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Nom</label>
                             <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->nom  : '' }}" type="text" placeholder="" name="nom" >
                             {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-
                         </div>
 
                         <div class="col-md-6 form-group">
@@ -48,20 +50,16 @@
                             <label>Téléphone</label>
                             <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->telephone  : '' }}"  placeholder="" name="telephone">
                             {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
-
-                        <div class="alert alert-info" style="display: none;"></div>
+                            <div class="alert alert-info" style="display: none;"></div>
                         </div>
 
                         <div class="col-md-6 form-group">
                             <label>Pays</label>
-                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" style="height: 50px;" name="pays">
-
+                            <select class="custom-select is-invalid {{ $errors->has('pays') ? 'is-invalid' : '' }}" style="height: 50px;" name="pays">
                                 <option value="{{ information_client() ? information_client()->pays  : '' }}">{{ information_client() ? information_client()->pays  : 'Choisissez le pays' }}</option>
                                 @foreach(pays() as $item)
-                                <option value="{{ $item->nom }}">{{ $item->nom }}</option>
-
+                                    <option value="{{ $item->nom }}">{{ $item->nom }}</option>
                                @endforeach
-
                             </select>
                             {!! $errors->first('pays', '<p class="text-danger">:message</p>') !!}
                         </div>
@@ -89,11 +87,10 @@
                             <label>Nom d'entreprise</label>
                             <input class="form-control {{ $errors->has('nom_entreprise') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->nom_entreprise  : '' }}" type="text" placeholder="" name="nom_entreprise" >
                             {!! $errors->first('nom_entreprise', '<p class="text-danger">:message</p>') !!}
-
                         </div>
-                        <div class="col-md-6 form-group">
-                            <button class="btn btn-primary font-weight-bold my-3 py-3 float-right" type="submit">{{ information_client() ? 'Modifier'  : 'Ajouter' }}</button>
-                        </div>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-primary font-weight-bold my-3 py-3 float-right" type="submit">{{ information_client() ? 'Modifier'  : 'Ajouter' }}</button>
                     </div>
                 </form>
             </div>

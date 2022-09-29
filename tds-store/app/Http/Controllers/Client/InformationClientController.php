@@ -22,6 +22,7 @@ class InformationClientController extends Controller
             'email' => 'required|unique:clients,email,except,id',
             'telephone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'pays' => 'required',
+            'rue' => 'required',
             'ville' => 'required',
             'code_postal' => 'required',
             'nom_entreprise' => 'required'

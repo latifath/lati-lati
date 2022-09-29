@@ -295,10 +295,10 @@ if(!function_exists('information_client')){
 
 // pour le nmbre total de like
 
-if(!function_exists('nombre')){
-    function nombre(){
+if(!function_exists('count_favoris')){
+    function count_favoris(){
         $nbr = DB::table('produit_user')->where('user_id', auth()->user()->id)->get();
-        return $nbr;
+        return $nbr->count();
     }
 }
 
