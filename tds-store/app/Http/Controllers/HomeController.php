@@ -6,6 +6,7 @@ use App\Models\Favoris;
 use App\Models\Produit;
 use App\Models\Publicite;
 use App\Models\Newsletter;
+use App\Models\Partenaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,9 @@ class HomeController extends Controller
 
         $publicites = Publicite::all();
 
-        return view('site-public.index', compact('produits_latest', 'publicites', 'publicite_latest'));
+        $partenaires = Partenaire::all();
+
+        return view('site-public.index', compact('produits_latest', 'publicites', 'publicite_latest', 'partenaires'));
     }
 
 

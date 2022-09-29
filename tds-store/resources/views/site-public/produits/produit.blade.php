@@ -70,19 +70,7 @@
 
 @section('partenaire')
     <!-- Vendor Start -->
-    <div class="container-fluid py-5">
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel vendor-carousel">
-                    @foreach (partenaires_logo() as $item)
-                        <div class="vendor-item border p-4">
-                            <img src="{{ $item->logo }}" alt="">
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('layouts.partials.partenaire')
     <!-- Vendor End -->
 @endsection
 

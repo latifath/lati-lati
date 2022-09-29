@@ -25,10 +25,9 @@ class PartenaireFactory extends Factory
     {
         return [
             'nom' => $this->faker->lastName(),
-            'image' => $this->faker->randomNumber($nbDigits = NULL, $strict = false),
+            'image' => $this->faker->numberBetween($min =1, $max = 100),
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
-
         ];
     }
 }

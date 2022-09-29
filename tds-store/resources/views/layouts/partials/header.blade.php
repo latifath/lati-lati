@@ -97,23 +97,24 @@
                         $i = 0
                         @endphp
                         @foreach (categorie_menu() as $item)
-                        @php
-                        $i++
-                        @endphp
-                        @if($i <= 8) @if(sous_categories_menu($item->id)->count() == 0)
-                            <a href="#" class="nav-item nav-link active" style="border-right: 1px solid #ffff; padding-right: 40px; {{ couleur_text_3() }};">{{ $item->nom }}</a>
-                            @else
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};" >{{ $item->nom }}</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    @foreach (sous_categories_menu($item->id) as $k)
-                                    <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
-                                    @endforeach
-                                </div>
-                            </div>
+                            @php
+                            $i++
+                            @endphp
+                            @if($i <= 8)
+                                @if(sous_categories_menu($item->id)->count() == 0)
+                                    <a href="#" class="nav-item nav-link active" style="border-right: 1px solid #ffff; padding-right: 40px; {{ couleur_text_3() }};">{{ $item->nom }}</a>
+                                @else
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};" >{{ $item->nom }}</a>
+                                        <div class="dropdown-menu rounded-0 m-0">
+                                            @foreach (sous_categories_menu($item->id) as $k)
+                                                <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
-                            @endif
-                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             </nav>

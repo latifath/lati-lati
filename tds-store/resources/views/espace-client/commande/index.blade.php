@@ -140,8 +140,8 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id),  0, '.', ' ' ) }} F CFA</td>
-                                <td>Néant</td>
+                                <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
+                                <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : 'Néant'}}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
@@ -173,7 +173,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
+                            <th style="width: 13%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -191,7 +191,6 @@
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
-
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
 
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
@@ -212,13 +211,13 @@
                 <div class="table-responsive">
                     <table id="datatable4" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
-                            <tr>
-                                <th>N°</th>
-                                <th>Date</th>
-                                <th>Montant</th>
-                                <th>Type de paiement</th>
-                                <th style="width: 8%">Action</th>
-                            </tr>
+                        <tr>
+                            <th>N°</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Type de paiement</th>
+                            <th style="width: 13%">Action</th>
+                        </tr>
                         </thead>
                         <tbody>
                             @php
@@ -237,7 +236,6 @@
                                     </a>
 
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
-
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -250,11 +248,8 @@
                     </table>
                 </div>
             </div>
-        </div>
-        </div>
-    </div>
-
-
+        </div> <!-- end col -->
+    </div> <!-- end row -->
 @endsection
 
 {{-- pour eviter les confusions avec les id au niveau des tables --}}
@@ -268,4 +263,21 @@
         $('#datatable4').DataTable();
     });
 </script>
+<script>
+    $(document).on('click', '#btn_ajout_paiement', function(){
+
+    var ID = $(this).attr('data-id');
+    var montant = $(this).attr('data-montant')
+
+
+    $('#add_id').val(ID);
+    $('#add_montant').val(montant);
+
+
+$('#ModalAjoutPaiement').modal('show');
+});
+
+</script>
+
+
 @endsection

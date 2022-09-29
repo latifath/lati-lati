@@ -112,7 +112,7 @@ Route::middleware('client')->group(function () {
 
     Route::get('/espace-client/page-paiement', [PaiementClientController:: class, 'payer_index'])->name('root_espace_client_payer_index');
 
-    Route::post('/espace-client/payer_commande', [PaiementClientController:: class, 'store'])->name('root_espace_client_payer_commande');
+    Route::get('validation/{id}/commande-reçue/type-paiement-{payment}', [PaiementClientController:: class, 'store'])->name('root_espace_client_store');
 
 
     // information client
@@ -121,7 +121,6 @@ Route::middleware('client')->group(function () {
     Route::post('espace-client/information-client/validation', [InformationClientController::class, 'store'])->name('root_espace_client_create_information_client');
 
     Route::post('espace-client/information-client/update', [InformationClientController::class, 'update'])->name('root_espace_client_update_information_client');
-
 
     // favoris
 

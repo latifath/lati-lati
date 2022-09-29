@@ -38,6 +38,12 @@
 </div>
 
 <div class="form-group">
+    <label for="">Image</label>
+    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image" value="{{ old('image') ?? $produit->image}}">
+    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+</div>
+
+<div class="form-group">
     <label for="description">Description</label>
     <textarea class="elm1 form-control {{ $errors->has('description') ? 'is-invalid' : '' }} " name="description">
         {!! old('description') ?? $produit->description !!}
