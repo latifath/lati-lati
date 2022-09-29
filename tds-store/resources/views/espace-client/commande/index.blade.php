@@ -142,10 +142,7 @@
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
                                 <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
-                                {{-- <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ' )}} F CFA</td> --}}
-                                {{-- <td>{{ account_commande($item->id)->type_paiement}}</td> --}}
-                                <td></td>
-
+                                <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : 'Néant'}}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
@@ -184,7 +181,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
+                            <th style="width: 13%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -202,13 +199,9 @@
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
-
-                                    {{-- <button id="btn_ajout_paiement" data-id="{{ $item->id }}" data-montant="{{montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) }}" class="btn" style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-money"></i> Payer</button> --}}
-
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
-
                                 </td>
                             </tr>
                             @php
@@ -239,7 +232,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
+                            <th style="width: 13%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -259,7 +252,6 @@
                                     </a>
 
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
-
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -275,7 +267,6 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
-    @include('espace-client.commande._modal');
 @endsection
 
 {{-- pour eviter les confusion avec les id au niveau des tables --}}

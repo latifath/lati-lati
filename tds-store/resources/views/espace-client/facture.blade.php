@@ -40,21 +40,20 @@
                             <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
-                                <div class="col-6 text-right">
-                                    <form action="" method="post">
-                                        <input type="hidden" name="type_paiement" value="">
-                                        {{-- @if ($_GET ['type_paiement'] == "momo")
-                                        <button class="kkiapay-button btn btn-primary my-3 py-3">Procéder au paiement</button>
-                                        @elseif($_GET ['type_paiement'] == "carte_bancaire")
-                                        <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
-                                        @elseif($_GET ['type_paiement'] == "paypal")
+                                @if( isset($_GET['type_paiement']))
+                                    <div class="col-6 text-right">
+                                        @if($_GET['type_paiement'] == "momo")
+                                            <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
+                                        @elseif($_GET['type_paiement'] == "carte_bancaire")
+                                            <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
+                                        @elseif($_GET['type_paiement'] == "paypal")
                                             <div id="paypal-button-container">
-                                        <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
-                                        </div>
-                                        @endif --}}
-                                         <button  type="submit" class="btn bg-success text-white">payer maintenant</button>
-                                    </form>
-                                </div>
+                                                <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                @else
+                                @endif
                                 <br>
                             @endif
                         </div>
@@ -96,23 +95,18 @@
                     <div class="col-6 text-right">
                         <strong>Mode de paiement</strong>
                         @if (exist_commande_paiement($cmde->id) != null)
-                            <form action="">
-
-                                <input type="hidden" name="mode" value="">
-                                <select class="custom-select w-auto" name="mode">
-                                    <option selected>{{ $pay->type_paiement ?? '' }}</option>
-                                </select>
-                            </form>
+                            <select class="custom-select w-auto" name="mode">
+                                <option selected>{{ $pay->type_paiement ?? '' }}</option>
+                            </select>
                         @else
-                            <form action="{{ route('root_espace_client_paiement', $cmde->id) }}" method="post" onChange='parent.location="javascript:location.reload()"'>
-                                <input type="hidden" name="mode" value="" >
-                                <select class="custom-select type w-auto" name="type_paiement"
-                                >
-                                    <option value="">Choisir le type de paiement</option>
+                            <form action="" method="GET">
+                                <select class="custom-select type w-auto" name="type_paiement" >
+                                    <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'Choisir le type de paiement' }}</option>
                                     <option value="momo">MoMo</option>
                                     <option value="carte_bancaire">Carte Bancaire</option>
                                     <option value="paypal">PayPal</option>
                                 </select>
+                                <button type="submit" class="btn bg-success text-white">Envoyer</button>
                             </form>
                         @endif
                     </div>
@@ -204,20 +198,18 @@
         </div>
         <div class="row py-5 float-right pr-3">
             <a href="{{ route('root_espace_client_commande_index') }}">
-                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;">Retour</button>
+                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button>
             </a>
 
             <button class="btn border" onClick="imprimer('facture')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
                 <i class="fa fa-print" aria-hidden="true" input type="button" value="Imprimer"> </i> Imprimer
             </button>
-
-
         </div>
     </div>
 
+    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $cmde->adresse_livraison_id) }}" callback="http://127.0.0.1:8000/validation/{{ $cmde->id }}/commande-reçue/type-paiement-{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
 
     <script src=https://code.jquery.com/jquery-3.4.1.min.js></script>
     <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js></script>
@@ -239,8 +231,63 @@
         // alert("Vous avez sélectionné le langage : " + langage);
       });
     });
-    </script>
+</script>
 
+<script>
+    paypal.Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '{{montant_ttc(montant_apres_reduction($sub_total),  $cmde->adresse_livraison_id) }}' // Can also reference a variable or function
+              }
+            }]
+          });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
+          return actions.order.capture().then(function(orderData) {
+            // Successful capture! For dev/demo purposes:
+            // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            // const transaction = orderData.purchase_units[0].payments.captures[0];
+            // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+
+            // var firstname = $('.firstname').val();
+            // var lastname = $('.lastname').val();
+
+            console.log(orderData.id);
+            // console.log(orderData);
+
+            $.ajax({
+                type: "POST",
+                url: "/place-order",
+                data: {
+                    // 'fname': firstname,
+                    // 'lname': lastname,
+                    'payment_mode':"Paid by PayPal",
+                    'payment_id':orderData.id,
+                },
+                success: function(response){
+                    console.log(orderData);
+                    // swal(response.status);
+                    // window.location.href = "/my-orders";
+                    // console.log(response.status);
+                    alert('Transaction');
+                }
+            });
+
+            // When ready to go live, remove the alert and show a success message within this page. For example:
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            // Or go to another URL:  actions.redirect('thank_you.html');
+          });
+        }
+      }).render('#paypal-button-container');
+
+</script>
 </body>
 </html>
+
+
 
