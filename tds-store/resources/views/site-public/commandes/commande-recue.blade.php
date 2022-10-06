@@ -139,7 +139,7 @@
                         <td class="border-0 float-left"><i class="fa fa-envelope" aria-hidden="true"></i> {{ adresseclient($commande->adresse_client_id)->email }}</td>
                     </tr>
                     <tr>
-                        <td class="border-0 float-left"><i class="fa fa-phone" aria-hidden="true"></i> {{ adresseclient($commande->adresse_client_id)->telephone }}</td>
+                        <td class="border-0 float-left"><i class="fa fa-phone-alt" aria-hidden="true"></i> {{ adresseclient($commande->adresse_client_id)->telephone }}</td>
                     </tr>
                 </div>
             </table>
@@ -160,7 +160,7 @@
                             <td class="border-0 float-left"><i class="fa fa-envelope" aria-hidden="true"></i> {{ adresselivraison($commande->adresse_livraison_id)->email }}</td>
                         </tr>
                         <tr>
-                            <td class="border-0 float-left"><i class="fa fa-phone" aria-hidden="true"></i> {{ adresselivraison($commande->adresse_livraison_id)->telephone }}</td>
+                            <td class="border-0 float-left"><i class="fa fa-phone-alt" aria-hidden="true"></i> {{ adresselivraison($commande->adresse_livraison_id)->telephone }}</td>
                         </tr>
                     </div>
                 </table>

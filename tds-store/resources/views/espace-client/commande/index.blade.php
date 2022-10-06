@@ -38,7 +38,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 10%">Action</th>
+                            <th style="width: 8%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -128,7 +128,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
+                            <th style="width: 5%;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -150,8 +150,6 @@
                                     <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
-
-                                    <button class="btn " style=""></button>
                                 </td>
                             </tr>
                             @php
@@ -173,7 +171,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 13%">Action</th>
+                            <th style="width: 8%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -216,7 +214,7 @@
                             <th>Date</th>
                             <th>Montant</th>
                             <th>Type de paiement</th>
-                            <th style="width: 13%">Action</th>
+                            <th style="width: 8%">Action</th>
                         </tr>
                         </thead>
                         <tbody>

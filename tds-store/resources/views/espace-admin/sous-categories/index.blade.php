@@ -63,7 +63,7 @@
             <form action="{{ route('root_espace_admin_edit_sous_categorie')}}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color:  #cdc3b8;">
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" >
                         <div class="form-group">
@@ -94,7 +94,7 @@
             </div>
             <form action="{{ route('root_espace_admin_create_sous_categorie')}}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color:  #cdc3b8;">
                     <div class="form-group">
                         <label for="">Nom</label>
                         <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez la sous-catégorie" name="nom">

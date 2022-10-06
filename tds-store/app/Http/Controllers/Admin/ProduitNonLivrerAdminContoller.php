@@ -13,9 +13,9 @@ use App\Mail\SendMailProduitDisponibleClient;
 class ProduitNonLivrerAdminContoller extends Controller
 {
     public function index(){
-        $produits_livre = ProduitNonLivrer::where('status', 'livrée')->get();
+        $produits_non_livre = ProduitNonLivrer::where('status', 'non livré')->get();
 
-        $produits_non_livre = ProduitNonLivrer::where('status', 'non livrée')->get();
+        $produits_livre = ProduitNonLivrer::where('status', 'livré')->get();
 
         return view('espace-admin.produits.produit-non-livre.produit-non-livre', compact('produits_non_livre', 'produits_livre'));
     }
@@ -33,7 +33,7 @@ class ProduitNonLivrerAdminContoller extends Controller
             ]);
 
             $produit_non_livre->update([
-                'status' => "livrée",
+                'status' => "livré",
             ]);
 
             Mail::to($produit_non_livre->commande->adresse_client->email)->send(new SendMailProduitDisponibleClient($produit_non_livre, $produit));
@@ -63,7 +63,7 @@ class ProduitNonLivrerAdminContoller extends Controller
             ]);
 
             $produit_livre->update([
-            'status' => "non livrée",
+            'status' => "non livré",
             ]);
 
             flashy()->info('Produit pas encore livré.');

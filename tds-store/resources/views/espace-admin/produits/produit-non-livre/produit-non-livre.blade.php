@@ -38,9 +38,10 @@
                                 <td>{{ $item->quantite }}</td>
                                 <td>{{ $item->status }}</td>
                                 <td>
-                                    <button  id="confirmation" data-id="{{ $item->id }}" data-toggle="tooltip" title="Livré" id="btn_delete_produit" class="btn bg-success text-white" ><i class="fa fa-check" aria-hidden="true"></i> Livrée</button>
+                                    <a href="{{ route('root_espace_admin_modifie_produits_non_livre', $item->id) }}">
+                                        <button data-toggle="tooltip" title="Livré" id="btn_delete_produit" class="btn bg-success text-white" ><i class="fa fa-check" aria-hidden="true"></i> Livrée</button>
+                                    </a>
                                 </td>
-
                             </tr>
                             @endforeach
                                 @php
@@ -85,7 +86,9 @@
                                 <td>{{ $item->quantite}}</td>
                                 <td>{{ $item->status}}</td>
                                 <td>
-                                    <button  id="confirmation_non_livrer" data-id="{{ $item->id }}" data-toggle="tooltip" title="Non Livré" id="btn_delete_produit" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Non Livrée</button>
+                                    <a href="{{ route('root_espace_admin_retirer_produits_non_livre', $item->id) }}">
+                                        <button data-toggle="tooltip" title="Non Livré" id="btn_delete_produit" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Non Livrée</button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -100,6 +103,7 @@
     </div>
 </div>
 
+{{-- @if($produits_non_livre != null)
 <div class="modal fade" id="ConfirmationModalCenter" aria-labelledby="ConfirmationModalCenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -109,11 +113,12 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('root_espace_admin_modifie_produits_non_livre', $item->id) }}"  method="POST">
+            <form action="{{ route('root_espace_admin_modifie_produits_non_livre', $item->id ) }}"  method="POST
+                ">
                 @csrf
                 @method('put')
                 <div class="modal-body">
-                    <input  class="form-control"  type="hidden" id="item_id" placeholder="" name="id" >
+                    <input  class="form-control"  type="hidden" id="item_id" placeholder="" name="id">
                     <h5 class="text-center">Etes-vous sûr de vouloir livrer le produit? </h5>
                 </div>
                 <div class="modal-footer">
@@ -124,7 +129,10 @@
        </div>
     </div>
 </div>
+@else
+@endif --}}
 
+{{-- @if($produits_livre != " ")
 <div class="modal fade" id="ConfirmationNonLivrerModalCenter" aria-labelledby="ConfirmationNonLivrerModalCenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -148,6 +156,8 @@
        </div>
     </div>
 </div>
+@else
+@endif --}}
 @endsection
 @section('js')
 <script>
@@ -156,7 +166,7 @@
     });
 </script>
 
-<script>
+{{-- <script>
     $(document).on('click', '#confirmation', function(){
        var ID = $(this).attr('data-id');
 
@@ -172,6 +182,6 @@
 
        $('#ConfirmationNonLivrerModalCenter').modal('show');
    });
-</script>
+</script> --}}
 @endsection
 

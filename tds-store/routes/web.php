@@ -325,9 +325,9 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/produits-non-livre', [ProduitNonLivrerAdminContoller::class, 'index'])->name('root_espace_admin_produits_non_livrer');
 
-    Route::put('espace-admin/produits-non-livre/{id}/modifier', [ProduitNonLivrerAdminContoller::class, 'validation_produit_livre'])->name('root_espace_admin_modifie_produits_non_livre');
+    Route::get('espace-admin/produits-non-livre/{id}/modifier', [ProduitNonLivrerAdminContoller::class, 'validation_produit_livre'])->name('root_espace_admin_modifie_produits_non_livre');
 
-    Route::post('espace-admin/produits-non-livre/{id}/retirer', [ProduitNonLivrerAdminContoller::class, 'validation_produit_non_livre'])->name('root_espace_admin_retirer_produits_non_livre');
+    Route::get('espace-admin/produits-non-livre/{id}/retirer', [ProduitNonLivrerAdminContoller::class, 'validation_produit_non_livre'])->name('root_espace_admin_retirer_produits_non_livre');
 
 });
 // end espace admin

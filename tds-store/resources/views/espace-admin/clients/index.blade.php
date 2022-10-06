@@ -39,9 +39,6 @@
                                 </a>
 
                                 <button data-toggle="tooltip" title="Supprimer" id="btn_delete"  data-id="{{ $item->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
-
-
-
                             </td>
                         </tr>
                         @endforeach
@@ -59,12 +56,11 @@
 @section('js')
     <script>
         $(document).on('click', '#btn_delete', function(){
+        var ID = $(this).attr('data-id');
 
-            var ID = $(this).attr('data-id');
+        $('#item_id').val(ID);
 
-            $('#id').val(ID);
-
-            $('#DeleteModalCenter').modal('show');
-        });
+        $('#DeleteModalCenter').modal('show');
+    });
     </script>
 @endsection

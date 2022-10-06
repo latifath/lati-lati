@@ -9,5 +9,5 @@ Bonjour chèr(e) {{ $produit_non_livre->commande->adresse_client->nom }},
         </li>
 </ul>
 
-Cordialement!
+<b><em>Merci de nous avoir fait confiance !</em></b>
 @endcomponent

@@ -352,7 +352,7 @@ function getIp(callback) {
    const phoneInput1 = window.intlTelInput(phoneInputField1, {
      initialCountry: "auto",
      geoIpLookup: getIp,
-     preferredCountries: ["côte-d'ivore", "gha", "togo", "fr"],
+     preferredCountries: ["ci", "gh", "tg", "fr", "bj"],
      utilsScript:
        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
    });

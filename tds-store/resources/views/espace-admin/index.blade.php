@@ -35,9 +35,9 @@
         <div class="card mini-stat m-b-30">
             <div class="p-3 bg-primary text-white">
                 <div class="mini-stat-icon">
-                    <i class="fa fa-product-hunt  float-right mb-0"></i>
+                    <i class="fa fa-product-hunt float-right mb-0"></i>
                 </div>
-                <h6 class="text-uppercase mb-0" >Produits</h6>
+                <h6 class="text-uppercase mb-0">Produits</h6>
             </div>
             <div class="card-body">
                 <div class="border-bottom pb-4">

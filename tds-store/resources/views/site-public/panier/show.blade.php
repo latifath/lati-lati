@@ -1,4 +1,6 @@
 @extends('layouts.master')
+
+@section ('detail_produit')
 @section('panier')
 <!-- Page Header Start -->
 <div class="container-fluid mb-5" style="{{ couleur_background_1() }}">

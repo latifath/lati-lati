@@ -25,6 +25,7 @@
          <!-- Responsive datatable examples -->
          <link href="{{ asset('dashbord/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
     </head>
 

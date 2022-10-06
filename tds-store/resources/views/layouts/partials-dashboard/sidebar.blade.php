@@ -32,10 +32,10 @@
                         <a href="{{ route('root_espace_client_paiement_index') }}" class="waves-effect"><i class="fa fa-money"></i> <span> Paiement </span> </a>
                     </li>
 
-                    <li class="">
+                    {{-- <li class="">
                         <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
                             <span>Favoris</span></a>
-                     </li>
+                     </li> --}}
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user"></i><span> Mon Profil</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
@@ -83,7 +83,7 @@
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-shopping-cart"></i><span>Commande</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="#">Ajouter une commande</a></li>
+                            <li><a href="{{ route('root_index') }}">Ajouter une commande</a></li>
                             <li><a href="{{ route('root_espace_admin_commandes_index') }}">Toutes les commandes</a></li>
                         </ul>
                     </li>
@@ -125,12 +125,8 @@
                      </li>
 
                     <li class="">
-                        <a href="{{ route('root_espace_admin_index_partenaire') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Mon profil</span></a>
+                        <a href="{{ route('profile.show') }}" class="waves-effect"><i class="fa fa-user" aria-hidden="true"></i><span>Mon profil</span></a>
                      </li>
-
-
-
-
 
                 @endadmin
 

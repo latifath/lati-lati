@@ -2,6 +2,16 @@
 use Illuminate\Support\Carbon;
 ?>
 @extends('layouts.master-dashboard')
+@section('head')
+<style>
+    /* .modal-body{
+        border: 1px solid;
+    } */
+    .form-control{
+        border: 1px solid;
+    }
+</style>
+@endsection
 
 @section('stocks')
 
@@ -68,20 +78,20 @@ use Illuminate\Support\Carbon;
         </div>
     </div>
 </div>
-
+{{-- #f0f0f0; --}}
 <div class="modal fade" id="ModalModifieStock" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifieStock" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Modifier le stock</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true" style="color:white;">&times;</span>
                 </button>
             </div>
             <form action="{{ route('root_espace_admin_edit_stock')}}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #cdc3b8">
 
                     <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id" >
                     <div class="form-group">

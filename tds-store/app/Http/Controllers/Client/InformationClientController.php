@@ -17,15 +17,15 @@ class InformationClientController extends Controller
     public function store(Request $request) {
 
         $this->validate($request, [
-            'nom' => 'required',
+            'nom' => 'required|min:3|max:20|alpha',
             'prenom' => 'required',
             'email' => 'required|unique:clients,email,except,id',
             'telephone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
-            'pays' => 'required',
+            'pays' => 'required|alpha',
             'rue' => 'required',
-            'ville' => 'required',
+            'ville' => 'required|max:255|alpha',
             'code_postal' => 'required',
-            'nom_entreprise' => 'required'
+            'nom_entreprise' => 'required|max:255|alpha'
 
          ]);
 
@@ -52,14 +52,15 @@ class InformationClientController extends Controller
     public function update(Request $request){
 
         $this->validate($request, [
-            'nom' => 'required',
+            'nom' => 'required|min:3|max:20|alpha',
             'prenom' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:clients,email,except,id',
             'telephone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
-            'pays' => 'required',
-            'ville' => 'required',
+            'pays' => 'required|alpha',
+            'rue' => 'required',
+            'ville' => 'required|max:255|alpha',
             'code_postal' => 'required',
-            'nom_entreprise' => 'required'
+            'nom_entreprise' => 'required|max:255|alpha'
         ]);
         Client::where('user_id', auth()->user()->id)->first()->update([
             'nom' => $request->nom,

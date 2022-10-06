@@ -1,4 +1,8 @@
 @extends('layouts.master')
+{{-- pour la barre de seach --}}
+ <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+ <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
 @section ('detail_produit')
 
@@ -42,7 +46,6 @@
                     </div>
                 </div>
                 <div class="col-lg-8 pb-5">
-
                     <div class="">
                         @livewire('like', ['produit' => $produit])
                     </div>
@@ -122,11 +125,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-
 
 <!-- Products Start -->
 <div class="container-fluid py-5">
@@ -139,11 +139,7 @@
                 @foreach ($sous_categories_produits as $produit)
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        @if ($produit == " ")
-                            <img class="img-fluid w-100" src="{{ asset('assets/img/product-1.jpg') }}" alt="" style="width: 100% !important; height: auto;">
-                        @else
-                            <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="" style="width: 100% !important; height: auto;">
-                        @endif
+                        <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="" style="width: 100% !important; height: auto;">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">{{ $produit->nom }}</h6>

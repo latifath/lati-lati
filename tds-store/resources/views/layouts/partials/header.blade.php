@@ -26,7 +26,6 @@
                         <x-jet-dropdown-link href="{{ route('root_deconnexion') }}" @click.prevent="$root.submit();" style="{{ couleur_text_3() }}; font-size: 15px;">
                             Déconnexion
                         </x-jet-dropdown-link>
-
                     </form>
                     @if (Auth::user()->role == "admin" || Auth::user()->role == "gestionnaire" || Auth::user()->role == "comptable")
                         <a href="{{ route('root_espace_admin_index') }}" style=" {{ couleur_text_3() }} ; font-size: 15px;">Espace-admin</a>
@@ -121,4 +120,3 @@
         </div>
     </div>
 </div>
-

@@ -1,8 +1,6 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            {{-- <img src="{{ asset('dashbord/images/logo.png') }}" height="50" alt="logo">        </x-slot> --}}
-
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('register') }}">

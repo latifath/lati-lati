@@ -65,7 +65,7 @@
             <form action="{{ route('root_espace_admin_edit_utilisateur') }}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color:  #cdc3b8;">
                     <div class="">
                         <input  class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}"  type="hidden" id="id" placeholder="" name="id" >
                         <div class="col-md-12 form-group">

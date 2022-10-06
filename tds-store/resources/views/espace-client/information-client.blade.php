@@ -1,9 +1,17 @@
 
 @extends('layouts.master-dashboard')
 @section('head')
+<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
 <style>
+        .iti{
+            display : block !important;
+        }
+
     .select2-selection--single{
             height: 50px !important;
             border: 1px solid #ced4da !important;
@@ -106,5 +114,37 @@
         width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
         placeholder: $( this ).data( 'placeholder' ),
     } );
+</script>
+
+<script>
+function getIp(callback) {
+ fetch('https://ipinfo.io/json?token=9299d29dc5c97f', { headers: { 'Accept': 'application/json' }})
+   .then((resp) => resp.json())
+   .catch(() => {
+     return {
+       country: 'us',
+     };
+   })
+   .then((resp) => callback(resp.country));
+}
+    const phoneInputField1 = document.querySelector("#phone1");
+
+   const phoneInput1 = window.intlTelInput(phoneInputField1, {
+     initialCountry: "auto",
+     geoIpLookup: getIp,
+     preferredCountries: ["ci", "gh", "tg", "fr", "bj"],
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+const info = document.querySelector(".alert-info");
+
+function process(event) {
+ event.preventDefault();
+
+ const phoneNumber1 = phoneInput1.getNumber();
+
+ info.style.display = "";
+ info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber1}</strong>`;
+}
 </script>
 @endsection

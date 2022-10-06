@@ -1,5 +1,8 @@
 @extends('layouts.master', ['titre' => 'tds'])
+{{-- barre de recherche --}}
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 @section('produit')
     <div class="container-fluid ">
         <div class="row px-xl-5 pb-3">
@@ -21,8 +24,12 @@
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 color-red">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>
                                         <div class="d-flex justify-content-center">
-                                            <h6>{{ number_format($produit->prix, 0, '.', ' ') }}</h6>
-                                            <h6 class="text-muted ml-2"><del>{{ number_format($produit->prix, 0, '.', ' ') }}</del></h6>
+                                            @if($produit->prix_promotionnel != null)
+                                                <h6 class="text-muted ml-2"><del>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA </del></h6>
+                                                <h6 class="ml-3"> {{ number_format($produit->prix_promotionnel, 0, '.', ' ') }} F CFA</h6>
+                                            @else
+                                                <h6>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA</h6>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-between bg-light border">
@@ -41,9 +48,6 @@
                                                 <button type="submit" class="btn btn-primary text-white" style="font-size: 11px;"><i class="fa fa-shopping-cart mr-1"></i> Ajouter</button>
                                             </div>
                                         </form>
-
-                                        {{-- <a href="" class="btn btn-sm text-dark p-0"><i
-                                                class="fas fa-shopping-cart text-primary mr-1"></i>Ajouter au panier</a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +61,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 

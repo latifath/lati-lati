@@ -63,7 +63,7 @@
             <br>
             <form action="{{ route('root_espace_admin_promotion_ajouter') }}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #cdc3b8;">
 
                 <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
 
@@ -120,7 +120,7 @@
             <form action="{{ route('root_espace_admin_promotion_update')}}"  method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color:  #cdc3b8;;">
 
                     <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id" id="edit_id">
                     <div class="form-group">

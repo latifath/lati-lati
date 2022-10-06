@@ -23,16 +23,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 
+<style>
+
+@media (max-width: 992px) {
+    .logo {
+        width: 60%;
+    }
+    .custom-select {
+        width: 50%;
+        height: 50%;
+    }
+    #btn-envoie {
+        margin-top: 10px;
+    }
+    #btn-kkiapay {
+        margin-left: 10px ! important;
+    }
+    .col-6{
+        padding-right: 0px !important;
+        padding-left: 5px !important;
+    }
+
+}
+</style>
 <body>
     <div class="container-fluid col-md-8 offset-md-2">
         <div class="card" id="facture">
             <div class="card-body p-5">
                 <div class="row">
                     <div class="col-6" style="">
-                        <p>
-                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds">
+                        <p >
+                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
                         </p>
-                        <h3 style=""> Facture #{{ $cmde->id}} </h3>
+                        <h3 class="id-commande"> Facture #{{ $cmde->id}} </h3>
                     </div>
                     <div class="col-6 text-center" style="">
                         <div class="">
@@ -41,7 +64,7 @@
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
                                 @if( isset($_GET['type_paiement']))
-                                    <div class="col-6 text-right">
+                                    <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
                                         @if($_GET['type_paiement'] == "momo")
                                             <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
                                         @elseif($_GET['type_paiement'] == "carte_bancaire")
@@ -101,12 +124,12 @@
                         @else
                             <form action="" method="GET">
                                 <select class="custom-select type w-auto" name="type_paiement" >
-                                    <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'Choisir le type de paiement' }}</option>
+                                    <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'type paiement' }}</option>
                                     <option value="momo">MoMo</option>
                                     <option value="carte_bancaire">Carte Bancaire</option>
                                     <option value="paypal">PayPal</option>
                                 </select>
-                                <button type="submit" class="btn bg-success text-white">Envoyer</button>
+                                <button type="submit" class="btn bg-success text-white" id="btn-envoie">Envoyer</button>
                             </form>
                         @endif
                     </div>

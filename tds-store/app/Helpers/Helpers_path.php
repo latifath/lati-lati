@@ -1,6 +1,5 @@
 <?php
 
-use SplFileInfo;
 use App\Models\Image;
 use App\Models\Produit;
 use Illuminate\Support\Str;

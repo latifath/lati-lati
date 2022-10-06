@@ -51,12 +51,6 @@ class CommandeAdminController extends Controller
         return view('espace-admin.commandes.show', compact('adr_cli', 'commande', 'adr_livr', 'paiement', 'commande_produit'));
     }
 
-    public function index_livraison(){
-        $livraisons =AdresseLivraison::all();
-
-        return view('espace-admin.commandes.index-livraison', compact('livraisons'));
-    }
-
     public function valider_commande($id){
 
        $commande = Commande::findOrfail($id);
@@ -115,5 +109,9 @@ class CommandeAdminController extends Controller
         return redirect()->route('root_espace_admin_commandes_index');
     }
 
+    public function index_livraison(){
+        $livraisons = Commande::where("status", "en cours")->get();
 
+        return view('espace-admin.commandes.index-livraison', compact('livraisons'));
+    }
 }

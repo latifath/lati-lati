@@ -35,15 +35,9 @@
             <br>
             <form action="{{ route('root_espace_admin_create_image_produit') }}"  method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #cdc3b8;">
 
                 <input class="form-control  {{ $errors->has('produit_id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit_id" id="add_image_id">
-
-                {{-- <div class="form-group">
-                    <label for="">Nom</label>
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom">
-                    {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                </div> --}}
 
                 <div class="form-group">
                     <label for="">Image</label>
