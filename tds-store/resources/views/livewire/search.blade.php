@@ -21,7 +21,7 @@
         @if(count($produits) > 0)
         @foreach($produits as $index => $produit)
             <h4  class="{{ $index == $selectedIndex  ? 'text-success' : ''}} "> {{ $produit->nom }}</h4>
-            <p class="{{ $index == $selectedIndex ? 'text-success' : '' }}"> {{ Str::substr($produit->description, 0, 100) }} {{ Str::length($produit->description) > 100 ? '...' : ''}} <span ></span></p>
+            <p class="{{ $index == $selectedIndex ? 'text-success' : '' }}"> {!! Str::substr($produit->description, 0, 100) !!} {!! Str::length($produit->description) > 100 ? '...' : '' !!} <span ></span></p>
         @endforeach
         @else
         <span class=" p-1 ">0 résultats pour "{{ $query }}"</span>
