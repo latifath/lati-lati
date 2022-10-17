@@ -61,8 +61,11 @@
                         <div class="">
                             @if (exist_commande_paiement($cmde->id) != null)
                             <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
+                            @elseif($cmde->status == 'annulee')
+                               <span style="font-size: 24px;" class="text-danger font-weight-bold"> ANNULE</span>
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
+
                                 @if( isset($_GET['type_paiement']))
                                     <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
                                         @if($_GET['type_paiement'] == "momo")
@@ -121,6 +124,8 @@
                             <select class="custom-select w-auto" name="mode">
                                 <option selected>{{ $pay->type_paiement ?? '' }}</option>
                             </select>
+                        @elseif($cmde->status == 'annulee')
+
                         @else
                             <form action="" method="GET">
                                 <select class="custom-select type w-auto" name="type_paiement" >

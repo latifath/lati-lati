@@ -93,7 +93,7 @@
             </div>
             <form action="{{ route('root_espace_admin_store')}}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color:  #cdc3b8;">
+                <div class="modal-body" style="background-color:  #f0f0f0;">
                     <div class="form-group">
                         <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez la catégorie" name="nom">
                         {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}

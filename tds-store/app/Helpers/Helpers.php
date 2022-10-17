@@ -75,10 +75,17 @@ if(!function_exists('couleur_blanche')){
 }
 
 
-
 if (!function_exists('categorie_menu')) {
     function categorie_menu(){
-        $categories = Categorie::all() ;
+        $categories = Categorie::all();
+        return $categories;
+
+    }
+}
+
+if (!function_exists('categorie_menu_sidebar')) {
+    function categorie_menu_sidebar(){
+        $categories = Categorie::orderBy('id', 'DESC')->limit(15)->get();
         return $categories;
 
     }

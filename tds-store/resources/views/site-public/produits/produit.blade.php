@@ -3,6 +3,21 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+@section('head')
+<style>
+    .img-fluid-all{
+        width: 200px;
+        height: 300px;
+        object-fit: contain;
+    }
+    .img-partenaire{
+        width: 80px;
+        height: 120px;
+        object-fit: contain;
+    }
+</style>
+@endsection
 @section('produit')
     <div class="container-fluid ">
         <div class="row px-xl-5 pb-3">
@@ -19,9 +34,9 @@
                                 <div class="card product-item border-0 mb-4 " style="{{ couleur_text_2()  }}">
                                     <div
                                         class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
+                                        <img class="img-fluid-all w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
                                     </div>
-                                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3 color-red">
+                                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-2 color-red">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>
                                         <div class="d-flex justify-content-center">
                                             @if($produit->prix_promotionnel != null)
@@ -43,7 +58,6 @@
                                                 <div class="input-group quantity mr-3" style="">
                                                     <input type="hidden" id="id" name="id" value="{{ $produit->id }}">
                                                     <input type="hidden" class="form-control bg-secondary text-center" value="1" name="quantite">
-
                                                 </div>
                                                 <button type="submit" class="btn btn-primary text-white" style="font-size: 11px;"><i class="fa fa-shopping-cart mr-1"></i> Ajouter</button>
                                             </div>
@@ -72,8 +86,29 @@
 
 
 @section('partenaire')
-    <!-- Vendor Start -->
-    @include('layouts.partials.partenaire')
-    <!-- Vendor End -->
+@section('partenaire')
+@foreach (partenaires_logo() as $pl)
+@if($pl == null)
+@else
+   @section('partenaire')
+        <!-- Vendor Start -->
+        <div class="container-fluid py-5" style="padding-bottom: 0rem !important">
+            <div class="row px-xl-5">
+                <div class="col">
+                    <div class="owl-carousel vendor-carousel">
+                        @foreach (partenaires_logo() as $pl)
+                            <div class="vendor-item border p-4">
+                                <img class="img-partenaire" src="{{ path_image($pl->image) ? asset(path_image_partenaire() . path_image($pl->image)->filename) : '' }}" alt="partenaire">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vendor End -->
+    @endsection
+ @endif
+@endforeach
+@endsection
 @endsection
 

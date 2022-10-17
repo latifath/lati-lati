@@ -90,7 +90,7 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Rue</label>
-                                        <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue : (old('rue') ?? '' )  }}" type="text" placeholder="Numero de la voie et nom de la rue" name="rue">
+                                        <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue : (old('rue') ?? '' )  }}" type="text" placeholder="" name="rue">
                                         {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
@@ -102,7 +102,7 @@
 
                                      <div class="col-md-6 form-group">
                                         <label>Code postal</label>
-                                        <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal : (old('code_postal') ?? '' ) }}" type="text" placeholder="123" name="code_postal" >
+                                        <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal : (old('code_postal') ?? '' ) }}" type="text" placeholder="" name="code_postal" >
                                         {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Rue</label>
-                                        <input class="form-control {{ $errors->has('rueLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Numero de la voie et nom de la rue" value="{{ old('rueLivraison') ?? '' }}" name="rueLivraison">
+                                        <input class="form-control {{ $errors->has('rueLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('rueLivraison') ?? '' }}" name="rueLivraison">
                                         {!! $errors->first('rueLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
 
@@ -172,7 +172,7 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Code postal</label>
-                                        <input class="form-control {{ $errors->has('code_postalLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="123" value="{{ old('code_postalLivraison') ?? '' }}" name="code_postalLivraison" >
+                                        <input class="form-control {{ $errors->has('code_postalLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('code_postalLivraison') ?? '' }}" name="code_postalLivraison" >
                                         {!! $errors->first('code_postalLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
                                 </div>

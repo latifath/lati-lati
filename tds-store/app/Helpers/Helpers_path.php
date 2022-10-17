@@ -3,6 +3,7 @@
 use App\Models\Image;
 use App\Models\Produit;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('save_image')) {
     function save_image($dir, $file) {
@@ -58,5 +59,12 @@ if (!function_exists('path_image')) {
 if(!function_exists('images')){
     function images($id){
          return Produit::find($id);
+    }
+}
+
+if(!function_exists('favoris')){
+    function favoris($id){
+        $produit_favoris = Produit::where('id', $id)->first();
+        return $produit_favoris;
     }
 }

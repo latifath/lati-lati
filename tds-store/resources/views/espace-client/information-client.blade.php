@@ -74,7 +74,7 @@
 
                         <div class="col-md-6 form-group">
                             <label>Rue</label>
-                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue  : '' }}" type="text" placeholder="Numero de la voie et nom de la rue" name="rue">
+                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->rue  : '' }}" type="text" placeholder="" name="rue">
                             {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
                         </div>
 
@@ -86,7 +86,7 @@
 
                         <div class="col-md-6 form-group">
                             <label>Code postal</label>
-                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal  : '' }}" type="text" placeholder="123" name="code_postal" >
+                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px;" value="{{ information_client() ? information_client()->code_postal  : '' }}" type="text" placeholder="" name="code_postal" >
                             {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
 
                         </div>

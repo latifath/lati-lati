@@ -78,7 +78,7 @@ use Illuminate\Support\Carbon;
         </div>
     </div>
 </div>
-{{-- #f0f0f0; --}}
+
 <div class="modal fade" id="ModalModifieStock" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifieStock" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -91,7 +91,7 @@ use Illuminate\Support\Carbon;
             <form action="{{ route('root_espace_admin_edit_stock')}}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #cdc3b8">
+                <div class="modal-body" style="background-color: #f0f0f0;">
 
                     <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id" >
                     <div class="form-group">

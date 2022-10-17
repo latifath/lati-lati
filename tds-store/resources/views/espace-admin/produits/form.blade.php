@@ -6,7 +6,7 @@
 <div class="form-group">
     <label for="">Quantité</label>
     <input class="form-control {{ $errors->has('quantite') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="quantite" value="{{ old('quantite') ?? $produit->quantite}}">
-    {!! $errors->first('quantie', '<p class="text-danger">:message</p>') !!}
+    {!! $errors->first('quantite', '<p class="text-danger">:message</p>') !!}
 </div>
 
 <div class="form-group">
@@ -37,18 +37,22 @@
     {!! $errors->first('sous_categorie', '<p class="text-danger">:message</p>') !!}
 </div>
 
+@if($SubmitName  == 'Modifier')
+
+@else
 <div class="form-group">
     <label for="">Image</label>
     <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image" value="{{ old('image') ?? $produit->image}}">
     {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
 </div>
+@endif
 
 <div class="form-group">
     <label for="description">Description</label>
     <textarea class="elm1 form-control {{ $errors->has('description') ? 'is-invalid' : '' }} " name="description">
         {!! old('description') ?? $produit->description !!}
     </textarea>
-    {!! $errors->first('descriprion', '<p class="text-danger">:message</p>') !!}
+    {!! $errors->first('description', '<p class="text-danger">:message</p>') !!}
 </div>
 
 <div class="float-right">

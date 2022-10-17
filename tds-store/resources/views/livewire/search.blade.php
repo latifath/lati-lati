@@ -29,11 +29,3 @@
     </div>
     @endif
 </div>
-{{-- <style>
-@media(max-width:480px){  /* For mobile phones: */
-
-  [class*="col-sm"] {
-
-  }
-}
-</style> --}}

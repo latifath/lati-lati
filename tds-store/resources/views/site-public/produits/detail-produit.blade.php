@@ -4,6 +4,26 @@
 
  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
+ @section('head')
+<style>
+    .img-fluid-prod {
+        width: 300px;
+        height: 400px;
+        object-fit: contain;
+    }
+    .img-fluid-autre {
+        width: 100px;
+        height: 200px;
+        object-fit: contain;
+    }
+    .img-partenaire{
+        width: 80px;
+        height: 120px;
+        object-fit: contain;
+    }
+</style>
+ @endsection
+
 @section ('detail_produit')
 
 <!-- Page Header Start -->
@@ -25,11 +45,11 @@
         @include('layouts.partials.sidebar')
         <div class="col-lg-9">
             <div class="row">
-                <div class="col-lg-4 pb-5">
+                <div class="col-lg-4 pb-0">
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner border" style="height: 400px;">
                             <div class="carousel-item active">
-                                    <img class="img-fluid" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="Image">
+                                    <img class="img-fluid-prod" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="Image">
                             </div>
                             @foreach($produit->images as $image)
                                 <div class="carousel-item">
@@ -67,8 +87,6 @@
                                 <input type="hidden" id="id" name="id" value="{{ $produit->id }}">
                                 <input type="text" class="form-control bg-secondary text-center" value="1" name="quantite" id="qty" min="1">
                                 <div class="input-group-btn">
-                                    {{-- <input type="number" id="quantity" name="quantity" min="1" max="5"> --}}
-
                                     <a class="btn btn-primary" id="add">
                                         <i class="fa fa-plus text-white"></i>
                                     </a>
@@ -97,15 +115,28 @@
                     <div class="d-flex pt-2">
                         <p class="font-weight-medium mb-0 mr-2">Partager sur:</p>
                         <div class="d-inline-flex">
-                            <a class="px-2" href="">
+                            <a class="px-2" id="facebook-btn" href="#">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a class="px-2" href="">
+                            {{-- <a class="px-2" id="twitter-btn" href="#">
                                 <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="px-2" href="">
+                            </a> --}}
+
+                            <a href="http://twitter.com/share" class="twitter-share-icon px-2"
+                            data-count="vertical" data-via="InfoWebMaster"><i class="fab fa-twitter"></i></a>
+                            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+                            <a class="px-2" id="linkedin-btn" href="#">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
+
+                            {{-- <a name="fb_share" type="box_count" share_url="http://www.example.com/page.html"><i class="fab fa-facebook-f"></i></a>
+                            <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script> --}}
+
+
+                            {{-- <script type="text/javascript" src="http://platform.linkedin.com/in.js"></script>
+                            <script type="in/share" data-counter="top"></script> --}}
+
+
                         </div>
                     </div>
                 </div>
@@ -139,7 +170,7 @@
                 @foreach ($sous_categories_produits as $produit)
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="" style="width: 100% !important; height: auto;">
+                        <img class="img-fluid-autre w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">{{ $produit->nom }}</h6>
@@ -181,7 +212,28 @@
 @endsection
 
 @section('partenaire')
-    @include('layouts.partials.partenaire')
+@foreach (partenaires_logo() as $pl)
+@if($pl == null)
+@else
+   @section('partenaire')
+        <!-- Vendor Start -->
+        <div class="container-fluid py-5" style="padding-bottom: 0rem !important">
+            <div class="row px-xl-5">
+                <div class="col">
+                    <div class="owl-carousel vendor-carousel">
+                        @foreach (partenaires_logo() as $pl)
+                            <div class="vendor-item border p-4">
+                                <img class="img-partenaire" src="{{ path_image($pl->image) ? asset(path_image_partenaire() . path_image($pl->image)->filename) : '' }}" alt="partenaire">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vendor End -->
+    @endsection
+ @endif
+@endforeach
 @endsection
 
 @if(session()->has('cart'))
@@ -212,7 +264,7 @@
                         Commander
                     </a>
                 </div>
-            </div>
+            </div>alpine
         </div>
     </div>
 @endif
@@ -241,5 +293,20 @@
                 $input.val( +$input.val() - 1 );
             }
         });
+    </script>
+
+    <script>
+        // socila share
+        const facebookBtn = document.getElementById('facebook-btn');
+        // const twitterBtn = document.getElementById('twitter-btn');
+        const linkedinBtn = document.getElementById('linkedin-btn');
+
+        let produitUrl = encodeURI(document.location.href);
+        let produitNom = encodeURI('{{ $produit->nom }}');
+
+        facebookBtn.setAttribute("href", 'http://www.facebook.com/sharer.php?href=${produitUrl}');
+        // twitterBtn.setAttribute("href", 'http://www.twitter.com/sharer.php?href=${produitUrl}&text=${produitNom}');
+        linkedinBtn.setAttribute("href", 'http://www.linkedin.com/shareArticle?url=${produitUrl}&title=${produitNom}');
+
     </script>
 @endsection

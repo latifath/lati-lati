@@ -45,5 +45,4 @@ class CommandeClientController extends Controller
 
         return view('espace-client.facture', compact('cmde', 'pay'));
     }
-
 }

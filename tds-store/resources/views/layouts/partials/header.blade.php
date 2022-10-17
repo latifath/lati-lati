@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <div class="row py-2 px-xl-5" style="font-size: 13.5px; {{ couleur_principal() }};">
         <div class="col-lg-6 d-none d-lg-block">
-            <div class="d-inline-flex align-items-center" style="{{ couleur_text_3() }}; font-size: 15px;">
-                <a class="px-1" style="{{ couleur_text_3() }};" href="">Des questions?</a>
+            <div class="d-inline-flex align-items-center" style="{{ couleur_text_3() }}; font-size: 14px;">
+                <strong style="{{ couleur_text_3() }};">Des questions?</strong>
                 {{-- <span class="text-muted px-1"></span> --}}
-                <a class="text-nowrap px-1" style="{{ couleur_text_3() }}; font-size: 15px;" href="">Contactez-nous!</a>
+                <strong class="px-2" style="{{ couleur_text_3() }}; font-size: 14px;">Contactez-nous!</strong>
                 <span class="text-nowrap">
                     <strong><i class="fa fa-phone-alt" style="{{couleur_text_1() }}"></i></strong>
-                    <a href="tel:+229 21 33 57 30"  style="{{ couleur_text_3() }}; font-size: 15px;">+229 21 33 57 30</a>
+                    <a href="tel:+22921335730"  style="{{ couleur_text_3() }}; font-size: 14px;">+229 21 33 57 30</a>
                 </span>
                 <span class="hidden-xs"></span>
-                <span class="text-nowrap px-1"  style="{{ couleur_text_3() }}; font-size: 15px;">
+                <span class="text-nowrap px-1"  style="{{ couleur_text_3() }}; font-size: 14px;">
                     <strong><i class="fa fa-envelope" style="{{ couleur_text_1() }}"></i></strong>
-                    <a href="#"  style="{{ couleur_text_3() }}; font-size: 15px;">info@tdsstore.bj</a>
+                    <a href="mailto:info@tdsstore"  style="{{ couleur_text_3() }}; font-size: 14px;">info@tdsstore.bj</a>
                 </span>
             </div>
         </div>
@@ -22,18 +22,19 @@
                 @auth
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
-
-                        <x-jet-dropdown-link href="{{ route('root_deconnexion') }}" @click.prevent="$root.submit();" style="{{ couleur_text_3() }}; font-size: 15px;">
+                        <x-jet-dropdown-link href="{{ route('root_deconnexion') }}" @click.prevent="$root.submit();" style="{{ couleur_text_3() }}; font-size: 15px; padding-right: 0rem !important;">
                             Déconnexion
                         </x-jet-dropdown-link>
                     </form>
+                    <span class="text-muted px-1">|</span>
+
                     @if (Auth::user()->role == "admin" || Auth::user()->role == "gestionnaire" || Auth::user()->role == "comptable")
                         <a href="{{ route('root_espace_admin_index') }}" style=" {{ couleur_text_3() }} ; font-size: 15px;">Espace-admin</a>
                     @else
                         <a href="{{ route('root_espace_client_index') }}" style=" {{ couleur_text_3() }} ; font-size: 15px;">Espace-client</a>
                     @endif
 
-                @else
+                    @else
                         <a href="{{ route('root_auth_login') }}" class="nav-item nav-link  p-0 " style="{{ couleur_text_3() }}; font-size: 15px;">Connexion</a>
 
                         @if (Route::has('register'))

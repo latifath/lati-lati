@@ -52,6 +52,11 @@ class PanierController extends Controller
             session()->put("stock", $stock);
 
         }
+        if ( $request->quantite <= $produit->quantite) {
+
+            $stock = session()->forget("stock");
+        }
+
 
     	// Ajout/Mise à jour du produit au panier avec sa quantité
     	$this->panierRepository->create($produit, $request->quantite);

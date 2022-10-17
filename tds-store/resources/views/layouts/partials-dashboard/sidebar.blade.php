@@ -32,10 +32,10 @@
                         <a href="{{ route('root_espace_client_paiement_index') }}" class="waves-effect"><i class="fa fa-money"></i> <span> Paiement </span> </a>
                     </li>
 
-                    {{-- <li class="">
+                    <li class="">
                         <a href="{{ route('root_site_public_favoris_index') }}" class="waves-effect"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
                             <span>Favoris</span></a>
-                     </li> --}}
+                     </li>
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user"></i><span> Mon Profil</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">

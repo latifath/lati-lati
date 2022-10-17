@@ -24,7 +24,7 @@ class InformationClientController extends Controller
             'pays' => 'required|alpha',
             'rue' => 'required',
             'ville' => 'required|max:255|alpha',
-            'code_postal' => 'required',
+            'code_postal' => 'required|Numeric',
             'nom_entreprise' => 'required|max:255|alpha'
 
          ]);
@@ -59,7 +59,7 @@ class InformationClientController extends Controller
             'pays' => 'required|alpha',
             'rue' => 'required',
             'ville' => 'required|max:255|alpha',
-            'code_postal' => 'required',
+            'code_postal' => 'required|Numeric',
             'nom_entreprise' => 'required|max:255|alpha'
         ]);
         Client::where('user_id', auth()->user()->id)->first()->update([

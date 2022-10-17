@@ -20,8 +20,10 @@ class ProduitNonLivrerAdminContoller extends Controller
         return view('espace-admin.produits.produit-non-livre.produit-non-livre', compact('produits_non_livre', 'produits_livre'));
     }
 
-    public function validation_produit_livre($id){
-        $produit_non_livre =  ProduitNonLivrer::findOrfail($id);
+    public function validation_produit_livre(Request $request, $id){
+
+        $produit_non_livre =  ProduitNonLivrer::findOrfail($request->id);
+
         $produit = Produit::findOrfail($produit_non_livre->produit_id);
 
         if($produit->quantite >= $produit_non_livre->quantite){
@@ -38,7 +40,7 @@ class ProduitNonLivrerAdminContoller extends Controller
 
             Mail::to($produit_non_livre->commande->adresse_client->email)->send(new SendMailProduitDisponibleClient($produit_non_livre, $produit));
 
-            flashy()->success('produit livré avec succès.');
+            flashy()->success('Produit livré avec succès.');
 
             return redirect()->route('root_espace_admin_produits_non_livrer');
 
@@ -48,12 +50,12 @@ class ProduitNonLivrerAdminContoller extends Controller
 
             return redirect()->route('root_espace_admin_produits_non_livrer');
         }
-
     }
 
-    public function validation_produit_non_livre($id){
+    public function validation_produit_non_livre(Request $request, $id){
 
-        $produit_livre =  ProduitNonLivrer::findOrfail($id);
+        $produit_livre =  ProduitNonLivrer::findOrfail($request->id);
+
         $produit = Produit::findOrfail($produit_livre->produit_id);
 
             $produit->quantite = $produit->quantite + $produit_livre->quantite ;

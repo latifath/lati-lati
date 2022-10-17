@@ -19,14 +19,14 @@
                 <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
-                        <th>Identifiant produit</th>
-                        <th style="width: 20%">Actions</th>
+                        <th>Nom produit</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($favoris as $favori)
                         <tr>
-                            <td>{{ $favori->produit_id }}</td>
+                            <td>{{ favoris($favori->produit_id)->nom}}</td>
                             <td>
                                 <button data-toggle="tooltip" data-id={{ $favori->id }} title="Supprimer" id="btn_delete_favoris"  class="btn text-white" style="{{ couleur_background_2() }}"><i class="fa fa-trash" aria-hidden="true"></i>Supprimer</button>
                            </td>
@@ -46,13 +46,6 @@
 
 @section('js')
 <script>
-    $(document).on('click', '#btn_edit_user', function(){
-        var ID = $(this).attr('data-id');
-
-        $('#id').val(ID);
-
-        $('#ModalEditUser').modal('show');
-    });
 
     $(document).on('click', '#btn_delete_favoris', function(){
         var ID = $(this).attr('data-id');

@@ -22,6 +22,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
+<style>
+
+    @media (max-width: 992px) {
+        .logo {
+            width: 60%;
+        }
+        .custom-select {
+            width: 50%;
+            height: 50%;
+        }
+        .col-6{
+            padding-right: 0px !important;
+            padding-left: 5px !important;
+        }
+
+    }
+    </style>
 
 <body>
     <div class="container-fluid col-md-8 offset-md-2">
@@ -30,7 +47,7 @@
                 <div class="row">
                     <div class="col-6" style="">
                         <p>
-                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds">
+                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
                         </p>
                         <h3 style=""> Facture #{{ $cmde->id}} </h3>
                     </div>
@@ -40,6 +57,7 @@
                             <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
+
                             @endif
                         </div>
                         <div class="small-text">

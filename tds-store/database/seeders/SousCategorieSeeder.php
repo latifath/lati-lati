@@ -14,6 +14,6 @@ class SousCategorieSeeder extends Seeder
      */
     public function run()
     {
-        SousCategorie:: factory()->count(5)->create();
+        SousCategorie:: factory()->count(25)->create();
     }
 }

@@ -7,7 +7,7 @@
     <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 text-dark"
         id="navbar-vertical">
         <div class="navbar-nav w-100 overflow-hidden ">
-            @foreach (categorie_menu() as $item)
+            @foreach (categorie_menu_sidebar() as $item)
                 @if (sous_categories_menu($item->id)->count() == 0)
                     <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                 @else

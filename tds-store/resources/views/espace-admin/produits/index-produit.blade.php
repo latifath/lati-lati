@@ -83,7 +83,7 @@
             <br>
             <form action="{{ route('root_espace_admin_stock_create') }}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color: #cdc3b8;">
+                <div class="modal-body" style="background-color: #f0f0f0;">
 
                 <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="add_stock_id">
 

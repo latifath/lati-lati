@@ -69,7 +69,6 @@
                                                         <button class="btn btn-sm btn-primary btn-plus" type="submit">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-
                                                     </div>
                                                 </div>
                                             </form>
@@ -89,7 +88,10 @@
                             <ul >
                                 @foreach (session("stock") as $key => $item)
                                 <li class="text-danger">
+                                    @if(session('stock') != NULL)
                                     La quantité du produit {{ $item['name'] }} est insuffisante : -{{ $item['qte'] }}
+                                    @else
+                                    @endif
                                 </li>
                                 @endforeach
                             </ul>
