@@ -64,7 +64,7 @@
                                 <td>{{ $commande->created_at}}</td>
                                 <td>{{ $commande->status }}</td>
                                 <td>
-                                    <button id="btn_show_commande" class="btn btn-primary" data-id="{{ $commande->id }}" data-date="{{ $commande->created_at }}" data-statut="{{ $commande->status }}" data-nom = "{{ $commande->adresse_client->nom . " " . adresseclient($commande->adresse_client_id)->prenom }}" data-email = "{{ adresseclient($commande->adresse_client_id)->email }}" data-tel = "{{ adresseclient($commande->adresse_client_id)->telephone }}" data-ville_pays = "{{ adresseclient($commande->adresse_client_id)->ville. " " . adresseclient($commande->adresse_client_id)->pays }}" data-code_postal = "{{ adresseclient($commande->adresse_client_id)->code_postal }}" data-date_paiement = "{{ account_commande($commande->id) ? account_commande($commande->id)->montant : '' }}" data-type = "{{ account_commande($commande->id) ? account_commande($commande->id)->type_paiement : '' }}" data-montant = "{{ account_commande($commande->id) ? account_commande($commande->id)->montant : '' }}" data-date_paiement = "{{ account_commande($commande->id) ? account_commande($commande->id)->created_at : '' }}"
+                                    <button id="btn_show_commande" class="btn btn-primary" data-id="{{ $commande->id }}" data-date="{{ $commande->created_at }}" data-statut="{{ $commande->status }}" data-nom = "{{ $commande->adresse_client->nom . " " . adresseclient($commande->adresse_client_id)->prenom }}" data-email = "{{ adresseclient($commande->adresse_client_id)->email }}" data-tel = "{{ adresseclient($commande->adresse_client_id)->telephone }}" data-ville_pays = "{{ adresseclient($commande->adresse_client_id)->ville. " " . adresseclient($commande->adresse_client_id)->pays }}" data-code_postal = "{{ adresseclient($commande->adresse_client_id)->code_postal }}"
                                         ><i class="fa fa-eye"></i> Voir </button>
                                 </td>
                             </tr>
@@ -123,7 +123,7 @@
                         <td>Code postal</td>
                         <td><span id='code_postal'></span></td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>Type de paiement</td>
                         <td><span id='type_paiement'></span></td>
                     </tr>
@@ -134,7 +134,7 @@
                     <tr>
                         <td>Date</td>
                         <td><span id='date'></span></td>
-                    </tr>
+                    </tr> --}}
 
                 </thead>
             </table>
@@ -160,10 +160,9 @@
              var tel = $(this).attr('data-tel');
              var ville_pays = $(this).attr('data-ville_pays');
              var code_postal = $(this).attr('data-code_postal');
-             var type = $(this).attr('data-type');
-             var montant = $(this).attr('data-montant');
-             var date_paiement = $(this).attr('data-date_paiement');
-
+            //  var type = $(this).attr('data-type');
+            //  var montant = $(this).attr('data-montant');
+            //  var date_paiement = $(this).attr('data-date_paiement');
 
 
             $('#id_com').html(ID);
@@ -174,11 +173,9 @@
              $('#tel').html(tel);
              $('#ville_pays').html(ville_pays);
              $('#code_postal').html(code_postal);
-             $('#type_paiement').html(type);
-             $('#montant').html(montant);
-             $('#date').html(date_paiement);
-
-
+            //  $('#type_paiement').html(type);
+            //  $('#montant').html(montant);
+            //  $('#date').html(date_paiement);
 
             $('#ShowModalCommande').modal('show');
         });

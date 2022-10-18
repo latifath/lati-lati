@@ -106,7 +106,7 @@ class CommandeController extends Controller
                 'adresse_livraison_id' => $adr->id,
                 'user_id' => auth()->user()->id,
                 'status' => 'attente paiement',
-                'tva' => $request->pays == "Benin" ? configuration()->tva : '0',
+                'tva' => $adr->pays == "Benin" ? configuration()->tva : '0',
                 'promotion' => $promotion ?? null,
             ]);
 

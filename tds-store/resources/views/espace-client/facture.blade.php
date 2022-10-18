@@ -38,12 +38,29 @@
     }
     #btn-kkiapay {
         margin-left: 10px ! important;
+
+    }
+    .kkiapay-button{
+        width: 130px;
+        height: 100px;
     }
     .col-6{
         padding-right: 0px !important;
         padding-left: 5px !important;
     }
+    #pay{
+        font-size: 14px;
+    }
+}
 
+@media print {
+  #paye {
+    display: none;
+  }
+  #btn-kkiapay {
+    display: none;
+
+  }
 }
 </style>
 <body>
@@ -64,7 +81,9 @@
                             @elseif($cmde->status == 'annulee')
                                <span style="font-size: 24px;" class="text-danger font-weight-bold"> ANNULE</span>
                             @else
-                                <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
+                                <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span><br>
+                                <span style="font-size: 20px;" class="text-black font-weight-bold" id="pay"> Payer maintenant</span>
+
 
                                 @if( isset($_GET['type_paiement']))
                                     <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
@@ -127,7 +146,7 @@
                         @elseif($cmde->status == 'annulee')
 
                         @else
-                            <form action="" method="GET">
+                            <form action="" method="GET" id="paye">
                                 <select class="custom-select type w-auto" name="type_paiement" >
                                     <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'type paiement' }}</option>
                                     <option value="momo">MoMo</option>

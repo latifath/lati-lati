@@ -378,5 +378,3 @@ Route::get('se-connecter', [UserController::class, 'connexion'])->name('root_aut
 Route::get('s-inscrire', [UserController::class, 'inscription'])->name('root_auth_register')->middleware("guest");
 Route::get('se-deconnecter', [UserController::class, 'deconnexion'])->name('root_deconnexion');
 
-
-

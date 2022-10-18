@@ -43,7 +43,7 @@
                                 <td>{{ $produit->quantite }}</td>
                                 <td>{{ $produit->prix }}</td>
                                 <td>{{ $produit->prix_promotionnel }}</td>
-                                <td>{!! $produit->description !!}</td>
+                                <td>{!! Str::substr($produit->description, 0, 120) !!} {!! Str::length($produit->description) > 120 ? '...' : '' !!}</td>
                                 <td>{{ $produit->sous_categorie->nom }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
@@ -54,11 +54,6 @@
                                         <button   data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i></button>
                                     </a>
                                     <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i></button>
-
-                                    {{-- <a href="{{ route('root_espace_admin_modifie_vue', $produit->id) }}">
-                                        <button data-toggle="tooltip" title="Editer produit" class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                    </a>
-                                    <button  data-toggle="tooltip" title="Supprimer" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -83,7 +78,7 @@
             <br>
             <form action="{{ route('root_espace_admin_stock_create') }}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #ffff;">
 
                 <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="add_stock_id">
 
@@ -99,9 +94,10 @@
                     {!! $errors->first('quantite', '<p class="text-danger">:message</p>') !!}
                 </div>
 
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </div>
+                <div class="modal-footer" style="display:block;">
+                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
+                 </div>
                 </div>
             </form>
        </div>

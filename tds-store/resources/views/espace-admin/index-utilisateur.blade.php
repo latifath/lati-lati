@@ -65,7 +65,7 @@
             <form action="{{ route('root_espace_admin_edit_utilisateur') }}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color:  #cdc3b8;">
+                <div class="modal-body" style="background-color:  #ffff;">
                     <div class="">
                         <input  class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}"  type="hidden" id="id" placeholder="" name="id" >
                         <div class="col-md-12 form-group">
@@ -79,10 +79,9 @@
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}">Modifier</button>
-
+                <div class="modal-footer" style="display:block;">
+                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                   <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
                 </div>
             </form>
        </div>

@@ -88,10 +88,7 @@
                             <ul >
                                 @foreach (session("stock") as $key => $item)
                                 <li class="text-danger">
-                                    @if(session('stock') != NULL)
                                     La quantité du produit {{ $item['name'] }} est insuffisante : -{{ $item['qte'] }}
-                                    @else
-                                    @endif
                                 </li>
                                 @endforeach
                             </ul>

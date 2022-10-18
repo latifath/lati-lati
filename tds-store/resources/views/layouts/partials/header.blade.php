@@ -115,6 +115,24 @@
                                 @endif
                             @endif
                         @endforeach
+                        @php
+                        $j = 0
+                        @endphp
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
+                            <div class="nav-item dropdown">
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    @foreach (categorie_menu() as $item)
+                                        @php
+                                            $j++
+                                        @endphp
+                                        @if ($j > 8)
+                                            <a href="" class="dropdown-item">{{ $item->nom }}</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>

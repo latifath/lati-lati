@@ -77,15 +77,7 @@ if(!function_exists('couleur_blanche')){
 
 if (!function_exists('categorie_menu')) {
     function categorie_menu(){
-        $categories = Categorie::all();
-        return $categories;
-
-    }
-}
-
-if (!function_exists('categorie_menu_sidebar')) {
-    function categorie_menu_sidebar(){
-        $categories = Categorie::orderBy('id', 'DESC')->limit(15)->get();
+        $categories = Categorie::orderBy('id', 'DESC')->get();
         return $categories;
 
     }
@@ -325,11 +317,14 @@ if(!function_exists('paiements')){
 if(!function_exists('disabled_button_commande')){
     function disabled_button_commande($param1, $param2){
         if($param1 == $param2){
-
             return "disabled";
-
-        }else{
-
         }
     }
 }
+
+if(!function_exists('produits_non_livrer')){
+    function produits_non_livrer($id){
+        return  Produit::where('id', $id)->first();
+    }
+}
+

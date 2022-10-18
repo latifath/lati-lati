@@ -40,7 +40,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                    <button type="submit" class="btn btn-danger">Oui, mettre</button>
+                    <button type="submit" class="btn btn-danger">Oui, Accepter</button>
                 </div>
             </form>
        </div>

@@ -18,7 +18,7 @@ class ProduitAdminController extends Controller
 {
     public function index(){
 
-        $produits = Produit::all();
+        $produits = Produit::orderBy('id', 'DESC')->get();
 
         $produits_rupture = Produit::where('quantite', '<', '5')->get();
 

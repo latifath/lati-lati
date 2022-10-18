@@ -31,7 +31,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->commande_id }}</td>
-                                    <td>{{ $item->produit_id }}</td>
+                                    <td>{{ produits_non_livrer($item->produit_id)->nom }}</td>
                                     <td>{{ $item->quantite }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
@@ -71,7 +71,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->commande_id }}</td>
-                                    <td>{{ $item->produit_id }}</td>
+                                    <td>{{ produits_non_livrer($item->produit_id)->nom }}</td>
                                     <td>{{ $item->quantite}}</td>
                                     <td>{{ $item->status}}</td>
                                     <td>

@@ -35,7 +35,7 @@
             <br>
             <form action="{{ route('root_espace_admin_create_image_produit') }}"  method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #ffff;">
 
                 <input class="form-control  {{ $errors->has('produit_id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit_id" id="add_image_id">
 
@@ -45,8 +45,9 @@
                     {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
                 </div>
 
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                <div class="modal-footer"  style="display:block;">
+                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
                 </div>
                 </div>
             </form>

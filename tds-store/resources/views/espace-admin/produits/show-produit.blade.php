@@ -76,24 +76,25 @@
             <br>
             <form action="{{ route('root_espace_admin_stock_create') }}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #ffff;">
 
                 <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="add_stock_id">
 
                 <div class="form-group">
                     <label for="">Prix Unitaire</label>
-                    <input class="form-control {{ $errors->has('prix_unitaire') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="prix_unitaire">
+                    <input class="form-control {{ $errors->has('prix_unitaire') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="text" placeholder="" name="prix_unitaire">
                     {!! $errors->first('prix_unitaire', '<p class="text-danger">:message</p>') !!}
                 </div>
 
                 <div class="form-group">
                     <label for="">Quantité</label>
-                    <input class="form-control {{ $errors->has('quantite') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="quantite">
+                    <input class="form-control {{ $errors->has('quantite') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="text" placeholder="" name="quantite">
                     {!! $errors->first('quantite', '<p class="text-danger">:message</p>') !!}
                 </div>
 
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                <div class="modal-footer" style="display:block;">
+                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal" style="float:left; margin-right: 250px;">Annuler</button>
+                    <button type="submit" class="btn btn-primary" style="float:right;">Ajouter</button>
                 </div>
                 </div>
             </form>
@@ -113,16 +114,17 @@
             <form action="{{ route('root_espace_admin_modifie_image_produit') }}"  method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color: #f0f0f0;">
+                <div class="modal-body" style="background-color: #ffff;">
                 <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_image_id">
 
                 <div class="form-group">
                     <label for="">Image</label>
-                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
+                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="file" placeholder="" name="image">
                     {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
                 </div>
-                <div class="modal-footer float-right">
-                    <button type="submit" class="btn btn-primary">Modifier</button>
+                <div class="modal-footer" style="display:block;">
+                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal" style="float:left; margin-right: 250px;">Annuler</button>
+                    <button type="submit" class="btn btn-primary" style="float:right;">Modifier</button>
                 </div>
                 </div>
             </form>
