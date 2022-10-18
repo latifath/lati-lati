@@ -23,7 +23,7 @@ class CreateCommandesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table-> string('status')->default('en cours');
             $table-> decimal('tva', 3, 2)->nullable();
-            $table-> integer('promotion')->nullable();
+            $table-> string('promotion')->nullable();
             $table->timestamps();
         });
     }
