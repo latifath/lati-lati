@@ -62,6 +62,7 @@
 
         <div class="container-fluid ">
             <div class="row px-xl-5 pb-3">
+
                 @include('layouts.partials.sidebar')
 
                 <div class="font-sans antialiased col-lg-9">

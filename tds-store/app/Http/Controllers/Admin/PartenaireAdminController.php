@@ -12,7 +12,7 @@ class PartenaireAdminController extends Controller
 {
     public function index(){
         $partenaires = Partenaire::all();
-        return view('espace-admin.partenaires.index-partenaire', compact('partenaires'));
+        return view('espace-admin.partenaires.index', compact('partenaires'));
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class PartenaireAdminController extends Controller
         if ($save != null) {
             Partenaire::create([
                 'nom' =>$request->nom,
-                'image' => $save->id,
+                'image_id' => $save->id,
             ]);
         }
 
@@ -62,23 +62,16 @@ class PartenaireAdminController extends Controller
 
         $partenaire = Partenaire::findOrfail($request->id);
 
-        $image = Image::findOrfail($partenaire->image);
+        $image = Image::findOrfail($partenaire->image_id);
 
-        unlink(path_image_partenaire() . $image->filename);
+        delete_image_path(path_image_partenaire(), $image->filename);
 
-        $image->delete();
-
-        // 'required|image|dimensions:min_width=1',
-
-        $save = save_image(public_path('images/partenaires'), $request->image);
+        $save = update_image(public_path('images/partenaires'), $request->image, $image);
 
         if ($save != null) {
-            $partenaire->update([
-                'image' => $save->id
-            ]);
-        }
 
-        flashy()->success('Image moddifiée avec succès');
+            flashy()->success('Image moddifiée avec succès');
+        }
 
         return redirect()->route('root_espace_admin_index_partenaire');
     }
@@ -87,17 +80,16 @@ class PartenaireAdminController extends Controller
 
         $partenaire = Partenaire::findOrfail($request->id);
 
-        $image = Image::findOrfail($partenaire->image);
+        $image = Image::findOrfail($partenaire->image_id);
 
-        unlink(path_image_partenaire() . $image->filename);
-
-        $image->delete();
+        delete_image_path(path_image_partenaire(), $image->filename);
 
         $partenaire->delete();
+
+        $image->delete();
 
         flashy()->error('Partenaire #'. $request->id . ' supprimé avec succès');
 
         return redirect()->back();
     }
-    // signin on github  et me connecter sur mon compte github
 }

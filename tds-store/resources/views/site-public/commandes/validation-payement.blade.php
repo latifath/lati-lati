@@ -136,41 +136,40 @@
                 @csrf
                 <div class="modal-body p-0" style="background-color: #ffff;">
                     <div class="">
-                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->id}}" type="hidden" placeholder="" name="id" style="border: 1px solid;">
+                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->id}}" type="hidden" placeholder="" name="id">
                         <div class="col-md-12 form-group">
                             <label>Nom</label>
-                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->nom}}" type="text" placeholder="" name="nom" >
+                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->nom}}" type="text" placeholder="" name="nom" >
                             {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Prénom</label>
-                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->prenom }}" type="text" placeholder="" name="prenom">
+                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->prenom }}" type="text" placeholder="" name="prenom">
                             {!! $errors->first('prenom', '<p class="text-danger">:message</p>') !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>E-mail</label>
-                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" style=" height: 50px; border: 1px solid;" value="{{  adresseclient($commande->adresse_client_id)->email }}" type="text" placeholder="" name="email">
+                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{  adresseclient($commande->adresse_client_id)->email }}" type="text" placeholder="" name="email">
                             {!! $errors->first('email', '<p class="text-danger">:message</p>') !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Téléphone</label>
-                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" style=" height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->telephone }}"  placeholder="" name="telephone">
+                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->telephone }}"  placeholder="" name="telephone">
                             {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
                         <div class="alert alert-info" style="display: none;"></div>
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Pays</label>
-                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays" style="height: 50px; border: 1px solid;">
+                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays">
                                 <option  value="{{ adresseclient($commande->adresse_client_id)->pays ?? '' }} ">{{ adresseclient($commande->adresse_client_id)->pays ?? ''}}</option>
-                                @foreach(pays() as $item)
-                                    <option value="{{ $item->nom }}">{{ $item->nom }}</option>
+                                @foreach(countries() as $country)
+                                    <option value="{{ $country->name}}">{{ $country->name}}</option>
 
                                 @endforeach
-
                             </select>
                             {!! $errors->first('pays', '<p class="text-danger">:message</p>') !!}
 
@@ -178,30 +177,30 @@
 
                         <div class="col-md-12 form-group">
                             <label>Rue</label>
-                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->rue}}" type="text" placeholder="" name="rue">
+                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->rue}}" type="text" placeholder="" name="rue">
                             {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Ville</label>
-                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->ville }}" type="text" placeholder="" name="ville">
+                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->ville }}" type="text" placeholder="" name="ville">
                             {!! $errors->first('ville', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Code postal</label>
-                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresseclient($commande->adresse_client_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
+                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
                             {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
 
                         </div>
                     </div>
 
                 </div>
-                <div class="modal-footer" style="display:block; padding:0px; border-top: 0px;">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 50px; float:left; margin-right: 30px; border-top: 0px;">Annuler</button>
-                    <button type="submit" class="btn btn-secondary" style="float:right;">Modifier</button>
+                <div class="modal-footer" style="display:block;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-secondary float-right">Modifier</button>
 
                 </div>
             </form>
@@ -227,28 +226,28 @@
 
                         <div class="col-md-12 form-group">
                             <label>Nom</label>
-                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->nom  }}" type="text" placeholder="" name="nom" >
+                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->nom  }}" type="text" placeholder="" name="nom" >
                             {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Prénom</label>
-                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->prenom}}" type="text" placeholder="" name="prenom">
+                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->prenom}}" type="text" placeholder="" name="prenom">
                             {!! $errors->first('prenom', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>E-mail</label>
-                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"style="height: 50px; border: 1px solid;"  value="{{  adresselivraison($commande->adresse_livraison_id)->email }}" type="text" placeholder="" name="email">
+                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"  value="{{  adresselivraison($commande->adresse_livraison_id)->email }}" type="text" placeholder="" name="email">
                             {!! $errors->first('email', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Téléphone</label>
-                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->telephone }}"  placeholder="" name="telephone">
+                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->telephone }}"  placeholder="" name="telephone">
                             {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
 
                         <div class="alert alert-info" style="display: none;"></div>
@@ -256,10 +255,10 @@
 
                         <div class="col-md-12 form-group">
                             <label>Pays</label>
-                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays" style="height: 50px; border: 1px solid;" >
+                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays" >
                                 <option value="{{ adresselivraison($commande->adresse_livraison_id)->pays ?? '' }} ">{{ adresselivraison($commande->adresse_livraison_id)->pays ?? ''}}</option>
-                                @foreach(pays() as $item)
-                                    <option value="{{ $item->nom }}">{{ $item->nom }}</option>
+                                @foreach(countries() as $country)
+                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
 
                                 @endforeach
 
@@ -269,30 +268,30 @@
 
                         <div class="col-md-12 form-group">
                             <label>Rue</label>
-                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->rue }}" type="text" placeholder="" name="rue">
+                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->rue }}" type="text" placeholder="" name="rue">
                             {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Ville</label>
-                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->ville }}" type="text" placeholder="" name="ville">
+                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->ville }}" type="text" placeholder="" name="ville">
                             {!! $errors->first('ville', '<p class="text-danger">:message</p>') !!}
 
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label>Code postal</label>
-                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" value="{{ adresselivraison($commande->adresse_livraison_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
+                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
                             {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
 
                         </div>
                     </div>
 
                 </div>
-                <div class="modal-footer" style="display:block; padding:0px; border-top: 0px;">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 50px; float:left; margin-right: 300px;">Annuler</button>
-                    <button type="submit" class="btn btn-secondary" style="float:right">Modifier</button>
+                <div class="modal-footer" style="display:block;">
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-secondary float-right">Modifier</button>
                 </div>
             </form>
         </div>

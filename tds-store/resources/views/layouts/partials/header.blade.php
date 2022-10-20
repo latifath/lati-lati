@@ -119,6 +119,7 @@
                         $j = 0
                         @endphp
                         <div class="nav-item dropdown">
+                            @if(count(categorie_menu()) > 8 )
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
                             <div class="nav-item dropdown">
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -132,6 +133,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

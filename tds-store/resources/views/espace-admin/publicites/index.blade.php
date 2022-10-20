@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table  class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                    <table  id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
                             <td>N°</td>
@@ -40,7 +40,7 @@
                                 <td>{{ $publicite->message }}</td>
                                 <td>
                                     <figure class="figure px-4 pt-5">
-                                        <img src="{{ asset(path_image_publicite() . path_image($publicite->image)->filename) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                        <img src="{{ asset(path_image_publicite() . path_image($publicite->image_id)->filename) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                         <div class="row pt-3">
                                             <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                         </div>

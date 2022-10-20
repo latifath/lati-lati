@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Image;
+use GuzzleHttp\Client;
 use App\Models\Produit;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -18,11 +19,43 @@ if (!function_exists('save_image')) {
         if($filepath != null){
             $picture = Image::create([
                 'filename' => $filename. '.' . $extension->getExtension(),
+                'mimetype' => $file->getClientMimeType()
             ]);
         } else{
             $picture = null;
         }
         return $picture;
+    }
+}
+if (!function_exists('update_image')) {
+    function update_image($dir, $file, $image) {
+
+        $extension = new SplFileInfo($file->getClientOriginalName());
+
+        $filename = Str::random(16);
+
+        // location chemin image
+        $filepath = $file->move($dir, $filename . '.' . $extension->getextension());
+
+        if($filepath != null){
+            $picture = $image->update([
+                'filename' => $filename. '.' . $extension->getExtension(),
+                'mimetype' => $file->getClientMimeType()
+            ]);
+        } else{
+            $picture = null;
+        }
+        return $picture;
+    }
+}
+
+if (!function_exists('delete_image_path')) {
+    function delete_image_path($path, $name) {
+        $path = public_path() . '/' . $path . $name;
+
+        if(file_exists($path)) {
+            return unlink($path);
+        }
     }
 }
 
@@ -68,3 +101,4 @@ if(!function_exists('favoris')){
         return $produit_favoris;
     }
 }
+

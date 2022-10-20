@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\Produit;
 use App\Models\Commande;
 use Illuminate\Http\Request;

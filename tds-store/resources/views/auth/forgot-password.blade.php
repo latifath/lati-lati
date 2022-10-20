@@ -1,3 +1,8 @@
+<style>
+    .h-sidebar{
+        height: 650px;
+    }
+</style>
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">

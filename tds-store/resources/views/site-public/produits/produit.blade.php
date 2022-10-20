@@ -34,7 +34,7 @@
                                 <div class="card product-item border-0 mb-4 " style="{{ couleur_text_2()  }}">
                                     <div
                                         class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img class="img-fluid-all w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
+                                        <img class="img-fluid-all w-100" src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" alt="">
                                     </div>
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-2 color-red">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="card-footer d-flex justify-content-between bg-light border">
                                         <a href="{{ route('root_sitepublic_show_produit_par_sous_categorie', [one_categorie(one_sous_categorie($produit->sous_categorie_id)->categorie_id)->slug, one_sous_categorie($produit->sous_categorie_id)->slug, $produit->slug])}}" class="btn btn-sm p-0 mt-3" style="color: #343a40;"><i
-                                                class="fas fa-eye" style="{{ couleur_text_2() }}"></i>Voir
+                                                class="fas fa-eye " style="{{ couleur_text_2() }}"></i>Voir
                                             les details
                                         </a>
                                         <form action="{{ route('root_create_panier', $produit) }}" method="POST">
@@ -98,7 +98,7 @@
                     <div class="owl-carousel vendor-carousel">
                         @foreach (partenaires_logo() as $pl)
                             <div class="vendor-item border p-4">
-                                <img class="img-partenaire" src="{{ path_image($pl->image) ? asset(path_image_partenaire() . path_image($pl->image)->filename) : '' }}" alt="partenaire">
+                                <img class="img-partenaire" src="{{ path_image($pl->image_id) ? asset(path_image_partenaire() . path_image($pl->image_id)->filename) : '' }}" alt="partenaire">
                             </div>
                         @endforeach
                     </div>

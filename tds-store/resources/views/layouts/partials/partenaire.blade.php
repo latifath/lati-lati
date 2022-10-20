@@ -7,9 +7,7 @@
     }
 </style>
 @endsection
-@foreach (partenaires_logo() as $pl)
-@if($pl == null)
-@else
+@if(count(partenaires_logo()) > 0)
    @section('partenaire')
         <!-- Vendor Start -->
         <div class="container-fluid py-5" style="padding-bottom: 0rem !important">
@@ -18,7 +16,7 @@
                     <div class="owl-carousel vendor-carousel">
                         @foreach (partenaires_logo() as $pl)
                             <div class="vendor-item border p-4">
-                                <img class="img-partenaire" src="{{ path_image($pl->image) ? asset(path_image_partenaire() . path_image($pl->image)->filename) : '' }}" alt="partenaire">
+                                <img class="img-partenaire" src="{{ path_image($pl->image_id) ? asset(path_image_partenaire() . path_image($pl->image_id)->filename) : '' }}" alt="partenaire">
                             </div>
                         @endforeach
                     </div>
@@ -27,5 +25,4 @@
         </div>
         <!-- Vendor End -->
     @endsection
- @endif
-@endforeach
+@endif

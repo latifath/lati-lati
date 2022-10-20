@@ -56,7 +56,7 @@
                 <td>Produit</td>
                 <td>
                 <figure class="figure">
-                    <img src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" class="figure-img img-fluid rounded" alt="" height="50" width="60">
+                    <img src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" class="figure-img img-fluid rounded" alt="" height="50" width="60">
                 </figure></td>
             </tr>
         </table>
@@ -64,74 +64,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalAjoutStock" data-backdrop="static" data-keyboasrd="false" tabindex="-1" aria-labelledby="ModalAjoutStock" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouveau stock</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <br>
-            <form action="{{ route('root_espace_admin_stock_create') }}"  method="POST">
-                @csrf
-                <div class="modal-body" style="background-color: #ffff;">
-
-                <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="add_stock_id">
-
-                <div class="form-group">
-                    <label for="">Prix Unitaire</label>
-                    <input class="form-control {{ $errors->has('prix_unitaire') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="text" placeholder="" name="prix_unitaire">
-                    {!! $errors->first('prix_unitaire', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Quantité</label>
-                    <input class="form-control {{ $errors->has('quantite') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="text" placeholder="" name="quantite">
-                    {!! $errors->first('quantite', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal" style="float:left; margin-right: 250px;">Annuler</button>
-                    <button type="submit" class="btn btn-primary" style="float:right;">Ajouter</button>
-                </div>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalModifieImageProduit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifieImageProduit" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Upload Image</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_modifie_image_produit') }}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                <div class="modal-body" style="background-color: #ffff;">
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_image_id">
-
-                <div class="form-group">
-                    <label for="">Image</label>
-                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px; border: 1px solid;" type="file" placeholder="" name="image">
-                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
-                </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="button" class="btn btn-secondary" data-dismiss="modal" style="float:left; margin-right: 250px;">Annuler</button>
-                    <button type="submit" class="btn btn-primary" style="float:right;">Modifier</button>
-                </div>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
+@include('espace-admin.produits._modal');
 
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
 

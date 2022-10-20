@@ -65,8 +65,8 @@
                             <label>Pays</label>
                             <select class="custom-select is-invalid {{ $errors->has('pays') ? 'is-invalid' : '' }}" style="height: 50px;" name="pays">
                                 <option value="{{ information_client() ? information_client()->pays  : '' }}">{{ information_client() ? information_client()->pays  : 'Choisissez le pays' }}</option>
-                                @foreach(pays() as $item)
-                                    <option value="{{ $item->nom }}">{{ $item->nom }}</option>
+                                @foreach(countries() as $country)
+                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
                                @endforeach
                             </select>
                             {!! $errors->first('pays', '<p class="text-danger">:message</p>') !!}

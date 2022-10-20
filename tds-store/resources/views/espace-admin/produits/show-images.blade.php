@@ -37,18 +37,17 @@
                 @csrf
                 <div class="modal-body" style="background-color: #ffff;">
 
-                <input class="form-control  {{ $errors->has('produit_id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit_id" id="add_image_id">
+                    <input class="form-control  {{ $errors->has('produit_id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit_id" id="add_image_id">
 
-                <div class="form-group">
-                    <label for="">Image</label>
-                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
-                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
+                        {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                    </div>
                 </div>
-
                 <div class="modal-footer"  style="display:block;">
                     <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
-                </div>
                 </div>
             </form>
        </div>

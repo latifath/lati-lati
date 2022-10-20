@@ -38,6 +38,10 @@
         .tx:hover{
             color: #fff !important;
         }
+
+        .h-sidebar{
+            height: 800px;
+        }
     </style>
 
     @livewireStyles

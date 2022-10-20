@@ -12,30 +12,29 @@
                 @csrf
                 <div class="modal-body" style="background-color:  #ffff;">
 
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
+                    <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
 
-                <div class="form-group">
-                    <label for="">Nom</label>
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom">
-                    {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                    <div class="form-group">
+                        <label for="">Nom</label>
+                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom">
+                        {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Message</label>
+                        <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message">
+                        {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Image</label>
+                        <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
+                        {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                    </div>
                 </div>
-
-                 <div class="form-group">
-                    <label for="">Message</label>
-                    <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message">
-                    {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Image</label>
-                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
-                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
-                </div>
-
                 <div class="modal-footer" style="display:block;">
                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
-                </div>
                 </div>
             </form>
        </div>
@@ -57,24 +56,23 @@
 
                 <div class="modal-body" style="background-color:  #ffff;">
 
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_id">
+                    <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_id">
 
-                <div class="form-group">
-                    <label for="">Nom</label>
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom" id="edit_nom">
-                    {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                    <div class="form-group">
+                        <label for="">Nom</label>
+                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="nom" id="edit_nom">
+                        {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Message</label>
+                        <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message" id="edit_message">
+                        {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
+                    </div>
                 </div>
-
-                 <div class="form-group">
-                    <label for="">Message</label>
-                    <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message" id="edit_message">
-                    {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
-                </div>
-
                 <div class="modal-footer" style="display:block;">
                     <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
-                </div>
                 </div>
             </form>
        </div>
@@ -95,18 +93,18 @@
                 @method('put')
                 <div class="modal-body" style="background-color:  #ffff;">
 
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_image_id">
+                    <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="edit_image_id">
 
-                <div class="form-group">
-                    <label for="">image</label>
-                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image" id="edit_image">
-                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                    <div class="form-group">
+                        <label for="">image</label>
+                        <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image" id="edit_image">
+                        {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                    </div>
                 </div>
 
                 <div class="modal-footer" style="display:block;">
                     <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">Upload</button>
-                </div>
                 </div>
             </form>
        </div>

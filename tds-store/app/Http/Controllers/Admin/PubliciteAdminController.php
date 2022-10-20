@@ -31,7 +31,7 @@ class PubliciteAdminController extends Controller
         Publicite::create([
                 'nom' => $request->nom,
                 'message' => $request->message,
-                'image' => $save->id,
+                'image_id' => $save->id,
             ]);
         }
 
@@ -41,62 +41,59 @@ class PubliciteAdminController extends Controller
 
     }
 
-        public function update(Request $request){
-            $request->validate([
-                'nom' => 'required',
-                'message' => 'required',
-            ]);
+    public function update(Request $request){
+        $request->validate([
+            'nom' => 'required',
+            'message' => 'required',
+        ]);
 
-            Publicite::findOrfail($request->id)->update([
-                'nom' => $request->nom,
-                'message' => $request->message,
-            ]);
+        Publicite::findOrfail($request->id)->update([
+            'nom' => $request->nom,
+            'message' => $request->message,
+        ]);
 
-            flashy()->success('Publicité modifiée avec succès');
+        flashy()->success('Publicité modifiée avec succès');
 
-            return redirect()->route('root_espace_admin_publicites');
+        return redirect()->route('root_espace_admin_publicites');
 
-        }
+    }
 
-        public function update_image(Request $request){
-            $request->validate([
-                'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
-            ]);
+    public function update_image(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
+        ]);
 
-            $delete = Publicite::findOrfail($request->id);
+        $publicite = Publicite::findOrfail($request->id);
 
-            $image = Image::findOrfail($delete->image);
+        $image = Image::findOrfail($publicite->image_id);
 
-            unlink(path_image_publicite() . $image->filename);
+        delete_image_path(path_image_publicite(), $image->filename);
 
-            $image->delete();
+        $save = update_image(public_path('images/publicites'), $request->image, $image);
 
-            $save = save_image(public_path('images/publicites'), $request->image);
-
-            Publicite::findOrfail($request->id)->update([
-                'image' => $save->id,
-            ]);
-
+        if($save != null) {
             flashy()->success('Image modifiée avec succès');
-
-            return redirect()->route('root_espace_admin_publicites');
-
         }
 
-        public function delete(Request $request){
-            $delete = Publicite::find($request->id);
+        return redirect()->route('root_espace_admin_publicites');
 
-            $image = Image::find($delete->image);
+    }
 
-            unlink(path_image_publicite() . $image->filename);
+    public function delete(Request $request){
 
-            $image->delete();
+        $publicite = Publicite::findOrfail($request->id);
 
-            $delete->delete();
+        $image = Image::findOrfail($publicite->image_id);
 
-            flashy()->error('Publicité #'. $request->id . 'supprimée avec succès');
+        delete_image_path(path_image_publicite(), $image->filename);
 
-            return redirect()->back();
-        }
+        $publicite->delete();
+
+        $image->delete();
+
+        flashy()->error('Publicité #'. $request->id . 'supprimée avec succès');
+
+        return redirect()->back();
+    }
 
 }

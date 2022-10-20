@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Promotion extends Model
 {
@@ -37,6 +38,9 @@ class Promotion extends Model
     return $this->hasMany(Commande::class);
     }
 
-
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 
 }

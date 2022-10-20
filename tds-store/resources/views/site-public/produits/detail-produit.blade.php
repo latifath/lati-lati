@@ -49,7 +49,7 @@
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner border" style="height: 400px;">
                             <div class="carousel-item active">
-                                    <img class="img-fluid-prod" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="Image">
+                                    <img class="img-fluid-prod" src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" alt="Image">
                             </div>
                             @foreach($produit->images as $image)
                                 <div class="carousel-item">
@@ -80,14 +80,14 @@
                         <div class="d-flex align-items-center mb-4 pt-2">
                             <div class="input-group quantity mr-3" style="width: 130px;">
                                 <div class="input-group-btn">
-                                    <a class="btn btn-primary a:hover" id="remove" >
+                                    <a class="btn btn-primary h-100 a:hover" id="remove" >
                                         <i class="fa fa-minus text-white"></i>
                                     </a>
                                 </div>
                                 <input type="hidden" id="id" name="id" value="{{ $produit->id }}">
                                 <input type="text" class="form-control bg-secondary text-center" value="1" name="quantite" id="qty" min="1">
                                 <div class="input-group-btn">
-                                    <a class="btn btn-primary" id="add">
+                                    <a class="btn btn-primary h-100" id="add">
                                         <i class="fa fa-plus text-white"></i>
                                     </a>
 
@@ -168,7 +168,7 @@
                     @foreach ($sous_categories_produits as $produit)
                     <div class="card product-item border-0">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid-autre w-100" src="{{ path_image($produit->image) ? asset(path_image_produit() . path_image($produit->image)->filename) : ''}}" alt="">
+                            <img class="img-fluid-autre w-100" src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" alt="">
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3">{{ $produit->nom }}</h6>
@@ -212,10 +212,7 @@
 <!-- Subscribe End -->
 @endsection
 
-@section('partenaire')
-@foreach (partenaires_logo() as $pl)
-@if($pl == null)
-@else
+@if(count(partenaires_logo()) > 0)
    @section('partenaire')
         <!-- Vendor Start -->
         <div class="container-fluid py-5" style="padding-bottom: 0rem !important">
@@ -224,7 +221,7 @@
                     <div class="owl-carousel vendor-carousel">
                         @foreach (partenaires_logo() as $pl)
                             <div class="vendor-item border p-4">
-                                <img class="img-partenaire" src="{{ path_image($pl->image) ? asset(path_image_partenaire() . path_image($pl->image)->filename) : '' }}" alt="partenaire">
+                                <img class="img-partenaire" src="{{ path_image($pl->image_id) ? asset(path_image_partenaire() . path_image($pl->image_id)->filename) : '' }}" alt="partenaire">
                             </div>
                         @endforeach
                     </div>
@@ -233,9 +230,7 @@
         </div>
         <!-- Vendor End -->
     @endsection
- @endif
-@endforeach
-@endsection
+@endif
 
 @if(session()->has('cart'))
     <div class="modal" tabindex="-1">

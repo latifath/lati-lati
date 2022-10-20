@@ -65,44 +65,43 @@
                 @csrf
                 <div class="modal-body" style="background-color: #ffff;">
 
-                <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
+                    <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
 
-                <div class="form-group">
-                    <label for="">Code coupon</label>
-                    <input class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="code_coupon">
-                    {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
+                    <div class="form-group">
+                        <label for="">Code coupon</label>
+                        <input class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="code_coupon">
+                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Type coupon</label>
+                        <select class="custom-select {{ $errors->has('type') ? 'is-invalid' : '' }}" style="height: 50px;" name="type" >
+                            <option value="fixed">fixed</option>
+
+                            <option value="percent_of">percent_of</option>
+
+                        </select>
+                        {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Valeur coupon</label>
+                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur">
+                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select class="custom-select {{ $errors->has('status') ? 'is-invalid' : '' }}" style="height: 50px;" name="status" >
+                            <option value="en cours">En cours </option>
+                            <option value="termine">Termine</option>
+                        </select>
+                        {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="">Type coupon</label>
-                    <select class="custom-select {{ $errors->has('type') ? 'is-invalid' : '' }}" style="height: 50px;" name="type" >
-                        <option value="fixed">fixed</option>
-
-                        <option value="percent_of">percent_of</option>
-
-                    </select>
-                    {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                 <div class="form-group">
-                    <label for="">Valeur coupon</label>
-                    <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur">
-                    {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Status</label>
-                    <select class="custom-select {{ $errors->has('status') ? 'is-invalid' : '' }}" style="height: 50px;" name="status" >
-                        <option value="en cours">En cours </option>
-                        <option value="termine">Termine</option>
-                    </select>
-                    {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
-                </div>
-
                 <div class="modal-footer" style="display:block;">
                     <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
-                </div>
                 </div>
             </form>
        </div>

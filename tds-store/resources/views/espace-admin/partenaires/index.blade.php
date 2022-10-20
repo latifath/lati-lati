@@ -37,7 +37,7 @@
                             {{-- <td>{{ $partenaire->logo }}</td> --}}
                             <td>
                                 <figure class="figure px-4 pt-5">
-                                    <img src="{{ asset(path_image_partenaire() . path_image($partenaire->image)->filename )}}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
+                                    <img src="{{ asset(path_image_partenaire() . path_image($partenaire->image_id)->filename )}}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                     <div class="row pt-3">
                                         <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
                                     </div>

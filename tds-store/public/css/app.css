@@ -85,8 +85,8 @@ Reset links to optimize for opt-in styling instead of opt-out.
 */
 
 a {
-  color: inherit;
-  text-decoration: inherit;
+  color: #01674e;
+  text-decoration: none;
 }
 
 /*

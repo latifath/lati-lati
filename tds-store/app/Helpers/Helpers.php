@@ -17,6 +17,7 @@ use App\Models\SousCategorie;
 use App\Models\CommandeProduit;
 use App\Models\AdresseLivraison;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client as ClientHttp;
 use Illuminate\Support\Facades\Auth;
 
 if(!function_exists('kkiapay')){
@@ -301,12 +302,12 @@ if(!function_exists('count_favoris')){
     }
 }
 
-if(!function_exists('pays')){
-    function pays(){
-        return Pays::all();
+// if(!function_exists('pays')){
+//     function pays(){
+//         return Pays::all();
 
-    }
-}
+//     }
+// }
 
 if(!function_exists('paiements')){
     function paiements(){
@@ -325,6 +326,21 @@ if(!function_exists('disabled_button_commande')){
 if(!function_exists('produits_non_livrer')){
     function produits_non_livrer($id){
         return  Produit::where('id', $id)->first();
+    }
+}
+
+if(!function_exists('countries')){
+    function countries(){
+        $client = new ClientHttp();
+
+        $url = "https://restcountries.com/v2/all";
+
+        $response = $client->request('GET', $url);
+
+        $responseBody = json_decode($response->getBody());
+
+        return $responseBody;
+
     }
 }
 

@@ -21,14 +21,11 @@ class CreateProduitsTable extends Migration
             $table->integer('quantite');
             $table->decimal('prix', 10, 2);
             $table->integer('sous_categorie_id')->unsigned();
-            $table->foreign('sous_categorie_id')->references('id')->on('sous_categories');
+            $table->foreign('sous_categorie_id')->references('id')->on('sous_categories')->onDelete('restrict')->onUpdate('cascade');
             $table->decimal('prix_achat', 10, 2)->nullable();
-            $table->decimal('prix_vente_500000', 10, 2)->nullable();
-            $table->decimal('prix_vente_1000000',10, 2)->nullable();
-            $table->decimal('prix_vente_5000000',10, 2)->nullable();
-            $table->decimal('prix_vente_10000000',10, 2)->nullable();
-            $table->decimal('prix_vente_10000000_+',10, 2)->nullable();
-            $table->integer('image');
+            $table->decimal('prix_vente', 10, 2)->nullable();
+            $table->integer('image_id')->unsigned();
+            $table->foreign('image_id')->references('id')->on('images')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
 
         });

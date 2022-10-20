@@ -74,7 +74,7 @@ class ProduitAdminController extends Controller
                 'description' => $request->description,
                 'categorie_id' => $request->categorie,
                 'sous_categorie_id' => $request->sous_categorie,
-                'image' => $save->id
+                'image_id' => $save->id
             ]);
         }
 
@@ -121,38 +121,31 @@ class ProduitAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $produit = Produit::find($request->id);
+        $produit = Produit::findOrfail($request->id);
 
-        $image = Image::find($produit->image);
+        $image = Image::findOrfail($produit->image_id);
 
-        unlink(path_image_produit() . $image->filename);
+        delete_image_path(path_image_produit(), $image->filename);
 
-        $image->delete();
-
-        $save = save_image(public_path('images/produits'), $request->image);
+        $save = update_image(public_path('images/produits'), $request->image, $image);
 
         if ($save != null) {
-            Produit::findOrfail($request->id)->update([
-                'image' => $save->id
-            ]);
+            flashy()->success('Image modifiée avec succès');
         }
-        flashy()->success('Image modifiée avec succès');
-
         return redirect()->route('root_espace_admin_show_produit', $request->id);
-
     }
 
     public function delete(Request $request){
 
         $produit = Produit::findOrfail($request->id);
 
-        $image = Image::findOrfail($produit->image);
+        $image = Image::findOrfail($produit->image_id);
 
-        unlink(path_image_produit() . $image->filename);
-
-        $image->delete();
+        delete_image_path(path_image_produit(), $image->filename);
 
         $produit->delete();
+
+        $image->delete();
 
         flashy()->error('Produit #'. $request->id . 'supprimé avec succès');
 
@@ -201,7 +194,7 @@ class ProduitAdminController extends Controller
 
         $image = Image::findOrfail($request->id);
 
-        unlink(path_image_produit() . $image->filename);
+        delete_image_path(path_image_produit(), $image->filename);
 
         $image->delete();
 

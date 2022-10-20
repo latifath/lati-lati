@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $produits_latest = Produit::orderBy('id', 'DESC')->limit(6)->get();
+        $produits_latest = Produit::orderBy('id', 'DESC')->limit(8)->get();
 
         $publicite_latest = Publicite::orderBy('id', 'DESC')->limit(1)->first();
 
