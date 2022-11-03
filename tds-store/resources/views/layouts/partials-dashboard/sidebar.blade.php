@@ -108,8 +108,15 @@
                         <a href="{{ route('root_espace_admin_commandes_news') }}" class="waves-effect"><i class="fa fa-envelope"></i><span>Newsletter</span> </a>
                     </li>
 
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-truck"></i><span>Livraisons</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('root_espace_admin_index_livraison') }}">Livraison</a></li>
+                            <li><a href="{{ route('root_espace_admin_index_expedition') }}">Expédition</a></li>
+                        </ul>
+                    </li>
+
                     <li class="">
-                        <a href="{{ route('root_espace_admin_index_livraison') }}" class="waves-effect"><i class="fa fa-truck" aria-hidden="true"></i><span>Livraisons</span></a>
                     </li>
 
                      <li class="">

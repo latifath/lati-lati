@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Livraison;
 use App\Models\ProduitNonLivrer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,5 +46,10 @@ class Commande extends Model
     public function produit_non_livrer()
     {
         return $this->hasMany(ProduitNonLivrer::class);
+    }
+
+    public function livraisons()
+    {
+        return $this->hasMany(Livraison::class);
     }
 }

@@ -44,7 +44,7 @@
                             <td>{{ $livraison->created_at }}</td>
                             <td>
                             <a href="">
-                                <button data-toggle="tooltip" title="Editer" class="btn btn-primary" ><i class="fa fa-edit"></i></i></button>
+                                <button data-toggle="tooltip" title="Livrer" class="btn btn-primary"><i class="fa fa-refresh"></i></i></button>
                             </a>
                             <a href="">
                                 <button data-toggle="tooltip" title="Supprimer" class="btn bg-danger text-white"><i class="fa fa-trash"></i></i></button>
@@ -58,5 +58,4 @@
         </div>
     </div>
 </div>
-
 @endsection

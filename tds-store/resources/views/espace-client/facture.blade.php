@@ -196,6 +196,10 @@
                                                 <td colspan="3" class="text-right"><strong> TVA</strong></td>
                                                 <td class="">{{ $cmde->tva == 1 ? '18%' : '0%' }}</td>
                                             </tr>
+                                            <tr class="">
+                                                <td colspan="3" class="text-right"><strong>Expédition</strong></td>
+                                                <td class="">{{  valeur_expedition($cmde->id)->montant != null ? number_format(valeur_expedition($cmde->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
+                                            </tr>
                                             @if ($cmde->promotion != null)
                                                 <tr class="">
                                                     <td colspan="3" class="text-right"><strong>Remise</strong></td>
@@ -204,7 +208,7 @@
                                             @endif
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
-                                                <td class="">{{ number_format(montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion),$cmde->adresse_livraison_id),  0, '.', ' ' ) }} F CFA</td>
+                                                <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion),$cmde->adresse_livraison_id) + valeur_expedition($cmde->id)->montant),  0, '.', ' ' ) }} F CFA</td>
                                             </tr>
 
                                     </tbody>

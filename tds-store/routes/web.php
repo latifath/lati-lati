@@ -11,6 +11,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\SitepublicController;
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Admin\LivraisonController;
 use App\Http\Controllers\Admin\StockAdminController;
 use App\Http\Controllers\Admin\ClientAdminController;
 use App\Http\Controllers\Client\HomeClientController;
@@ -211,9 +212,17 @@ Route::middleware('admin')->group(function () {
 
     // gestion livraison
 
-    Route::get('espace-admin/livraisons', [CommandeAdminController::class, 'index_livraison'])->name('root_espace_admin_index_livraison');
+    Route::get('espace-admin/livraisons', [LivraisonController::class, 'index'])->name('root_espace_admin_index_livraison');
 
-    Route::get('espace-admin/livraisons/{id}/detail', [CommandeAdminController::class, 'details'])->name('root_espace_admin_details');
+    Route::get('espace-admin/livraisons/{id}/detail', [LivraisonController::class, 'details'])->name('root_espace_admin_details');
+
+    Route::get('espace-admin/expedition', [LivraisonController::class, 'index_expedition'])->name('root_espace_admin_index_expedition');
+
+    Route::post('espace-admin/expedition/store', [LivraisonController::class, 'store'])->name('root_espace_admin_store_expedition');
+
+    Route::put('espace-admin/expedition/update', [LivraisonController::class, 'update'])->name('root_espace_admin_update_expedition');
+
+    Route::delete('espace-admin/expedition/{id}/delete', [LivraisonController::class, 'delete'])->name('root_espace_admin_delete_expedition');
 
 
     // gestion sous-categorie

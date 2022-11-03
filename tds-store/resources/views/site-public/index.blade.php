@@ -1,10 +1,8 @@
 @extends('layouts.master', ['titre' => 'home'])
 
-{{-- barre de recherche --}}
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 @section('head')
+{{-- barre de recherche --}}
+<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 <style>
     .img-fluid-product{
         width: 200px;
@@ -24,13 +22,10 @@
 </style>
 @endsection
 
-
 @section('produit')
-{{-- {{ dd(session("stock")) }} --}}
     <div class="container-fluid ">
         <div class="row px-xl-5 pb-3">
             @include('layouts.partials.sidebar')
-            {{-- carousel --}}
             <div class="col-lg-9">
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">

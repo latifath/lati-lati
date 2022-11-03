@@ -63,10 +63,9 @@
                         @endforeach
                     </div>
                 </div>
-
-                {{-- pagination --}}
-                    {{-- {{ $sous_categories_produits->links() }} --}}
-                    {{-- pagination end --}}
+                <div class="row px-xl-5 pb-3">
+                    {{ $sous_categorie_produits->links() }}
+                </div>
             </div>
         </div>
 
@@ -74,11 +73,9 @@
 @endsection
 
 @section('newsletter')
-@include('layouts.partials.newsletter')
+    @include('layouts.partials.newsletter')
 @endsection
 
 @section('partenaire')
-
     @include('layouts.partials.partenaire')
-
 @endsection

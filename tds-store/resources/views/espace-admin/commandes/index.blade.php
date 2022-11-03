@@ -39,7 +39,7 @@
                             <td>{{ $cmd_terminee->id }}</td>
                             <td>{{ $cmd_terminee->created_at }}</td>
                             <td>{{ $cmd_terminee->adresse_client->nom }} {{ $cmd_terminee->adresse_client->prenom }}</td>
-                            <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($cmd_terminee->id), $cmd_terminee->promotion), $cmd_terminee->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
+                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmd_terminee->id), $cmd_terminee->promotion), $cmd_terminee->adresse_livraison_id) + valeur_expedition($cmd_terminee->id)->montant), 0, '.', ' ') }} F CFA</td>
                             <td>{{ $cmd_terminee->status}}</td>
                             <td>
                             <a href="{{ route('root_espace_admin_commandes_show', $cmd_terminee->id) }}">
@@ -151,7 +151,7 @@
                             <td>{{ $cmde_en_attente->id }}</td>
                             <td>{{ $cmde_en_attente->created_at }}</td>
                             <td>{{ $cmde_en_attente->adresse_client->nom }} {{ $cmde_en_attente->adresse_client->prenom }}</td>
-                            <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_en_attente->id), $cmde_en_attente->promotion), $cmde_en_attente->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
+                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_en_attente->id), $cmde_en_attente->promotion), $cmde_en_attente->adresse_livraison_id) + valeur_expedition($cmde_en_attente->id)->montant), 0, '.', ' ') }} F CFA</td>
                             <td>{{$cmde_en_attente->status}}</td>
                             <td>
                             <a href="{{ route('root_espace_admin_commandes_show', $cmde_en_attente->id) }}">
@@ -208,7 +208,7 @@
                             <td>{{ $cmde_non_payee->id }}</td>
                             <td>{{ $cmde_non_payee->created_at }}</td>
                             <td>{{ $cmde_non_payee->adresse_client->nom }} {{ $cmde_non_payee->adresse_client->prenom }}</td>
-                            <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_non_payee->id), $cmde_non_payee->promotion), $cmde_non_payee->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
+                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_non_payee->id), $cmde_non_payee->promotion), $cmde_non_payee->adresse_livraison_id) + valeur_expedition($cmde_non_payee->id)->montant), 0, '.', ' ') }} F CFA</td>
                             <td>{{$cmde_non_payee->status}}</td>
                             <td>
                             <a href="{{ route('root_espace_admin_commandes_show', $cmde_non_payee->id) }}">
@@ -264,7 +264,7 @@
                             <td>{{ $cmde_annulee->id }}</td>
                             <td>{{ $cmde_annulee->created_at }}</td>
                             <td>{{ $cmde_annulee->adresse_client->nom }} {{ $cmde_annulee->adresse_client->prenom }}</td>
-                            <td>{{ number_format (montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_annulee->id), $cmde_annulee->promotion), $cmde_annulee->adresse_livraison_id), 0, '.', ' ') }} F CFA</td>
+                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_annulee->id), $cmde_annulee->promotion), $cmde_annulee->adresse_livraison_id) + valeur_expedition($cmde_annulee->id)->montant), 0, '.', ' ') }} F CFA</td>
                             <td>{{$cmde_annulee->status}}</td>
                             <td>
                             <a href="{{ route('root_espace_admin_commandes_show', $cmde_annulee->id) }}">

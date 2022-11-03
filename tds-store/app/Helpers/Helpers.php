@@ -9,7 +9,9 @@ use App\Models\Produit;
 use App\Models\Commande;
 use App\Models\Paiement;
 use App\Models\Categorie;
+use App\Models\Livraison;
 use App\Models\Promotion;
+use App\Models\Expedition;
 use App\Models\Partenaire;
 use App\Models\AdresseClient;
 use App\Models\Configuration;
@@ -302,13 +304,6 @@ if(!function_exists('count_favoris')){
     }
 }
 
-// if(!function_exists('pays')){
-//     function pays(){
-//         return Pays::all();
-
-//     }
-// }
-
 if(!function_exists('paiements')){
     function paiements(){
         return  Paiement::all();
@@ -335,7 +330,7 @@ if(!function_exists('countries')){
 
         $url = "https://restcountries.com/v2/all";
 
-        $response = $client->request('GET', $url);
+        $response = $client-> request('GET', $url);
 
         $responseBody = json_decode($response->getBody());
 
@@ -344,3 +339,15 @@ if(!function_exists('countries')){
     }
 }
 
+if(!function_exists('villes')){
+    function villes(){
+        return Expedition::all();
+    }
+}
+
+// Pour recuuperer le montant dans la table livraison
+if(!function_exists('valeur_expedition')){
+    function valeur_expedition($id){
+        return Livraison::where('commande_id', $id)->first();
+    }
+}

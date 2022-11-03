@@ -17,8 +17,8 @@ class CreateLivraisonsTable extends Migration
             $table->increments('id');
             $table->integer('commande_id')->unsigned();
             $table->foreign('commande_id')->references('id')->on('commandes')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('adresse_client_id')->unsigned();
-            $table->foreign('adresse_client_id')->references('id')->on('adresse_clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->decimal('montant', 10, 2)->nullable();
+            $table->string('status')->default('non');
             $table->timestamps();
         });
     }

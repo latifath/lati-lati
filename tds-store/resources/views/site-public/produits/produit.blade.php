@@ -1,10 +1,8 @@
 @extends('layouts.master', ['titre' => 'tds'])
-{{-- barre de recherche --}}
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
 @section('head')
+{{-- barre de recherche --}}
+<script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 <style>
     .img-fluid-all{
         width: 200px;
@@ -79,36 +77,10 @@
 @endsection
 
 @section('newsletter')
-
-@include('layouts.partials.newsletter')
-
+    @include('layouts.partials.newsletter')
 @endsection
 
-
 @section('partenaire')
-@section('partenaire')
-@foreach (partenaires_logo() as $pl)
-@if($pl == null)
-@else
-   @section('partenaire')
-        <!-- Vendor Start -->
-        <div class="container-fluid py-5" style="padding-bottom: 0rem !important">
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="owl-carousel vendor-carousel">
-                        @foreach (partenaires_logo() as $pl)
-                            <div class="vendor-item border p-4">
-                                <img class="img-partenaire" src="{{ path_image($pl->image_id) ? asset(path_image_partenaire() . path_image($pl->image_id)->filename) : '' }}" alt="partenaire">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vendor End -->
-    @endsection
- @endif
-@endforeach
-@endsection
+    @include('layouts.partials.partenaire')
 @endsection
 

@@ -115,7 +115,7 @@
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="form-check">
                                         <label class="form-check-label check-form-livraison" >
-                                            <input type="checkbox" class="form-check-input" value="1" onchange="valueChanged()" name="check" {{ old('check') == '1' ? 'checked' : '' }}>Adresse de livraison différente de adresse de facturation
+                                            <input type="checkbox" class="form-check-input" value="1" onchange="valueChanged()" name="check" {{ old('check') == '1' ? 'checked' : '' }}>Adresse de livraison différente de l'adresse de facturation
                                         </label>
                                     </div>
                                 </div>
@@ -124,7 +124,6 @@
                                         <label>Nom</label>
                                         <input class="form-control {{ $errors->has('nomLivraison') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="" value="{{ old('nomLivraison') ?? '' }}" name="nomLivraison" >
                                         {!! $errors->first('nomLivraison', '<p class="text-danger">:message</p>') !!}
-
                                    </div>
 
                                     <div class="col-md-6 form-group">
@@ -138,7 +137,6 @@
                                         <input class="form-control {{ $errors->has('emailLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('emailLivraison') ?? '' }}" name="emailLivraison">
                                         {!! $errors->first('emailLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
-
 
                                     <div class="col-md-6 form-group">
                                         <label>Téléphone</label>
@@ -166,8 +164,20 @@
 
                                     <div class="col-md-6 form-group">
                                         <label>Ville</label>
-                                        <input class="form-control {{ $errors->has('villeLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" value="{{ old('villeLivraison') ?? '' }}" name="villeLivraison">
+                                        <select class="custom-select {{ $errors->has('villeLivraison') ? 'is-invalid' : '' }}" style="height: 50px;" name="villeLivraison" id="ville">
+                                            <option  value="{{ old('villeLivraison') ?? '' }}">{{ old('villeLivraison') ?? 'Choisissez la ville' }}</option>
+                                            @foreach(villes() as $ville)
+                                                <option value="{{ $ville->ville }}">{{ $ville->ville }}</option>
+                                            @endforeach
+                                            <option value="autres">Autres</option>
+                                        </select>
                                         {!! $errors->first('villeLivraison', '<p class="text-danger">:message</p>') !!}
+                                        <br>
+                                        <div class="form-group ville2" style="display: none">
+                                            <label>Entrez votre ville</label>
+                                            <input class="form-control {{ $errors->has('villeLivraison2') ? 'is-invalid' : '' }}" type="text" style="height: 50px;" name="villeLivraison2">
+                                            {!! $errors->first('villeLivraison2', '<p class="text-danger">:message</p>') !!}
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6 form-group">
@@ -176,7 +186,6 @@
                                         {!! $errors->first('code_postalLivraison', '<p class="text-danger">:message</p>') !!}
                                     </div>
                                 </div>
-
                             </fieldset>
                         </div>
                     </div>
@@ -227,11 +236,14 @@
 
                                         <div class="d-flex justify-content-between">
                                             <p>Remise</p>
-                                                <p >{{ valeur_coupon() ?? '0' }}</p>
-                                             {{-- <p>TVA</p>
-                                            <p>{{ configuration()->tva == 1 ? '18%' : '0%' }}</p> --}}
-
+                                            <p >{{ valeur_coupon() ?? '0' }}</p>
                                         </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <p>Expédition</p>
+                                            <p>À déterminer</p>
+                                        </div>
+
                                         <div class="card-footer border-secondary bg-transparent" style="padding: 0px">
                                             <div class="d-flex justify-content-between mt-2">
                                                 @if(!request()->session()->has('coupon'))
@@ -320,11 +332,20 @@
     window.onload = function () {
         valueChanged()
     }
-
-
-
 </script>
 @section('js')
+<script>
+    $(document).ready(function(){
+        $("select#ville").change(function(){
+            var option_ville = $(this).children("option:selected").val();
+            if (option_ville == "autres") {
+                $('.ville2').show();
+            }else{
+                $('.ville2').hide();
+            }
+        });
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 <script>
     $( 'select' ).select2( {

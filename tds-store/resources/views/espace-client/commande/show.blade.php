@@ -51,8 +51,12 @@
                     <h5 class="font-weight-bold" >{{ $commande->tva == 1 ? '18%' : '0%' }}</h5>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
+                    <h5 class="font-weight-bold">Expédition</h5>
+                    <h5 class="font-weight-bold" >{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</h5>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">Total</h5>
-                    <h5 class="font-weight-bold"  style="{{ couleur_text_2() }}">{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) , '0', '.', ' ') }} F CFA</h5>
+                    <h5 class="font-weight-bold"  style="{{ couleur_text_2() }}">{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant) , '0', '.', ' ') }} F CFA</h5>
                 </div>
             </div>
         </div>

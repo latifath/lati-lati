@@ -4,6 +4,10 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AUIH145OuUGKi0m4xp3aJuBpRn1TdOqKop0QiUD_cRo12VqQeIA2siBz0DEasrmL_eaO_PF2VfnHFqkl&currency=USD"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=AUIH145OuUGKi0m4xp3aJuBpRn1TdOqKop0QiUD_cRo12VqQeIA2siBz0DEasrmL_eaO_PF2VfnHFqkl"></script>
 
+{{-- pour le select --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+
 @endsection
 @section('validation')
 <!-- Page Header Start -->
@@ -30,6 +34,7 @@
                                 <th>Date</th>
                                 <th>Coupon</th>
                                 <th>TVA</th>
+                                <th>Expédition</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -39,7 +44,8 @@
                                 <td>{{ $commande->created_at }}</td>
                                 <td>{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }} </td>
                                 <td>{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
-                                <td style="{{ couleur_text_2() }}">{{  number_format(montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id), '0', '.', ' ' ) }} F CFA</td>
+                                <td style="{{ couleur_text_2() }}">{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }} </td>
+                                <td style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant), '0', '.', ' ' ) }} F CFA</td>
                             </tr>
                         </tbody>
                     </table>
@@ -96,7 +102,11 @@
                 </div>
 
             </div>
+            @if ($type_paiement == "livraison" )
+            <p class="pt-3">Merci pour votre commande, Cliquez sur le boutton <strong>continuer</strong></p>
+            @else
             <p class="pt-3">Merci pour votre commande, Cliquez sur le boutton <strong>Procéder au paiement</strong></p>
+            @endif
             <div class="mb-4">
                 <div class="col-sm-12">
 
@@ -122,185 +132,34 @@
         </div>
     </div>
 </div>
-{{-- adresse facturation --}}
-<div class="modal fade" id="ModalEditAdresseFacturation" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalEditAdresseFacturationTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modification Adresse Facturation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_site_public_edit_adresse_facturation') }}" id="" method="POST">
-                @csrf
-                <div class="modal-body p-0" style="background-color: #ffff;">
-                    <div class="">
-                        <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->id}}" type="hidden" placeholder="" name="id">
-                        <div class="col-md-12 form-group">
-                            <label>Nom</label>
-                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->nom}}" type="text" placeholder="" name="nom" >
-                            {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                        </div>
+@include('site-public.commandes._modal-edit-adresse')
 
-                        <div class="col-md-12 form-group">
-                            <label>Prénom</label>
-                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->prenom }}" type="text" placeholder="" name="prenom">
-                            {!! $errors->first('prenom', '<p class="text-danger">:message</p>') !!}
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{  adresseclient($commande->adresse_client_id)->email }}" type="text" placeholder="" name="email">
-                            {!! $errors->first('email', '<p class="text-danger">:message</p>') !!}
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Téléphone</label>
-                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->telephone }}"  placeholder="" name="telephone">
-                            {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
-                        <div class="alert alert-info" style="display: none;"></div>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Pays</label>
-                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays">
-                                <option  value="{{ adresseclient($commande->adresse_client_id)->pays ?? '' }} ">{{ adresseclient($commande->adresse_client_id)->pays ?? ''}}</option>
-                                @foreach(countries() as $country)
-                                    <option value="{{ $country->name}}">{{ $country->name}}</option>
-
-                                @endforeach
-                            </select>
-                            {!! $errors->first('pays', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Rue</label>
-                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->rue}}" type="text" placeholder="" name="rue">
-                            {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Ville</label>
-                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->ville }}" type="text" placeholder="" name="ville">
-                            {!! $errors->first('ville', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Code postal</label>
-                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" value="{{ adresseclient($commande->adresse_client_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
-                            {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer" style="display:block;">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-secondary float-right">Modifier</button>
-
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-{{-- adresse livraison --}}
-    <div class="modal fade" id="ModalEditAdresseLivraison" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalEditAdresseLivraisonTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel"> Modification Adresse de Livraison</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_site_public_edit_adresse_livraison') }}" id="" method="POST">
-                <div class="modal-body p-0" style="background-color: #ffff;" >
-                    @csrf
-                    <div class="">
-                        <input class="form-control" value="{{ adresselivraison($commande->adresse_livraison_id)->id}}" type="hidden" placeholder="" name="id" >
-
-                        <div class="col-md-12 form-group">
-                            <label>Nom</label>
-                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->nom  }}" type="text" placeholder="" name="nom" >
-                            {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Prénom</label>
-                            <input class="form-control {{ $errors->has('prenom') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->prenom}}" type="text" placeholder="" name="prenom">
-                            {!! $errors->first('prenom', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"  value="{{  adresselivraison($commande->adresse_livraison_id)->email }}" type="text" placeholder="" name="email">
-                            {!! $errors->first('email', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Téléphone</label>
-                            <input id="phone1" type="tel"  class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->telephone }}"  placeholder="" name="telephone">
-                            {!! $errors->first('telephone', '<p class="text-danger">:message</p>') !!}
-
-                        <div class="alert alert-info" style="display: none;"></div>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Pays</label>
-                            <select class="custom-select {{ $errors->has('pays') ? 'is-invalid' : '' }}" name="pays" >
-                                <option value="{{ adresselivraison($commande->adresse_livraison_id)->pays ?? '' }} ">{{ adresselivraison($commande->adresse_livraison_id)->pays ?? ''}}</option>
-                                @foreach(countries() as $country)
-                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
-
-                                @endforeach
-
-                            </select>
-                            {!! $errors->first('pays', '<p class="text-danger">:message</p>') !!}
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Rue</label>
-                            <input class="form-control {{ $errors->has('rue') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->rue }}" type="text" placeholder="" name="rue">
-                            {!! $errors->first('rue', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Ville</label>
-                            <input class="form-control {{ $errors->has('ville') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->ville }}" type="text" placeholder="" name="ville">
-                            {!! $errors->first('ville', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <label>Code postal</label>
-                            <input class="form-control {{ $errors->has('code_postal') ? 'is-invalid' : '' }}" value="{{ adresselivraison($commande->adresse_livraison_id)->code_postal }}" type="text" placeholder="" name="code_postal" >
-                            {!! $errors->first('code_postal', '<p class="text-danger">:message</p>') !!}
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer" style="display:block;">
-                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-secondary float-right">Modifier</button>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
 @endsection
 
 @section('js')
 <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) }}" callback="http://127.0.0.1:8000/validation-commmande/{{ $commande->id }}/commande-reçue/type-paiement-{{ $type_paiement }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("select#ville1").change(function(){
+            var option_ville = $(this).children("option:selected").val();
+            if (option_ville == "autres") {
+                $('.ville2').show();
+            }else{
+                $('.ville2').hide();
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script>
+    $( 'select' ).select2( {
+        theme: "bootstrap-5",
+        width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+        placeholder: $( this ).data( 'placeholder' ),
+    } );
+</script>
 
 <script>
     $(document).on('click', '#btn_edit_adr_fact', function(){
@@ -314,10 +173,13 @@
     });
 
 </script>
+
+
+
 <script>
     paypal.Buttons({
         // Sets up the transaction when a payment button is clicked
-        createOrder: function(data, actions) => {
+        createOrder: (data, actions) => {
           return actions.order.create({
             purchase_units: [{
               amount: {
@@ -330,9 +192,9 @@
         onApprove: (data, actions) => {
           return actions.order.capture().then(function(orderData) {
             // Successful capture! For dev/demo purposes:
-            // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-            // const transaction = orderData.purchase_units[0].payments.captures[0];
-            // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            alert(`Transaction \${transaction.status}: \${transaction.id}\n\nSee console for all available details`);
 
             // var firstname = $('.firstname').val();
             // var lastname = $('.lastname').val();

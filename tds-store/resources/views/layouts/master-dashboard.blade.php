@@ -126,6 +126,8 @@
 
                         @yield('bilan-paiement')
 
+                        @yield('expedition')
+
                     </div>
 
                 </div>

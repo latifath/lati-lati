@@ -48,8 +48,6 @@
                             <td>{{ $produit->sous_categorie->nom}}</td>
                             <td>
                                 <button  id="btn_edit_correction_stock" data-id="{{ $produit->id }}" data-quantite="{{ $produit->quantite }}" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-refresh"></i></button>
-                                {{-- <button  id="btn_edit_stock"  class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
-                                <button  id="btn_delete_stock" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button> --}}
                             </td>
                         </tr>
                         @php

@@ -28,7 +28,7 @@
                                 @if (account_commande($item->id) != "")
                                     <tr>
                                         <td>{{ account_commande($item->id)->created_at }}</td>
-                                        <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ')}} F CFA</td>
+                                        <td>{{ number_format((account_commande($item->id)->montant), 0, '.', ' ')}} F CFA</td>
                                         <td>{{ account_commande($item->id)->type_paiement }}</td>
                                         <td>{{ account_commande($item->id)->commande_id }}</td>
                                         <td>

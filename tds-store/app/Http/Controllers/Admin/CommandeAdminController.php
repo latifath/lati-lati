@@ -108,10 +108,4 @@ class CommandeAdminController extends Controller
         flashy()->error('Commande #'. $request->id . 'supprimée avec succès');
         return redirect()->route('root_espace_admin_commandes_index');
     }
-
-    public function index_livraison(){
-        $livraisons = Commande::where("status", "en cours")->get();
-
-        return view('espace-admin.commandes.index-livraison', compact('livraisons'));
-    }
 }

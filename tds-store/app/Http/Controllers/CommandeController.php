@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Produit;
 use App\Models\Commande;
+use App\Models\Livraison;
+use App\Models\Expedition;
 use Illuminate\Http\Request;
 use App\Models\AdresseClient;
 use App\Models\CommandeProduit;
+use App\Mail\SendMailExpedition;
 use App\Models\AdresseLivraison;
+use App\Models\ProduitNonLivrer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailNewCommandeAdmin;
 use App\Mail\SendMailNewCommandeClient;
 use App\Mail\SendMailProduitInsuffisantAdmin;
 use App\Mail\SendMailProduitInsuffisantClient;
 use App\Http\Requests\CreateValidationCommandeFormRequest;
-use App\Models\ProduitNonLivrer;
 
 class CommandeController extends Controller
 {
@@ -34,8 +37,8 @@ class CommandeController extends Controller
             'email'=> 'required|email',
             'telephone'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'pays'=> 'required',
-            'rue'=> 'required|min:4',
-            'ville'=> 'required|min:3',
+            'rue'=> 'required',
+            'ville'=> 'required',
             'code_postal'=> 'required',
             'payment' => 'required',
         ]);
@@ -48,7 +51,8 @@ class CommandeController extends Controller
                 'telephoneLivraison'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
                 'paysLivraison'=> 'required',
                 'rueLivraison'=> 'required|min:4',
-                'villeLivraison'=> 'required|min:3',
+                'villeLivraison'=> 'required',
+                'villeLivraison2'=> 'required_if:villeLivraison,autres',
                 'code_postalLivraison'=> 'required',
             ]);
         }
@@ -68,9 +72,10 @@ class CommandeController extends Controller
                 'code_postal'=> request('code_postal')
             ]);
 
+            $villeLivraison = $request->villeLivraison != 'autres' ? $request->villeLivraison : $request->villeLivraison2;
 
             if($request->check == 1 ) {
-                $adr = AdresseLivraison::Create([
+                $adresseLivraison = AdresseLivraison::Create([
                     'nom'=> request('nomLivraison'),
                     'prenom'=> request('prenomLivraison'),
                     'email'=> request('emailLivraison'),
@@ -78,11 +83,11 @@ class CommandeController extends Controller
                     'telephone'=> request('telephoneLivraison'),
                     'pays'=> request('paysLivraison'),
                     'rue'=> request('rueLivraison'),
-                    'ville'=> request('villeLivraison'),
+                    'ville'=> $villeLivraison,
                     'code_postal'=> request('code_postalLivraison')
                 ]);
             }else{
-                $adr = AdresseLivraison::Create([
+                $adresseLivraison = AdresseLivraison::Create([
                     'nom'=> request('nom'),
                     'prenom'=> request('prenom'),
                     'email'=> request('email'),
@@ -102,11 +107,22 @@ class CommandeController extends Controller
             // creation de la commande
             $commande = Commande::create([
                 'adresse_client_id' => $clt->id,
-                'adresse_livraison_id' => $adr->id,
+                'adresse_livraison_id' => $adresseLivraison->id,
                 'user_id' => auth()->user()->id,
                 'status' => 'attente paiement',
-                'tva' => $adr->pays == "Benin" ? configuration()->tva : '0',
+                'tva' => $adresseLivraison->pays == "Benin" ? configuration()->tva : '0',
                 'promotion' => $promotion ?? null,
+            ]);
+
+            $expedition = Expedition::where('ville', $adresseLivraison->ville)->first();
+            if ($expedition != null) {
+                $amount = $expedition->montant;
+            }
+
+            $livraison = Livraison::create ([
+                'commande_id' =>  $commande->id,
+                'montant' => $amount ?? null,
+                'status' => 'non',
             ]);
 
             //    creation et ajout d'information dans le champs commandeProduit
@@ -146,9 +162,9 @@ class CommandeController extends Controller
 
             request()->session()->forget('coupon');
 
-            Mail::to($clt->email)->send(new SendMailNewCommandeClient($clt, $commande, $adr));
+            Mail::to($clt->email)->send(new SendMailNewCommandeClient($clt, $commande, $adresseLivraison));
 
-            Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailNewCommandeAdmin($clt, $commande, $adr));
+            Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailNewCommandeAdmin($clt, $commande, $adresseLivraison));
 
             $stock_session = session('stock') ;
 
@@ -161,6 +177,11 @@ class CommandeController extends Controller
                 //pour vider la session stock quant on click sur le button passer la commande
 
                 session()->forget("stock");
+            }
+
+            if($livraison->montant == null){
+
+                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt));
             }
 
 
@@ -181,12 +202,12 @@ class CommandeController extends Controller
             $sub_total = $sub_total + $value->prix * $value->quantite ;
         }
 
-
         return view("site-public.commandes.validation-payement", compact('commande', 'sub_total','type_paiement'));
 
     }
 
-    public function edit_adresse_facturation(Request $request) {
+    public function edit_adresse_facturation(Request $request)
+    {
 
         $request->validate([
             'nom'=> 'required',
@@ -223,10 +244,12 @@ class CommandeController extends Controller
             'telephone'=> 'required|min:8|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'pays'=> 'required',
             'rue'=> 'required|min:4',
-            'ville'=> 'required|min:3',
+            'ville'=> 'required',
+            'ville2'=> 'required_if:ville,autres',
             'code_postal'=> 'required',
         ]);
 
+        $ville =  $request->ville != 'autres' ? $request->ville : $request->ville2;
         AdresseLivraison::findOrfail($request->id)->update([
             "nom" => $request->nom,
             "prenom" => $request->prenom,
@@ -234,7 +257,7 @@ class CommandeController extends Controller
             "telephone" => $request->telephone,
             "pays" => $request->pays,
             "rue" => $request->rue,
-            "ville" => $request->ville,
+            "ville" => $ville,
             "code_postal" => $request->code_postal,
         ]);
 
@@ -243,6 +266,16 @@ class CommandeController extends Controller
          $commande->update([
             'tva' => $request->pays == "Benin" ? configuration()->tva : '0',
          ]);
+
+         $expedition = Expedition::where('ville', $ville)->first();
+        if ($expedition != null) {
+            $amount = $expedition->montant;
+        }
+        $livraison = Livraison::where('commande_id', $commande->id)->first();
+
+        $livraison->update([
+            'montant' => $amount ?? null,
+        ]);
 
         flashy()->success('Adresse de livraison modifiée avec succès');
 
@@ -267,14 +300,11 @@ class CommandeController extends Controller
             $produit->update([
                 'quantite' => $produit->quantite,
             ]);
-
         }
 
         session()->forget("stock");
 
         flashy()->error('Commande #' . $id . ' annulée avec succès');
-        return redirect('/')
-        ;
-
+        return redirect('/');
     }
 }
