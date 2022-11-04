@@ -54,14 +54,14 @@
 
                                                 <tr>
                                                     <td class="border-0 float-left">Total dû: <span
-                                                            style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant), '0', '.', ' ') }} F CFA</span>
+                                                            style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ') }} F CFA</span>
                                                     </td>
                                                 </tr>
                                                 @else
 
                                                 <tr>
                                                     <td class="border-0 float-left">Solde: <span
-                                                        style="{{ couleur_text_2() }}">{{ number_format((account_commande($commande->id)->montant + valeur_expedition($commande->id)->montant), '0', '.', ' ') }} F CFA</span>
+                                                        style="{{ couleur_text_2() }}">{{ number_format((account_commande($commande->id)->montant + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ') }} F CFA</span>
                                                     </td>
                                                 </tr>
                                                 @endif
@@ -124,14 +124,14 @@
 
                                                     <tr class="">
                                                         <td colspan="3" class="text-right"><strong>Expédition</strong></td>
-                                                        <td class="">{{valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer'  }}</td>
+                                                        <td class="">{{info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer'  }}</td>
                                                     </tr>
 
                                                     <tr class="">
                                                         <td colspan="3" class="text-right"><strong
                                                                 style="{{ couleur_text_2() }}">Montant Total</strong></td>
                                                         <td class=""style="{{ couleur_text_2() }}">
-                                                            {{  number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant), '0', '.', ' ')}} F CFA</td>
+                                                            {{  number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ')}} F CFA</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -167,8 +167,7 @@
                                                                 </tr>
                                                             @else
                                                                 <tr>
-
-                                                                    <td colspan="3" class="text-center">Aucune
+                                                                <td colspan="3" class="text-center">Aucune
                                                                         transaction trouvé</td>
                                                                     <td></td>
                                                                     <td></td>
@@ -187,9 +186,6 @@
                                 <div class="row mt-4">
                                     <div class="col-md-8 offset-md-2">
                                         <div class="card m-b-30">
-                                            {{-- <div class="card-header bg-light">
-                                            <h4 class="mt-2 header-title text-dark" style="font-size: 24px">Ajouter un paiement</h4>
-                                        </div> --}}
                                             <div class="card-body">
                                                 <form action="{{ route('root_espace_admin_paiement_create') }}"
                                                     method="POST">

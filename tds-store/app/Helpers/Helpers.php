@@ -346,8 +346,31 @@ if(!function_exists('villes')){
 }
 
 // Pour recuuperer le montant dans la table livraison
-if(!function_exists('valeur_expedition')){
-    function valeur_expedition($id){
+if(!function_exists('info_livraison')){
+    function info_livraison($id){
         return Livraison::where('commande_id', $id)->first();
     }
 }
+
+// Vérifier si une livraison du commande a été crée pour une commande
+if(!function_exists('verify_amount_livraison_exist')){
+    function verify_amount_livraison_exist($livraison){
+        if ($livraison) {
+            return $livraison->montant;
+        }
+
+        return null;
+    }
+}
+
+// Tous les produits d\'une sous-catégorie
+
+if(!function_exists('produits_sous_categorie')){
+    function produits_sous_categorie($sous_cat){
+        $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
+        $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
+        return $sous_categories_produits;
+    }
+}
+
+

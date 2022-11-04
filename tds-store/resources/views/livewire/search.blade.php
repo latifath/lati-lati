@@ -9,12 +9,11 @@
              style="border: 1px solid #EDF1FF !important">
             <div class="input-group-append" style="{{ couleur_background_1() }}">
                 <span class="input-group-text bg-transparent text-primary pt-2">
-                    <i class="fa fa-search" ></i>
+                    <i class="fa fa-search"></i>
                 </span>
             </div>
         </div>
     </form>
-
     @if (strlen($query) > 2)
     <div class="col-12 border rounded bg-secondary text-md w-56 mt-1" style="z-index: 1; position: absolute; font-size:13px;"
      x-show="open">

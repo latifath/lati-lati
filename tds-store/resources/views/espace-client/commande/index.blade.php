@@ -140,7 +140,7 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + valeur_expedition($item->id)->montant), 0, '.', ' ') }} F CFA</td>
+                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id))),0, '.', ' ') }} F CFA</td>
                                 <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : 'Néant'}}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
@@ -183,7 +183,7 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id),  0, '.', ' ' ) }} F CFA</td>
+                                <td>{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id)), 0, '.', ' ' ) }} F CFA</td>
                                 <td>Néant</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
@@ -226,7 +226,7 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + valeur_expedition($item->id)->montant),  0, '.', ' ' )}}</td>
+                                <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id))),0, '.', ' ' )}} F CFA</td>
                                 <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : ' '}}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">

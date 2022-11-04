@@ -181,7 +181,7 @@ class CommandeController extends Controller
 
             if($livraison->montant == null){
 
-                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt));
+                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt, $adresseLivraison));
             }
 
 

@@ -10,11 +10,11 @@
 
 <div class="col-12">
         <div class="card border-secondary mb-5">
-                <div class="card-header border-0" style="{{ couleur_principal() }}; font-size: 24px;">
-                    <h4 class="font-weight-semi-bold m-0 text-center">Commande #{{ $id }}</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
+            <div class="card-header border-0" style="{{ couleur_principal() }}; font-size: 24px;">
+                <h4 class="font-weight-semi-bold m-0 text-center">Commande #{{ $id }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
                     <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
@@ -40,7 +40,7 @@
                         </tbody>
                     </table>
                 </div>
-                </div>
+            </div>
             <div class="card-footer border-secondary bg-transparent">
                 <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold" >Remise</h5>
@@ -52,11 +52,11 @@
                 </div>
                 <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold">Expédition</h5>
-                    <h5 class="font-weight-bold" >{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</h5>
+                    <h5 class="font-weight-bold" >{{ info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</h5>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold" style="{{ couleur_text_2() }}">Total</h5>
-                    <h5 class="font-weight-bold"  style="{{ couleur_text_2() }}">{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant) , '0', '.', ' ') }} F CFA</h5>
+                    <h5 class="font-weight-bold"  style="{{ couleur_text_2() }}">{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))) , '0', '.', ' ') }} F CFA</h5>
                 </div>
             </div>
         </div>

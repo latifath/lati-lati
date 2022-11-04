@@ -198,7 +198,7 @@
                                             </tr>
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Expédition</strong></td>
-                                                <td class="">{{  valeur_expedition($cmde->id)->montant != null ? number_format(valeur_expedition($cmde->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
+                                                <td class="">{{  info_livraison($cmde->id) != null ? number_format(info_livraison($cmde->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
                                             </tr>
                                             @if ($cmde->promotion != null)
                                                 <tr class="">
@@ -208,7 +208,7 @@
                                             @endif
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
-                                                <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion),$cmde->adresse_livraison_id) + valeur_expedition($cmde->id)->montant),  0, '.', ' ' ) }} F CFA</td>
+                                                <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion),$cmde->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde->id))),  0, '.', ' ' ) }} F CFA</td>
                                             </tr>
 
                                     </tbody>
@@ -258,7 +258,7 @@
         </div>
     </div>
 
-    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $cmde->adresse_livraison_id) }}" callback="http://127.0.0.1:8000/validation/{{ $cmde->id }}/commande-reçue/type-paiement-{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $cmde->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde->id)) }}" callback="http://127.0.0.1:8000/validation/{{ $cmde->id }}/commande-reçue/type-paiement-{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 

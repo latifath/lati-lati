@@ -58,8 +58,8 @@
                         <td>{{ $commande->created_at }}</td>
                         <td>{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }} </td>
                         <td>{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
-                        <td style="{{ couleur_text_2() }}">{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'À communiquer' }}</td>
-                        <td style="{{ couleur_text_2() }}">{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant), 0, '.', ' ') }} F CFA</td>
+                        <td style="{{ couleur_text_2() }}">{{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'À communiquer' }}</td>
+                        <td style="{{ couleur_text_2() }}">{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + info_livraison($commande->id)->montant), 0, '.', ' ') }} F CFA</td>
 
                     </tr>
                 </tbody>
@@ -113,7 +113,7 @@
 
                     <tr>
                         <td class="border-right-0">Epédition :</td>
-                        <td class="border-left-0" style="{{ couleur_text_2() }}">{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'À communiquer' }}</td>
+                        <td class="border-left-0" style="{{ couleur_text_2() }}">{{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'à communiquer' }}</td>
                     </tr>
 
                     <tr>
@@ -122,7 +122,7 @@
                     </tr>
                     <tr>
                         <td class="border-right-0" style="{{ couleur_text_2() }}"><b>Montant TTC</b></td>
-                        <td class="border-left-0" style="{{ couleur_text_2() }}"><b>{{  number_format((montant_ttc(montant_apres_reduction_sans_session($total_commande, $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant),  0, '.', ' ' ) }} F CFA</b></td>
+                        <td class="border-left-0" style="{{ couleur_text_2() }}"><b>{{  number_format((montant_ttc(montant_apres_reduction_sans_session($total_commande, $commande->promotion), $commande->adresse_livraison_id) + info_livraison($commande->id)->montant),  0, '.', ' ' ) }} F CFA</b></td>
                     </tr>
 
                 </tbody>

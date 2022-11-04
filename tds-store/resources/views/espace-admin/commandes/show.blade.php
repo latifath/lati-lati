@@ -151,17 +151,18 @@
                                     @endif
 
                                 </tr>
-                                    <tr class="">
-                                        <td colspan="4" class="text-right"><strong>TVA</strong></td>
-                                        <td class="">{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td colspan="4" class="text-right"><strong>Expédition</strong></td>
-                                        <td class="">{{ valeur_expedition($commande->id)->montant != null ? number_format(valeur_expedition($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
-                                    </tr>
+                                <tr class="">
+                                    <td colspan="4" class="text-right"><strong>TVA</strong></td>
+                                    <td class="">{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
+                                </tr>
+                                <tr class="">
+                                    <td colspan="4" class="text-right"><strong>Expédition</strong></td>
+                                    <td class="">{{ info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
+                                </tr>
+
                                 <tr style="{{ couleur_text_2() }}">
                                     <td colspan="4" class="text-right"><strong>Montant TTC</strong></td>
-                                    <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + valeur_expedition($commande->id)->montant),  0, '.', ' ' ) }} F CFA</td>
+                                    <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))),'0', '.', ' ' ) }} F CFA</td>
                                 </tr>
                         </tbody>
                     </table>

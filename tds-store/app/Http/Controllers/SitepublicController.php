@@ -38,7 +38,6 @@ class SitepublicController extends Controller
 
             return view ('site-public.produits.detail-produit', compact('produit', 'cat', 'sous_cat', 'sous_categories_produits'));
         }
-
     }
 
     public function verification(){

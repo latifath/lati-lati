@@ -1,4 +1,23 @@
+
+<style>
+    .header-menu-content{
+        display: none;
+        z-index: 1000;
+        width:100%;
+        position: absolute;
+        min-height: 180px;
+        left: 0;
+    }
+    .parent-menu-item-hover:hover .header-menu-content{
+        display: block;
+    }
+    ul {
+        list-style-type: none;
+    }
+</style>
+
 <div class="container-fluid">
+
     <div class="row py-2 px-xl-5" style="font-size: 13.5px; {{ couleur_principal() }};">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center" style="{{ couleur_text_3() }}; font-size: 14px;">
@@ -91,8 +110,8 @@
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" style="background-color: #f0f0f0;">
-                    <div class="navbar-nav m-auto py-0" style="padding: 10px 20px; background-color: #f0f0f0; border-right: 1px solid #ffff; {{ couleur_text_3() }};">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" style="background-color: #f0f0f0; ">
+                    <div class="navbar-nav m-auto py-0">
                         @php
                         $i = 0
                         @endphp
@@ -101,18 +120,27 @@
                             $i++
                             @endphp
                             @if($i <= 8)
-                                @if(sous_categories_menu($item->id)->count() == 0)
-                                    <a href="#" class="nav-item nav-link active" style="border-right: 1px solid #ffff; padding-right: 40px; {{ couleur_text_3() }};">{{ $item->nom }}</a>
-                                @else
-                                    <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};" >{{ $item->nom }}</a>
-                                        <div class="dropdown-menu rounded-0 m-0">
+                                <div class="parent-menu-item-hover" >
+                                    <a href="#" class="nav-link dropdown-toggle pr-5" style="border-right: 1px solid #ffff;">{{ $item->nom }}</a>
+                                    <div class="header-menu-content" style="background-color: #fff; border: 1px solid #ddd;">
+                                        <div class="row">
                                             @foreach (sous_categories_menu($item->id) as $k)
-                                                <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
+                                                <div class="col-md-3 col-sm-4 mb-3">
+                                                    <div class="">
+                                                        <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="nav-link">{{ $k->nom }}</a>
+                                                    </div>
+                                                    <ul>
+                                                        @foreach (produits_sous_categorie($k->slug) as $produit)
+                                                            <li>
+                                                                <a href="{{ route('root_sitepublic_show_produit_par_sous_categorie', [$item->slug, $k->slug, $produit->slug])}}">{{ $produit->nom }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             @endforeach
                                         </div>
                                     </div>
-                                @endif
+                                </div>
                             @endif
                         @endforeach
                         @php
@@ -121,7 +149,7 @@
                         <div class="nav-item dropdown">
                             @if(count(categorie_menu()) > 8 )
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
-                            <div class="nav-item dropdown">
+                            <div class="header-menu-content" style="background-color: #fff; border: 1px solid #ddd;">
                                 <div class="dropdown-menu rounded-0 m-0">
                                     @foreach (categorie_menu() as $item)
                                         @php

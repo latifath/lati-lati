@@ -146,7 +146,7 @@
                                             </tr>
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Expédition</strong></td>
-                                                <td class="">{{  valeur_expedition($cmde->id)->montant != null ? number_format(valeur_expedition($cmde->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
+                                                <td class="">{{  info_livraison($cmde->id)->montant != null ? number_format(info_livraison($cmde->id)->montant, '0', '.', ' ') . ' F CFA ' : 'à communiquer' }}</td>
                                             </tr>
                                             @if ($cmde->promotion != null)
                                                 <tr class="">
@@ -156,7 +156,7 @@
                                             @endif
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
-                                                <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion), $cmde->adresse_livraison_id) + valeur_expedition($cmde->id)->montant),  0, '.', ' ' ) }} F CFA</td>
+                                                <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion), $cmde->adresse_livraison_id) + info_livraison($cmde->id)->montant),  0, '.', ' ' ) }} F CFA</td>
                                             </tr>
 
                                     </tbody>
