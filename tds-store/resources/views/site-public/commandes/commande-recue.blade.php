@@ -33,8 +33,7 @@
         <div class="col-sm-8">
             <div class="">
                 <h3>Merci!</h3>
-                <p class="mb-4">Vous avez passé la commande avec succès.
-                    Votre facture est disponible et téléchargeable.
+                <p class="mb-4">Vous avez passé la commande avec succès. Votre facture est disponible et téléchargeable.
                     <a href="{{ route('root_site_public_facture', [$commande, $type_paiement]) }}" class="facture btn btn-primary text-white tx" style="float: right; margin-bottom: 10px;" role="button">Facture</a>
                     <button class="btn border facture_mobile" onClick="imprimer('facture')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
                         <i class="fa fa-print" aria-hidden="true" input type="button" value="Imprimer"> </i> Imprimer
@@ -176,7 +175,8 @@
     </div>
 </div>
 
-@include('site-public.commandes.mobile_facture')
+@include('site-public.commandes.factures.mobile_facture')
+
 @endsection
 
 

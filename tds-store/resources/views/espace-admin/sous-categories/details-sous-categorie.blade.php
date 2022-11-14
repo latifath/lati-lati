@@ -13,7 +13,7 @@
     <div class="col-md-12 col-12">
         <div class="card m-b-30">
            <div class="card-header bg-success">
-                <h4 class="mt-3 header-title text-white "  style="font-size: 24px; text-align: center;">Détails des produits associés à la sous-catégorie # </h4>
+                <h4 class="mt-3 header-title text-white "  style="font-size: 24px; text-align: center;">Liste des produits associés à la sous-catégorie {{ $sous_categorie->nom }} </h4>
             </div>
            <div class="card-body">
             <div class="table-responsive">
@@ -21,10 +21,8 @@
                     <thead>
                     <tr>
                         <th>N°</th>
-                        <th>Id</th>
                         <th>Nom</th>
                         <th>Description</th>
-                        <th>Slug</th>
                         <th>Quantité</th>
                         <th>Prix</th>
                         <th>Date</th>
@@ -37,12 +35,10 @@
                         @foreach ($sous_cat_pdt as $item)
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $item->id }}</td>
                             <td>{{ $item->nom }}</td>
-                            <td>{{ $item->description}}</td>
-                            <td>{{ $item->slug}}</td>
+                            <td>{!! Str::substr($item->description, 0, 50) !!} {!! Str::length($item->description) > 50 ? '...' : '' !!}</td>
                             <td>{{ $item->quantite }}</td>
-                            <td>{{ $item->prix }}</td>
+                            <td>{{ number_format($item->prix, '0', '.', '') }} F CFA</td>
                             <td>{{ $item->created_at }}</td>
 
                         </tr>

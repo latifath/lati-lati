@@ -2,6 +2,8 @@
 
 <p>Montant d'expédition à communiquer au client {{ $clt->nom }} {{ $clt->prenom }}</p>
 <div class="">
+    <p>Commande N° {{ $commande->id }}</p>
+
     <h3>Informations de livraison</h3>
     <p>{{ $adresseLivraison['nom'] }} {{ $adresseLivraison['prenom'] }}</p>
     <p> {{ $adresseLivraison['rue'] }} , {{ $adresseLivraison['ville'] }} </p>

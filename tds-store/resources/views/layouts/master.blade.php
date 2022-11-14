@@ -3,12 +3,29 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TDS-store</title>
+    <title>{{ $titre ?? 'TDS STORE' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+     {{-- partage sur facebook et linkedin--}}
+    <meta property="og:title" content={{ $title ??  ''}} />
+    <meta property="og:url" content={{ $url ?? '' }} />
+    <meta property="og:image" content={{ $image ?? '' }} />
+    <meta property="og:description" content={{ $description ?? '' }} />
+    <meta property="og:site_name" content={{ $site_name ?? ''  }} />
+    <meta property="og:type" content={{ $type ?? '' }} />
+    <meta property="og:image:width" content={{ $image_widht ?? ''}}>
+    <meta property="og:image:height" content={{ $image_height ?? '' }}>
+    <meta property="og:image:type" content={{ $image_type ?? '' }}>
+
+
+    {{-- partage sur twitter --}}
+    <meta name="twitter:card" content={{ $tcard ?? '' }}/>
+    <meta name="twitter:site" content={{ $tsite ?? '' }}>
+    <meta name="twitter:title" content={{ $ttitle ?? '' }} />
+    <meta name="twitter:description" content={{ $tdescription ?? '' }} />
+    <!-- Twitter summary card avec image large de 280x150px -->
+    <meta name="twitter:image:src" content={{ $timage ?? '' }} />
 
 
     <!-- Favicon -->

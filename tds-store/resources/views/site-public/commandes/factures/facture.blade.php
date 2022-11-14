@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title>TDS-store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
@@ -158,7 +156,6 @@
                                                 <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
                                                 <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $cmde->promotion), $cmde->adresse_livraison_id) + info_livraison($cmde->id)->montant),  0, '.', ' ' ) }} F CFA</td>
                                             </tr>
-
                                     </tbody>
                                 </table>
                             </div>

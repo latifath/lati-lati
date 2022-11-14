@@ -181,7 +181,7 @@ class CommandeController extends Controller
 
             if($livraison->montant == null){
 
-                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt, $adresseLivraison));
+                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt, $adresseLivraison, $commande));
             }
 
 
@@ -271,6 +271,7 @@ class CommandeController extends Controller
         if ($expedition != null) {
             $amount = $expedition->montant;
         }
+
         $livraison = Livraison::where('commande_id', $commande->id)->first();
 
         $livraison->update([

@@ -59,7 +59,6 @@ class ProduitAdminController extends Controller
             'quantite' => 'required|integer',
             'prix' => 'required|integer',
             'description' => 'required',
-            'categorie' => 'required',
             'sous_categorie' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
@@ -72,7 +71,6 @@ class ProduitAdminController extends Controller
                 'quantite' => $request->quantite,
                 'prix' => $request->prix,
                 'description' => $request->description,
-                'categorie_id' => $request->categorie,
                 'sous_categorie_id' => $request->sous_categorie,
                 'image_id' => $save->id
             ]);
@@ -97,7 +95,6 @@ class ProduitAdminController extends Controller
             'quantite' => 'required|integer',
             'prix' => 'required|integer',
             'description' => 'required',
-            'categorie' => 'required',
             'sous_categorie' => 'required',
 
         ]);
@@ -107,7 +104,6 @@ class ProduitAdminController extends Controller
             "quantite" => $request->quantite,
             "prix" => $request->prix,
             "description" => $request->description,
-            'categorie_id' => $request->categorie,
             'sous_categorie_id' => $request->sous_categorie
         ]);
 

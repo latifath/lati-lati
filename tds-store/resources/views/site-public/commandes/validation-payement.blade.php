@@ -116,7 +116,7 @@
 
                     @if ($type_paiement == "momo")
                     <button class="kkiapay-button btn btn-primary my-3 py-3">Procéder au paiement</button>
-                    @elseif($type_paiement == "carte_bancaire")
+                    @elseif($type_paiement == "card")
                     <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
                     @elseif($type_paiement == "paypal")
                     <div id="paypal-button-container">
@@ -137,7 +137,7 @@
 @endsection
 
 @section('js')
-<script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) }}" callback="http://127.0.0.1:8005/validation-commmande/{{ $commande->id }}/commande-reçue/type-paiement-{{ $type_paiement }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+<script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) }}" paymentmethod="{{ $type_paiement }}" callback="http://127.0.0.1:8000/validation-commmande/{{ $commande->id }}/commande-reçue/type-paiement-{{ $type_paiement }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -159,9 +159,8 @@
         width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
         placeholder: $( this ).data( 'placeholder' ),
     } );
-</script>
 
-<script>
+
     $(document).on('click', '#btn_edit_adr_fact', function(){
         $('#ModalEditAdresseFacturation').modal('show');
     });
@@ -172,11 +171,7 @@
         $('#ModalEditAdresseLivraison').modal('show');
     });
 
-</script>
 
-
-
-<script>
     paypal.Buttons({
         // Sets up the transaction when a payment button is clicked
         createOrder: (data, actions) => {

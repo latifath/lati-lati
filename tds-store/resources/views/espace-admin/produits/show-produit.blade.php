@@ -96,8 +96,6 @@
 
         $('#ModalModifieImageProduit').modal('show');
     });
-
-
 </script>
 @endsection
 

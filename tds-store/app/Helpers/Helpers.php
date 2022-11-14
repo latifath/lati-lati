@@ -1,12 +1,6 @@
 <?php
-use App\Models\Pays;
-use App\Models\User;
 use Kkiapay\Kkiapay;
-use App\Models\Image;
 use App\Models\Client;
-use App\Models\Favoris;
-use App\Models\Produit;
-use App\Models\Commande;
 use App\Models\Paiement;
 use App\Models\Categorie;
 use App\Models\Livraison;
@@ -16,11 +10,9 @@ use App\Models\Partenaire;
 use App\Models\AdresseClient;
 use App\Models\Configuration;
 use App\Models\SousCategorie;
-use App\Models\CommandeProduit;
 use App\Models\AdresseLivraison;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client as ClientHttp;
-use Illuminate\Support\Facades\Auth;
 
 if(!function_exists('kkiapay')){
     function kkiapay($id_transaction){
@@ -34,49 +26,6 @@ if(!function_exists('kkiapay')){
 
     }
 }
-
-if(!function_exists('couleur_text_1')) {
-    function couleur_text_1() {
-         return "color :  #01674e";
-    }
-}
-
-if(!function_exists('couleur_background_1')) {
-    function couleur_background_1() {
-         return "background-color :  #01674e";
-    }
-}
-
-if(!function_exists('couleur_text_2')) {
-    function couleur_text_2() {
-         return "color :  #ea0513";
-    }
-}
-
-if(!function_exists('couleur_background_2')) {
-    function couleur_background_2() {
-         return "background-color :  #ea0513";
-    }
-}
-
-if(!function_exists('couleur_text_3')){
-    function couleur_text_3(){
-        return "color: #1C1C1C";
-    }
-}
-
-if(!function_exists('couleur_principal')){
-    function couleur_principal(){
-        return "background-color: #EDF1FF";
-    }
-}
-
-if(!function_exists('couleur_blanche')){
-    function couleur_blanche(){
-        return "color: #ffff";
-    }
-}
-
 
 if (!function_exists('categorie_menu')) {
     function categorie_menu(){
@@ -106,6 +55,14 @@ if (!function_exists('one_sous_categorie')) {
      return $sous_categorie;
      };
 }
+
+// recupérer la categorie dans le table sous_categorie
+if (!function_exists('all_sub_categorie_by_category')){
+    function all_sub_categorie_by_category($category) {
+        return  SousCategorie::where('categorie_id', $category)->get();
+    };
+}
+
 if (!function_exists('one_categorie')) {
     function one_categorie($id) {
         $categorie = Categorie:: where('id', $id)->first();
@@ -113,38 +70,7 @@ if (!function_exists('one_categorie')) {
     }
 }
 
-// #20c997 entente
-//  :#ee740d reste
-
-// pour faire appel au montant total vu qu'elle apparait sur plusieurs pages
-if(!function_exists('total_commande')){
-    function total_commande($id){
-        $total = 0;
-        $compdt = CommandeProduit::where('commande_id', $id)->get();
-
-        foreach ($compdt as $key => $value) {
-            $total = $total + $value->prix * $value->quantite ;
-        }
-        return $total;
-    }
-}
-// end
-
-if(!function_exists('detail_commande')) {
-    function detail_commande($id){
-        $commande_produit = CommandeProduit:: where('commande_id', $id)->get();
-        return $commande_produit;
-    }
-}
-
-if(!function_exists('produit')) {
-    function produit($id){
-        $produit = Produit::findOrfail($id);
-        return $produit;
-    }
-}
 // pour recupérer les informations du AdresseClient qui a payé
-
 if(!function_exists('adresseclient')) {
     function adresseclient($id) {
         $adresseclients = AdresseClient::findOrfail($id);
@@ -154,27 +80,6 @@ if(!function_exists('adresseclient')) {
 // end
 
 
-if(!function_exists('account_commande')) {
-    function account_commande($id){
-        $account = Paiement::where('commande_id', $id)->first();
-        return $account;
-    }
-}
-
-if(!function_exists('compte_com')){
-    function compte_com($id){
-        $com = Paiement::findOrfail($id);
-        return $com;
-    }
-}
-
-if(!function_exists('commande')){
-    function commande($id){
-        $commande = Commande::where('id', $id)->first();
-        return $commande;
-
-    }
-}
 
 if(!function_exists('adresselivraison')) {
     function adresselivraison($id) {
@@ -183,17 +88,6 @@ if(!function_exists('adresselivraison')) {
     }
 }
 
-if(!function_exists('exist_commande_paiement')) {
-    function exist_commande_paiement($id){
-        return Paiement::where('commande_id', $id)->first();
-    }
-}
-
-if(!function_exists('last_image_produit')){
-    function last_image_produit($id_produit){
-        return Image::where('produit_id', $id_produit)->first();
-    }
-}
 
 if(!function_exists('configuration')){
     function configuration(){
@@ -294,7 +188,6 @@ if(!function_exists('information_client')){
     }
 }
 
-
 // pour le nmbre total de like
 
 if(!function_exists('count_favoris')){
@@ -318,11 +211,6 @@ if(!function_exists('disabled_button_commande')){
     }
 }
 
-if(!function_exists('produits_non_livrer')){
-    function produits_non_livrer($id){
-        return  Produit::where('id', $id)->first();
-    }
-}
 
 if(!function_exists('countries')){
     function countries(){
@@ -358,19 +246,42 @@ if(!function_exists('verify_amount_livraison_exist')){
         if ($livraison) {
             return $livraison->montant;
         }
-
         return null;
     }
 }
 
-// Tous les produits d\'une sous-catégorie
 
-if(!function_exists('produits_sous_categorie')){
-    function produits_sous_categorie($sous_cat){
-        $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
-        $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
-        return $sous_categories_produits;
+if(!function_exists('showSharer')){
+    function showSharer($url, $message){
+
+        echo '
+            <a class="pr-3" href="https://facebook.com/sharer/sharer.php?u=' . urlencode($url) . '" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a class="pr-3" href="https://twitter.com/intent/tweet/?text=' . urlencode($message) . '&url=' . urlencode($url) . '" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <a class="pr-3" href="mailto:?subject=' .  urlencode($message) . '&body=' . urlencode($url) . '" target="_self" rel="noopener" aria-label="Share by E-Mail">
+                <i class="fa fa-envelope"></i>
+            </a>
+
+            <a class="pr-3" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=' . urlencode($url) . '&title=' . urlencode($message) . '&summary=' . urlencode($message) . '&source=' . urlencode($url) . '" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <a class="pr-3" href="whatsapp://send?text=' . urlencode($message) . '%20' . urlencode($url) . '" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a class="pr-3" href="https://telegram.me/share/url?text=' . urlencode($message) . '&url=' . urlencode($url) . '" target="_blank" rel="noopener" aria-label="Share on Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+        ';
     }
 }
+
+
 
 

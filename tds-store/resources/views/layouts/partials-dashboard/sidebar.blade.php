@@ -112,7 +112,7 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-truck"></i><span>Livraisons</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{ route('root_espace_admin_index_livraison') }}">Livraison</a></li>
-                            <li><a href="{{ route('root_espace_admin_index_expedition') }}">Expédition</a></li>
+                            <li><a href="{{ route('root_espace_admin_index_expedition') }}">Config Exp</a></li>
                         </ul>
                     </li>
 

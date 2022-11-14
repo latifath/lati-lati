@@ -18,7 +18,7 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('root_espace_admin_recapitutatif_show') }}">
                     @csrf
-                    <div class=row>
+                    <div class="row col-md-12">
                         <div class="col-md-4 form-group">
                             <label>Période du :</label>
                             <input class="form-control {{ $errors->has('date_debut') ? 'is-invalid' : '' }}" style="height: 50px;" value="" type="date" placeholder="" name="date_debut" required/>
@@ -30,8 +30,8 @@
                             <input class="form-control {{ $errors->has('date_fin') ? 'is-invalid' : '' }}" style="height: 50px;" value="" type="date" placeholder="" name="date_fin" required/>
                             {!! $errors->first('date_fin', '<p class="text-danger">:message</p>') !!}
                         </div>
-                        <div class="col-md-2 form-group">
-                            <button class="btn btn-primary font-weight-bold my-4 py-3 float-right" type="submit">Valider</button>
+                        <div class="col-md-4 form-group">
+                            <button class="btn btn-primary font-weight-bold my-4 py-3" type="submit" style="padding: 50%;">Valider</button>
                         </div>
                     </div>
                 </form>

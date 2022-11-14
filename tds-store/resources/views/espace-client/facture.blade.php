@@ -97,7 +97,6 @@
                                             </div>
                                         @endif
                                     </div>
-                                @else
                                 @endif
                                 <br>
                             @endif
@@ -114,9 +113,7 @@
                         </div>
                     </div>
                 </div>
-
                 <hr>
-
                 <div class="row">
                     <div class="col-6 ">
                         <strong> Facturé à</strong>
@@ -143,14 +140,12 @@
                             <select class="custom-select w-auto" name="mode">
                                 <option selected>{{ $pay->type_paiement ?? '' }}</option>
                             </select>
-                        @elseif($cmde->status == 'annulee')
-
                         @else
                             <form action="" method="GET" id="paye">
                                 <select class="custom-select type w-auto" name="type_paiement" >
                                     <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'type paiement' }}</option>
                                     <option value="momo">MoMo</option>
-                                    <option value="carte_bancaire">Carte Bancaire</option>
+                                    <option value="card">Carte Bancaire</option>
                                     <option value="paypal">PayPal</option>
                                 </select>
                                 <button type="submit" class="btn bg-success text-white" id="btn-envoie">Envoyer</button>
@@ -258,7 +253,7 @@
         </div>
     </div>
 
-    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $cmde->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde->id)) }}" callback="http://127.0.0.1:8000/validation/{{ $cmde->id }}/commande-reçue/type-paiement-{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $cmde->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde->id)) }}" paymentmethod="{{ $type_paiement }}" callback="http://127.0.0.1:8000/validation/{{ $cmde->id }}/commande-reçue/type-paiement-{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 

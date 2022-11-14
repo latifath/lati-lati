@@ -48,6 +48,7 @@ Bonjour cher(e) {{ $clt['nom'] }}
     @if ($commande->promotion != null)
     <h2>Remise: {{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</h2>
     @endif
+    <h2>Expédition: {{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'À communiquer' }}</h2>
 </div>
 
 

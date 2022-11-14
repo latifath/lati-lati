@@ -1,4 +1,4 @@
-@extends('layouts.master', ['titre' => 'moi'])
+@extends('layouts.master', ['titre' => 'TDS Store'])
 
 @section('head')
 <style>
@@ -64,11 +64,12 @@
                     </div>
                 </div>
                 <div class="row px-xl-5 pb-3">
-                    {{ $sous_categorie_produits->links() }}
+                    @if($sous_categorie_produits->count() > 4)
+                        {{ $sous_categorie_produits->links() }}
+                    @endif
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 

@@ -137,12 +137,6 @@
                                     </h6>
                                     <h6 class="font-weight-medium mt-1">{{ valeur_coupon() }} </h6>
                                 </div>
-
-                                {{-- <div class="d-flex justify-content-between">
-                                    <h6 class="font-weight-medium">Expédition</h6>
-                                    <h6 class="font-weight-medium">À détermier
-                                    </h6>
-                                </div> --}}
                             </div>
                             <div class="card-footer border-secondary bg-transparent">
                                 <div class="d-flex justify-content-between mt-2">

@@ -27,11 +27,12 @@
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
+         @yield('head')
+
     </head>
 
 
     <body class="fixed-left">
-        @yield('head')
         <!-- Loader -->
         <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
 

@@ -10,7 +10,7 @@ class SitepublicController extends Controller
 {
     public function produits(){
 
-        $tout_produits = Produit::paginate(8);
+        $tout_produits = Produit::orderBy('id', 'DESC')->paginate(8);
 
         return view ('site-public.produits.produit', compact('tout_produits'));
 

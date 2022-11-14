@@ -1,26 +1,26 @@
-@extends('layouts.master')
+@extends('layouts.master', [
+    'title' => $produit->nom,
+    'site_name' => env('APP_NAME'),
+    'description' => $produit->description,
+    'image' => path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : '',
+    'url' => route('root_sitepublic_show_produit_par_sous_categorie', [$produit->sous_categorie->categorie->slug, $produit->sous_categorie->slug, $produit->slug]),
+    'type' => 'Article',
+    'image_widht' => '300',
+    'image_height' => '300',
+    'image_type' => 'image/jpeg'
+],[
+    'tcard' => "summary_large_image",
+    'tsite' => "@latifa_monsia",
+    'ttitle' => $produit->nom,
+    'tdescription' => $produit->description,
+    'timage' => path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''
+])
 
 @section('head')
 {{-- pour la barre de seach --}}
  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
-<style>
-    .img-fluid-prod {
-        width: 300px;
-        height: 400px;
-        object-fit: contain;
-    }
-    .img-fluid-autre {
-        width: 100px;
-        height: 200px;
-        object-fit: contain;
-    }
-    .img-partenaire{
-        width: 80px;
-        height: 120px;
-        object-fit: contain;
-    }
-</style>
- @endsection
+
+@endsection
 
 @section ('detail_produit')
 
@@ -115,17 +115,7 @@
                     <div class="d-flex pt-2">
                         <p class="font-weight-medium mb-0 mr-2">Partager sur:</p>
                         <div class="d-inline-flex">
-                            <a class="px-2" id="facebook-btn" href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-
-                            <a href="http://twitter.com/share" class="twitter-share-icon px-2"
-                            data-count="vertical" data-via="InfoWebMaster"><i class="fab fa-twitter"></i></a>
-                            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-                            <a class="px-2" id="linkedin-btn" href="#">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
+                                {{ showSharer(route('root_sitepublic_show_produit_par_sous_categorie', [$produit->sous_categorie->categorie->slug, $produit->sous_categorie->slug, $produit->slug]), "") }}
                         </div>
                     </div>
                 </div>
@@ -133,14 +123,14 @@
 
             <div class="col-12 pt-0">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Caractéristiques</a>
+                    <p class="nav-item nav-link active" style="{{ couleur_text_2() }}">Caractéristiques</p>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3" style="{{ couleur_text_2() }}">Caractéristiques du produit</h4>
                         <p>{!! $produit->description !!}</p>
+                        {{-- <p>{!! Str::substr($produit->description, 0, 120) !!} {!! Str::length($produit->description) > 120 ? '...' : '' !!}</p> --}}
                     </div>
-
                 </div>
             </div>
         </div>
@@ -225,7 +215,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         // socila share
         const facebookBtn = document.getElementById('facebook-btn');
         // const twitterBtn = document.getElementById('twitter-btn');
@@ -238,5 +228,5 @@
         // twitterBtn.setAttribute("href", 'http://www.twitter.com/sharer.php?href=${produitUrl}&text=${produitNom}');
         linkedinBtn.setAttribute("href", 'http://www.linkedin.com/shareArticle?url=${produitUrl}&title=${produitNom}');
 
-    </script>
+    </script> --}}
 @endsection

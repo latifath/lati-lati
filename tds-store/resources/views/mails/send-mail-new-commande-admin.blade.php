@@ -49,8 +49,7 @@
     <h2>Mode de paiement: {{ paiements()->type_paiement }}</h2>
     @else
     @endif
-    {{-- <h2>Montant Total: {{ $commande->paiements->montant }}</h2> --}}
-
+    <h2>Expédition: {{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'À communiquer' }}</h2>
 
 
 {{ config('app.name') }}

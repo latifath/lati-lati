@@ -61,7 +61,8 @@ class SousCategorieAdminController extends Controller
     }
 
     public function show($id){
+        $sous_categorie = SousCategorie::findOrfail($id);
         $sous_cat_pdt = Produit::where('sous_categorie_id', $id)->get();
-        return view('espace-admin.sous-categories.details-sous-categorie', compact('sous_cat_pdt'));
+        return view('espace-admin.sous-categories.details-sous-categorie', compact('sous_cat_pdt', 'sous_categorie'));
     }
 }

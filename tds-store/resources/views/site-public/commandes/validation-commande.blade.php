@@ -269,7 +269,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="carte_bancaire" {{ old('payment') == 'carte_bancaire' ? 'checked' : '' }} name="payment" id="cart">
+                                            <input type="radio" class="custom-control-input {{ $errors->has('payment') ? 'is-invalid' : '' }}" value="card" {{ old('payment') == 'card' ? 'checked' : '' }} name="payment" id="cart">
                                             <label class="custom-control-label" for="cart">Carte Bancaire</label>
                                         </div>
                                     </div>
@@ -353,50 +353,47 @@
         width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
         placeholder: $( this ).data( 'placeholder' ),
     } );
-</script>
 
-<script>
+    function getIp(callback) {
+        fetch('https://ipinfo.io/json?token=9299d29dc5c97f', { headers: { 'Accept': 'application/json' }})
+        .then((resp) => resp.json())
+        .catch(() => {
+            return {
+            country: 'us',
+            };
+        })
+        .then((resp) => callback(resp.country));
+        }
+        const phoneInputField1 = document.querySelector("#phone1");
+        const phoneInputField2 = document.querySelector("#phone2");
 
-function getIp(callback) {
- fetch('https://ipinfo.io/json?token=9299d29dc5c97f', { headers: { 'Accept': 'application/json' }})
-   .then((resp) => resp.json())
-   .catch(() => {
-     return {
-       country: 'us',
-     };
-   })
-   .then((resp) => callback(resp.country));
-}
-    const phoneInputField1 = document.querySelector("#phone1");
-    const phoneInputField2 = document.querySelector("#phone2");
+    const phoneInput1 = window.intlTelInput(phoneInputField1, {
+        initialCountry: "auto",
+        geoIpLookup: getIp,
+        preferredCountries: ["ci", "gh", "tg", "fr", "bj"],
+        utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
 
-   const phoneInput1 = window.intlTelInput(phoneInputField1, {
-     initialCountry: "auto",
-     geoIpLookup: getIp,
-     preferredCountries: ["ci", "gh", "tg", "fr", "bj"],
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-   });
+    const phoneInput2 = window.intlTelInput(phoneInputField2, {
+        initialCountry: "auto",
+        geoIpLookup: getIp,
+        preferredCountries: ["côte-d'ivore", "gha", "togo", "fr"],
+        utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+        const info = document.querySelector(".alert-info");
 
-   const phoneInput2 = window.intlTelInput(phoneInputField2, {
-     initialCountry: "auto",
-     geoIpLookup: getIp,
-     preferredCountries: ["côte-d'ivore", "gha", "togo", "fr"],
-     utilsScript:
-       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-   });
-const info = document.querySelector(".alert-info");
+        function process(event) {
+        event.preventDefault();
 
-function process(event) {
- event.preventDefault();
+        const phoneNumber1 = phoneInput1.getNumber();
+        const phoneNumber2 = phoneInput2.getNumber();
 
- const phoneNumber1 = phoneInput1.getNumber();
- const phoneNumber2 = phoneInput2.getNumber();
-
- info.style.display = "";
- info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber1}</strong>`;
- info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber2}</strong>`;
-}
+        info.style.display = "";
+        info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber1}</strong>`;
+        info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber2}</strong>`;
+    }
 </script>
 @endsection
 

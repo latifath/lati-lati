@@ -15,23 +15,18 @@
     {!! $errors->first('prix', '<p class="text-danger">:message</p>') !!}
 </div>
 
- <div class=" form-group">
-    <label for="">Catégorie</label>
-    <select class="custom-select {{ $errors->has('categorie') ? 'is-invalid' : '' }}"  name="categorie" style="height: 50px;" >
-        <option style="height: 50px;" value="{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->id ?? '') }}">{{ old('categorie') ? old('categorie') : ($produit->sous_categorie->categorie->nom ?? 'Choississez une catégorie') }}</option>
-        @foreach ($categories as $item)
-        <option value="{{ $item->id }}">{{ $item->nom }}</option>
-        @endforeach
-    </select>
-    {!! $errors->first('categorie', '<p class="text-danger">:message</p>') !!}
-</div>
-
 <div class=" form-group">
     <label for="">Sous-Catégorie</label>
     <select class="custom-select {{ $errors->has('sous_categorie') ? 'is-invalid' : '' }}" name="sous_categorie" style="height: 50px; border:">
         <option value="{{ old('sous_categorie') ? old('sous_categorie') : ($produit->sous_categorie->id ?? '') }}"> {{ old('sous_categorie') ? old('sous_categorie') : ($produit->sous_categorie->nom ?? 'Choississez une sous catégorie' ) }}</option>
-        @foreach ($sous_categories as $item)
-        <option value="{{ $item->id }}">{{ $item->nom }}</option>
+        @foreach ($categories as $item)
+        @if (all_sub_categorie_by_category($item->id)->count() > 0)
+            <optgroup label="{{ $item->nom }}">
+                @foreach (all_sub_categorie_by_category($item->id) as $valeur )
+                <option value="{{ $valeur->id }}">{{ $valeur->nom }}</option>
+                @endforeach
+            </optgroup>
+        @endif
         @endforeach
     </select>
     {!! $errors->first('sous_categorie', '<p class="text-danger">:message</p>') !!}

@@ -1,5 +1,13 @@
 @extends('layouts.master-dashboard')
 
+@section('head')
+    <style>
+        .select2-results__group{
+            font-weight: bold !important;
+            color:  #ea0513 !important;
+        }
+    </style>
+@endsection
 @section('produit-create')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />

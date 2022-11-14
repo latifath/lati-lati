@@ -1,4 +1,4 @@
-@extends('layouts.master', ['titre' => 'home'])
+@extends('layouts.master')
 
 @section('head')
 {{-- barre de recherche --}}

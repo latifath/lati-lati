@@ -3,9 +3,7 @@
         <div class="row col-md-12 pt-0 p-4 m-0" style="{{ couleur_principal() }}; " >
             <div class="col-md-6 px-xl-0">
                 <p class="mt-md-3 text-center text-md-left text-dark">
-                    {{-- <a href="https://twitter.com/TechnodataB"  target="_blank" class="twitter px-2"><i class="fab fa-twitter fa-lg"></i></a>
-                    <a href="https://www.linkedin.com/company/technodata-solutions"  target="_blank" class="linkdine px-2"> <i class="fab fa-linkedin-in fa-lg"></i></a> --}}
-                    <a href="https://www.facebook.com/Tds-hosting-287580505117463/"  target="_blank" class="facebook px-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+                   <a href="https://web.facebook.com/TechnoDataStore/"  target="_blank" class="facebook px-2"><i class="fab fa-facebook-f fa-lg"></i></a>
                     <a href="https://www.instagram.com/technodatasolutions/" class="instagram px-2"><i class="fab fa-instagram fa-lg"></i></a>
                 </p>
             </div>

@@ -17,10 +17,10 @@ class CategorieController extends Controller
     }
 
     public function show($id){
-
+        $categorie = Categorie::findOrfail($id);
         $detail_cat = SousCategorie::where('categorie_id', $id)->get();
 
-        return view('/espace-admin.categories.details-categorie', compact('detail_cat'));
+        return view('/espace-admin.categories.details-categorie', compact('detail_cat', 'categorie'));
     }
 
     public function update(Request $request){

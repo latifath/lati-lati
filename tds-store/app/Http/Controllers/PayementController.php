@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Commande;
 use App\Models\Paiement;
-use Illuminate\Http\Request;
-use App\Models\CommandeProduit;
 use App\Models\AdresseLivraison;
 
 class PayementController extends Controller
@@ -47,15 +45,6 @@ class PayementController extends Controller
         $cmde = Commande::where('id', $id)->first();
         $pay = Paiement::where('commande_id', $cmde->id)->first();
 
-        return view('site-public.commandes.facture', compact('cmde', 'type_paiement', 'pay'));
-    }
-
-    public function placeorder(Request $request){
-        // dd($request->input('payment_mode'));
-
-        if ($request->input('payment_mode') == "Paid by PayPal") {
-            return response()->json(['status' => 'Payer avec succes']);
-        }
-        return redirect('/')->with('status', 'Payer avec succes');
+        return view('site-public.commandes.factures.facture', compact('cmde', 'type_paiement', 'pay'));
     }
 }

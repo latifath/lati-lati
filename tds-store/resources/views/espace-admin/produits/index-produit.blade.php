@@ -1,6 +1,5 @@
 @extends('layouts.master-dashboard')
 
-
 @section('produits')
 
 @include('layouts.partials-dashboard.entête-page', [
@@ -30,20 +29,18 @@
                             <th>Quantité</th>
                             <th>Prix</th>
                             <th>Prix promo</th>
-                            <th>Description</th>
                             <th>Sous-catégorie</th>
                             <th style="width: 15%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($produits as $produit)
+                            @foreach ($produits as $key => $produit)
                             <tr>
-                                <td>{{ $produit->id }}</td>
+                                <td>{{ $key + 1 }}</td>
                                 <td>{{ $produit->nom }}</td>
                                 <td>{{ $produit->quantite }}</td>
                                 <td>{{ $produit->prix }}</td>
                                 <td>{{ $produit->prix_promotionnel }}</td>
-                                <td>{!! Str::substr($produit->description, 0, 120) !!} {!! Str::length($produit->description) > 120 ? '...' : '' !!}</td>
                                 <td>{{ $produit->sous_categorie->nom }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
@@ -226,12 +223,7 @@
     });
 
 
-    // ajout image produit
-
-
-
 </script>
-
 <script>
     function imprimer(divName) {
         var printContents = document.getElementById(divName).innerHTML;

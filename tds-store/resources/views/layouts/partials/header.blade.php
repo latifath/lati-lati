@@ -122,7 +122,7 @@
                             @if($i <= 8)
                                 <div class="parent-menu-item-hover" >
                                     <a href="#" class="nav-link dropdown-toggle pr-5" style="border-right: 1px solid #ffff;">{{ $item->nom }}</a>
-                                    <div class="header-menu-content" style="background-color: #fff; border: 1px solid #ddd;">
+                                    <div class="header-menu-content" style="background-color: #f5efef; border: 1px solid #ddd;">
                                         <div class="row">
                                             @foreach (sous_categories_menu($item->id) as $k)
                                                 <div class="col-md-3 col-sm-4 mb-3">
@@ -146,21 +146,32 @@
                         @php
                         $j = 0
                         @endphp
-                        <div class="nav-item dropdown">
+                        <div class="parent-menu-item-hover">
                             @if(count(categorie_menu()) > 8 )
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="padding-right: 40px; border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
-                            <div class="header-menu-content" style="background-color: #fff; border: 1px solid #ddd;">
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    @foreach (categorie_menu() as $item)
-                                        @php
-                                            $j++
-                                        @endphp
-                                        @if ($j > 8)
-                                            <a href="" class="dropdown-item">{{ $item->nom }}</a>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </div>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
+                                    <div class="header-menu-content" style="background-color:  #f5efef; border: 1px solid #ddd;">
+                                        <div class="row">
+                                            @foreach (categorie_menu() as $item)
+                                            <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
+                                                @php
+                                                    $j++
+                                                @endphp
+                                                @if ($j > 8)
+                                                <div class="mt-0">
+                                                    <a href="" class="nav-link">{{ $item->nom }}</a>
+                                                </div>
+                                                <ul>
+                                                    @foreach (sous_categories_menu($item->id) as $k)
+                                                    <li>
+                                                        <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}">{{ $k->nom }}</a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                             @endif
                         </div>
                     </div>
