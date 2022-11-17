@@ -4,9 +4,9 @@
 @section('publicites')
 
 @include('layouts.partials-dashboard.entête-page', [
-    'infos1' => 'Dashbord',
+    'infos1' => 'Publicités',
     'infos2' => 'Publicités',
-    'infos3' => 'publicités',
+    'infos3' => 'Publicités',
 ])
 <br>
 
@@ -30,32 +30,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $i= 1;
-                            @endphp
-                            @foreach($publicites as $publicite)
-                            <tr>
-                                <td>{{ $i}}</td>
-                                <td>{{ $publicite->nom }}</td>
-                                <td>{{ $publicite->message }}</td>
-                                <td>
-                                    <figure class="figure px-4 pt-5">
+                            @foreach($publicites as $key => $publicite)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $publicite->nom }}</td>
+                                    <td>{{ $publicite->message }}</td>
+                                    <td>
                                         <img src="{{ asset(path_image_publicite() . path_image($publicite->image_id)->filename) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
-                                        <div class="row pt-3">
-                                            <figcaption class="figure-caption mx-3" style="font-size: 18px;"></figcaption>
-                                        </div>
-                                    </figure>
-                                </td>
-                                <td>
-                                    <button id="btn_edit_publicite" data-id="{{ $publicite->id }}" data-nom="{{ $publicite->nom }}" data-message="{{ $publicite->message }}" class="btn btn-primary"><i class="fa fa-edit"></i>Editer</button>
-                                    <button id="btn_edit_image_publicite" data-id="{{ $publicite->id }}" class="btn btn-info"><i class="fa fa-image"></i>Upload</button>
-                                    <button id="btn_delete_publicite" data-id="{{ $publicite->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash"></i>Supprimer</button>
-                                </td>
+                                    </td>
+                                    <td>
+                                        <button id="btn_edit_publicite" data-id="{{ $publicite->id }}" data-nom="{{ $publicite->nom }}" data-message="{{ $publicite->message }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
+                                        <button id="btn_edit_image_publicite" data-id="{{ $publicite->id }}" class="btn btn-info"><i class="fa fa-image"></i> Upload</button>
+                                        <button id="btn_delete_publicite" data-id="{{ $publicite->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash"></i> Supprimer</button>
+                                    </td>
 
-                            </tr>
-                            @php
-                                $i++;
-                            @endphp
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

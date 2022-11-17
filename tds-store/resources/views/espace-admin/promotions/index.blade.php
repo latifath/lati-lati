@@ -4,7 +4,7 @@
 @section('Admin-index-promotion')
 
 @include('layouts.partials-dashboard.entête-page', [
-    'infos1' => 'Promotion',
+    'infos1' => 'Promotions',
     'infos2' => 'Promotion',
     'infos3' => 'Toutes les promotions',
 ])
@@ -31,9 +31,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($promotions as $promotion)
+                            @foreach ($promotions as $key => $promotion)
                             <tr>
-                                <td>{{ $promotion->id }}</td>
+                                <td>{{ $key + 1 }}</td>
                                 <td>{{ $promotion->code }}</td>
                                 <td>{{ $promotion->type }}</td>
                                 <td>{{ $promotion->valeur }}</td>

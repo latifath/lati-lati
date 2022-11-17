@@ -3,15 +3,15 @@
 @section('correction-stock')
 
 @include('layouts.partials-dashboard.entête-page', [
-    'infos1' => 'Stocks',
-    'infos2' => 'correction stock',
+    'infos1' => 'Correction stock',
+    'infos2' => 'Stocks',
     'infos3' => 'Correction stock',
 ])
 <br>
 
 <div class="row">
     <div>
-        <button class="btn border mb-3 mx-3" onClick="imprimer('magazin')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
+        <button class="btn border mb-3 mx-3" onClick="imprimer('magazin')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">
             <i class="fa fa-print" aria-hidden="true" input type="button" value="Imprimer"> </i> Imprimer
         </button>
     </div>
@@ -35,24 +35,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-
-                        @foreach($produits as $produit)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $produit->nom }}</td>
-                            <td>{{ $produit->quantite }}</td>
-                            <td>{{number_format($produit->prix, '0', '.', ' ')}}FCFA</td>
-                            <td>{{ $produit->sous_categorie->nom}}</td>
-                            <td>
-                                <button  id="btn_edit_correction_stock" data-id="{{ $produit->id }}" data-quantite="{{ $produit->quantite }}" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-refresh"></i></button>
-                            </td>
-                        </tr>
-                        @php
-                           $i++;
-                       @endphp
+                        @foreach($produits as $key => $produit)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $produit->nom }}</td>
+                                <td>{{ $produit->quantite }}</td>
+                                <td>{{number_format($produit->prix, '0', '.', ' ')}} F CFA</td>
+                                <td>{{ $produit->sous_categorie->nom}}</td>
+                                <td>
+                                    <button  id="btn_edit_correction_stock" data-id="{{ $produit->id }}" data-quantite="{{ $produit->quantite }}" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-refresh"></i></button>
+                                </td>
+                            </tr>
                        @endforeach
                     </tbody>
                 </table>
@@ -132,20 +125,20 @@
         </table>
     </div>
 </div>
+
 @endsection
+
 @section('js')
 <script>
-$(document).on('click', '#btn_edit_correction_stock', function(){
-    var ID = $(this).attr('data-id');
-    var quantite = $(this).attr('data-quantite');
+    $(document).on('click', '#btn_edit_correction_stock', function(){
+        var ID = $(this).attr('data-id');
+        var quantite = $(this).attr('data-quantite');
 
-    $('#edit_id').val(ID);
-    $('#edit_quantite').val(quantite);
-    $('#ModalCorrectionStock').modal('show');
-});
-</script>
+        $('#edit_id').val(ID);
+        $('#edit_quantite').val(quantite);
+        $('#ModalCorrectionStock').modal('show');
+    });
 
-<script>
     function imprimer(divName) {
         var printContents = document.getElementById(divName).innerHTML;
         var originalContents = document.body.innerHTML;

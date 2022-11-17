@@ -3,7 +3,7 @@
 @section('les-info')
 
 @include('layouts.partials-dashboard.entête-page', [
-    'infos1' => 'Commandes',
+    'infos1' => 'Commande #' . $commande->id,
     'infos2' => 'Commandes',
     'infos3' => 'Détails commande',
 ])
@@ -11,13 +11,13 @@
 
 <div class="row">
     <div class="col-6 offset-sm-3">
-        <button  id="confirmation" data-id="{{ $commande->id }}" class="btn-success my-2 py-2" {{ disabled_button_commande($commande->status, 'terminee') }}><i class="fa fa-check">Accepter la commande</i> </button>
+        <button  id="confirmation" data-id="{{ $commande->id }}" class="btn btn-success my-2 py-2" {{ disabled_button_commande($commande->status, 'terminee') }}><i class="fa fa-check">Accepter la commande</i> </button>
 
-        <button id="btn_annule_commande"  data-id="{{ $commande->id }}" class="btn-secondary my-2 py-2 mx-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'annulee') }}>Annuler la commande</button>
+        <button id="btn_annule_commande"  data-id="{{ $commande->id }}" class="btn btn-secondary my-2 py-2 mx-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'annulee') }}>Annuler la commande</button>
 
-        <button id="btn_commande_en_attente" data-id="{{ $commande->id }}" class="btn-light my-2 py-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'en cours') }}>Mettre en attente</button>
+        <button id="btn_commande_en_attente" data-id="{{ $commande->id }}" class="btn btn-light my-2 py-2" type="submit" style="border: 1px solid;" {{ disabled_button_commande($commande->status, 'en cours') }}>Mettre en attente</button>
 
-        <button id="btn_delete_commande" data-id="{{ $commande->id }}" class="btn-danger my-2 py-2  mx-2" type="submit">Supprimer la commande</button>
+        <button id="btn_delete_commande" data-id="{{ $commande->id }}" class="btn btn-danger my-2 py-2  mx-2" type="submit">Supprimer la commande</button>
 
     </div>
 </div>
@@ -121,10 +121,9 @@
                     <table class="table table-striped table-bordered dt-responsive nowrap">
                         <thead>
                             <tr>
-                                <td><strong>Description</strong></td>
                                 <td><strong>Nom</strong></td>
-                                <td><strong>Qty</strong></td>
-                                <td><strong>Prix ex TVA</strong></td>
+                                <td><strong>Qté</strong></td>
+                                <td><strong>Prix HT</strong></td>
                                 <td><strong>Sous-total</strong></td>
                             </tr>
                         </thead>
@@ -135,7 +134,6 @@
                                 @foreach ($commande_produit as $item)
                                     @php $sub_total += $item['quantite'] * $item['prix'] @endphp
                                     <tr>
-                                        <td>{!! $item->produit->description !!}</td>
                                         <td>{{$item->produit->nom }}</td>
                                         <td>{{ number_format($item->prix, '0', '.', ' ') }} F CFA</td>
                                         <td>{{ $item->quantite }}</td>
@@ -146,22 +144,22 @@
                                 <tr class="">
                                     @if ($commande->promotion != null)
 
-                                    <td colspan="4" class="text-right"><strong>Remise</strong></td>
+                                    <td colspan="3" class="text-right"><strong>Remise</strong></td>
                                     <td class="">{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</td>
                                     @endif
 
                                 </tr>
                                 <tr class="">
-                                    <td colspan="4" class="text-right"><strong>TVA</strong></td>
+                                    <td colspan="3" class="text-right"><strong>TVA</strong></td>
                                     <td class="">{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
                                 </tr>
                                 <tr class="">
-                                    <td colspan="4" class="text-right"><strong>Expédition</strong></td>
+                                    <td colspan="3" class="text-right"><strong>Expédition</strong></td>
                                     <td class="">{{ info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
                                 </tr>
 
                                 <tr style="{{ couleur_text_2() }}">
-                                    <td colspan="4" class="text-right"><strong>Montant TTC</strong></td>
+                                    <td colspan="3" class="text-right"><strong>Montant TTC</strong></td>
                                     <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))),'0', '.', ' ' ) }} F CFA</td>
                                 </tr>
                         </tbody>

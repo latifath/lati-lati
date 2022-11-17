@@ -19,32 +19,25 @@
             <div class="table-responsive">
                 <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
-                    <tr>
-                        <th>N°</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Quantité</th>
-                        <th>Prix</th>
-                        <th>Date</th>
-                    </tr>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                            <th>Date</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($sous_cat_pdt as $item)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $item->nom }}</td>
-                            <td>{!! Str::substr($item->description, 0, 50) !!} {!! Str::length($item->description) > 50 ? '...' : '' !!}</td>
-                            <td>{{ $item->quantite }}</td>
-                            <td>{{ number_format($item->prix, '0', '.', '') }} F CFA</td>
-                            <td>{{ $item->created_at }}</td>
-
-                        </tr>
-                        @php
-                           $i++;
-                       @endphp
+                        @foreach ($sous_cat_pdt as $key => $item)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->nom }}</td>
+                                <td>{!! Str::substr($item->description, 0, 50) !!} {!! Str::length($item->description) > 50 ? '...' : '' !!}</td>
+                                <td>{{ $item->quantite }}</td>
+                                <td>{{ number_format($item->prix, '0', '.', '') }} F CFA</td>
+                                <td>{{ $item->created_at }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modification sous-catégorie</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Modification une sous-catégorie</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,7 +10,7 @@
             <form action="{{ route('root_espace_admin_edit_sous_categorie')}}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color:  #ffff;">
+                <div class="modal-body">
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" >
                         <div class="form-group">
@@ -19,8 +19,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
 
                 </div>
@@ -33,14 +33,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajouter une nouvelle Sous-catégorie</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Ajouter une sous-catégorie</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="{{ route('root_espace_admin_create_sous_categorie')}}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color:  #ffff;">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="">Nom</label>
                         <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez la sous-catégorie" name="nom">
@@ -58,8 +58,8 @@
                     </div>
 
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
 
                 </div>

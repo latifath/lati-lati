@@ -27,9 +27,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $categorie)
+                        @foreach ($categories as $key => $categorie)
                         <tr>
-                            <td>{{ $categorie->id }}</td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $categorie->nom }}</td>
                             <td>
                                 <a href="{{ route('root_espace_admin_details_categorie', $categorie->id) }}">

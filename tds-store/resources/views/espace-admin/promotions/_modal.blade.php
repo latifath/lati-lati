@@ -46,8 +46,8 @@
                         {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
                 </div>
             </form>
@@ -105,8 +105,8 @@
                         {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">Modifier</button>
                 </div>
             </form>

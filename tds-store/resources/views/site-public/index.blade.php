@@ -40,7 +40,6 @@
                                         <h4 class="text-light text-uppercase font-weight-medium mb-3">{{ $publicite_latest->message }}
                                         </h4>
                                         <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{ $publicite_latest->nom }}</h3>
-                                        {{-- <a href="" class="btn btn-light py-2 px-3" style="{{ couleur_background_1() }}; text-white;">Voir maintenat</a> --}}
                                     </div>
                                 </div>
                             @endif
@@ -83,7 +82,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 pb-1">
                                 <div class="card product-item border-0 mb-4">
                                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img class="img-fluid-product w-100" src="{{ path_image($produit->image) != null ? asset(path_image_produit() . path_image($produit->image_id)->filename) :  " "}}" alt="" width="50px">
+                                        <img class="img-fluid-product w-100" src={{ path_image($produit->image) != null ? asset(path_image_produit() . path_image($produit->image_id)->filename) :  "" }} alt="" width="50px">
                                     </div>
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3" style="{{ couleur_text_2() }}">
                                         <h6 class="text-truncate mb-3">{{ $produit->nom}}</h6>
@@ -92,7 +91,7 @@
                                                 <h6 class="text-muted"><del>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA </del></h6>
                                                 <h6 class="ml-3"> {{ number_format($produit->prix_promotionnel, 0, '.', ' ') }} F CFA</h6>
                                             @else
-                                            <h6>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA</h6>
+                                                <h6>{{ number_format($produit->prix, 0, '.', ' ') }} F CFA</h6>
                                             @endif
                                         </div>
                                     </div>

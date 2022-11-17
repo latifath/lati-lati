@@ -24,13 +24,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($utilisateurs as $item)
+                        @foreach ($utilisateurs as $user)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->email}}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email}}</td>
+                            <td>{{ $user->created_at }}</td>
                             <td>
-                                <a href="{{ route('root_espace_admin_clients_show', $item->id )}}">
+                                <a href="{{ route('root_espace_admin_clients_show', $user->id )}}">
                                     <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                 </a>
 
@@ -38,7 +38,7 @@
                                     <button class="btn" data-toggle="tooltip" title="Bloquer l'accès" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-lock" aria-hidden="true"></i></button>
                                 </a>
 
-                                <button data-toggle="tooltip" title="Supprimer" id="btn_delete"  data-id="{{ $item->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button data-toggle="tooltip" title="Supprimer" id="btn_delete"  data-id="{{ $user->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </td>
                         </tr>
                         @endforeach

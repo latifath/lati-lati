@@ -35,24 +35,24 @@
                         </thead>
                         <tbody>
                             @foreach ($produits as $key => $produit)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $produit->nom }}</td>
-                                <td>{{ $produit->quantite }}</td>
-                                <td>{{ $produit->prix }}</td>
-                                <td>{{ $produit->prix_promotionnel }}</td>
-                                <td>{{ $produit->sous_categorie->nom }}</td>
-                                <td>
-                                    <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
-                                        <button   data-toggle="tooltip" title="voir produit" class="btn btn-primary"><i class="fa fa-eye"></i></button>
-                                    </a>
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $produit->nom }}</td>
+                                    <td>{{ $produit->quantite }}</td>
+                                    <td>{{ $produit->prix }}</td>
+                                    <td>{{ $produit->prix_promotionnel }}</td>
+                                    <td>{{ $produit->sous_categorie->nom }}</td>
+                                    <td>
+                                        <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
+                                            <button   data-toggle="tooltip" title="voir produit" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+                                        </a>
 
-                                    <a href="{{ route('root_espace_admin_show_images', $produit->id) }}">
-                                        <button   data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i></button>
-                                    </a>
-                                    <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i></button>
-                                </td>
-                            </tr>
+                                        <a href="{{ route('root_espace_admin_show_images', $produit->id) }}">
+                                            <button   data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i></button>
+                                        </a>
+                                        <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i></button>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -62,44 +62,6 @@
     </div>
 </div>
 
-{{-- ajout stock --}}
-<div class="modal fade" id="ModalAjoutStock" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalAjoutStock" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouveau stock</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <br>
-            <form action="{{ route('root_espace_admin_stock_create') }}"  method="POST">
-                @csrf
-                <div class="modal-body" style="background-color: #ffff;">
-
-                <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="add_stock_id">
-
-                <div class="form-group">
-                    <label for="">Prix Unitaire</label>
-                    <input class="form-control {{ $errors->has('prix_unitaire') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="prix_unitaire">
-                    {!! $errors->first('prix_unitaire', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="">Quantité</label>
-                    <input class="form-control {{ $errors->has('quantite') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="quantite">
-                    {!! $errors->first('quantite', '<p class="text-danger">:message</p>') !!}
-                </div>
-
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
-                 </div>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
 
 {{-- impression --}}
 <div class="d-none">
@@ -180,6 +142,9 @@
         </table>
     </div>
 </div>
+
+@include('espace-admin.produits._modal');
+
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
 
 @endsection

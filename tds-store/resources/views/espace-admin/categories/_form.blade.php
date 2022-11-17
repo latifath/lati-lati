@@ -10,7 +10,7 @@
             <form action="{{ route('root_espace_admin_edit')}}"  method="POST">
                 @csrf
                 @method('put')
-                <div class="modal-body" style="background-color:  #ffff;">
+                <div class="modal-body">
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;"  type="hidden" placeholder="" name="id">
                         <div class="form-group">
@@ -20,9 +20,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                   <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
+                   <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
                 </div>
             </form>
        </div>
@@ -41,15 +41,15 @@
             </div>
             <form action="{{ route('root_espace_admin_store')}}"  method="POST">
                 @csrf
-                <div class="modal-body" style="background-color:  #ffff;">
+                <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px; " type="text" placeholder="Entrez la catégorie" name="nom">
                         {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
-                <div class="modal-footer"  style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                   <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">Ajouter</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
+                   <button type="submit" class="btn" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">Ajouter</button>
                 </div>
             </form>
        </div>

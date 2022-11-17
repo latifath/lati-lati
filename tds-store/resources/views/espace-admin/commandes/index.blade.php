@@ -29,31 +29,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $y= 1;
-                        @endphp
-                        @foreach ($commandes_terminee  as $cmd_terminee)
-
-                        <tr>
-                            <td>{{ $y}}</td>
-                            <td>{{ $cmd_terminee->id }}</td>
-                            <td>{{ $cmd_terminee->created_at }}</td>
-                            <td>{{ $cmd_terminee->adresse_client->nom }} {{ $cmd_terminee->adresse_client->prenom }}</td>
-                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmd_terminee->id), $cmd_terminee->promotion), $cmd_terminee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmd_terminee->id))), 0, '.', ' ') }} F CFA</td>
-                            <td>{{ $cmd_terminee->status}}</td>
-                            <td>
-                            <a href="{{ route('root_espace_admin_commandes_show', $cmd_terminee->id) }}">
-                                <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
-                            </a>
-                            <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmd_terminee->id) }}">
-                            <button   data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                            </a>
-                            </td>
-                            @php
-                            $y++;
-                            @endphp
+                        @foreach ($commandes_terminee  as $key => $cmd_terminee)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $cmd_terminee->id }}</td>
+                                <td>{{ $cmd_terminee->created_at }}</td>
+                                <td>{{ $cmd_terminee->adresse_client->nom }} {{ $cmd_terminee->adresse_client->prenom }}</td>
+                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmd_terminee->id), $cmd_terminee->promotion), $cmd_terminee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmd_terminee->id))), 0, '.', ' ') }} F CFA</td>
+                                <td>{{ $cmd_terminee->status}}</td>
+                                <td>
+                                    <a href="{{ route('root_espace_admin_commandes_show', $cmd_terminee->id) }}">
+                                        <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
+                                    </a>
+                                    <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmd_terminee->id) }}">
+                                        <button   data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
-                        </tr>
                     </tbody>
                 </table>
                 </div>
@@ -84,29 +77,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $y= 1;
-                        @endphp
-                        @foreach ($commandes_effectuee  as $cmd_effectuee)
+                        @foreach ($commandes_effectuee  as $key => $cmd_effectuee)
 
                         <tr>
-                            <td>{{ $y}}</td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $cmd_effectuee->id }}</td>
                             <td>{{ $cmd_effectuee->created_at }}</td>
                             <td>{{ $cmd_effectuee->adresse_client->nom }} {{ $cmd_effectuee->adresse_client->prenom }}</td>
                             <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmd_effectuee->id), $cmd_effectuee->promotion), $cmd_effectuee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmd_effectuee->id))), 0, '.', ' ') }} F CFA</td>
                             <td>{{ $cmd_effectuee->status }}</td>
                             <td>
-                            <a href="{{ route('root_espace_admin_commandes_show', $cmd_effectuee->id) }}">
-                                <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
-                            </a>
-                            <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmd_effectuee->id) }}">
-                            <button   data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                            </a>
+                                <a href="{{ route('root_espace_admin_commandes_show', $cmd_effectuee->id) }}">
+                                    <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
+                                </a>
+                                <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmd_effectuee->id) }}">
+                                    <button   data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                </a>
                             </td>
-                            @php
-                            $y++;
-                            @endphp
                         @endforeach
                         </tr>
 
@@ -141,30 +128,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $y= 1;
-                        @endphp
-                        @foreach ($commandes_en_attente as $cmde_en_attente)
-
-                        <tr>
-                            <td>{{ $y}}</td>
-                            <td>{{ $cmde_en_attente->id }}</td>
-                            <td>{{ $cmde_en_attente->created_at }}</td>
-                            <td>{{ $cmde_en_attente->adresse_client->nom }} {{ $cmde_en_attente->adresse_client->prenom }}</td>
-                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_en_attente->id), $cmde_en_attente->promotion), $cmde_en_attente->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_en_attente->id))), 0, '.', ' ') }} F CFA</td>
-                            <td>{{$cmde_en_attente->status}}</td>
-                            <td>
-                            <a href="{{ route('root_espace_admin_commandes_show', $cmde_en_attente->id) }}">
-                                <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
-                            </a>
-                            <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmde_en_attente->id) }}">
-                                <button data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                        @foreach ($commandes_en_attente as $key => $cmde_en_attente)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $cmde_en_attente->id }}</td>
+                                <td>{{ $cmde_en_attente->created_at }}</td>
+                                <td>{{ $cmde_en_attente->adresse_client->nom }} {{ $cmde_en_attente->adresse_client->prenom }}</td>
+                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_en_attente->id), $cmde_en_attente->promotion), $cmde_en_attente->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_en_attente->id))), 0, '.', ' ') }} F CFA</td>
+                                <td>{{$cmde_en_attente->status}}</td>
+                                <td>
+                                <a href="{{ route('root_espace_admin_commandes_show', $cmde_en_attente->id) }}">
+                                    <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
                                 </a>
-                            </td>
-                        </tr>
-                        @php
-                            $y++;
-                            @endphp
+                                <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmde_en_attente->id) }}">
+                                    <button data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
 
                     </tbody>
@@ -198,30 +178,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $y= 1;
-                        @endphp
-                        @foreach ($commandes_non_payee  as $cmde_non_payee)
-
-                        <tr>
-                            <td>{{ $y}}</td>
-                            <td>{{ $cmde_non_payee->id }}</td>
-                            <td>{{ $cmde_non_payee->created_at }}</td>
-                            <td>{{ $cmde_non_payee->adresse_client->nom }} {{ $cmde_non_payee->adresse_client->prenom }}</td>
-                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_non_payee->id), $cmde_non_payee->promotion), $cmde_non_payee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_non_payee->id))), 0, '.', ' ') }} F CFA</td>
-                            <td>{{$cmde_non_payee->status}}</td>
-                            <td>
-                            <a href="{{ route('root_espace_admin_commandes_show', $cmde_non_payee->id) }}">
-                                <button  data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
-                            </a>
-                            <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmde_non_payee->id) }}">
-                                <button  data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                                </a>
-                            </td>
-                        </tr>
-                        @php
-                            $y++;
-                            @endphp
+                        @foreach ($commandes_non_payee  as $key => $cmde_non_payee)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $cmde_non_payee->id }}</td>
+                                <td>{{ $cmde_non_payee->created_at }}</td>
+                                <td>{{ $cmde_non_payee->adresse_client->nom }} {{ $cmde_non_payee->adresse_client->prenom }}</td>
+                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_non_payee->id), $cmde_non_payee->promotion), $cmde_non_payee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_non_payee->id))), 0, '.', ' ') }} F CFA</td>
+                                <td>{{$cmde_non_payee->status}}</td>
+                                <td>
+                                    <a href="{{ route('root_espace_admin_commandes_show', $cmde_non_payee->id) }}">
+                                        <button  data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
+                                    </a>
+                                    <a href="{{ route('root_espace_admin_detail_ajout_paiement', $cmde_non_payee->id) }}">
+                                        <button  data-toggle="tooltip" title="Ajouter paiement" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -254,27 +227,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $y= 1;
-                        @endphp
                         @foreach ($commandes_annulee  as $cmde_annulee)
-
-                        <tr>
-                            <td>{{ $y}}</td>
-                            <td>{{ $cmde_annulee->id }}</td>
-                            <td>{{ $cmde_annulee->created_at }}</td>
-                            <td>{{ $cmde_annulee->adresse_client->nom }} {{ $cmde_annulee->adresse_client->prenom }}</td>
-                            <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_annulee->id), $cmde_annulee->promotion), $cmde_annulee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_annulee->id))), 0, '.', ' ') }} F CFA</td>
-                            <td>{{$cmde_annulee->status}}</td>
-                            <td>
-                            <a href="{{ route('root_espace_admin_commandes_show', $cmde_annulee->id) }}">
-                                <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
-                            </a>
-                            </td>
-                        </tr>
-                        @php
-                            $y++;
-                            @endphp
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $cmde_annulee->id }}</td>
+                                <td>{{ $cmde_annulee->created_at }}</td>
+                                <td>{{ $cmde_annulee->adresse_client->nom }} {{ $cmde_annulee->adresse_client->prenom }}</td>
+                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($cmde_annulee->id), $cmde_annulee->promotion), $cmde_annulee->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($cmde_annulee->id))), 0, '.', ' ') }} F CFA</td>
+                                <td>{{$cmde_annulee->status}}</td>
+                                <td>
+                                <a href="{{ route('root_espace_admin_commandes_show', $cmde_annulee->id) }}">
+                                    <button data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
+                                </a>
+                                </td>
+                            </tr>
                         @endforeach
 
                     </tbody>

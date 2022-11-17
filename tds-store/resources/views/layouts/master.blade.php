@@ -95,6 +95,7 @@
     @yield('commande-reçue')
 
     @yield('newsletter')
+
     @yield('partenaire')
 
     @yield('information-client')

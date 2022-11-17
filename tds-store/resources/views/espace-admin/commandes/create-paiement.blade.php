@@ -1,7 +1,7 @@
 @extends('layouts.master-dashboard')
 @section('Paiement-create')
     @include('layouts.partials-dashboard.entête-page', [
-        'infos1' => 'Commandes #',
+        'infos1' => 'Commande #' . $commande->id,
         'infos2' => 'Toutes les commandes',
         'infos3' => 'Ajouter paiement',
     ])
@@ -92,7 +92,7 @@
                                                 <thead>
                                                     <tr>
                                                         <td><strong>Description</strong></td>
-                                                        <td><strong>Qty</strong></td>
+                                                        <td><strong>Qté</strong></td>
                                                         <td><strong>Prix</strong></td>
                                                         <td><strong>Sous-total</strong></td>
                                                     </tr>
@@ -167,10 +167,8 @@
                                                                 </tr>
                                                             @else
                                                                 <tr>
-                                                                <td colspan="3" class="text-center">Aucune
-                                                                        transaction trouvé</td>
-                                                                    <td></td>
-                                                                    <td></td>
+                                                                <td colspan="3" class="text-center">
+                                                                    Aucune transaction trouvée </td>
                                                                 </tr>
                                                             @endif
                                                         </tbody>

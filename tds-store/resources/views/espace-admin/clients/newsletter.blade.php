@@ -11,11 +11,11 @@
     <div class="col-12">
         <div class="card m-b-30">
             <div class="card-header bg-success">
-                <h4 class="mt-0 header-title text-white d-inline-block" style="font-size: 24px; text-align: center;;">Liste des abonné(e)s active</h4>
+                <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Liste des abonné(e)s active</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -26,13 +26,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-
-                        @foreach($newsletter_act  as $item)
+                        @foreach($newsletter_act  as $key => $item)
                         <tr>
-                            <td>{{ $i }}</td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
@@ -43,9 +39,6 @@
 
                             </td>
                         </tr>
-                        @php
-                            $i++;
-                        @endphp
                          @endforeach
                     </tbody>
                 </table>
@@ -64,7 +57,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
                         <th>N°</th>
@@ -75,26 +68,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
+                        @foreach($newsletter_desa  as $key => $item)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('root_espace_admin_debloquer_newsletter', $item->id) }}">
+                                        <button  id="btn_edit_newsletter" data-id="{{ $item->id }}" class="btn btn-primary"><i class="fa fa-unlock"> Debloquer</i></button>
+                                    </a>
+                                    <button id="btn_delete_partenaire" data-id="{{ $item->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"> Supprimer</i></button>
 
-                        @foreach($newsletter_desa  as $item)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>
-                                <a href="{{ route('root_espace_admin_debloquer_newsletter', $item->id) }}">
-                                    <button  id="btn_edit_newsletter" data-id="{{ $item->id }}" class="btn btn-primary"><i class="fa fa-unlock"> Debloquer</i></button>
-                                </a>
-                                <button id="btn_delete_partenaire" data-id="{{ $item->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"> Supprimer</i></button>
-
-                            </td>
-                        </tr>
-                        @php
-                            $i++;
-                        @endphp
+                                </td>
+                            </tr>
                          @endforeach
                     </tbody>
                 </table>
@@ -110,6 +96,11 @@
 
 @section('js')
 <script>
+
+    $(document).ready(function() {
+        $('#datatable1').DataTable();
+    });
+
     $(document).on('click', '#btn_edit_newsletter', function(){
         var ID = $(this).attr('data-id');
         var email = $(this).attr('data-email');

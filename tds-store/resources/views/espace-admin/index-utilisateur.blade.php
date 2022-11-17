@@ -68,7 +68,7 @@
                 <div class="modal-body" style="background-color:  #ffff;">
                     <div class="">
                         <input  class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}"  type="hidden" id="id" placeholder="" name="id" >
-                        <div class="col-md-12 form-group">
+                        <div class="form-group">
                             <select class="custom-select {{ $errors->has('role') ? 'is-invalid' : '' }}" style="height: 50px;" name="role" >
                                 <option>Choisir un Role</option>
                                 <option value="client">Client</option>
@@ -79,8 +79,8 @@
                     </div>
 
                 </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <div class="modal-footer">
+                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>
                    <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Modifier</button>
                 </div>
             </form>

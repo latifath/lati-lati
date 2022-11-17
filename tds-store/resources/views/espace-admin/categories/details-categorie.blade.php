@@ -16,25 +16,19 @@
            <div class="card-body">
                 <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
-                    <tr>
-                        <th>N°</th>
-                        <th>Nom</th>
-                        <th>Date</th>
-                    </tr>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Date</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($detail_cat as $item)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $item->nom }}</td>
-                            <td>{{ $item->created_at }}</td>
-                       </tr>
-                       @php
-                           $i++;
-                       @endphp
+                        @foreach ($detail_cat as $key => $item)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->nom }}</td>
+                                <td>{{ $item->created_at }}</td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

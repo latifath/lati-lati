@@ -83,7 +83,6 @@
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-shopping-cart"></i><span>Commande</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{ route('root_index') }}">Ajouter une commande</a></li>
                             <li><a href="{{ route('root_espace_admin_commandes_index') }}">Toutes les commandes</a></li>
                         </ul>
                     </li>

@@ -2,7 +2,7 @@
 
 @section('update-produit')
 @include('layouts.partials-dashboard.entête-page', [
-'infos1' => 'Produits',
+'infos1' => 'Produit #' . $produit->id,
 'infos2' => 'Produits',
 'infos3' => 'Détails produit',
 ])
@@ -12,18 +12,18 @@
     <div class="col-md-12">
         <div>
             <a href="{{ route('root_espace_admin_modifie_vue', $produit->id) }}">
-                <button data-toggle="tooltip" title="Edit produit" class="btn btn-primary"><i class="fa fa-edit"></i>Editer</button>
+                <button data-toggle="tooltip" title="Edit produit" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
             </a>
 
-            <button id="btn_edit_image_produit" data-id="{{ $produit->id }}" data-toggle="tooltip" title="Edit image produit" class="btn btn-info"><i class="fa fa-image"></i>Upload</button>
-
-            <button data-toggle="tooltip" title="Supprimer produit" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i>Supprimer</button>
+            <button id="btn_edit_image_produit" data-id="{{ $produit->id }}" data-toggle="tooltip" title="Edit image produit" class="btn btn-secondary"><i class="fa fa-image"></i> Upload</button>
 
             <a href="{{ route('root_espace_admin_show_images', $produit->id) }}">
                 <button data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i> Galerie</button>
             </a>
 
             <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i> Ajout stock</button>
+
+            <button data-toggle="tooltip" title="Supprimer produit" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button>
 
         </div>
         <div class="table-responsive">
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-@include('espace-admin.produits._modal');
+@include('espace-admin.produits._modal')
 
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
 
