@@ -24,7 +24,6 @@ class PromotionAdminController extends Controller
             'status' => 'required',
 
         ]);
-
         Promotion::create(['code' => $request->code_coupon, 'type' => $request->type, 'valeur' => $request->valeur, 'status' =>$request->status]);
 
         flashy()->info('Promotion ajoutée avec succès.');

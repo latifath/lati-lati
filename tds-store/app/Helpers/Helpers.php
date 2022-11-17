@@ -7,12 +7,14 @@ use App\Models\Livraison;
 use App\Models\Promotion;
 use App\Models\Expedition;
 use App\Models\Partenaire;
+use Illuminate\Support\Str;
 use App\Models\AdresseClient;
 use App\Models\Configuration;
 use App\Models\SousCategorie;
 use App\Models\AdresseLivraison;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client as ClientHttp;
+use Illuminate\Database\Eloquent\Collection;
 
 if(!function_exists('kkiapay')){
     function kkiapay($id_transaction){
@@ -281,6 +283,17 @@ if(!function_exists('showSharer')){
         ';
     }
 }
+
+if(!function_exists('generate_code_coupon')){
+    function generate_code_coupon ($l){
+
+        $chaine = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return substr(str_shuffle(str_repeat($chaine , $l)), 0, $l);
+
+    }
+}
+
 
 
 

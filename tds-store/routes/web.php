@@ -216,6 +216,15 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/livraisons/{id}/detail', [LivraisonController::class, 'details'])->name('root_espace_admin_details');
 
+    Route::delete('espace-admin/livraisons/{id}/delete', [LivraisonController::class, 'delete_livraison'])->name('root_espace_admin_delete_livraisons');
+
+    Route::post('espace-admin/livraisons/{id}/modification-statut', [LivraisonController::class, 'modification_statut'])->name('root_espace_admin_modification_statut_livraison');
+
+    Route::put('espace-admin/livraisons/update-expedition', [LivraisonController::class, 'update_frais'])->name('root_espace_admin_livraison_update');
+
+
+    // gestion Expédition
+
     Route::get('espace-admin/expedition', [LivraisonController::class, 'index_expedition'])->name('root_espace_admin_index_expedition');
 
     Route::post('espace-admin/expedition/store', [LivraisonController::class, 'store'])->name('root_espace_admin_store_expedition');
@@ -223,6 +232,7 @@ Route::middleware('admin')->group(function () {
     Route::put('espace-admin/expedition/update', [LivraisonController::class, 'update'])->name('root_espace_admin_update_expedition');
 
     Route::delete('espace-admin/expedition/{id}/delete', [LivraisonController::class, 'delete'])->name('root_espace_admin_delete_expedition');
+
 
 
     // gestion sous-categorie
@@ -255,7 +265,6 @@ Route::middleware('admin')->group(function () {
     Route::delete('espace-admin/produits/{id}/supprimer', [ProduitAdminController::class, 'delete'])->name('root_espace_admin_produit_delete');
 
     Route::get('espace-admin/produits/{id}/show', [ProduitAdminController::class, 'show'])->name('root_espace_admin_show_produit');
-
 
 
     //images

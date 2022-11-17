@@ -3,16 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Commande;
+use App\Models\Livraison;
+use App\Models\Expedition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Expedition;
 
 class LivraisonController extends Controller
 {
     public function index(){
-        $livraisons = Commande::where("status", "en cours")->get();
+        $livraisons_incomplète = Livraison::where('montant', null)->where('status', 'non')->get();
 
-        return view('espace-admin.livraisons.index', compact('livraisons'));
+        $livraisons = Livraison::where('montant', '!=', null)->where('status', 'non')->get();
+
+        $livraisons_valide = Livraison::where('status', 'oui')->where('montant', '!=', null)->get();
+
+        return view('espace-admin.livraisons.index', compact('livraisons', 'livraisons_incomplète', 'livraisons_valide'));
+    }
+
+    public function update_frais(Request $request){
+        $request->validate([
+            'montant' => 'required',
+        ]);
+
+        Livraison::findOrfail($request->id)->update([
+            'montant' =>$request->montant,
+        ]);
+
+        flashy()->info('Frais Expédition Ajouter avec succès.');
+        return redirect()->back();
+    }
+
+    public function modification_statut(Request $request){
+        $livraison_update_status = Livraison::findOrfail($request->id);
+        $livraison_update_status->update([
+            'status' => 'oui',
+        ]);
+
+        flashy()->success('Livraison effectuée avec succès');
+        return redirect()->back();
     }
 
     public function index_expedition(){

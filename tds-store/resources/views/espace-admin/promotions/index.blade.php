@@ -9,12 +9,13 @@
     'infos3' => 'Toutes les promotions',
 ])
 <br>
+
 <div class="row">
     <div class="col-md-12 col-12">
         <div class="card m-b-30">
            <div class="card-header bg-success">
                 <h4 class="mt-3 header-title text-white text-center  d-inline-block" style="font-size: 24px;">Promotions</h4>
-                <button  id="btn_ajout_promotion" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}">Ajouter une promotion</button>
+                <button  id="btn_ajout_promotion" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}"><i class="fa fa-plus" aria-hidden="true"> Ajouter une promotion</i></button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -51,148 +52,31 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalAjoutPromotion" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalAjoutPromotion" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une promotion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <br>
-            <form action="{{ route('root_espace_admin_promotion_ajouter') }}"  method="POST">
-                @csrf
-                <div class="modal-body" style="background-color: #ffff;">
-
-                    <input class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="add_id">
-
-                    <div class="form-group">
-                        <label for="">Code coupon</label>
-                        <input class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="code_coupon">
-                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Type coupon</label>
-                        <select class="custom-select {{ $errors->has('type') ? 'is-invalid' : '' }}" style="height: 50px;" name="type" >
-                            <option value="fixed">fixed</option>
-
-                            <option value="percent_of">percent_of</option>
-
-                        </select>
-                        {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Valeur coupon</label>
-                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur">
-                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <select class="custom-select {{ $errors->has('status') ? 'is-invalid' : '' }}" style="height: 50px;" name="status" >
-                            <option value="en cours">En cours </option>
-                            <option value="termine">Termine</option>
-                        </select>
-                        {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                   <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};" >Ajouter</button>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalModifiePromotion" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalModifiePromotion" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modification coupon</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('root_espace_admin_promotion_update')}}"  method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                <div class="modal-body" style="background-color:  #ffff;">
-
-                    <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" type="hidden" placeholder="" name="id" id="edit_id">
-                    <div class="form-group">
-                        <label for="">Code coupon</label>
-                        <input class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="code_coupon" id='edit_code'>
-                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Type coupon</label>
-                        <select class="custom-select {{ $errors->has('type') ? 'is-invalid' : '' }}" style="height: 50px;" name="type" id='edit_type'>
-                            <option value="fixed">fixed</option>
-
-                            <option value="percent_of">percent_of</option>
-
-                        </select>
-                        {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                     <div class="form-group">
-                        <label for="">Valeur coupon</label>
-                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur" id='edit_valeur'>
-                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <select class="custom-select {{ $errors->has('status') ? 'is-invalid' : '' }}" style="height: 50px;" name="status" id='edit_status'>
-                            <option value="en cours">En cours </option>
-                            <option value="termine">Termine</option>
-                        </select>
-                        {!! $errors->first('status', '<p class="text-danger">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="modal-footer" style="display:block;">
-                    <button id="button" type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                   <button type="submit" class="btn float-right" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">Modifier</button>
-                </div>
-            </form>
-       </div>
-    </div>
-</div>
-
+@include('espace-admin.promotions._modal')
 @include('layouts.modal', ["route" => route('root_espace_admin_promotion_delete', 0), 'nom'=>'cette promotion'])
 
 @endsection
 @section('js')
 <script>
 
-$(document).on('click', '#btn_ajout_promotion', function(){
-
-    var ID = $(this).attr('data-id');
-
-
-    $('#add_id').val(ID);
-
-$('#ModalAjoutPromotion').modal('show');
-});
-
-$(document).on('click', '#btn_edit_promotion', function(){
+    $(document).on('click', '#btn_ajout_promotion', function(){
         var ID = $(this).attr('data-id');
-        var code = $(this).attr('data-code');
+
+        $('#add_id').val(ID);
+
+        $('#ModalAjoutPromotion').modal('show');
+    });
+
+    $(document).on('click', '#btn_edit_promotion', function(){
+        var id = $(this).attr('data-id');
         var type = $(this).attr('data-type');
         var valeur = $(this).attr('data-valeur');
         var status = $(this).attr('data-status');
 
-        $('#edit_id').val(ID);
-        $('#edit_code').val(code);
+        $('#edit_id').val(id);
         $('#edit_type').val(type);
         $('#edit_valeur').val(valeur);
         $('#edit_status').val(status);
-
 
         $('#ModalModifiePromotion').modal('show');
     });
@@ -206,5 +90,35 @@ $(document).on('click', '#btn_edit_promotion', function(){
         $('#DeleteModalCenter').modal('show');
     });
 
+
+    $(document).on('click', '#generate', function(){
+        var code = $(this).attr('data-code');
+
+        function generate_code(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        $('#coupon').val(generate_code(8))
+    });
+
+    $(document).on('click', '#generate_edit', function(){
+        var code = $(this).attr('data-code');
+
+        function generate_code(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        $('#coupon_edit').val(generate_code(8))
+    });
 </script>
 @endsection
