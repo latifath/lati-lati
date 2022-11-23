@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Client;
 
 use App\Models\Client;
 use App\Models\Commande;
-use App\Models\Paiement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,14 +42,7 @@ class HomeClientController extends Controller
 
        $commande = Commande:: where('user_id', auth()->user()->id)->where('status', 'en cours')->orwhere('status', 'terminee')->latest()->first();
 
-        if($commande != ""){
-            $paiement = Paiement:: where('commande_id', $commande->id)->first();
-        }else{
-            $paiement = 0 ;
-        }
-
-
-        return view('espace-client.index', compact('nb_cmd_effectuee', 'nb_cmd_attente', 'nb_cmd_annulee', 'nb_cmd_non_payee', 'paiement', 'commande', 'nb_cmd_attente_paiement'));
+        return view('espace-client.index', compact('nb_cmd_effectuee', 'nb_cmd_attente', 'nb_cmd_annulee', 'nb_cmd_non_payee', 'commande', 'nb_cmd_attente_paiement'));
 
     }
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Commande;
-use App\Models\Paiement;
 use App\Models\CommandeProduit;
 use App\Http\Controllers\Controller;
 
@@ -30,19 +29,7 @@ class CommandeClientController extends Controller
 
         $commande = Commande::findOrfail($id);
 
-        $paiement = Paiement::where('commande_id', $id)->first();
-
-        return view('espace-client.commande.show', compact('commande_detail', 'id', 'commande', 'paiement'));
+        return view('espace-client.commande.show', compact('commande_detail', 'id', 'commande'));
     }
 
-    // Facture
-
-    public function facture($id){
-
-        $cmde = Commande::where('id', $id)->first();
-
-        $pay = Paiement::where('commande_id', $cmde->id)->first();
-
-        return view('espace-client.facture', compact('cmde', 'pay'));
-    }
 }

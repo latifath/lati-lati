@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title>TDS-store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
@@ -22,12 +20,42 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
-<body style="text-align: center; padding-top: 25%;">
-    <h1 class="text-success">Votre commande à été payée avec succès. <br> Merci !
-    </h1>
-    <a href="{{ route('root_espace_client_commande_index') }}">
-        <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button>
-    </a>
+<style>
+
+    @media (max-width: 992px) {
+        .logo {
+            width: 60%;
+        }
+        .custom-select {
+            width: 50%;
+            height: 50%;
+        }
+        #btn-envoie {
+        margin-top: 10px;
+    }
+    #btn-kkiapay {
+        margin-left: 10px ! important;
+
+    }
+    .kkiapay-button{
+        width: 130px;
+        height: 100px;
+    }
+    .col-6{
+        padding-right: 0px !important;
+        padding-left: 5px !important;
+    }
+    #pay{
+        font-size: 14px;
+    }
+}
+</style>
+
+<body>
+
+
+        gjjjjjjjjjjh
+
 
 </body>
 </html>

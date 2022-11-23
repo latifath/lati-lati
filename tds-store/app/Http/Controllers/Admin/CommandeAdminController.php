@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Produit;
 use App\Models\Commande;
-use App\Models\Paiement;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use App\Models\AdresseClient;
@@ -46,9 +45,7 @@ class CommandeAdminController extends Controller
 
         $commande_produit = CommandeProduit::where('commande_id', $id)->get();
 
-        $paiement = Paiement::where('commande_id', $id)->get();
-
-        return view('espace-admin.commandes.show', compact('adr_cli', 'commande', 'adr_livr', 'paiement', 'commande_produit'));
+        return view('espace-admin.commandes.show', compact('adr_cli', 'commande', 'adr_livr', 'commande_produit'));
     }
 
     public function valider_commande($id){

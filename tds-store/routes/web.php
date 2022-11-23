@@ -9,6 +9,7 @@ use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PayementController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\SitepublicController;
+use App\Http\Controllers\Admin\FactureController;
 use App\Http\Controllers\Admin\CategorieController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\LivraisonController;
@@ -73,8 +74,7 @@ Route::get('validation-commmande/{id}/payer-la-commande/type-paiement-{payment}'
 
 Route::get('validation-commmande/{id}/commande-reçue/type-paiement-{payment}', [PayementController::class, 'commande_recue'])->name('root_site_public_commande_recue');
 
-Route::get('commande/{id}/type-paiement-{paiement}/facturation', [PayementController::class, 'facture'])->name('root_site_public_facture');
-
+// Route::get('commande/{id}/type-paiement-{paiement}/facturation', [PayementController::class, 'facture'])->name('root_facture');
 
 Route::post('/newsletter', [HomeController::class, 'newsletter'])->name('root_site_public_newsletter');
 
@@ -107,13 +107,15 @@ Route::middleware('client')->group(function () {
 
     Route ::get('/espace-client/commande/{id}/detail', [CommandeClientController:: class, 'show'])->name('root_espace_client_commande_show');
 
-    Route::get('/espace-client/commandes/{id}/facturation', [CommandeClientController:: class, 'facture'])->name('root_espace_client_commande_facture');
+    // Route::get('/espace-client/commandes/{id}/facturation', [CommandeClientController:: class, 'facture'])->name('root_espace_client_commande_facture');
+
+    Route::get('espace-client/facture/{id}', [PayementController::class, 'facture'])->name('root_facture');
 
     Route::get('/espace-client/paiement', [PaiementClientController:: class, 'index'])->name('root_espace_client_paiement_index');
 
     Route::get('/espace-client/page-paiement', [PaiementClientController:: class, 'payer_index'])->name('root_espace_client_payer_index');
 
-    Route::get('validation/{id}/commande-reçue/type-paiement-{payment}', [PaiementClientController:: class, 'store'])->name('root_espace_client_store');
+    // Route::get('validation/{id}/commande-reçue/type-paiement-{payment}', [PaiementClientController:: class, 'store'])->name('root_espace_client_store');
 
 
     // information client
@@ -346,6 +348,21 @@ Route::middleware('admin')->group(function () {
     Route::get('espace-admin/produits-non-livre/{id}/modifier', [ProduitNonLivrerAdminContoller::class, 'validation_produit_livre'])->name('root_espace_admin_modifie_produits_non_livre');
 
     Route::post('espace-admin/produits-non-livre/{id}/retirer', [ProduitNonLivrerAdminContoller::class, 'validation_produit_non_livre'])->name('root_espace_admin_retirer_produits_non_livre');
+
+    // generation facture
+
+    Route::get('espace-admin/livraison/{id}/facture-generate/', [FactureController::class, 'index'])->name('root_espace_admin_index_facture');
+
+    Route::post('espace-admin/livraison/facture', [FactureController::class, 'store_facture_item'])->name('root_espace_admin_creation_facture');
+
+    Route::post('espace-admin/generate/facture', [FactureController::class, 'store_facture'])->name('root_espace_admin_generate_facture');
+
+    Route::get('espace-admin/livraison/facture/{id}', [FactureController::class, 'facture'])->name('root_espace_admin_facture');
+
+    Route::put('espace-admin/livraison/facture/update', [FactureController::class, 'update'])->name('root_espace_admin_facture_update');
+
+    Route::post('espace-admin/livraison/validation/facture/{id}', [FactureController::class, 'confirm'])->name('root_espace_admin_facture_validate');
+
 
 });
 // end espace admin

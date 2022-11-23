@@ -21,9 +21,10 @@ class CreateCommandesTable extends Migration
             $table->foreign('adresse_client_id')->references('id')->on('adresse_clients')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table-> string('status')->default('en cours');
-            $table-> decimal('tva', 3, 2)->nullable();
-            $table-> string('promotion')->nullable();
+            $table->integer('invoice_id')->default(0);
+            $table->string('status')->default('en cours');
+            $table->decimal('tva', 3, 2)->nullable();
+            $table->string('promotion')->nullable();
             $table->timestamps();
         });
     }

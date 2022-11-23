@@ -44,8 +44,8 @@
                                 <td>{{ $commande->created_at }}</td>
                                 <td>{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }} </td>
                                 <td>{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
-                                <td style="{{ couleur_text_2() }}">{{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'à communiquer' }} </td>
-                                <td style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + info_livraison($commande->id)->montant), '0', '.', ' ' ) }} F CFA</td>
+                                <td style="{{ couleur_text_2() }}">{{ info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'à communiquer' }} </td>
+                                <td style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ' ) }} F CFA</td>
                             </tr>
                         </tbody>
                     </table>
@@ -137,7 +137,7 @@
 @endsection
 
 @section('js')
-<script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) }}" paymentmethod="{{ $type_paiement }}" callback="http://127.0.0.1:8000/validation-commmande/{{ $commande->id }}/commande-reçue/type-paiement-{{ $type_paiement }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+<script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) }}" paymentmethod="" callback="http://127.0.0.1:8000/validation-commmande/{{ $commande->id }}/commande-reçue/type-paiement-{{ $type_paiement }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
 <script>
     $(document).ready(function(){

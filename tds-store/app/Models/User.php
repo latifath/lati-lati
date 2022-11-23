@@ -86,4 +86,14 @@ class User extends Authenticatable
     return $this->belongsToMany(Produit::class);
     }
 
+    public function invoices()
+    {
+    return $this->hasMany(Invoice::class);
+    }
+
+    public function invoice_items()
+    {
+    return $this->hasMany(InvoiceItem::class);
+    }
+
 }

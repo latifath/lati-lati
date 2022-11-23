@@ -61,7 +61,6 @@ public function update(Request $request){
 
     $request->validate([
         'quantite' => 'required',
-        'prix_unitaire' => 'required',
     ]);
 
      $stock = Stock::findOrfail($request->id);
@@ -70,7 +69,6 @@ public function update(Request $request){
 
     Stock::findOrfail($request->id)->update([
         "quantite" => $request->quantite,
-        "prix_unitaire" => $request->prix_unitaire,
         "montant" => $request->quantite * $request->prix_unitaire,
     ]);
 

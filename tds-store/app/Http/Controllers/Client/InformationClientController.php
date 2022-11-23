@@ -54,7 +54,7 @@ class InformationClientController extends Controller
         $this->validate($request, [
             'nom' => 'required|min:3|max:20|alpha',
             'prenom' => 'required',
-            'email' => 'required|unique:clients,email,except,id',
+            'email' => 'required',
             'telephone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'pays' => 'required|alpha',
             'rue' => 'required',

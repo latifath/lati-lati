@@ -24,20 +24,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($commandes as $item)
-                                @if (account_commande($item->id) != "")
-                                    <tr>
-                                        <td>{{ account_commande($item->id)->created_at }}</td>
-                                        <td>{{ number_format((account_commande($item->id)->montant), 0, '.', ' ')}} F CFA</td>
-                                        <td>{{ account_commande($item->id)->type_paiement }}</td>
-                                        <td>{{ account_commande($item->id)->commande_id }}</td>
-                                        <td>
-                                            <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
-                                                <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
+                            @foreach ($bills as $invoice)
+                                <tr>
+                                    <td>{{ $invoice->created_at }}</td>
+                                    <td>{{ number_format(($invoice->total), 0, '.', ' ')}} F CFA</td>
+                                    <td>{{ $invoice->payment_method }}</td>
+                                    <td>#{{ commande($invoice->id) ? commande($invoice->id)->id : 'Néant'}}</td>
+                                    <td>
+                                        @if (commande($invoice->id))
+                                            <a href="{{ route('root_espace_client_commande_show', $invoice->id) }}">
+                                                <button class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                             </a>
-                                        </td>
-                                    </tr>
-                                @endif
+                                        @endif
+
+                                        <a href="{{ route('root_facture', $invoice->id) }}">
+                                            <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

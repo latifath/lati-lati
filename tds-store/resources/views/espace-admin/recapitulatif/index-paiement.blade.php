@@ -40,7 +40,7 @@
     </div>
 </div>
 <br>
-    @if ($paiements != " ")
+    @if ($payment)
         <div class="row">
             <div>
                 <button class="btn border mb-3 mx-3" onClick="imprimer('bilan-paiement')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
@@ -51,7 +51,7 @@
             <div class="col-12" id="bilan-paiement">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        @if($paiements->count() == 0)
+                        @if($payment->count() == 0)
                         <h2 class="text-danger">Aucun paiement trouvé pour la période du {{ Carbon\Carbon::parse( $date_d)->format('d-m-Y') }} au {{ Carbon\Carbon::parse($date_f)->format('d-m-Y') }} </h2>
                         @else
                         <h1 class="mt-0 header-title text-success" style="font-size: 30px; text-align: center;"> Etat des paiements du {{ Carbon\Carbon::parse( $date_d)->format('d-m-Y') }} au {{ Carbon\Carbon::parse($date_f)->format('d-m-Y') }}</h1>
@@ -69,21 +69,19 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $i= 1;
                                         $total = 0;
                                     @endphp
-                                    @foreach($paiements as $paiement)
+                                    @foreach($payment as $key => $paid)
                                         <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>{{ $paiement->reference }}</td>
-                                            <td>{{ $paiement->montant }}</td>
-                                            <td>{{ $paiement->commande_id }}</td>
-                                            <td>{{ $paiement->type_paiement }}</td>
-                                            <td>{{ $paiement->created_at->format('m-d-Y') }}</td>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $paid->reference }}</td>
+                                            <td>{{ number_format($paid->total, '0', '.', ' ' )}} F CFA</td>
+                                            <td>{{ $paid->commande_id }}</td>
+                                            <td>{{ $paid->payment_method }}</td>
+                                            <td>{{ $paid->date_paid }}</td>
                                         </tr>
                                         @php
-                                            $i++;
-                                            $total = $total + $paiement->montant;
+                                            $total = $total + $paid->total;
                                         @endphp
 
                                     @endforeach

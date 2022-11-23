@@ -40,7 +40,7 @@
     </div>
 </div>
 <br>
-    @if ($commandes == " ")
+    @if ($commandes)
         <div class="row">
             <div>
                 <button class="btn border mb-3 mx-3" onClick="imprimer('Bilan')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">

@@ -129,6 +129,8 @@
 
                         @yield('expedition')
 
+                        @yield('creation-facture')
+
                     </div>
 
                 </div>

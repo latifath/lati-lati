@@ -36,9 +36,9 @@
                         <tr>
                             <th>N°</th>
                             <th>Date</th>
-                            <th>Montant</th>
+                            <th>Prix</th>
                             <th>Type de paiement</th>
-                            <th style="width: 8%">Action</th>
+                            <th style="width: 15%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,15 +50,14 @@
                             <tr>
                                 <td>{{ $item->id}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(account_commande($item->id)->montant, 0, '.', ' ')}} F CFA</td>
-                                <td>{{ $item->type_paiement}}</td>
+                                <td>{{ $item->invoice ? number_format($item->invoice->total, '0', '.', '') . 'F CFA' : null }}</td>
+                                <td>{{ $item->invoice->payment_method ?? NULL }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
 
                                     </a>
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
-
+                                    <a href="{{ route('root_facture', $item->invoice_id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -80,7 +79,7 @@
                         <tr>
                             <th>N°</th>
                             <th>Date</th>
-                            <th>Montant</th>
+                            <th>Prix</th>
                             <th>Type de paiement</th>
                             <th style="width: 8%">Action</th>
                         </tr>
@@ -94,14 +93,14 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ account_commande($item->id) ? number_format(account_commande($item->id)->montant, '0', '.', ' ' ) .' F CFA' : 'Néant' }}</td>
-                                <td>{{ account_commande($item->id) ?  account_commande($item->id)->type_paiement : 'Néant' }}</td>
+                                <td>{{ $item->invoice ? number_format($item->invoice->total, '0', '.', '') . 'F CFA' : null }}</td>
+                                <td>{{ $item->invoice->payment_method ?? NULL }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
 
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
+                                    <a href="{{ route('root_facture', $item->invoice_id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -126,9 +125,9 @@
                         <tr>
                             <th>N°</th>
                             <th>Date</th>
-                            <th>Montant</th>
+                            <th>Prix</th>
                             <th>Type de paiement</th>
-                            <th style="width: 5%;">Action</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -140,14 +139,14 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format ((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id))),0, '.', ' ') }} F CFA</td>
-                                <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : 'Néant'}}</td>
+                                <td>{{ $item->invoice ? number_format($item->invoice->total, '0', '.', '') . 'F CFA' : null }}</td>
+                                <td>{{ $item->invoice->payment_method ?? NULL }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
 
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
+                                    <a href="{{ route('root_facture', $item->invoice_id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -169,7 +168,7 @@
                         <tr>
                             <th>N°</th>
                             <th>Date</th>
-                            <th>Montant</th>
+                            <th>Prix</th>
                             <th>Type de paiement</th>
                             <th style="width: 8%">Action</th>
                         </tr>
@@ -183,14 +182,14 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format(montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id)), 0, '.', ' ' ) }} F CFA</td>
-                                <td>Néant</td>
+                                <td>{{ $item->invoice ? number_format($item->invoice->total, '0', '.', '') . 'F CFA' : null }}</td>
+                                <td>{{ $item->invoice->payment_method ?? NULL }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;" ><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
 
+                                    <a href="{{ route('root_facture', $item->invoice_id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>
@@ -212,7 +211,7 @@
                         <tr>
                             <th>N°</th>
                             <th>Date</th>
-                            <th>Montant</th>
+                            <th>Prix</th>
                             <th>Type de paiement</th>
                             <th style="width: 8%">Action</th>
                         </tr>
@@ -226,14 +225,14 @@
                             <tr>
                                 <td>{{ $i}}</td>
                                 <td>{{ $item->created_at}}</td>
-                                <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($item->id), $item->promotion), $item->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($item->id))),0, '.', ' ' )}} F CFA</td>
-                                <td>{{ account_commande($item->id) ? account_commande($item->id)->type_paiement : ' '}}</td>
+                                <td>{{ $item->invoice ? number_format($item->invoice->total, '0', '.', '') . 'F CFA' : null }}</td>
+                                <td>{{ $item->invoice->payment_method ?? NULL }}</td>
                                 <td>
                                     <a href="{{ route('root_espace_client_commande_show', $item->id) }}">
                                         <button class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                     </a>
 
-                                    <a href="{{ route('root_espace_client_commande_facture', $item->id) }}">
+                                    <a href="{{ route('root_facture', $item->invoice_id) }}">
                                         <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                     </a>
                                 </td>

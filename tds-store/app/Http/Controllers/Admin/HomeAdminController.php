@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Produit;
 use App\Models\Commande;
-use App\Models\Paiement;
 use App\Models\Categorie;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
@@ -33,13 +32,6 @@ class HomeAdminController extends Controller
 
         $m_paiement = 0;
 
-        $paiements = Paiement::all();
-
-        foreach ($paiements as $paiement) {
-             $m_paiement = $m_paiement + $paiement->montant;
-
-        }
-
         // categories
 
         $categories = Categorie::all();
@@ -54,7 +46,7 @@ class HomeAdminController extends Controller
 
 
 
-        return view('/espace-admin.index', compact('commandes_effectuee', 'commandes_en_attente', 'commandes_annulee', 'commandes_non_payee', 'm_paiement', 'newsletters', 'nbr_role_client', 'nbr_role_admin', 'categories', 'sous_categories', 'produits'));
+        return view('/espace-admin.index', compact('commandes_effectuee', 'commandes_en_attente', 'commandes_annulee', 'commandes_non_payee', 'newsletters', 'nbr_role_client', 'nbr_role_admin', 'categories', 'sous_categories', 'produits'));
 
     }
 

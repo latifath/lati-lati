@@ -180,7 +180,6 @@
                 <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Reference</th>
                         <th>Montant</th>
                         <th>Type paiement</th>
@@ -188,15 +187,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($paiement as $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
-                            <td>{{$value->reference }}</td>
-                            <td>{{ number_format($value->montant, '0', '.', ' ') }} F CFA</td>
-                            <td>{{$value->type_paiement }}</td>
-                            <td>{{$value->created_at }}</td>
+                            <td>{{$commande->invoice ?  $commande->invoice->reference : ''}}</td>
+                            <td>{{ $commande->invoice ? number_format($commande->invoice->montant, '0', '.', ' ') . 'F CFA' : NULL }}</td>
+                            <td>{{$commande->invoice ? $commande->invoice->type_paiement : NULL}}</td>
+                            <td>{{$commande->invoice ? $commande->invoice->created_at  : NULL}}</td>
                         </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>

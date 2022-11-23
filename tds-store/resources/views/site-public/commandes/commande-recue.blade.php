@@ -10,7 +10,47 @@
     .facture_mobile{
         display: none;
     }
+    }
+
+
+@media (max-width: 992px) {
+    .logo {
+        width: 60%;
+    }
+    .custom-select {
+        width: 50%;
+        height: 50%;
+    }
+    #btn-envoie {
+        margin-top: 10px;
+    }
+    #btn-kkiapay {
+        margin-left: 10px ! important;
+
+    }
+    .kkiapay-button{
+        width: 130px;
+        height: 100px;
+    }
+    .col-6{
+        padding-right: 0px !important;
+        padding-left: 5px !important;
+    }
+    #pay{
+        font-size: 14px;
+    }
+}
+
+@media print {
+  #paye {
+    display: none;
   }
+  #btn-kkiapay {
+    display: none;
+
+  }
+}
+
 </style>
 @endsection
 @section('commande-reçue')
@@ -34,7 +74,7 @@
             <div class="">
                 <h3>Merci!</h3>
                 <p class="mb-4">Vous avez passé la commande avec succès. Votre facture est disponible et téléchargeable.
-                    <a href="{{ route('root_site_public_facture', [$commande, $type_paiement]) }}" class="facture btn btn-primary text-white tx" style="float: right; margin-bottom: 10px;" role="button">Facture</a>
+                    <a href="{{ route('root_facture', $commande->invoice_id) }}" class="facture btn btn-primary text-white tx" style="float: right; margin-bottom: 10px;" role="button">Facture</a>
                     <button class="btn border facture_mobile" onClick="imprimer('facture')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
                         <i class="fa fa-print" aria-hidden="true" input type="button" value="Imprimer"> </i> Imprimer
                     </button>
@@ -112,7 +152,7 @@
 
                     <tr>
                         <td class="border-right-0">Epédition :</td>
-                        <td class="border-left-0" style="{{ couleur_text_2() }}">{{ info_livraison($commande->id)->montant != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'à communiquer' }}</td>
+                        <td class="border-left-0" style="{{ couleur_text_2() }}">{{ info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ' ) . ' F CFA ' : 'à communiquer' }}</td>
                     </tr>
 
                     <tr>

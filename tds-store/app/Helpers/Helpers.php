@@ -1,12 +1,15 @@
 <?php
+use App\Models\User;
 use Kkiapay\Kkiapay;
 use App\Models\Client;
-use App\Models\Paiement;
+use App\Models\Invoice;
+use App\Models\Commande;
 use App\Models\Categorie;
 use App\Models\Livraison;
 use App\Models\Promotion;
 use App\Models\Expedition;
 use App\Models\Partenaire;
+use App\Models\InvoiceItem;
 use Illuminate\Support\Str;
 use App\Models\AdresseClient;
 use App\Models\Configuration;
@@ -25,6 +28,18 @@ if(!function_exists('kkiapay')){
         $kkiapay = new Kkiapay($public_key, $private_key, $secret, $sandbox=true);
 
         return $kkiapay->verifyTransaction($id_transaction);
+
+    }
+}
+
+if(!function_exists('verify_kkiapay_transaction')){
+    function verify_kkiapay_transaction($id_transaction, $m_invoice){
+
+        if(kkiapay($id_transaction)->status == "SUCCESS" && kkiapay($id_transaction)->amount >= $m_invoice) {
+            return true;
+        }
+
+        return false;
 
     }
 }
@@ -199,12 +214,6 @@ if(!function_exists('count_favoris')){
     }
 }
 
-if(!function_exists('paiements')){
-    function paiements(){
-        return  Paiement::all();
-    }
-}
-
 if(!function_exists('disabled_button_commande')){
     function disabled_button_commande($param1, $param2){
         if($param1 == $param2){
@@ -238,7 +247,12 @@ if(!function_exists('villes')){
 // Pour recuuperer le montant dans la table livraison
 if(!function_exists('info_livraison')){
     function info_livraison($id){
-        return Livraison::where('commande_id', $id)->first();
+        $livraisons = Livraison::where('commande_id', $id)->orderBy('id', 'DESC')->get();
+        $l = "";
+        foreach($livraisons as $livraison) {
+            $l = $livraison;
+        }
+        return $l;
     }
 }
 
@@ -294,7 +308,29 @@ if(!function_exists('generate_code_coupon')){
     }
 }
 
+// Facture informations
+if(!function_exists('invoice_items')) {
+    function invoice_items($facture_id){
+        return InvoiceItem::where('invoice_id', $facture_id)->get();
+    }
+}
 
 
+if(!function_exists('invoice_terminate')) {
+    function invoice_terminate($invoice){
+        return Invoice::findOrfail($invoice);
+    }
+}
 
+if(!function_exists('customer_users')) {
+    function customer_users(){
+        return User::where('role', 'client')->get();
+    }
+}
+
+if(!function_exists('client')) {
+    function client($user){
+        return Client::where('user_id', $user)->first();
+    }
+}
 

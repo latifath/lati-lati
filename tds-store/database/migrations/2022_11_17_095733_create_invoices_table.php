@@ -17,12 +17,15 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('date_paid');
-            $table->date('date_cancel');
+            $table->dateTime('date_paid')->nullable();
+            $table->dateTime('date_cancel')->nullable();
             $table->decimal('subtotal', 10, 2);
+            $table->integer('tva')->nullable();
             $table->decimal('total', 10, 2);
-            $table->string('payment_method');
-            $table->boolean('normalize');
+            $table->string('payment_method')->nullable();
+            $table->string('reference')->unique()->nullable();
+            $table->boolean('status')->default(1);
+            $table->boolean('normalize')->default(0);
 
             $table->timestamps();
         });

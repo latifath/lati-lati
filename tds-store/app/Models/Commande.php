@@ -11,12 +11,7 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['adresse_client_id', 'adresse_livraison_id', 'status', 'user_id', 'tva', 'promotion', 'created_at', 'updated_at'];
-
-    public function paiements()
-    {
-    return $this->hasMany(Paiement::class);
-    }
+    protected $fillable = ['adresse_client_id', 'adresse_livraison_id', 'user_id', 'invoice_id', 'status', 'tva', 'promotion', 'created_at', 'updated_at'];
 
     public function adresse_client()
     {
@@ -35,7 +30,7 @@ class Commande extends Model
 
     public function adresse_livraison()
     {
-    return $this->belongsTo(AdresseLivraison::class);
+        return $this->belongsTo(AdresseLivraison::class);
     }
 
     public function promotion()
@@ -51,5 +46,10 @@ class Commande extends Model
     public function livraisons()
     {
         return $this->hasMany(Livraison::class);
+    }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

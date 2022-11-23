@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Livraison;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expedition extends Model
 {
@@ -13,6 +14,6 @@ class Expedition extends Model
 
     public function livraisons()
     {
-        return $this->hasMany(Paiement::class);
+        return $this->hasMany(Livraison::class);
     }
 }

@@ -41,10 +41,10 @@
             </div>
             <div class="card-body">
                 <div class="border-bottom pb-4">
-                     <span class="badge badge-success">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ' ) }} F CFA</span> <span class="ml-2 text-muted">Dernier paiement</span>
+                     {{-- <span class="badge badge-success">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ' ) }} F CFA</span> <span class="ml-2 text-muted">Dernier paiement</span> --}}
                 </div>
                 <div class="mt-4 text-muted">
-                    <h5 class="m-0" style="color: #ea0513;">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0','.', ' ' ) }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i></h5>
+                    {{-- <h5 class="m-0" style="color: #ea0513;">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0','.', ' ' ) }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i></h5> --}}
                 </div>
             </div>
         </div>

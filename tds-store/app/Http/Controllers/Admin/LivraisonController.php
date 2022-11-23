@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Commande;
 use App\Models\Livraison;
 use App\Models\Expedition;
 use Illuminate\Http\Request;
@@ -13,7 +12,7 @@ class LivraisonController extends Controller
     public function index(){
         $livraisons_incomplète = Livraison::where('montant', null)->where('status', 'non')->get();
 
-        $livraisons = Livraison::where('montant', '!=', null)->where('status', 'non')->get();
+        $livraisons = Livraison::where('status', 'non')->get();
 
         $livraisons_valide = Livraison::where('status', 'oui')->where('montant', '!=', null)->get();
 
@@ -50,8 +49,7 @@ class LivraisonController extends Controller
 
     public function store(Request $request){
         $request->validate([
-
-            'ville' => 'required|',
+            'ville' => 'required',
             'montant' => 'required|integer',
         ]);
 

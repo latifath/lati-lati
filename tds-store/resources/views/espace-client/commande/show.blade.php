@@ -61,7 +61,7 @@
             </div>
         </div>
 </div>
-<br><br>
+
 <div class="col-12">
     <div class="card border-secondary mb-5">
             <div class="card-header border-0" style="{{ couleur_principal() }}; font-size: 24px;">
@@ -100,7 +100,6 @@
             </div>
     </div>
 </div>
-<br>
 
 <div class="col-12">
     <div class="card border-secondary mb-5">
@@ -141,7 +140,6 @@
     </div>
 </div>
 
-<br><br>
 <div class="col-12">
     <div class="card border-secondary mb-5">
             <div class="card-header border-0"  style="{{ couleur_principal() }}; font-size: 24px;">
@@ -158,11 +156,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if( exist_commande_paiement($commande->id) !=null)
+                        @if( $commande->invoice && $commande->invoice->date_paid)
                         <tr>
-                            <td>{{ number_format($paiement->montant, '0', '.', ' ') }} F CFA</td>
-                            <td>{{ $paiement->created_at }}</td>
-                            <td>{{ $paiement->type_paiement }}</td>
+                            <td>{{ number_format($commande->invoice->subtotal, '0', '.', ' ') }} F CFA</td>
+                            <td>{{ $commande->invoice->date_paid }}</td>
+                            <td>{{ $commande->invoice->payment_method }}</td>
                         </tr>
                         @else
                         <tr>

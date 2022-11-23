@@ -23,11 +23,10 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#resume">Résumé</a>
                             </li>
-                            @if($commande->status != 'terminee')
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#paiement">Ajouter un paiement</a>
-                            </li>
-                            @else
+                            @if($commande->invoice && !$commande->invoice->date_paid)
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#paiement">Ajouter un paiement</a>
+                                </li>
                             @endif
                         </ul>
 
@@ -50,33 +49,39 @@
                                                         </span></td>
                                                 </tr>
 
-                                                @if (exist_commande_paiement($commande->id) == null)
-
-                                                <tr>
-                                                    <td class="border-0 float-left">Total dû: <span
-                                                            style="{{ couleur_text_2() }}">{{  number_format((montant_ttc(montant_apres_reduction_sans_session(total_commande($commande->id), $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ') }} F CFA</span>
-                                                    </td>
-                                                </tr>
+                                                @if (!$commande->invoice)
+                                                    <tr>
+                                                        <td class="border-0 float-left">
+                                                            Aucune facture dû
+                                                        </td>
+                                                    </tr>
+                                                @elseif(!$commande->invoice->date_paid )
+                                                    <tr>
+                                                        <td class="border-0 float-left">Total dû: <span
+                                                                style="{{ couleur_text_2() }}">{{  number_format($commande->invoice->total, '0', '.', ' ') }} F CFA</span>
+                                                        </td>
+                                                    </tr>
                                                 @else
-
-                                                <tr>
-                                                    <td class="border-0 float-left">Solde: <span
-                                                        style="{{ couleur_text_2() }}">{{ number_format((account_commande($commande->id)->montant + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ') }} F CFA</span>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td class="border-0 float-left">Solde: <span
+                                                            style="{{ couleur_text_1() }}">{{ number_format($commande->invoice->total, '0', '.', ' ') }} F CFA</span>
+                                                        </td>
+                                                    </tr>
                                                 @endif
                                             </div>
                                         </table>
                                     </div>
                                     <div class="col-md-6">
-                                        @if (exist_commande_paiement($commande->id) == null)
+                                        @if (!$commande->invoice)
+                                            <span style="font-size: 24px;" class="text-muted font-weight-bold">Aucune facture dû</span>
+                                        @elseif(!$commande->invoice->date_paid)
                                             <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON
                                                 PAYE</span>
                                         @else
                                             <span style="font-size: 24px;" class="text-success font-weight-bold">
                                                 PAYE</span>
                                             <p>Méthode de paiement: <strong style="font-size: 16px">
-                                                    {{ account_commande($commande->id)->type_paiement }}</strong></p>
+                                                {{ $commande->invoice->payment_method}}</strong></p>
                                         @endif
                                     </div>
                                 </div>
@@ -156,14 +161,16 @@
                                                                 <th>Date</th>
                                                                 <th>Type paiement</th>
                                                                 <th>Montant</th>
+                                                                <th>Reference</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @if (exist_commande_paiement($commande->id) != null)
+                                                            @if ($commande->invoice && $commande->invoice->date_paid)
                                                                 <tr>
-                                                                    <td>{{ $paiement->created_at }}</td>
-                                                                    <td>{{ $paiement->type_paiement }}</td>
-                                                                    <td>{{number_format($paiement->montant, '0', '.', ' ') }} F CFA</td>
+                                                                    <td>{{ $commande->invoice->created_at }}</td>
+                                                                    <td>{{ $commande->invoice->payment_method }}</td>
+                                                                    <td>{{number_format($commande->invoice->total, '0', '.', ' ') }}</td>
+                                                                    <td>{{ $commande->invoice->reference }} F CFA</td>
                                                                 </tr>
                                                             @else
                                                                 <tr>
@@ -188,14 +195,10 @@
                                                 <form action="{{ route('root_espace_admin_paiement_create') }}"
                                                     method="POST">
                                                     @csrf
-                                                    <div class="form-group">
-                                                        <label for=""></label>
-                                                        <input
-                                                            class="form-control {{ $errors->has('commande_id') ? 'is-invalid' : '' }}"
-                                                            style="height: 50px;" value="{{ $commande->id }}"
-                                                            type="hidden" placeholder="" name="commande_id">
-                                                        {!! $errors->first('commande_id', '<p class="text-danger">:message</p>') !!}
-                                                    </div>
+                                                    <input class="form-control" type="hidden" name="id" value={{ $commande->invoice->id }}>
+
+                                                    <input class="form-control" type="hidden" name="f_montant" value={{ $commande->invoice->total }}>
+
                                                     <div class="form-group">
                                                         <label for="">Date</label>
                                                         <input

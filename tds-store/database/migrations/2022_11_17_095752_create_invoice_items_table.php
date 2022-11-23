@@ -15,12 +15,14 @@ class CreateInvoiceItemsTable extends Migration
     {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('facture_id')->unsigned();
-            $table->foreign('facture_id')->references('id')->on('factures')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('invoice_id')->unsigned();
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('description');
-
+            $table->string('description')->default('');
+            $table->float('price')->default(0);
+            $table->integer('quantity')->default(0);
+            $table->decimal('amount', 10,2);
             $table->timestamps();
         });
     }

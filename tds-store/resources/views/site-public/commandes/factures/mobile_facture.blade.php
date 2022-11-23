@@ -5,31 +5,46 @@
             <div class="row">
                 <div class="col-6" style="">
                     <p>
-                        <img src="{{ asset('assets/img/tds.png') }}" alt="">
+                        <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
                     </p>
-                    <h3 style=""> Facture #{{ $commande->id}} </h3>
+                    <h3 style=""> Facture #{{ $commande->invoice->id}} </h3>
                 </div>
+
                 <div class="col-6 text-center" style="">
                     <div class="">
-                        @if (exist_commande_paiement($commande->id) != null)
+                        @if ($commande->invoice->date_paid)
                         <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
+                        @elseif($commande->invoice->date_cancel)
+                           <span style="font-size: 24px;" class="text-danger font-weight-bold"> ANNULE</span>
                         @else
-                            <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span>
+                            <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span><br>
+                            @if( isset($_GET['type_paiement']))
+                                <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
+                                    @if($_GET['type_paiement'] == "momo")
+                                        <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
+                                    @elseif($_GET['type_paiement'] == "card")
+                                        <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
+                                    @elseif($_GET['type_paiement'] == "paypal")
+                                        <div id="paypal-button-container">
+                                            <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+                            <br>
                         @endif
                     </div>
                     <div class="small-text">
                         <?php
-                            $date = "$commande->created_at";
+                            $date = "$commande->invoice->created_at";
 
                         ?>
                         Date d'echéance: {{ date('Y-m-d', strtotime($date. ' + 14 days')) }}
                     </div>
                     <div class="paiement-btn-container hidden-print">
-
                     </div>
                 </div>
             </div>
-
             <hr>
 
             <div class="row">
@@ -50,17 +65,26 @@
                 </div>
                 <div class="col-6">
                     <strong>Date de facturation</strong><br>
-                    <span>{{ $commande->created_at }} </span>
+                    <span>{{ $commande->invoice->created_at }} </span>
                 </div>
+
                 <div class="col-6 text-right">
-                    <strong>Mode de paiement</strong>
-                    <form action="">
-                        <input type="hidden" name="mode" value="">
-                        <select class="custom-select w-auto" name="mode">
-                            <option value="">{{ $type_paiement }}</option>
-                            <option selected>{{ $type_paiement }}</option>
-                        </select>
-                    </form>
+                        <strong>Mode de paiement</strong>
+                        @if ($commande->invoice->date_paid)
+                            <select class="custom-select w-auto" name="mode">
+                                <option selected>{{ $commande->invoice->payment_method ?? '' }}</option>
+                            </select>
+                        @else
+                            <form action="" method="GET" id="paye">
+                                <select class="custom-select type w-auto" name="type_paiement" >
+                                    <option value="">{{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : 'type paiement' }}</option>
+                                    <option value="momo">MoMo</option>
+                                    <option value="card">Carte Bancaire</option>
+                                    <option value="paypal">PayPal</option>
+                                </select>
+                                <button type="submit" class="btn bg-success text-white" id="btn-envoie">Envoyer</button>
+                            </form>
+                        @endif
                 </div>
 
                 <div class="card col-12 p-0 mt-5">
@@ -76,10 +100,11 @@
                                     <tr>
                                         <td><strong>Description</strong></td>
                                         <td><strong>Qty</strong></td>
-                                        <td><strong>Prix ex TVA</strong></td>
-                                        <td><strong>Sous-Total</strong></td>
+                                        <td><strong>Prix HT</strong></td>
+                                        <td><strong>Sous-total</strong></td>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @php
                                         $sub_total = 0 ;
@@ -135,11 +160,11 @@
                             </thead>
                             <tbody>
                                 <tr class="text-center">
-                                    @if(exist_commande_paiement($commande->id) != '')
-                                        <td>{{ $pay->created_at }}</td>
-                                        <td>{{ $type_paiement }}</td>
-                                        <td>{{ $pay->reference}}</td>
-                                        <td>{{ number_format($pay->montant, '0', '.', ' ' ) }} F CFA</td>
+                                    @if($commande->invoice->date_paid)
+                                        <td>{{ $commande->created_at }}</td>
+                                        <td>{{ $commande->invoice->payment_method }}</td>
+                                        <td>{{ $commande->invoice->reference }}</td>
+                                        <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))),  0, '.', ' ' ) }} F CFA</td>
                                     @else
                                         <td class="text-center" colspan="4">
                                             <span>Aucune transaction trouvée</span>

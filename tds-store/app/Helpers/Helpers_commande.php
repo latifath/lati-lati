@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Commande;
-use App\Models\Paiement;
 use App\Models\CommandeProduit;
 
 
@@ -27,30 +26,10 @@ if(!function_exists('detail_commande')) {
 }
 
 
-if(!function_exists('account_commande')) {
-    function account_commande($id){
-        $account = Paiement::where('commande_id', $id)->first();
-        return $account;
-    }
-}
-
-if(!function_exists('compte_com')){
-    function compte_com($id){
-        $com = Paiement::findOrfail($id);
-        return $com;
-    }
-}
-
 if(!function_exists('commande')){
-    function commande($id){
-        $commande = Commande::where('id', $id)->first();
+    function commande($invoice_id){
+        $commande = Commande::where('invoice_id', $invoice_id)->first();
         return $commande;
 
-    }
-}
-
-if(!function_exists('exist_commande_paiement')) {
-    function exist_commande_paiement($id){
-        return Paiement::where('commande_id', $id)->first();
     }
 }
