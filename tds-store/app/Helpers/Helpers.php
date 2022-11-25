@@ -318,7 +318,11 @@ if(!function_exists('invoice_items')) {
 
 if(!function_exists('invoice_terminate')) {
     function invoice_terminate($invoice){
-        return Invoice::findOrfail($invoice);
+        $invoice = Invoice::find($invoice);
+        if (!$invoice) {
+            return false;
+        }
+        return $invoice;
     }
 }
 

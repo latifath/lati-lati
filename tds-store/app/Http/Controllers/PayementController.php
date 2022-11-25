@@ -53,7 +53,10 @@ class PayementController extends Controller
         $invoice = Invoice::findOrfail($id);
         $commande = Commande::where('invoice_id', $invoice->id)->first();
         $transaction_id = $_GET['transaction_id'] ?? null;
-        $route = view('site-public.commandes.factures.facture', compact('invoice', 'commande'));
+        $adresseclient =  $commande ? adresseclient($commande->adresse_client_id) : client($invoice->user_id);
+        $items = $commande ? detail_commande($commande->id) : invoice_items($invoice->id);
+
+        $route = view('site-public.commandes.factures.facture', compact('invoice', 'commande', 'adresseclient', 'items'));
 
         if($invoice->date_paid == null) {
             if($transaction_id && verify_kkiapay_transaction($transaction_id, $invoice->id)) {
@@ -68,9 +71,11 @@ class PayementController extends Controller
                     'reference' => $transaction_id,
                 ]);
 
-                $commande->update([
-                    "status" => 'en cours',
-                ]);
+                if ($commande) {
+                    $commande->update([
+                        "status" => 'en cours',
+                    ]);
+                }
             }
         }
         return $route;

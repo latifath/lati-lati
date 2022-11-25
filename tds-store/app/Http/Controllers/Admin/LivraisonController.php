@@ -5,18 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Livraison;
 use App\Models\Expedition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class LivraisonController extends Controller
 {
     public function index(){
-        $livraisons_incomplète = Livraison::where('montant', null)->where('status', 'non')->get();
+        $dispatch_incomplete = Livraison::where('montant', null)->get();
 
-        $livraisons = Livraison::where('status', 'non')->get();
+        $dispatch_invoice_incomplete = Livraison::where('invoice_id', '!=', null)->get();
+        $dispatch = Livraison::where('status', 'non')->where('montant', '!=', null)->orwhere('invoice_id', '!=', null)->get();
 
-        $livraisons_valide = Livraison::where('status', 'oui')->where('montant', '!=', null)->get();
+        // $dispatch = DB::table("livraisons")
+        // ->where('status', 'non')
+        // ->where('montant', '!=', null)
+        // ->orwhere('invoice_id', '!=', null)
+        // ->get();
 
-        return view('espace-admin.livraisons.index', compact('livraisons', 'livraisons_incomplète', 'livraisons_valide'));
+        $dispatch_validate = Livraison::where('status', 'oui')->get();
+
+        return view('espace-admin.livraisons.index', compact('dispatch_incomplete', 'dispatch_invoice_incomplete', 'dispatch', 'dispatch_validate'));
     }
 
     public function update_frais(Request $request){

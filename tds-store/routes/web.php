@@ -2,6 +2,7 @@
 
 use App\Models\ProduitNonLivrer;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PanierController;
@@ -131,6 +132,7 @@ Route::middleware('client')->group(function () {
 
     Route::delete('site-public/favoris/{id}/supprimer', [FavorisClientController::class, 'delete'])->name('root_site_public_favoris_delete');
 
+    Route::get('facture', [InvoiceController::class, 'test'])->name('root_test');
 });
 
 // end espace client
@@ -351,17 +353,15 @@ Route::middleware('admin')->group(function () {
 
     // generation facture
 
-    Route::get('espace-admin/livraison/{id}/facture-generate/', [FactureController::class, 'index'])->name('root_espace_admin_index_facture');
+    Route::get('espace-admin/facture/{id}/generate', [FactureController::class, 'index'])->name('root_espace_admin_index_facture');
 
-    Route::post('espace-admin/livraison/facture', [FactureController::class, 'store_facture_item'])->name('root_espace_admin_creation_facture');
+    Route::post('espace-admin/facture/generate/item', [FactureController::class, 'store_facture_item'])->name('root_espace_admin_creation_facture');
 
-    Route::post('espace-admin/generate/facture', [FactureController::class, 'store_facture'])->name('root_espace_admin_generate_facture');
+    Route::post('espace-admin/facture/generate/create', [FactureController::class, 'store_facture'])->name('root_espace_admin_generate_facture');
 
-    Route::get('espace-admin/livraison/facture/{id}', [FactureController::class, 'facture'])->name('root_espace_admin_facture');
+    Route::put('espace-admin/facture/generate/item/update', [FactureController::class, 'update'])->name('root_espace_admin_facture_update');
 
-    Route::put('espace-admin/livraison/facture/update', [FactureController::class, 'update'])->name('root_espace_admin_facture_update');
-
-    Route::post('espace-admin/livraison/validation/facture/{id}', [FactureController::class, 'confirm'])->name('root_espace_admin_facture_validate');
+    Route::post('espace-admin/facture/{id}/terminate', [FactureController::class, 'confirm'])->name('root_espace_admin_facture_validate');
 
 
 });

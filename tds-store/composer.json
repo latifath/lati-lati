@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
         "cviebrock/eloquent-sluggable": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -32,12 +35,14 @@
             "app/Helpers/Helpers_path.php",
             "app/Helpers/Helpers_commande.php",
             "app/Helpers/Helpers_custom.php",
-            "app/Helpers/Helpers_product.php"
+            "app/Helpers/Helpers_product.php",
+            "app/Helpers/test.php"
         ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Swagger\\Client\\" : "app/Helpers/lib/"
         }
     },
     "autoload-dev": {

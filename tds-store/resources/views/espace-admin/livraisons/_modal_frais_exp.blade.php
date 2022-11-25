@@ -66,7 +66,7 @@
                 @csrf
                 <div class="modal-body" style="background-color:  #ffff;">
                     <input type="hidden" name="user_id" id="user_id">
-                    <input type="text" name="livraison_id" id="livraison_id">
+                    <input type="hidden" name="livraison_id" id="livraison_id">
                     <div class="form-group">
                         <label for="">Assujetti a la tva ?</label>
                         <select class="custom-select {{ $errors->has('tva') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" name="tva" >

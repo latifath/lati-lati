@@ -103,10 +103,13 @@
                 <div class="row">
                     <div class="col-6 ">
                         <strong> Facturé à</strong>
-                        <p class="small-text">
-                            {{ adresseclient($commande->adresse_client_id)->nom . " " . adresseclient($commande->adresse_client_id)->prenom }} <br>
-                            {{ adresseclient($commande->adresse_client_id)->rue  }}, {{ adresseclient($commande->adresse_client_id)->ville }} <br>
-                            {{ adresseclient($commande->adresse_client_id)->code_postal }}, {{ adresseclient($commande->adresse_client_id)->pays }}
+                        @if ($adresseclient)
+                            <p class="small-text">
+                                {{ $adresseclient->nom . " " . $adresseclient->prenom }} <br>
+                                {{ $adresseclient->rue  }}, {{ $adresseclient->ville }} <br>
+                                {{ $adresseclient->code_postal }}, {{ $adresseclient->pays }}
+                            </p>
+                        @endif
                     </div>
                     <div class="col-6 text-right">
                         <strong>Payé à</strong>
@@ -162,39 +165,44 @@
                                         @php
                                             $sub_total = 0 ;
                                         @endphp
-                                        @foreach (detail_commande($commande->id) as $item)
-                                        @php $sub_total += $item['quantite'] * $item['prix'] @endphp
+                                        @foreach ($items as $item)
+                                            @php $sub_total += $item['quantite'] * $item['prix'] @endphp
 
-                                        <tr>
-                                            <td>{{ produit($item->produit_id)->nom }}</td>
-                                            <td>{{ $item->quantite }}</td>
-                                            <td>{{ number_format(produit($item->produit_id)->prix, '0', '.', ' ')}}</td>
-                                            <td>{{ number_format($item->quantite * $item->prix,'0', '.', ' ') }} F CFA</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $commande ? produit($item->produit_id)->nom : $item->description }}</td>
+                                                <td>{{ $commande ? $item->quantite : $item->quantity }}</td>
+                                                <td>{{ number_format($commande ? produit($item->produit_id)->prix : $item->price, '0', '.', ' ')}}</td>
+                                                <td>{{ number_format($commande ? $item->quantite * $item->prix : $item->amount,'0', '.', ' ') }} F CFA</td>
+                                            </tr>
                                         @endforeach
 
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>Total</strong></td>
-                                                <td class="">{{ number_format(total_commande($commande->id), '0', '.', ' ') }} F CFA</td>
+                                                <td class="">{{ number_format($commande ? $sub_total : $invoice->subtotal, '0', '.', ' ') }} F CFA</td>
                                             </tr>
                                             <tr class="">
                                                 <td colspan="3" class="text-right"><strong>TVA</strong></td>
-                                                <td class="">{{ $commande->tva == 1 ? '18%' : '0%' }}</td>
+                                                <td class="">{{ $invoice->tva == 1 ? '18%' : '0%' }}</td>
                                             </tr>
-                                            <tr class="">
-                                                <td colspan="3" class="text-right"><strong>Expédition</strong></td>
-                                                <td class="">{{  info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
-                                            </tr>
-                                            @if ($commande->promotion != null)
+                                            @if ($commande)
                                                 <tr class="">
-                                                    <td colspan="3" class="text-right"><strong>Remise</strong></td>
-                                                    <td class="">{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</td>
+                                                    <td colspan="3" class="text-right"><strong>Expédition</strong></td>
+                                                    <td class="">{{  info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
                                                 </tr>
+                                                @if ($commande->promotion != null)
+                                                    <tr class="">
+                                                        <td colspan="3" class="text-right"><strong>Remise</strong></td>
+                                                        <td class="">{{ valeur_coupon_cmde($commande->promotion) != null ? valeur_coupon_cmde($commande->promotion) : 'null' }}</td>
+                                                    </tr>
+                                                @endif
+                                            @php
+                                                $amount_ttc = montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + info_livraison($commande->id)->montant;
+                                            @endphp
                                             @endif
-                                        <tr class="">
-                                        <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
-                                        <td class="">{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + info_livraison($commande->id)->montant),  0, '.', ' ' ) }} F CFA</td>
-                                        </tr>
+                                            <tr class="">
+                                                <td colspan="3" class="text-right"><strong>Montant Total</strong></td>
+                                                <td class="">{{ number_format($commande ? $amount_ttc : $invoice->total,  0, '.', ' ' ) }} F CFA</td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -214,10 +222,10 @@
                                 <tbody>
                                     <tr class="text-center">
                                         @if($invoice->date_paid)
-                                            <td>{{ $commande->created_at }}</td>
+                                            <td>{{ $commande ? $commande->created_at : $invoice->created_at }}</td>
                                             <td>{{ $invoice->payment_method }}</td>
                                             <td>{{ $invoice->reference }}</td>
-                                            <td>{{ number_format((montant_ttc(montant_apres_reduction_sans_session($sub_total, $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))),  0, '.', ' ' ) }} F CFA</td>
+                                            <td>{{ number_format(kkiapay($invoice->reference)->amount,  0, '.', ' ' ) }} F CFA</td>
                                         @else
                                             <td class="text-center" colspan="4">
                                                 <span>Aucune transaction trouvée</span>
@@ -232,8 +240,8 @@
             </div>
         </div>
         <div class="row py-5 float-right pr-3">
-            <a href="{{ route('root_espace_client_commande_show', $commande->id) }}">
-                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button>
+            {{-- <a href="{{ route('root_espace_client_commande_show', $commande->id) }}">
+                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button> --}}
             </a>
 
             <button class="btn border" onClick="imprimer('facture')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">
@@ -242,7 +250,7 @@
         </div>
     </div>
 
-    <script amount="{{ montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) }}" paymentmethod="" callback="http://127.0.0.1:8000/espace-client/facture/{{ $invoice->id }}?type_paiement={{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
+    <script amount="{{ $commande ? montant_ttc(montant_apres_reduction($sub_total), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id)) : $invoice->total }}" paymentmethod="" callback="http://127.0.0.1:8000/espace-client/facture/{{ $invoice->id }}?type_paiement={{ isset($_GET['type_paiement']) ? $_GET['type_paiement'] : ' ' }}" data="" url="https://technodatasolutions.bj/img/logo.png" position="center" theme="#0095ff" sandbox="true" key="08785180ecc811ec848227abfc492dc7" src="https://cdn.kkiapay.me/k.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 

@@ -17,7 +17,7 @@ class FactureController extends Controller
     public function index($id){
         $invoice = invoice::findOrfail($id);
 
-        return view('espace-admin.livraisons.factures.index', compact('invoice'));
+        return view('espace-admin.livraisons.factures.generate', compact('invoice'));
     }
 
     public function store_facture(Request $request){
@@ -115,13 +115,6 @@ class FactureController extends Controller
         Mail::to(client($invoice->user_id)->email)->send(new SendMailMontantExpeditionClient($invoice));
 
         flashy()->success('Facture validée avec succès');
-        return redirect()->route('root_espace_admin_paiements_index');
-    }
-
-    public function facture($id){
-        $invoice = Invoice::where('id', $id);
-        // $info_item = InvoiceItem::where('invoice_id', $invoice)->first();
-
-        return view('espace-admin.livraisons.factures.facture', compact('invoice'));
+        return redirect()->route('root_espace_admin_index_livraison');
     }
 }
