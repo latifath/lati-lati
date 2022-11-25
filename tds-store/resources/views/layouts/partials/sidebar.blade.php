@@ -14,7 +14,7 @@
                 @php
                     $i++ ;
                 @endphp
-                @if ($i <= 20)
+                @if ($i <= 40)
                     @if (sous_categories_menu($item->id)->count() == 0)
                         <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                     @else
