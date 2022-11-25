@@ -108,15 +108,11 @@ Route::middleware('client')->group(function () {
 
     Route ::get('/espace-client/commande/{id}/detail', [CommandeClientController:: class, 'show'])->name('root_espace_client_commande_show');
 
-    // Route::get('/espace-client/commandes/{id}/facturation', [CommandeClientController:: class, 'facture'])->name('root_espace_client_commande_facture');
-
     Route::get('espace-client/facture/{id}', [PayementController::class, 'facture'])->name('root_facture');
 
     Route::get('/espace-client/paiement', [PaiementClientController:: class, 'index'])->name('root_espace_client_paiement_index');
 
     Route::get('/espace-client/page-paiement', [PaiementClientController:: class, 'payer_index'])->name('root_espace_client_payer_index');
-
-    // Route::get('validation/{id}/commande-reçue/type-paiement-{payment}', [PaiementClientController:: class, 'store'])->name('root_espace_client_store');
 
 
     // information client

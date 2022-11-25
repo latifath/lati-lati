@@ -240,8 +240,8 @@
             </div>
         </div>
         <div class="row py-5 float-right pr-3">
-            {{-- <a href="{{ route('root_espace_client_commande_show', $commande->id) }}">
-                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button> --}}
+            <a href="{{ route('root_espace_client_paiement_index') }}">
+                <button class="btn mx-4" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour</button>
             </a>
 
             <button class="btn border" onClick="imprimer('facture')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }}; text-white;">

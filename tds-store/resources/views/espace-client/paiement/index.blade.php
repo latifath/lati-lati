@@ -29,7 +29,7 @@
                                     <td>{{ $invoice->created_at }}</td>
                                     <td>{{ number_format(($invoice->total), 0, '.', ' ')}} F CFA</td>
                                     <td>{{ $invoice->payment_method }}</td>
-                                    <td>#{{ commande($invoice->id) ? commande($invoice->id)->id : 'Néant'}}</td>
+                                    <td>{{ commande($invoice->id) ? '#' . commande($invoice->id)->id : 'Néant'}}</td>
                                     <td>
                                         @if (commande($invoice->id))
                                             <a href="{{ route('root_espace_client_commande_show', $invoice->id) }}">
