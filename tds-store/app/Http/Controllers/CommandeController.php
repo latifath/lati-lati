@@ -197,7 +197,7 @@ class CommandeController extends Controller
 
             Mail::to($clt->email)->send(new SendMailNewCommandeClient($clt, $commande, $adresseLivraison));
 
-            Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailNewCommandeAdmin($clt, $commande, $adresseLivraison));
+            Mail::to('commande@tdsstore.bj')->send(new SendMailNewCommandeAdmin($clt, $commande, $adresseLivraison));
 
             $stock_session = session('stock');
 
@@ -205,7 +205,7 @@ class CommandeController extends Controller
 
                 Mail::to($clt->email)->send(new SendMailProduitInsuffisantClient($stock_session, $cde_pdt));
 
-                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailProduitInsuffisantAdmin($stock_session, $cde_pdt));
+                Mail::to('commande@tdsstore.bj')->send(new SendMailProduitInsuffisantAdmin($stock_session, $cde_pdt));
 
                 //pour vider la session stock quant on click sur le button passer la commande
 
@@ -214,7 +214,7 @@ class CommandeController extends Controller
 
             if ($livraison->montant == null) {
 
-                Mail::to('assiawou-latifa.monsia@epitech.eu')->send(new SendMailExpedition($livraison, $clt, $adresseLivraison, $commande));
+                Mail::to('commande@tdsstore.bj')->send(new SendMailExpedition($livraison, $clt, $adresseLivraison, $commande));
             }
 
 

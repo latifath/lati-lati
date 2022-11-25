@@ -30,7 +30,7 @@ class SendMailMontantExpeditionClient extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
         ->subject('Montant Expédition')
         ->markdown('mails.send-mail-montant-expedition-client')
         ->with(['invoice' => $this->invoice

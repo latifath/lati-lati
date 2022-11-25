@@ -35,7 +35,7 @@ class SendMailExpedition extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
         ->subject('Montant expédition à Communiquer')
         ->markdown('mails.send-mail-expedition-admin')
         ->with(['livraison' => $this->livraison, 'clt' => $this->clt, 'adresseLivraison' => $this->adresseLivraison, 'commande' => $this->commande]);

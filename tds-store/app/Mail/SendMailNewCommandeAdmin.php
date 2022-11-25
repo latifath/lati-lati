@@ -35,7 +35,7 @@ class SendMailNewCommandeAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
         ->subject('Commande passée')
         ->markdown('mails.send-mail-new-commande-admin')
         ->with('clt', 'commande', 'adr',  $this->clt, $this->commande, $this->adr);

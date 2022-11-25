@@ -34,7 +34,7 @@ class SendMailProduitDisponibleClient extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
         ->subject('Produit disponible')
         ->markdown('mails.send-mail-produit-disponible-client')
         ->with('produit_non_livre', 'produit', $this->produit_non_livre, $this->produit);

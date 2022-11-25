@@ -30,7 +30,7 @@ class SendMailCommandeAcceptee extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
                     ->subject('Confirmation Commande')
                     ->markdown('mails.send-mail-commande-acceptee')
                     ->with(['cmde' => $this->cmde]);

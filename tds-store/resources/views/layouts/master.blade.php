@@ -57,7 +57,7 @@
         }
 
         .h-sidebar{
-            height: 800px;
+            height: 1520px;
         }
     </style>
 

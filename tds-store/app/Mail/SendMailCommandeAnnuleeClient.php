@@ -30,7 +30,7 @@ class SendMailCommandeAnnuleeClient extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
         ->subject('Commande Annulée')
         ->markdown('mails.send-mail-commande-annulee-client')
         ->with(['commande' => $this->commande]);

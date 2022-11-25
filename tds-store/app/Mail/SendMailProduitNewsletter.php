@@ -31,7 +31,7 @@ class SendMailProduitNewsletter extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
                     ->subject('Nouveauté sur le site')
                     ->markdown('mails.send-mail-produit-newsletter')
                     ->with([

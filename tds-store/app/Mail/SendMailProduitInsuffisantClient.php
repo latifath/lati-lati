@@ -34,7 +34,7 @@ class SendMailProduitInsuffisantClient extends Mailable
      */
     public function build()
     {
-        return $this->from('lmonsia@technodatasolutions.bj')
+        return $this->from('contact@tdsstore.bj')
                     ->subject('Quantité Insuffisante')
                     ->markdown('mails.send-mail-produit-insuffisant-client')
                     ->with([
