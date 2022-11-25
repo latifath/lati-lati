@@ -18,9 +18,9 @@ class SitepublicController extends Controller
 
     public function all_produit_par_sous_categorie($cat, $sous_cat){
         $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
-        $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
+        $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->orderBy('id', 'DESC')->get();
 
-        $sous_categorie_produits = Produit::paginate(8);
+        $sous_categorie_produits = Produit::orderBy('id', 'DESC')->paginate(8);
 
         return view ('site-public.produits.sous-categorie-produit', compact('cat', 'sous_cat' ,'sous_categories_produits', 'sous_categorie_produits'));
 
@@ -34,7 +34,7 @@ class SitepublicController extends Controller
 
             $produit->with('images');
             $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
-            $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->get();
+            $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->orderBy('id', 'DESC')->get();
 
             return view ('site-public.produits.detail-produit', compact('produit', 'cat', 'sous_cat', 'sous_categories_produits'));
         }
