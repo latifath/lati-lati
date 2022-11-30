@@ -82,10 +82,10 @@
         </div>
         <div class="card-body">
             <div class="border-bottom pb-4">
-                {{-- <span class="badge badge-success">{{ number_format($m_paiement, '0', '.', ' ') }} F CFA</span><span class="ml-2 text-muted">Paiement</span><br> --}}
+                <span class="badge badge-success">{{ number_format($m_paiement, '0', '.', ' ') }} F CFA</span><span class="ml-2 text-muted">Paiement</span><br>
             </div>
             <div class="mt-4 text-muted">
-                {{-- <h5 class="m-0" style="{{ couleur_text_2() }}">{{ number_format($m_paiement, '0', '.', ' ') }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i>Total</h5> --}}
+                <h5 class="m-0" style="{{ couleur_text_2() }}">{{ number_format($m_paiement, '0', '.', ' ') }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i>Total</h5>
             </div>
         </div>
     </div>

@@ -63,7 +63,7 @@ class ProduitAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $save = save_image(public_path('images/produits'), $request->image);
+        $save = save_image('produits', $request->image);
 
         if ($save != null) {
             $produit = Produit::create([
@@ -123,7 +123,7 @@ class ProduitAdminController extends Controller
 
         delete_image_path(path_image_produit(), $image->filename);
 
-        $save = update_image(public_path('images/produits'), $request->image, $image);
+        $save = update_image('produits', $request->image, $image);
 
         if ($save != null) {
             flashy()->success('Image modifiée avec succès');
@@ -165,7 +165,7 @@ class ProduitAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $save = save_image(public_path('images/produits'), $request->image);
+        $save = save_image('produits', $request->image);
 
         if ($save != null) {
 

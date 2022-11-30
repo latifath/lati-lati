@@ -116,7 +116,6 @@
                 <th>Prix</th>
                 <th>Sous-catégorie</th>
                 <th>Catégorie</th>
-
             </tr>
             </thead>
             <tbody>
@@ -158,7 +157,6 @@
         var prix = $(this).attr('data-prix');
         var description = $(this).attr('data-description');
 
-
         $('#edit_id').val(ID);
         $('#edit_nom').val(nom);
         $('#quantite').val(quantite);
@@ -186,7 +184,6 @@
 
        $('#ModalAjoutStock').modal('show');
     });
-
 
 </script>
 <script>

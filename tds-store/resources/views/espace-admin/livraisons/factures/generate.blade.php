@@ -69,7 +69,7 @@
             <button id ="btn_valide_facture"  data-id="{{ $invoice->id }}" type="button" class="btn btn-primary px-2 py-2"><i class="fa fa-check"></i> Terminer et envoyer le mail</button>
         </div>
         <div class="table-responsive">
-            <table id="" class="table table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+            <table id="" class="table table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%; background-color:white; color:#212529;">
                 <thead>
                     <tr>
                         <th>Désignation</th>

@@ -41,10 +41,14 @@
             </div>
             <div class="card-body">
                 <div class="border-bottom pb-4">
-                     {{-- <span class="badge badge-success">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0', '.', ' ' ) }} F CFA</span> <span class="ml-2 text-muted">Dernier paiement</span> --}}
+                     {{-- <span class="badge badge-success">{{ $bills == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($bills->total,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0','.', ' ' ) }} F CFA</span> <span class="ml-2 text-muted">Dernier paiements</span> --}}
+                     <span class="badge badge-success"></span> <span class="ml-2 text-muted">Dernier paiements</span>
+
                 </div>
                 <div class="mt-4 text-muted">
-                    {{-- <h5 class="m-0" style="color: #ea0513;">{{ $paiement == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($paiement->montant,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0','.', ' ' ) }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i></h5> --}}
+                    {{-- <h5 class="m-0" style="color: #ea0513;">{{ $bills == " " ? '0' : number_format((montant_ttc(montant_apres_reduction_sans_session ($bills->total,  $commande->promotion), $commande->adresse_livraison_id) + verify_amount_livraison_exist(info_livraison($commande->id))), '0','.', ' ' ) }} F CFA<i class="mdi mdi-arrow-up text-success ml-2"></i></h5> --}}
+                    <h5 class="m-0" style="color: #ea0513;"><i class="mdi mdi-arrow-up text-success ml-2"></i></h5>
+
                 </div>
             </div>
         </div>
@@ -59,10 +63,10 @@
             </div>
             <div class="card-body">
                 <div class="border-bottom pb-4">
-                    <span class="badge badge-danger"> -02% </span> <span class="ml-2 text-muted">From previous period</span>
+                    <span class="badge badge-danger"></span> <span class="ml-2 text-muted"></span>
                 </div>
                 <div class="mt-4 text-muted">
-                    <h5 class="m-0">14.5<i class="mdi mdi-arrow-down text-danger ml-2"></i></h5>
+                    <h5 class="m-0"><i class="mdi mdi-arrow-down text-danger ml-2"></i></h5>
 
                 </div>
             </div>
@@ -78,10 +82,10 @@
             </div>
             <div class="card-body">
                 <div class="border-bottom pb-4">
-                    <span class="badge badge-success"> +10% </span> <span class="ml-2 text-muted">From previous period</span>
+                    <span class="badge badge-success"> </span> <span class="ml-2 text-muted"></span>
                 </div>
                 <div class="mt-4 text-muted">
-                    <h5 class="m-0">15234<i class="mdi mdi-arrow-up text-success ml-2"></i></h5>
+                    <h5 class="m-0"><i class="mdi mdi-arrow-up text-success ml-2"></i></h5>
 
                 </div>
             </div>

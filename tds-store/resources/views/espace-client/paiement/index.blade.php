@@ -36,7 +36,6 @@
                                                 <button class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                             </a>
                                         @endif
-
                                         <a href="{{ route('root_facture', $invoice->id) }}">
                                             <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
                                         </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 
 use App\Models\Client;
+use App\Models\Invoice;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,7 +43,9 @@ class HomeClientController extends Controller
 
        $commande = Commande:: where('user_id', auth()->user()->id)->where('status', 'en cours')->orwhere('status', 'terminee')->latest()->first();
 
-        return view('espace-client.index', compact('nb_cmd_effectuee', 'nb_cmd_attente', 'nb_cmd_annulee', 'nb_cmd_non_payee', 'commande', 'nb_cmd_attente_paiement'));
+       $bills = Invoice::where('user_id', auth()->user()->id)->get();
+
+        return view('espace-client.index', compact('nb_cmd_effectuee', 'nb_cmd_attente', 'nb_cmd_annulee', 'nb_cmd_non_payee', 'commande', 'nb_cmd_attente_paiement', 'bills'));
     }
 
 }

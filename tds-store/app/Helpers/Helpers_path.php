@@ -13,8 +13,7 @@ if (!function_exists('save_image')) {
 
         $filename = Str::random(16);
 
-        // location chemin image
-        $filepath = $file->move($dir, $filename . '.' . $extension->getextension());
+        $filepath = $file->storeAs($dir, $filename . '.' . $extension->getExtension(), 'public');
 
         if($filepath != null){
             $picture = Image::create([
@@ -27,6 +26,7 @@ if (!function_exists('save_image')) {
         return $picture;
     }
 }
+
 if (!function_exists('update_image')) {
     function update_image($dir, $file, $image) {
 
@@ -35,7 +35,7 @@ if (!function_exists('update_image')) {
         $filename = Str::random(16);
 
         // location chemin image
-        $filepath = $file->move($dir, $filename . '.' . $extension->getextension());
+        $filepath = $file->storeAs($dir, $filename . '.' . $extension->getExtension(), 'public');
 
         if($filepath != null){
             $picture = $image->update([
@@ -61,19 +61,19 @@ if (!function_exists('delete_image_path')) {
 
 if (!function_exists('path_image_partenaire')) {
     function path_image_partenaire() {
-         return "images/partenaires/";
+         return "storage/partenaires/";
     }
 }
 
 if (!function_exists('path_image_produit')) {
     function path_image_produit() {
-        return "images/produits/";
+        return "storage/produits/";
     }
 }
 
 if (!function_exists('path_image_publicite')) {
     function path_image_publicite() {
-        return "images/publicites/";
+        return "storage/publicites/";
     }
 }
 
@@ -101,4 +101,3 @@ if(!function_exists('favoris')){
         return $produit_favoris;
     }
 }
-
