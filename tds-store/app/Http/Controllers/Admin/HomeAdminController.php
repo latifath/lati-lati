@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\User;
+use App\Models\Invoice;
 use App\Models\Produit;
 use App\Models\Commande;
 use App\Models\Categorie;
@@ -32,6 +33,14 @@ class HomeAdminController extends Controller
 
         $m_paiement = 0;
 
+        $invoices = Invoice::all();
+
+        foreach($invoices as $invoice) {
+            $m_paiement = $m_paiement + $invoice->total;
+        }
+
+
+
         // categories
 
         $categories = Categorie::all();
@@ -44,9 +53,10 @@ class HomeAdminController extends Controller
 
         $produits = Produit::all();
 
+        // $m_paiement += $invoices;
 
 
-        return view('/espace-admin.index', compact('commandes_effectuee', 'commandes_en_attente', 'commandes_annulee', 'commandes_non_payee', 'newsletters', 'nbr_role_client', 'nbr_role_admin', 'categories', 'sous_categories', 'produits'));
+        return view('/espace-admin.index', compact('commandes_effectuee', 'commandes_en_attente', 'commandes_annulee', 'commandes_non_payee', 'newsletters', 'nbr_role_client', 'nbr_role_admin', 'categories', 'sous_categories', 'produits', 'invoices', 'm_paiement'));
 
     }
 

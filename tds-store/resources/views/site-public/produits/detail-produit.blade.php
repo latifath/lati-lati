@@ -214,19 +214,4 @@
             }
         });
     </script>
-
-    {{-- <script>
-        // socila share
-        const facebookBtn = document.getElementById('facebook-btn');
-        // const twitterBtn = document.getElementById('twitter-btn');
-        const linkedinBtn = document.getElementById('linkedin-btn');
-
-        let produitUrl = encodeURI(document.location.href);
-        let produitNom = encodeURI('{{ $produit->nom }}');
-
-        facebookBtn.setAttribute("href", 'http://www.facebook.com/sharer.php?href=${produitUrl}');
-        // twitterBtn.setAttribute("href", 'http://www.twitter.com/sharer.php?href=${produitUrl}&text=${produitNom}');
-        linkedinBtn.setAttribute("href", 'http://www.linkedin.com/shareArticle?url=${produitUrl}&title=${produitNom}');
-
-    </script> --}}
 @endsection

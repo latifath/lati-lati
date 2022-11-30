@@ -31,7 +31,7 @@
                                 <td>{{ number_format($item->montant, '0', '.', '')}} F CFA</td>
                                 <td>{{ $item->commande->id }}</td>
                                 <td>
-                                    <button data-toggle="tooltip" title="Ajouter" id="btn_edit_frais_exp" data-id="{{ $item->id }}" data-montant="{{ $item->montant }}" class="btn btn-primary"><i class="fa fa-plus"></i></i></button>
+                                    {{-- <button data-toggle="tooltip" title="Ajouter" id="btn_edit_frais_exp" data-id="{{ $item->id }}" data-montant="{{ $item->montant }}" class="btn btn-primary"><i class="fa fa-plus"></i></i></button> --}}
                                     <button data-toggle="tooltip" title="Génération facture" id="btn_generate_facture" class="btn btn-primary" data-user="{{ $item->commande->user_id }}" data-livraison="{{ $item->id }}"><i class="fa fa-refresh"></i></i></button>
                                     <button data-toggle="tooltip" title="Supprimer" id="btn_delete_livraison" data-id="{{ $item->id }}" class="btn bg-danger text-white"><i class="fa fa-trash"></i></i></button>
                                 </td>
@@ -69,7 +69,7 @@
                                     <td>{{ number_format($item->montant, '0', '.', '')}} F CFA</td>
                                     <td>{{ $item->commande->id }}</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="Ajouter" id="btn_edit_frais_exp" data-id="{{ $item->id }}" data-montant="{{ $item->montant }}" class="btn btn-primary"><i class="fa fa-plus"></i></i></button>
+                                        {{-- <button data-toggle="tooltip" title="Ajouter" id="btn_edit_frais_exp" data-id="{{ $item->id }}" data-montant="{{ $item->montant }}" class="btn btn-primary"><i class="fa fa-plus"></i></i></button> --}}
                                         @if ($item->invoice_id)
                                             <a href="{{ route('root_espace_admin_index_facture', $item->invoice_id) }}">
                                                 <button data-toggle="tooltip" title="Génération facture" id="" class="btn btn-primary" ><i class="fa fa-refresh"></i></i></button>
@@ -100,10 +100,10 @@
                 <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
-                        <th>Adresse <br> Livraison</th>
+                        <th>Adresse Livraison</th>
                         <th>Téléphone</th>
-                        <th>Montant <br> Expédition</th>
-                        <th>Numéro de <br>commande</th>
+                        <th>Montant Expédition</th>
+                        <th>Numéro de commande</th>
                         <th style="width: 10%;">Action</th>
                     </tr>
                     </thead>

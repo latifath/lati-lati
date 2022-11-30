@@ -25,7 +25,7 @@ class PubliciteAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
 
         ]);
-        $save = save_image(public_path('images/publicites'), $request->image);
+        $save = save_image('publicites', $request->image);
 
         if ($save != null) {
         Publicite::create([
@@ -69,7 +69,7 @@ class PubliciteAdminController extends Controller
 
         delete_image_path(path_image_publicite(), $image->filename);
 
-        $save = update_image(public_path('images/publicites'), $request->image, $image);
+        $save = update_image('publicites', $request->image, $image);
 
         if($save != null) {
             flashy()->success('Image modifiée avec succès');

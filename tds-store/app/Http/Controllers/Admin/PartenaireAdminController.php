@@ -22,7 +22,7 @@ class PartenaireAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $save = save_image(public_path('images/partenaires'), $request->image);
+        $save = save_image('partenaires', $request->image);
 
         if ($save != null) {
             Partenaire::create([
@@ -66,7 +66,7 @@ class PartenaireAdminController extends Controller
 
         delete_image_path(path_image_partenaire(), $image->filename);
 
-        $save = update_image(public_path('images/partenaires'), $request->image, $image);
+        $save = update_image('partenaires', $request->image, $image);
 
         if ($save != null) {
 
