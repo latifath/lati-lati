@@ -60,7 +60,7 @@
                                     <thead>
                                     <tr>
                                         <th>N°</th>
-                                        <th>Commande N°</th>
+                                        <th>N° Commande</th>
                                         <th>Montant</th>
                                         <th>Date</th>
                                         <th>Status</th>
@@ -71,7 +71,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $commande->id }}</td>
-                                                <td>{{ number_format(total_commande($commande->id), 0, '.', ' ') }}</td>
+                                                <td>{{ number_format(total_commande($commande->id), 0, '.', ' ') F CFA}}</td>
                                                 <td>{{ $commande->created_at->format('m/d/Y') }}</td>
                                                 <td>{{ $commande->status }}</td>
                                             </tr>

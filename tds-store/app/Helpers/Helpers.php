@@ -46,7 +46,7 @@ if(!function_exists('verify_kkiapay_transaction')){
 
 if (!function_exists('categorie_menu')) {
     function categorie_menu(){
-        $categories = Categorie::orderBy('id', 'DESC')->get();
+        $categories = Categorie::orderBy('id', 'ASC')->get();
         return $categories;
 
     }

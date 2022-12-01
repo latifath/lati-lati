@@ -119,7 +119,7 @@
                             @php
                             $i++
                             @endphp
-                            @if($i <= 8)
+                            @if($i <= 8 )
                                 <div class="parent-menu-item-hover" >
                                     <a href="#" class="nav-link dropdown-toggle pr-5" style="border-right: 1px solid #ffff;">{{ $item->nom }}</a>
                                     <div class="header-menu-content" style="background-color: #f5efef; border: 1px solid #ddd;">
