@@ -115,7 +115,7 @@
                         @php
                         $i = 0
                         @endphp
-                        @foreach (categorie_menu() as $item)
+                        @foreach (priority_by_category_tree() as $item)
                             @php
                             $i++
                             @endphp
@@ -151,24 +151,62 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
                                     <div class="header-menu-content" style="background-color:  #f5efef; border: 1px solid #ddd;">
                                         <div class="row">
-                                            @foreach (categorie_menu() as $item)
-                                            <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
-                                                @php
-                                                    $j++
-                                                @endphp
-                                                @if ($j > 8)
-                                                <div class="mt-0">
-                                                    <a href="" class="nav-link">{{ $item->nom }}</a>
+                                            @foreach (priority_by_category_two() as $item)
+                                                <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
+                                                    @php
+                                                        $j++
+                                                    @endphp
+                                                    @if ($j > 8)
+                                                    <div class="mt-0">
+                                                        <a href="" class="nav-link">{{ $item->nom }}</a>
+                                                    </div>
+                                                    <ul>
+                                                        @foreach (sous_categories_menu($item->id) as $k)
+                                                        <li>
+                                                            <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}">{{ $k->nom }}</a>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                    @endif
                                                 </div>
-                                                <ul>
-                                                    @foreach (sous_categories_menu($item->id) as $k)
-                                                    <li>
-                                                        <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}">{{ $k->nom }}</a>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                                @endif
-                                            </div>
+                                            @endforeach
+                                            @foreach (priority_by_category_one() as $item)
+                                                <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
+                                                    @php
+                                                        $j++
+                                                    @endphp
+                                                    @if ($j > 8)
+                                                    <div class="mt-0">
+                                                        <a href="" class="nav-link">{{ $item->nom }}</a>
+                                                    </div>
+                                                    <ul>
+                                                        @foreach (sous_categories_menu($item->id) as $k)
+                                                        <li>
+                                                            <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}">{{ $k->nom }}</a>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                            @foreach (priority_by_category_zero() as $item)
+                                                <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
+                                                    @php
+                                                        $j++
+                                                    @endphp
+                                                    @if ($j > 8)
+                                                    <div class="mt-0">
+                                                        <a href="" class="nav-link">{{ $item->nom }}</a>
+                                                    </div>
+                                                    <ul>
+                                                        @foreach (sous_categories_menu($item->id) as $k)
+                                                        <li>
+                                                            <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}">{{ $k->nom }}</a>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                    @endif
+                                                </div>
                                             @endforeach
                                         </div>
                                     </div>

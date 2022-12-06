@@ -20,6 +20,13 @@
 {{-- pour la barre de seach --}}
  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
+ <style>
+   .img-fluid-prod{
+        width: 400px;
+        height: 500px;
+        object-fit: contain;
+    }
+ </style>
 @endsection
 
 @section ('detail_produit')

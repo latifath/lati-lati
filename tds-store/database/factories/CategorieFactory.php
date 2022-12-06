@@ -26,9 +26,11 @@ class CategorieFactory extends Factory
     {
         $nom = 'cat-' . $this->faker->lastName();
         $slug= Str::slug($nom . $this->faker->time($format = 's', $max = 'now'));
+        $priority_order = $this->faker->randomDigitNot(5);
         return [
            'nom' => $nom ,
            'slug' => $slug,
+           'priority_order' => $priority_order,
            'created_at' => $this->faker->date(),
            'updated_at' => $this->faker->date(),
         ];

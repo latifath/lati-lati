@@ -26,10 +26,12 @@ class CategorieController extends Controller
     public function update(Request $request){
         $request->validate([
             'nom'=> 'required',
+            'priority_order'=> 'required',
         ]);
 
         Categorie::findOrfail($request->id)->update([
             "nom" => $request->nom,
+            "priority_order" => $request->priority_order,
         ]);
 
 
@@ -43,6 +45,7 @@ public function store(Request $request)
         $request->validate([
 
             'nom' => 'required',
+            'priority_order' => 'required',
         ]);
 
         Categorie::create($request->all());

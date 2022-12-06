@@ -23,30 +23,18 @@
 <style>
 
     @media (max-width: 992px) {
-        .logo {
-            width: 60%;
-        }
-        .custom-select {
-            width: 50%;
-            height: 50%;
-        }
-        #btn-envoie {
-        margin-top: 10px;
-    }
-    #btn-kkiapay {
-        margin-left: 10px ! important;
-
-    }
-    .kkiapay-button{
-        width: 130px;
-        height: 100px;
-    }
-    .col-6{
-        padding-right: 0px !important;
-        padding-left: 5px !important;
-    }
     #pay{
         font-size: 14px;
+    }
+    #btn-kkiapay{
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+    #facture_number{
+        text-align: center;
+    }
+    .lieu_payement{
+        text-align: none !important;
     }
 }
 </style>
@@ -56,14 +44,14 @@
         <div class="card" id="facture">
             <div class="card-body p-5">
                 <div class="row">
-                    <div class="col-6" style="">
+                    <div class="col-md-6 text-center;">
                         <p>
                             <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
                         </p>
-                        <h3 style=""> Facture #{{ $invoice->id}} </h3>
+                        <h3 id="facture_number">Facture #{{ $invoice->id}} </h3>
                     </div>
 
-                    <div class="col-6 text-center" style="">
+                    <div class="col-md-6 text-center" style="">
                         <div class="">
                             @if ($invoice->date_paid)
                             <span style="font-size: 24px;" class="text-success font-weight-bold"> PAYE</span>
@@ -72,7 +60,7 @@
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span><br>
                                 @if( isset($_GET['type_paiement']))
-                                    <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
+                                    <div class="col-md-6" style="margin-left: 110px;" id="btn-kkiapay">
                                         @if($_GET['type_paiement'] == "momo")
                                             <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
                                         @elseif($_GET['type_paiement'] == "carte_bancaire")
@@ -101,7 +89,7 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-6 ">
+                    <div class="col-md-6 ">
                         <strong> Facturé à</strong>
                         @if ($adresseclient)
                             <p class="small-text">
@@ -111,7 +99,7 @@
                             </p>
                         @endif
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="lieu_payement col-md-6 text-right">
                         <strong>Payé à</strong>
                         <p class="small-text">
                             TDS STORE <br>
@@ -119,12 +107,12 @@
                             +229 21335730 / +229 91435555 (WhatsApp)
                         </p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <strong>Date de facturation</strong><br>
                         <span>{{ $invoice->created_at }} </span>
                     </div>
 
-                    <div class="col-6 text-right">
+                    <div class="col-md-6 text-right mt-3">
                             <strong>Mode de paiement</strong>
                             @if ($invoice->date_paid)
                                 <select class="custom-select w-auto" name="mode">
@@ -143,7 +131,7 @@
                             @endif
                     </div>
 
-                    <div class="card col-12 p-0 mt-5">
+                    <div class="card col-md-12 p-0 mt-5">
                         <div class="card-header">
                             <h3 class="panel-titre">
                                 <strong>Items de la facturation</strong>
@@ -208,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-5">
+                    <div class="col-md-12 mt-5">
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
