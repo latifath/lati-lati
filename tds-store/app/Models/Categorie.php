@@ -20,7 +20,7 @@ class Categorie extends Model
             ];
     }
 
-    protected $fillable = [ 'nom', 'slug', 'created_at', 'updated_at'];
+    protected $fillable = [ 'nom', 'slug', 'priority_order', 'created_at', 'updated_at'];
 
     public function sous_categories()
     {

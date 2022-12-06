@@ -14,9 +14,20 @@
                     <div class="">
                         <input id="edit_id" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" style="height: 50px;"  type="hidden" placeholder="" name="id">
                         <div class="form-group">
-
+                            <label for="">Nom catégorie</label>
                             <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="entrez la catégorie" name="nom" id="edit_nom">
                             {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                        </div>
+                        <div class="form-group">
+                            <label for="">Priorité</label>
+                            <select class="custom-select {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px;" name="priority_order" >
+                                <option>Choisissez une priorité</option>
+                                <option value="3">Haute</option>
+                                <option value="2"> Moyenne</option>
+                                <option value="1"> Petite</option>
+                                <option value="0"> Plus petite</option>
+                            </select>
+                            {!! $errors->first('role', '<p class="text-danger">:message</p>') !!}
                         </div>
                     </div>
                 </div>
@@ -43,8 +54,24 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="">Nom catégorie</label>
                         <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px; " type="text" placeholder="Entrez la catégorie" name="nom">
                         {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Priorité</label>
+                        <select class="custom-select {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px;" name="priority_order" >
+                            <option>Choisissez une priorité</option>
+                            @if(priority_by_category_tree()->count() >= 8)
+                            <option value="3" disabled selected>Haute</option>
+                            @else
+                            <option value="3">Haute</option>
+                            @endif
+                            <option value="2"> Moyenne</option>
+                            <option value="1"> Petite</option>
+                            <option value="0"> Plus petite</option>
+                        </select>
+                        {!! $errors->first('role', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
                 <div class="modal-footer">

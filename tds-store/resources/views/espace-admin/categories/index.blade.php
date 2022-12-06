@@ -23,6 +23,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
+                        <th>Priorité</th>
                         <th style="width: 15%">Action</th>
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $categorie->nom }}</td>
+                            <td>{{ $categorie->priority_order }}</td>
                             <td>
                                 <a href="{{ route('root_espace_admin_details_categorie', $categorie->id) }}">
                                     <button  data-toggle="tooltip" title="Voir" class="btn" style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-eye"></i></button>
@@ -60,9 +62,11 @@
     $(document).on('click', '#btn_edit_categorie', function(){
         var ID = $(this).attr('data-id');
         var nom = $(this).attr('data-nom');
+        var priority = $(this).attr('data-priority');
 
         $('#edit_id').val(ID);
         $('#edit_nom').val(nom);
+        $('#edit_priority').val(priority);
 
         $('#ModalModifie').modal('show');
     });

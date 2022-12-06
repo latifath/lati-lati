@@ -338,3 +338,36 @@ if(!function_exists('client')) {
     }
 }
 
+// ordre de priorité des categories
+
+if (!function_exists('priority_by_category_tree')) {
+    function priority_by_category_tree(){
+        $categories = Categorie::where('priority_order', 3)->orderBy('id', 'DESC')->limit(8)->get();
+        return $categories;
+
+    }
+}
+
+if (!function_exists('priority_by_category_two')) {
+    function priority_by_category_two(){
+        $categories = Categorie::where('priority_order', 2)->orderBy('id', 'DESC')->get();
+        return $categories;
+
+    }
+}
+
+if (!function_exists('priority_by_category_one')) {
+    function priority_by_category_one(){
+        $categories = Categorie::where('priority_order', 1)->orderBy('id', 'DESC')->get();
+        return $categories;
+
+    }
+}
+
+if (!function_exists('priority_by_category_zero')) {
+    function priority_by_category_zero(){
+        $categories = Categorie::where('priority_order', 0)->orderBy('id', 'DESC')->get();
+        return $categories;
+
+    }
+}
