@@ -153,10 +153,6 @@
                                         <div class="row">
                                             @foreach (priority_by_category_two() as $item)
                                                 <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
-                                                    @php
-                                                        $j++
-                                                    @endphp
-                                                    @if ($j > 8)
                                                     <div class="mt-0">
                                                         <a href="" class="nav-link">{{ $item->nom }}</a>
                                                     </div>
@@ -167,15 +163,10 @@
                                                         </li>
                                                         @endforeach
                                                     </ul>
-                                                    @endif
                                                 </div>
                                             @endforeach
                                             @foreach (priority_by_category_one() as $item)
                                                 <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
-                                                    @php
-                                                        $j++
-                                                    @endphp
-                                                    @if ($j > 8)
                                                     <div class="mt-0">
                                                         <a href="" class="nav-link">{{ $item->nom }}</a>
                                                     </div>
@@ -186,15 +177,10 @@
                                                         </li>
                                                         @endforeach
                                                     </ul>
-                                                    @endif
                                                 </div>
                                             @endforeach
                                             @foreach (priority_by_category_zero() as $item)
                                                 <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
-                                                    @php
-                                                        $j++
-                                                    @endphp
-                                                    @if ($j > 8)
                                                     <div class="mt-0">
                                                         <a href="" class="nav-link">{{ $item->nom }}</a>
                                                     </div>
@@ -205,7 +191,6 @@
                                                         </li>
                                                         @endforeach
                                                     </ul>
-                                                    @endif
                                                 </div>
                                             @endforeach
                                         </div>
