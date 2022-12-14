@@ -19,6 +19,7 @@ class CreatePartenairesTable extends Migration
             $table->string('slug')->unique();
             $table->integer('image_id')->unsigned();
             $table->foreign('image_id')->references('id')->on('images')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('number_order')->unique()->nullable();
             $table->timestamps();
         });
     }

@@ -79,6 +79,8 @@ Route::get('validation-commmande/{id}/commande-reçue/type-paiement-{payment}', 
 
 Route::post('/newsletter', [HomeController::class, 'newsletter'])->name('root_site_public_newsletter');
 
+Route::post('/newsletter/désabonne', [HomeController::class, 'desabonne'])->name('root_site_public_newsletter_desabonne');
+
 Route::post('/place-order', [PayementController::class, 'placeorder'])->name('root_site_public_placeorder');
 
 // paypal

@@ -31,7 +31,7 @@
                                 <option value="1"> Petite</option>
                                 <option value="0"> Plus petite</option>
                             </select>
-                            {!! $errors->first('role', '<p class="text-danger">:message</p>') !!}
+                            {!! $errors->first('priority_order', '<p class="text-danger">:message</p>') !!}
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <option value="1"> Petite</option>
                             <option value="0"> Plus petite</option>
                         </select>
-                        {!! $errors->first('role', '<p class="text-danger">:message</p>') !!}
+                        {!! $errors->first('priority_order', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
                 <div class="modal-footer">

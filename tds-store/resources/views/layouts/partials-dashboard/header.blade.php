@@ -1,11 +1,18 @@
-
+<style>
+    @media (max-width: 542px) {
+    img{
+        width: 100px;
+        height: 60px;
+    }
+    }
+</style>
   <!-- Top Bar Start -->
 <div class="topbar" style="{{ couleur_principal() }}">
 
     <div class="topbar-left	d-none d-lg-block">
         <div class="text-center">
 
-            <a href="/" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}" height="50" alt="logo"></a>
+            <a href="/"><img src="{{ asset('dashbord/images/logo.png') }}" height="50" alt="tds" class="logo" ></a>
         </div>
     </div>
 

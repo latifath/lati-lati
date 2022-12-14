@@ -26,7 +26,18 @@
         height: 500px;
         object-fit: contain;
     }
- </style>
+    .img-fluid-autre{
+        width: 200px;
+        height: 300px;
+        object-fit: contain;
+    }
+    .img-partenaire{
+        width: 80px;
+        height: 120px;
+        object-fit: contain;
+    }
+
+    </style>
 @endsection
 
 @section ('detail_produit')

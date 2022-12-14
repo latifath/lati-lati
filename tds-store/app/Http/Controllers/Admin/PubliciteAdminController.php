@@ -22,6 +22,7 @@ class PubliciteAdminController extends Controller
         $request->validate([
             'nom' => 'required',
             'message' => 'required',
+            'ordre_de_numero' => 'required|unique:publicites,number_order,except,id|integer',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
 
         ]);
@@ -31,6 +32,7 @@ class PubliciteAdminController extends Controller
         Publicite::create([
                 'nom' => $request->nom,
                 'message' => $request->message,
+                'number_order' => $request->ordre_de_numero,
                 'image_id' => $save->id,
             ]);
         }
@@ -45,11 +47,14 @@ class PubliciteAdminController extends Controller
         $request->validate([
             'nom' => 'required',
             'message' => 'required',
+            'ordre_de_numero' => 'required|unique:publicites,number_order,except,id|integer',
+
         ]);
 
         Publicite::findOrfail($request->id)->update([
             'nom' => $request->nom,
             'message' => $request->message,
+            'number_order' => $request->ordre_de_numero,
         ]);
 
         flashy()->success('Publicité modifiée avec succès');

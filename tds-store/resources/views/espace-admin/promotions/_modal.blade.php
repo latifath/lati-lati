@@ -17,8 +17,14 @@
                     <label for="">Code coupon</label>
                     <div class="form-group">
                         <input id="coupon" class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }} text-uppercase" style="height: 50px; display: inline-block; width: 70%;"  type="text" placeholder="" name="code_coupon">
-                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
                         <button id="generate" class="btn btn-success float-right" type="button" style="height: 50px; display: inline-block; width: 28%;"><i class="fa fa-refresh" aria-hidden="true"> Generate</i></button>
+                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Valeur coupon</label>
+                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur" >
+                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
                     </div>
 
                     <div class="form-group">
@@ -30,11 +36,6 @@
 
                         </select>
                         {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="">Valeur coupon</label>
-                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur" >
-                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
                     </div>
 
                     <div class="form-group">
@@ -75,9 +76,15 @@
                     <label for="">Code coupon</label>
                     <div class="form-group">
                         <input id="coupon_edit" class="form-control {{ $errors->has('code_coupon') ? 'is-invalid' : '' }} text-uppercase" style="height: 50px; display: inline-block; width: 70%;"  type="text" placeholder="" name="code_coupon">
-                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
                         <button id="generate_edit" class="btn btn-success float-right" type="button" style="height: 50px; display: inline-block; width: 28%;"><i class="fa fa-refresh" aria-hidden="true"> Generate</i></button>
+                        {!! $errors->first('code_coupon', '<p class="text-danger">:message</p>') !!}
                     </div>
+
+                    <div class="form-group">
+                       <label for="">Valeur coupon</label>
+                       <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur" id='edit_valeur'>
+                       {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
+                   </div>
 
                     <div class="form-group">
                         <label for="">Type coupon</label>
@@ -88,12 +95,6 @@
 
                         </select>
                         {!! $errors->first('type', '<p class="text-danger">:message</p>') !!}
-                    </div>
-
-                     <div class="form-group">
-                        <label for="">Valeur coupon</label>
-                        <input class="form-control {{ $errors->has('valeur') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="valeur" id='edit_valeur'>
-                        {!! $errors->first('valeur', '<p class="text-danger">:message</p>') !!}
                     </div>
 
                     <div class="form-group">

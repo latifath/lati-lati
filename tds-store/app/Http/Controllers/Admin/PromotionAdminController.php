@@ -24,7 +24,7 @@ class PromotionAdminController extends Controller
             'status' => 'required',
 
         ]);
-        Promotion::create(['code' => $request->code_coupon, 'type' => $request->type, 'valeur' => $request->valeur, 'status' =>$request->status]);
+        Promotion::create(['code' => $request->code_coupon, 'type' => $request->type, 'valeur' => $request->valeur, 'priority_order'=> $request->priorite, 'status' =>$request->status]);
 
         flashy()->info('Promotion ajoutée avec succès.');
 
@@ -36,7 +36,7 @@ class PromotionAdminController extends Controller
 
         $request->validate([
 
-            'code_coupon' => 'required|unique:promotions,code,except,id|max:8',
+            'code_coupon' => 'required|unique:promotions,priority_order,except,id|max:8',
             'type' => 'required',
             'valeur' => 'required',
             'status' => 'required',

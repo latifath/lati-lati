@@ -61,7 +61,7 @@ if (!function_exists('sous_categories_menu')) {
 
 if (!function_exists('partenaires_logo')) {
      function partenaires_logo() {
-         $partenaires = Partenaire::all();
+         $partenaires = Partenaire::orderBy('number_order', 'ASC')->get();
          return $partenaires;
      }
 }

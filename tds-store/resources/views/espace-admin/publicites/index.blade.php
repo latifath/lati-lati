@@ -25,6 +25,7 @@
                             <td>N°</td>
                             <th>Nom</th>
                             <th>Message</th>
+                            <th>Numéro d'ordre</th>
                             <th>Path</th>
                             <th style="width: 20%">Action</th>
                         </tr>
@@ -35,11 +36,12 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $publicite->nom }}</td>
                                     <td>{{ $publicite->message }}</td>
+                                    <td>{{ $publicite->number_order }}</td>
                                     <td>
                                         <img src="{{ asset(path_image_publicite() . path_image($publicite->image_id)->filename) }}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                     </td>
                                     <td>
-                                        <button id="btn_edit_publicite" data-id="{{ $publicite->id }}" data-nom="{{ $publicite->nom }}" data-message="{{ $publicite->message }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
+                                        <button id="btn_edit_publicite" data-id="{{ $publicite->id }}" data-nom="{{ $publicite->nom }}" data-message="{{ $publicite->message }}" data-ordre="{{ $publicite->number_order }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
                                         <button id="btn_edit_image_publicite" data-id="{{ $publicite->id }}" class="btn btn-info"><i class="fa fa-image"></i> Upload</button>
                                         <button id="btn_delete_publicite" data-id="{{ $publicite->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash"></i> Supprimer</button>
                                     </td>
@@ -79,10 +81,12 @@ $(document).on('click', '#btn_edit_publicite', function(){
         var id = $(this).attr('data-id');
         var nom = $(this).attr('data-nom');
         var message = $(this).attr('data-message');
+        var ordre = $(this).attr('data-ordre');
 
         $('#edit_id').val(id);
         $('#edit_nom').val(nom);
         $('#edit_message').val(message);
+        $('#edit_ordre_de_numero').val(ordre);
 
         $('#ModalModifiepublicite').modal('show');
 });
