@@ -18,6 +18,12 @@
                            <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="entrez le nom" name="nom" id="edit_nom">
                            {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
                        </div>
+
+                       <div class="form-group">
+                        <label for="">Numéro d'ordre</label>
+                        <input class="form-control {{ $errors->has('ordre_de_numero') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="entrez le numéro d'ordre" name="ordre_de_numero" id="edit_ordre_de_numero">
+                        {!! $errors->first('ordre_de_numero', '<p class="text-danger">:message</p>') !!}
+                    </div>
                    </div>
                </div>
                <div class="modal-footer">
@@ -73,15 +79,21 @@
                <div class="modal-body" style="background-color:  #ffff;">
                    <div class="form-group">
                        <label for="">Nom</label>
-                       <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez le nom" name="nom">
                        {!! $errors->first('nom', '<p class="text-danger">:message</p>') !!}
-                   </div>
+                    </div>
+                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez le nom" name="nom">
 
                     <div class="form-group">
-                       <label for="">Logo</label>
-                       <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="Entrez l'image" name="image">
-                       {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
-                   </div>
+                        <label for="">Numéro d'ordre</label>
+                        <input class="form-control {{ $errors->has('ordre_de_numero') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="Entrez le numéro d'ordre" name="ordre_de_numero">
+                        {!! $errors->first('ordre_de_numero', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                <div class="form-group">
+                    <label for="">Logo</label>
+                    <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="Entrez l'image" name="image">
+                    {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
+                </div>
                </div>
                <div class="modal-footer">
                    <button id="button" type="reset" class="btn btn-secondary mr-auto" data-dismiss="modal">Annuler</button>

@@ -17,11 +17,11 @@ class HomeController extends Controller
     {
         $produits_latest = Produit::orderBy('id', 'DESC')->limit(8)->get();
 
-        $publicite_latest = Publicite::orderBy('id', 'DESC')->limit(1)->first();
+        $publicite_latest = Publicite::orderBy('number_order', 'ASC')->limit(1)->first();
 
-        $publicites = Publicite::all();
+        $publicites = Publicite::orderBy('number_order', 'ASC')->get();
 
-        $partenaires = Partenaire::all();
+        $partenaires = Partenaire::orderBy('number_order', 'ASC')->get();
 
         return view('site-public.index', compact('produits_latest', 'publicites', 'publicite_latest', 'partenaires'));
     }
@@ -37,18 +37,25 @@ class HomeController extends Controller
 
     public function newsletter(Request $request){
         //  pour la verification de la validiter du mail
-
         $request->validate([
-            'email' => 'required|string|email|unique:newsletters,email,except,id',
+            'email' => 'required|email',
         ]);
 
-        $news = Newsletter:: create([
+        $newsletter = Newsletter::where('email', $request->email)->first();
+
+        if($newsletter) {
+            $newsletter->delete();
+
+            flashy()->error('Désabonnée');
+            return redirect()->back();
+        }
+
+        Newsletter:: create([
             "email" => $request->email,
         ]);
 
         flashy()->success('Abonée');
-
         return redirect()->back();
+
     }
-    // End
 }

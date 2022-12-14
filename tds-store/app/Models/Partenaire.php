@@ -20,6 +20,6 @@ class Partenaire extends Model
             ];
     }
 
-    protected $fillable = [ 'nom', 'slug', 'image_id', 'created_at', 'updated_at'];
+    protected $fillable = [ 'nom', 'slug', 'image_id', 'number_order', 'created_at', 'updated_at'];
 
 }

@@ -24,6 +24,7 @@
                             <th>Id</th>
                             <th>Nom</th>
                             <th>Logo</th>
+                            <th>Numéro d'ordre</th>
                             <th>Date</th>
                             <th style="width: 15%">Action</th>
                         </tr>
@@ -37,9 +38,10 @@
                                 <td>
                                     <img src="{{ asset(path_image_partenaire() . path_image($partenaire->image_id)->filename )}}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
                                 </td>
+                                <td>{{ $partenaire->number_order }}</td>
                                 <td>{{ $partenaire->created_at }}</td>
                                 <td>
-                                    <button  id="btn_edit_partenaire" data-id="{{ $partenaire->id }}" data-nom = "{{ $partenaire->nom }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
+                                    <button  id="btn_edit_partenaire" data-id="{{ $partenaire->id }}" data-nom = "{{ $partenaire->nom }}" data-ordre="{{ $partenaire->number_order }}" class="btn btn-primary"><i class="fa fa-edit"></i> Editer</button>
                                     <button  id="btn_edit_image_partenaire" data-id="{{ $partenaire->id }}" class="btn btn-info"><i class="fa fa-image"></i> Upload</button>
                                     <button  id="btn_delete_partenaire" data-id="{{ $partenaire->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button>
                                 </td>
@@ -64,12 +66,15 @@
     $(document).on('click', '#btn_edit_partenaire', function(){
         var id = $(this).attr('data-id');
         var nom = $(this).attr('data-nom');
+        var ordre = $(this).attr('data-ordre');
 
         $('#edit_id').val(id);
         $('#edit_nom').val(nom);
+        $('#edit_ordre_de_numero').val(ordre);
 
         $('#ModalModifiePartenaire').modal('show');
     });
+
     $(document).on('click', '#btn_edit_image_partenaire', function(){
         var id = $(this).attr('data-id');
 

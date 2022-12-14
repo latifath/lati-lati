@@ -27,6 +27,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="">Numéro d'ordre</label>
+                        <input class="form-control {{ $errors->has('ordre_de_numero') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="ordre_de_numero">
+                        {!! $errors->first('ordre_de_numero', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Image</label>
                         <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="image">
                         {!! $errors->first('image', '<p class="text-danger">:message</p>') !!}
@@ -68,6 +74,12 @@
                         <label for="">Message</label>
                         <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="message" id="edit_message">
                         {!! $errors->first('message', '<p class="text-danger">:message</p>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Numéro d'ordre</label>
+                        <input class="form-control {{ $errors->has('ordre_de_numero') ? 'is-invalid' : '' }}" style="height: 50px;" type="text" placeholder="" name="ordre_de_numero" id="edit_ordre_de_numero">
+                        {!! $errors->first('ordre_de_numero', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>
                 <div class="modal-footer">

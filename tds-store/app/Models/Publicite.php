@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Publicite extends Model
 {
     use HasFactory;
-    protected $fillable = ['nom', 'message', 'image_id', 'created_at', 'updated_at'];
+    protected $fillable = ['nom', 'message', 'number_order', 'image_id', 'created_at', 'updated_at'];
 
     public function image()
     {

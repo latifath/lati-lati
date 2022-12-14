@@ -19,6 +19,7 @@ class PartenaireAdminController extends Controller
     {
         $request->validate([
             'nom' => 'required|unique:partenaires,nom,except,id',
+            'ordre_de_numero' => 'required|unique:partenaires,number_order,except,id|integer',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
@@ -27,6 +28,7 @@ class PartenaireAdminController extends Controller
         if ($save != null) {
             Partenaire::create([
                 'nom' =>$request->nom,
+                'number_order' =>$request->ordre_de_numero,
                 'image_id' => $save->id,
             ]);
         }
@@ -40,13 +42,17 @@ class PartenaireAdminController extends Controller
     public function update(Request $request){
 
         $request->validate([
-            'nom' => 'required|unique:partenaires,nom,except,id',
+            'nom' => 'required',
+            'ordre_de_numero' => 'required|unique:partenaires,number_order,except,id|integer',
+
         ]);
 
         $partenaire = Partenaire::findOrfail($request->id);
 
         $partenaire->update([
             'nom' => $request->nom,
+            'number_order' =>$request->ordre_de_numero,
+
         ]);
 
         flashy()->success('Partenaire #'. $request->id . ' modifié avec succès');
