@@ -362,6 +362,8 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/facture/{id}/terminate', [FactureController::class, 'confirm'])->name('root_espace_admin_facture_validate');
 
+    // Facture
+    Route::get('espace-client/facture/{id}', [PaiementAdminController::class, 'facture_commande'])->name('root_facture');
 
 });
 // end espace admin

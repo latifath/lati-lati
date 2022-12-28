@@ -41,6 +41,9 @@
                                         @if ($invoice->commandes->count() > 0)
                                             <button data-toggle="tooltip" title="Voir" id="btn_details_commande" class="btn" style="background-color: #007bff; border: #007bff; color: white;" data-id="{{ commande($invoice->id)->id}}" data-date="{{ commande($invoice->id)->created_at}}" data-statut="{{ commande($invoice->id)->status }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                         @endif
+                                        <a href="{{ route('root_facture', $invoice->id) }}">
+                                            <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> Facture</button>
+                                        </a>
                                         <button data-toggle="tooltip" title="Supprimer" id="btn_delete_invoice" data-id="{{ $invoice->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
