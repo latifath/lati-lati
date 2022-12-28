@@ -63,15 +63,54 @@ class PaiementAdminController extends Controller
             'reference' => 'required|unique:invoices,reference,except,id',
 
         ]);
-        Invoice::findOrfail($request->id)->update([
+
+        $invoice = Invoice::findOrfail($request->id)->update([
             'date_paid' => $request->date,
             'payment_method' => $request->type_paiement,
             'total' => $request->montant,
             'reference' => $request->reference
         ]);
 
+        $commande = Commande::where('invoice_id', $request->id)->first();
+
+        Commande::findOrfail($commande->id)->update([
+            'status' => "en cours",
+        ]);
+
         flashy()->info('Paiement créée avec succès.');
 
         return redirect()->back();
+    }
+
+    public function facture_commande($id){
+        $invoice = Invoice::findOrfail($id);
+        $commande = Commande::where('invoice_id', $invoice->id)->first();
+        $transaction_id = $_GET['transaction_id'] ?? null;
+        $adresseclient =  $commande ? adresseclient($commande->adresse_client_id) : client($invoice->user_id);
+        $items = $commande ? detail_commande($commande->id) : invoice_items($invoice->id);
+
+        $route = view('site-public.commandes.factures.facture', compact('invoice', 'commande', 'adresseclient', 'items'));
+
+        if($invoice->date_paid == null) {
+            if($transaction_id && verify_kkiapay_transaction($transaction_id, $invoice->id)) {
+                if(Invoice::where('reference', $transaction_id)->exists()){
+                    flashy()->error('Ce paiement existe déjà');
+                    return $route;
+                }
+
+                $invoice->update([
+                    'date_paid' => Carbon::now(),
+                    'payment_method' => $_GET['type_paiement'],
+                    'reference' => $transaction_id,
+                ]);
+
+                if ($commande) {
+                    $commande->update([
+                        "status" => 'en cours',
+                    ]);
+                }
+            }
+        }
+        return $route;
     }
 }
