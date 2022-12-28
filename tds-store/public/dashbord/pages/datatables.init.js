@@ -6,7 +6,11 @@
  */
 
 $(document).ready(function() {
-    $('#datatable').DataTable();
+    $('#datatable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+    });
 
     //Buttons examples
     var table = $('#datatable-buttons').DataTable({

@@ -54,7 +54,7 @@
                 <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Livraisons Facture Incomplètes</h4>
             </div>
             <div class="card-body">
-                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                         <tr>
                             <th>Adresse  Livraison</th>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="card-body">
-                <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
                         <th>Adresse Livraison</th>
@@ -153,7 +153,7 @@
                 <h4 class="mt-0 header-title text-white" style="font-size: 24px; text-align: center;">Livraisons Validées</h4>
             </div>
             <div class="card-body">
-                <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable3" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                         <tr>
                             <th>Adresse <br> Livraison</th>
@@ -191,10 +191,25 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable();
+        $('#datatable1').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
     $(document).ready(function() {
-        $('#datatable2').DataTable();
+        $('#datatable2').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
+    });
+    $(document).ready(function() {
+        $('#datatable3').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
 </script>
 <script>
