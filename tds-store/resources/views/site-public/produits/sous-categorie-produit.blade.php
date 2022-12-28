@@ -64,9 +64,7 @@
                     </div>
                 </div>
                 <div class="row px-xl-5 pb-3">
-
                     {{ $sous_categorie_produits->links() }}
-
                 </div>
             </div>
         </div>
