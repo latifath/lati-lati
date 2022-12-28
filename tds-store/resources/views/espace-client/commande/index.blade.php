@@ -254,10 +254,26 @@
 
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable();
-        $('#datatable2').DataTable();
-        $('#datatable3').DataTable();
-        $('#datatable4').DataTable();
+        $('#datatable1').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
+        $('#datatable2').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
+        $('#datatable3').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
+        $('#datatable4').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
 </script>
 <script>

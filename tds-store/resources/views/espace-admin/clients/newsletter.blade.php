@@ -98,7 +98,11 @@
 <script>
 
     $(document).ready(function() {
-        $('#datatable1').DataTable();
+        $('#datatable1').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
 
     $(document).on('click', '#btn_edit_newsletter', function(){

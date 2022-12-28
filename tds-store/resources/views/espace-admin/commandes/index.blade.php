@@ -235,16 +235,32 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable();
+        $('#datatable1').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
     $(document).ready(function() {
-        $('#datatable2').DataTable();
+        $('#datatable2').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
     $(document).ready(function() {
-        $('#datatable3').DataTable();
+        $('#datatable3').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
     $(document).ready(function() {
-        $('#datatable4').DataTable();
+        $('#datatable4').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
 </script>
 @endsection

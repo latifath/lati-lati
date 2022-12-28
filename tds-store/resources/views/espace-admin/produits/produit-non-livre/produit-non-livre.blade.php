@@ -55,7 +55,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                    <table id="datatable1" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
                             <th>N°</th>
@@ -94,7 +94,11 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#datatable2').DataTable();
+        $('#datatable1').DataTable({
+            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/fr-FR.json"
+        }
+        });
     });
 </script>
 
