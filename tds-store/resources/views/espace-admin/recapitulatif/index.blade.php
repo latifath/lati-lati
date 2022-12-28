@@ -19,6 +19,8 @@
                 <form method="POST" action="{{ route('root_espace_admin_recapitutatif_show') }}">
                     @csrf
                     <div class="row col-md-12">
+                        <input class="form-control" type="hidden" name="valide_date" value="">
+
                         <div class="col-md-5">
                             <label>Période du :</label>
                             <input class="form-control {{ $errors->has('date_debut') ? 'is-invalid' : '' }}" style="height: 50px;" value="" type="date" placeholder="" name="date_debut" required/>
@@ -42,42 +44,45 @@
 <br>
     @if ($commandes)
         <div class="row">
-            <div>
-                <button class="btn border mb-3 mx-3" onClick="imprimer('Bilan')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">
-                    <i class="fa fa-print" aria-hidden="true" type="button" value="Imprimer"> </i> Imprimer
-                </button>
-            </div>
-            <br>
-            <div class="col-12" id="Bilan">
+            <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
                         @if($commandes->count() == 0)
                             <h3 class="text-danger">Aucune commande trouvé pour la période du {{ Carbon\Carbon::parse($date_debut)->format('d-m-Y') }} au {{ Carbon\Carbon::parse($date_fin)->format('d-m-Y') }}</h3>
                         @else
-                            <h1 class="mt-0 header-title text-success" style="font-size: 24px; text-align: center;">Commandes du {{ Carbon\Carbon::parse($date_debut)->format('d-m-Y') }} au {{ Carbon\Carbon::parse($date_fin)->format('d-m-Y') }}</h1>
-                            <div class="table-responsive">
-                                <table  class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
-                                    <thead>
-                                    <tr>
-                                        <th>N°</th>
-                                        <th>N° Commande</th>
-                                        <th>Montant</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($commandes as $key => $commande)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $commande->id }}</td>
-                                                <td>{{ number_format(total_commande($commande->id), 0, '.', ' ') F CFA}}</td>
-                                                <td>{{ $commande->created_at->format('m/d/Y') }}</td>
-                                                <td>{{ $commande->status }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        {{-- Bouton pour l'impression --}}
+                            <div>
+                                <button class="btn border mb-3 mx-3" onClick="imprimer('Bilan')" style="{{ couleur_background_1() }}; {{ couleur_blanche() }};">
+                                    <i class="fa fa-print" aria-hidden="true" type="button" value="Imprimer"> </i> Imprimer
+                                </button>
+                            </div>
+                            <div class="" id="Bilan">
+                                <h1 class="mt-0 header-title text-success" style="font-size: 24px; text-align: center;">Commandes du {{ Carbon\Carbon::parse($date_debut)->format('d-m-Y') }} au {{ Carbon\Carbon::parse($date_fin)->format('d-m-Y') }}</h1>
+                                <br>
+                                <div class="table-responsive">
+                                    <table  class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                                        <thead>
+                                        <tr>
+                                            <th>N°</th>
+                                            <th>N°Commande</th>
+                                            <th>Montant</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($commandes as $key => $commande)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $commande->id }}</td>
+                                                    <td>{{ number_format(total_commande($commande->id), 0, '.', ' ')}} F CFA</td>
+                                                    <td>{{ $commande->created_at->format('m/d/Y') }}</td>
+                                                    <td>{{ $commande->status }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         @endif
                     </div>

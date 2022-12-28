@@ -31,8 +31,12 @@
                                 <td>{{ number_format($item->montant, '0', '.', '')}} F CFA</td>
                                 <td>{{ $item->commande->id }}</td>
                                 <td>
-                                    {{-- <button data-toggle="tooltip" title="Ajouter" id="btn_edit_frais_exp" data-id="{{ $item->id }}" data-montant="{{ $item->montant }}" class="btn btn-primary"><i class="fa fa-plus"></i></i></button> --}}
-                                    <button data-toggle="tooltip" title="Génération facture" id="btn_generate_facture" class="btn btn-primary" data-user="{{ $item->commande->user_id }}" data-livraison="{{ $item->id }}"><i class="fa fa-refresh"></i></i></button>
+                                    @if($item->invoice_id == null)
+                                        <button data-toggle="tooltip" title="Génération facture" id="btn_generate_facture" class="btn btn-primary" data-user="{{ $item->commande->user_id }}" data-livraison="{{ $item->id }}"><i class="fa fa-refresh"></i></i></button>
+                                    @else
+                                        <button data-toggle="tooltip" title="Facture déjà générée" id="btn_generate_facture" class="btn btn-primary" disabled="disabled" data-user="{{ $item->commande->user_id }}" data-livraison="{{ $item->id }}"><i class="fa fa-refresh"></i></i></button>
+                                    @endif
+
                                     <button data-toggle="tooltip" title="Supprimer" id="btn_delete_livraison" data-id="{{ $item->id }}" class="btn bg-danger text-white"><i class="fa fa-trash"></i></i></button>
                                 </td>
                             </tr>

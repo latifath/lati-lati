@@ -18,7 +18,7 @@
                     @if (sous_categories_menu($item->id)->count() == 0)
                         <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                     @else
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown" style="padding-top: 10px;">
                             <a href="#" class="nav-link" data-toggle="dropdown"><i
                                     class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
 
@@ -39,7 +39,7 @@
                     @if (sous_categories_menu($item->id)->count() == 0)
                         <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                     @else
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown" style="padding-top: 10px;" >
                             <a href="#" class="nav-link" data-toggle="dropdown"><i
                                     class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
 
@@ -60,7 +60,7 @@
                     @if (sous_categories_menu($item->id)->count() == 0)
                         <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                     @else
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown" style="padding-top: 10px;">
                             <a href="#" class="nav-link" data-toggle="dropdown"><i
                                     class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
 
@@ -81,7 +81,7 @@
                     @if (sous_categories_menu($item->id)->count() == 0)
                         <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
                     @else
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown" style="padding-top: 10px;">
                             <a href="#" class="nav-link" data-toggle="dropdown"><i
                                     class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
 
@@ -94,7 +94,6 @@
                     @endif
                 @endif
             @endforeach
-
         </div>
     </nav>
 </div>

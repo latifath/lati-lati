@@ -15,7 +15,7 @@
         <div class="card m-b-30">
            <div class="card-header bg-success">
                 <h4 class="mt-3 header-title text-white text-center  d-inline-block" style="font-size: 24px;">Publicités</h4>
-                <button  id="btn_ajout_publicite" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}"><i class="fa fa-plus" aria-hidden="true"> Ajouter une publicité</i></button>
+                <button  id="btn_ajout_publicite" class="float-right btn d-inline-block text-white border"  {{ couleur_background_1() }}><i class="fa fa-plus" aria-hidden="true"> Ajouter une publicité</i></button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

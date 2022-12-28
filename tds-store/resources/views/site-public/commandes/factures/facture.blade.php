@@ -36,17 +36,22 @@
     .lieu_payement{
         text-align: none !important;
     }
+
+    img{
+        margin-left: 80px;
+        width: 50%;
+    }
 }
 </style>
 
 <body>
     <div class="container-fluid col-md-8 offset-md-2">
         <div class="card" id="facture">
-            <div class="card-body p-5">
+            <div class="card-body p-5" style="padding: 0.75rem !important;">
                 <div class="row">
                     <div class="col-md-6 text-center;">
-                        <p>
-                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
+                        <p classe=col-md-6>
+                            <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo" width="50%" height="20%">
                         </p>
                         <h3 id="facture_number">Facture #{{ $invoice->id}} </h3>
                     </div>
@@ -60,14 +65,14 @@
                             @else
                                 <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span><br>
                                 @if( isset($_GET['type_paiement']))
-                                    <div class="col-md-6" style="margin-left: 110px;" id="btn-kkiapay">
+                                    <div class="col-md-6" style="margin-left: 150px;" id="btn-kkiapay">
                                         @if($_GET['type_paiement'] == "momo")
-                                            <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
+                                            <button class="kkiapay-button btn btn-success my-3">Procéder au paiement</button>
                                         @elseif($_GET['type_paiement'] == "carte_bancaire")
-                                            <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
+                                            <button class="kkiapay-button btn btn-primary my-3 mx-1">Procéder au paiement</button>
                                         @elseif($_GET['type_paiement'] == "paypal")
                                             <div id="paypal-button-container">
-                                                <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
+                                                <button class="paypal.Buttons btn btn-primary my-3">PayPal</button>
                                             </div>
                                         @endif
                                     </div>
@@ -159,7 +164,7 @@
                                             <tr>
                                                 <td>{{ $commande ? produit($item->produit_id)->nom : $item->description }}</td>
                                                 <td>{{ $commande ? $item->quantite : $item->quantity }}</td>
-                                                <td>{{ number_format($commande ? produit($item->produit_id)->prix : $item->price, '0', '.', ' ')}}</td>
+                                                <td>{{ number_format($commande ? produit($item->produit_id)->prix : $item->price, '0', '.', ' ')}} F CFA</td>
                                                 <td>{{ number_format($commande ? $item->quantite * $item->prix : $item->amount,'0', '.', ' ') }} F CFA</td>
                                             </tr>
                                         @endforeach
@@ -213,7 +218,8 @@
                                             <td>{{ $commande ? $commande->created_at : $invoice->created_at }}</td>
                                             <td>{{ $invoice->payment_method }}</td>
                                             <td>{{ $invoice->reference }}</td>
-                                            <td>{{ number_format(kkiapay($invoice->reference)->amount,  0, '.', ' ' ) }} F CFA</td>
+                                            {{-- <td>{{ number_format(kkiapay($invoice->id)->amount,  0, '.', ' ' ) }} F CFA</td> --}}
+                                            <td>{{ number_format($commande ? $amount_ttc : $invoice->total,  0, '.', ' ' ) }} F CFA</td>
                                         @else
                                             <td class="text-center" colspan="4">
                                                 <span>Aucune transaction trouvée</span>

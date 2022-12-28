@@ -20,7 +20,8 @@ class SitepublicController extends Controller
         $sous_categorie = SousCategorie::where('slug', $sous_cat)->first();
         $sous_categories_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->orderBy('id', 'DESC')->get();
 
-        $sous_categorie_produits = Produit::orderBy('id', 'DESC')->paginate(8);
+        // pour pagination
+        $sous_categorie_produits = Produit::where('sous_categorie_id', $sous_categorie->id)->orderBy('id', 'DESC')->paginate(8);
 
         return view ('site-public.produits.sous-categorie-produit', compact('cat', 'sous_cat' ,'sous_categories_produits', 'sous_categorie_produits'));
 

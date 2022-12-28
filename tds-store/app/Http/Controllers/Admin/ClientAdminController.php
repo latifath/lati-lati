@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Commande;
 use Illuminate\Http\Request;
+use App\Mail\SendMailPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ClientAdminController extends Controller
 {
@@ -40,27 +42,30 @@ class ClientAdminController extends Controller
     //     // return view('/espace-admin.clients.index', compact('user'));
     // }
 
-        public function add(){
-            return view('espace-admin.clients.create');
-        }
+    public function add(){
+        return view('espace-admin.clients.create');
+    }
 
-        public function create(Request $request)
-        {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,except,id',
-            'role' => 'required',
-            'password' => 'required|string|min:6|max:12',
-            'password_confirm' => 'required|same:password|min:6',
-        ]);
+    public function create(Request $request)
+    {
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|unique:users,email,except,id',
+        'password' => 'required|string|min:6|max:12',
+    ]);
 
-        User::create(['name' => $request->name, 'email' =>$request->email, 'role' => $request->role, 'password' => Hash::make($request->password), 'password_confirm' => Hash::make($request->password_confirm)]);
+    $user = User::create(['name' => $request->name, 'email' =>$request->email, 'password' => Hash::make($request->password)]);
 
-        flashy()->info('Client crée avec succès.');
-        return redirect()->back();
+    if (request()->has('feature')) {
 
-       }
+        Mail::to($user->email)->send(new SendMailPassword($user));
+    }
 
+
+    flashy()->info('Client crée avec succès.');
+    return redirect()->back();
+
+    }
 
     public function delete(Request $request){
 

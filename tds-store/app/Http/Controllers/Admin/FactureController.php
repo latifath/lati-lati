@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Invoice;
 use App\Models\Commande;
 use App\Models\Livraison;
@@ -40,7 +41,7 @@ class FactureController extends Controller
             'invoice_id' => $invoice->id,
         ]);
 
-        flashy()->info('Facture crée avec succès');
+        flashy()->info('Facture Mise en place avec succès');
 
         return redirect()->route('root_espace_admin_index_facture', $invoice->id);
     }
@@ -112,7 +113,8 @@ class FactureController extends Controller
             'total' => $total
         ]);
 
-        Mail::to(client($invoice->user_id)->email)->send(new SendMailMontantExpeditionClient($invoice));
+        $user_email = User::findOrfail($invoice->user_id);
+        Mail::to(client($user_email->email))->send(new SendMailMontantExpeditionClient($invoice));
 
         flashy()->success('Facture validée avec succès');
         return redirect()->route('root_espace_admin_index_livraison');
