@@ -359,7 +359,7 @@
         .then((resp) => resp.json())
         .catch(() => {
             return {
-            country: 'us',
+            country: 'bj',
             };
         })
         .then((resp) => callback(resp.country));

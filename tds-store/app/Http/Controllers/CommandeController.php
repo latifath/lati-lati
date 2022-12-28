@@ -172,15 +172,15 @@ class CommandeController extends Controller
             // creation facture
             $valeur_tva = 0;
             if($commande->tva == 1){
-                $valeur_tva = 1.18;
+                $valeur_tva = $amount_product * 1.18;
             }else{
-                $valeur_tva ;
+                $valeur_tva = $amount_product;
             }
             $facture = Invoice::create([
                 'user_id' => $user->id,
                 'subtotal' => $amount_product,
                 'tva' => $commande->tva,
-                'total' => $amount_product * $valeur_tva + $livraison->montant,
+                'total' => $valeur_tva + $livraison->montant,
                 'payment_method' => $request->payment,
                 'reference' => NULL,
             ]);

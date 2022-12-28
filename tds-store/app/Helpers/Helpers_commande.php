@@ -30,6 +30,5 @@ if(!function_exists('commande')){
     function commande($invoice_id){
         $commande = Commande::where('invoice_id', $invoice_id)->first();
         return $commande;
-
     }
 }

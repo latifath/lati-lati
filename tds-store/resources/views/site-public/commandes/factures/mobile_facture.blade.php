@@ -1,11 +1,11 @@
 
 <div class="container-fluid col-md-8 offset-md-2 d-none">
     <div class="card" id="facture">
-        <div class="card-body p-5">
+        <div class="card-body p-5"  style="padding: 0.75rem !important;">
             <div class="row">
                 <div class="col-6" style="">
                     <p>
-                        <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo">
+                        <img src="{{ asset('assets/img/tds.png') }}" alt="tds" class="logo" width="50%" height="20%">
                     </p>
                     <h3 style=""> Facture #{{ $commande->invoice->id}} </h3>
                 </div>
@@ -19,14 +19,14 @@
                         @else
                             <span style="font-size: 24px;" class="text-danger font-weight-bold"> NON PAYE</span><br>
                             @if( isset($_GET['type_paiement']))
-                                <div class="col-6 text-right " style="margin-left: 110px;" id="btn-kkiapay">
+                                <div class="col-6 text-right " style="margin-left: 150px;" id="btn-kkiapay">
                                     @if($_GET['type_paiement'] == "momo")
-                                        <button class="kkiapay-button btn btn-success my-3 py-3">Procéder au paiement</button>
+                                        <button class="kkiapay-button btn btn-success my-3">Procéder au paiement</button>
                                     @elseif($_GET['type_paiement'] == "card")
-                                        <button class="kkiapay-button btn btn-primary my-3 py-3 mx-1">Procéder au paiement</button>
+                                        <button class="kkiapay-button btn btn-primary my-3 mx-1">Procéder au paiement</button>
                                     @elseif($_GET['type_paiement'] == "paypal")
                                         <div id="paypal-button-container">
-                                            <button class="paypal.Buttons btn btn-primary my-3 py-3">PayPal</button>
+                                            <button class="paypal.Buttons btn btn-primary my-3">PayPal</button>
                                         </div>
                                     @endif
                                 </div>

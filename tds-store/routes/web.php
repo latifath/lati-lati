@@ -144,6 +144,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/verification-auth', [SitepublicController::class, 'verification'])->name('root_verification_auth');
 
+    // gestion client
     Route::get('/espace-admin/clients', [ClientAdminController::class, 'index'])->name('root_espace_admin_clients_index');
 
     Route::delete('espace-admin/clients/supprimer/{id}', [ClientAdminController::class, 'delete'])->name('root_delete_clients');

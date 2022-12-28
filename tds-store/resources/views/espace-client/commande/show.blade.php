@@ -158,7 +158,7 @@
                     <tbody>
                         @if( $commande->invoice && $commande->invoice->date_paid)
                         <tr>
-                            <td>{{ number_format($commande->invoice->subtotal, '0', '.', ' ') }} F CFA</td>
+                            <td>{{ number_format($commande->invoice->total, '0', '.', ' ') }} F CFA</td>
                             <td>{{ $commande->invoice->date_paid }}</td>
                             <td>{{ $commande->invoice->payment_method }}</td>
                         </tr>

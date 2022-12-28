@@ -19,9 +19,9 @@ class CreateInvoicesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->dateTime('date_paid')->nullable();
             $table->dateTime('date_cancel')->nullable();
-            $table->decimal('subtotal', 10, 2);
+            $table->decimal('subtotal', 10, 2)->nullable();
             $table->integer('tva')->nullable();
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 10, 2)->nullable();
             $table->string('payment_method')->nullable();
             $table->string('reference')->unique()->nullable();
             $table->boolean('status')->default(1);

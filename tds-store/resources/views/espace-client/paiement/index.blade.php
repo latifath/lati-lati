@@ -32,7 +32,7 @@
                                     <td>{{ commande($invoice->id) ? '#' . commande($invoice->id)->id : 'Néant'}}</td>
                                     <td>
                                         @if (commande($invoice->id))
-                                            <a href="{{ route('root_espace_client_commande_show', $invoice->id) }}">
+                                            <a href="{{ route('root_espace_client_commande_show', commande($invoice->id)->id) }}">
                                                 <button class="btn btn-secondary"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button>
                                             </a>
                                         @endif

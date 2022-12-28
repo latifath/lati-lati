@@ -94,6 +94,7 @@
                             </ul>
                         </div>
                     @endif
+
                     <div class="col-md-6 mt-5 {{ session()->has('stock') ? '' : 'offset-md-6' }}">
                         @if (!request()->session()->has('coupon'))
                             <div class="mb-3">
@@ -108,6 +109,17 @@
                                     </div>
                                 </div>
                             </form>
+                            {{-- affichage des erreur --}}
+                            @if($errors->any())
+                                <h4 class="text-danger">{{$errors->first()}}</h4>
+                                <br>
+                            @endif
+
+                            @if(session()->has('message'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
                         @else
                             <div class="mb-3">
                                 <p> Un coupon est déjà appliqué.</p>

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class PromotionController extends Controller
 {
 
-
     public function verification_coupon(Request $request){
 
       $code = $request->code;
@@ -18,9 +17,7 @@ class PromotionController extends Controller
 
       if (!$promotion){
 
-        flashy()->error('Le coupon est invalide');
-
-        return redirect()->back();
+        return redirect()->back()->withErrors(['msg' => 'Le coupon est invalide.']);
 
       }
 
@@ -31,9 +28,7 @@ class PromotionController extends Controller
         'valeur' => $promotion->valeur,
       ]);
 
-      flashy()->success('Le coupon est appliqué');
-
-      return redirect()->back();
+      return redirect()->back()->with('message', 'Le coupon est appliqué!');
 
     }
 
