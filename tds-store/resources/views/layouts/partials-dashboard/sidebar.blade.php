@@ -6,7 +6,7 @@
     <div class="left-side-logo d-block d-lg-none" >
         <div class="text-center" style="{{ couleur_principal() }}">
 
-            <a href="/" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}" height="5" widht="5" alt="logo"></a>
+            <a href="/" class="logo"><img src="{{ new_year() ? asset('dashbord/images/logo_sapin.png') :  asset('dashbord/images/logo.png') }}" height="5" widht="5" alt="logo"></a>
         </div>
     </div>
 

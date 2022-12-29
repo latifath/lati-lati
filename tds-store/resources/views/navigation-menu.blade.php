@@ -6,11 +6,11 @@
                 <!-- Logo -->
                 @if(Auth::user()->role == "client")
               <div class="shrink-0 flex items-center">
-                <a href="{{ route('root_espace_client_index') }}" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
+                <a href="{{ route('root_espace_client_index') }}" class="logo"><img src="{{ new_year() ? asset('dashbord/images/logo_sapin.png') :  asset('dashbord/images/logo.png')}}"  alt="logo" style="height: 50px"></a>
               </div>
               @else
               <div class="shrink-0 flex items-center">
-                <a href="{{ route('root_espace_admin_index') }}" class="logo"><img src="{{ asset('dashbord/images/logo.png') }}"  alt="logo" style="height: 50px"></a>
+                <a href="{{ route('root_espace_admin_index') }}" class="logo"><img src="{{ new_year() ? asset('dashbord/images/logo_sapin.png') :  asset('dashbord/images/logo.png')}}"  alt="logo" style="height: 50px"></a>
               </div>
               @endif
 

@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="shortcut icon" href="{{ asset('dashbord/images/logo.png') }}">
+        <link rel="shortcut icon" href="{{ new_year() ? asset('dashbord/images/logo_sapin.png') : asset('dashbord/images/logo.png')}}">
 
          <!-- Alertify css -->
          {{-- <link href="{{  asset('dashbord/plugins/alertify/css/alertify.css') }}" rel="stylesheet" type="text/css"> --}}

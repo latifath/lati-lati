@@ -371,3 +371,19 @@ if (!function_exists('priority_by_category_zero')) {
 
     }
 }
+
+if(!function_exists('new_year')){
+    function new_year(){
+        $date_debut = Carbon\Carbon::parse(date('Y') . "-12-20 00:00:00");
+
+        $date_fin = Carbon\Carbon::parse(date('Y') + 1 . "-01-31 23:59:59");
+
+        $dt = Carbon\Carbon::parse(new \DateTime());
+
+        if($date_debut < $dt && $date_fin > $dt){
+            return true;
+        }
+
+        return false;
+    }
+}

@@ -12,7 +12,7 @@
     <div class="topbar-left	d-none d-lg-block">
         <div class="text-center">
 
-            <a href="/"><img src="{{ asset('dashbord/images/logo.png') }}" height="50" alt="tds" class="logo" ></a>
+            <a href="/"><img src="{{ new_year() ? asset('dashbord/images/logo_sapin.png') : asset('dashbord/images/logo.png') }}" height="50" alt="tds" class="logo" ></a>
         </div>
     </div>
 
