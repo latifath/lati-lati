@@ -9,7 +9,7 @@
         <title>{{ config('app.name', 'TDS-store') }}</title>
 
         <!-- Google Web Fonts -->
-        <link rel="preconnect" href="{{ asset('assets/img/tds.png') }}">
+        <link rel="preconnect" href="{{ new_year() ? asset('assets/img/tds_sapin.png') :  asset('assets/img/tds.png')}}">
 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 

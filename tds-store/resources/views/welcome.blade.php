@@ -10,7 +10,7 @@
         <title>TDS Store</title>
 
         <!-- Fonts -->
-        <link href="{{ asset('dashbord/images/logo.png') }}" rel="stylesheet">
+        <link href="{{ new_year() ? asset('dashbord/images/logo_sapin.png') : asset('dashbord/images/logo.png') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
