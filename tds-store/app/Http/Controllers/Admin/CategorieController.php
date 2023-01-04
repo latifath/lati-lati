@@ -11,7 +11,7 @@ class CategorieController extends Controller
 {
     public function index(){
 
-      $categories =  Categorie::all();
+      $categories =  Categorie::orderBy('priority_order','ASC')->select('id','nom','priority_order')->get();
 
       return view('/espace-admin.categories.index', compact('categories'));
     }
@@ -38,9 +38,9 @@ class CategorieController extends Controller
         flashy()->success('Catégorie #'. $request->id . 'modifiée avec succès');
 
         return redirect()->back();
- }
+    }
 
-public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
 
@@ -65,6 +65,32 @@ public function store(Request $request)
         return redirect()->back();
     }
 
+    public function updateOrder(Request $request){
 
+        $categories = Categorie::all();
+        foreach ($categories as $categorie)
+        {
+            foreach ($request->categorie as $categorie)
+         {
+            if ($categorie['id'] == $categorie->id) {
+            $categorie->update(['priority_order' => $categorie['position']]);
+            }
+            }
+            return response('Update Successfully.', 200);
+            }
+
+
+        // foreach ($categories as $categorie) {
+        //     $categorie->timestamps = false; // To disable update_at field updation
+        //     $id = $categorie->id;
+
+        //         foreach ($request->priority_order as $priority) {
+        //             if ($priority['id'] == $id) {
+        //                 $categorie->update(['priority_order' => $priority['position']]);
+        //             }
+        //         }
+        // }
+        //     flashy()->success('Ordre de tire modifier avec succès');
+    }
 
 }

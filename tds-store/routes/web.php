@@ -269,6 +269,10 @@ Route::middleware('admin')->group(function () {
 
     Route::get('espace-admin/produits/{id}/show', [ProduitAdminController::class, 'show'])->name('root_espace_admin_show_produit');
 
+    Route::post('espace-admin/produits/ajout-fiche-technique', [ProduitAdminController::class, 'create_fiche_technique'])->name('root_espace_admin_produit_fiche_technique');
+
+    Route::delete('espace-admin/produits/Fiche-technique/{id}/supprimer', [ProduitAdminController::class, 'delete_technical_sheet'])->name('root_espace_admin_produit_fiche_technique_delete');
+
 
     //images
 
@@ -364,6 +368,8 @@ Route::middleware('admin')->group(function () {
 
     // Facture
     Route::get('espace-client/facture/{id}', [PaiementAdminController::class, 'facture_commande'])->name('root_facture');
+
+    Route::post('espace-admin/update/categorie_order', [CategorieController::class, 'updateOrder'])->name('root_update_categorie_order');
 
 });
 // end espace admin

@@ -37,6 +37,10 @@
         object-fit: contain;
     }
 
+    #fiche
+    {
+        display:none;
+    }
     </style>
 @endsection
 
@@ -147,8 +151,16 @@
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3" style="{{ couleur_text_2() }}">Caractéristiques du produit</h4>
                         <p>{!! $produit->description !!}</p>
-                        {{-- <p>{!! Str::substr($produit->description, 0, 120) !!} {!! Str::length($produit->description) > 120 ? '...' : '' !!}</p> --}}
                     </div>
+                    <br>
+                    <br>
+                    @if($produit->file_id != null)
+                    <button id="btn_fiche" class="btn btn-secondary float-right"> Voir la fiche technique</button>
+                    <br><br>
+                    <div id= "fiche">
+                        <iframe src="{{ path_image($produit->file_id) ? asset(path_fiche_technique() . path_image($produit->file_id)->filename) : ''}}" style="" height="1000px" width="100%"></iframe>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -231,5 +243,15 @@
                 $input.val( +$input.val() - 1 );
             }
         });
+    </script>
+
+    <script>
+        document.querySelector("#btn_fiche").onclick = function() {
+            if (window.getComputedStyle(document.querySelector('#fiche')).display=='none'){
+            document.querySelector("#fiche").style.display="block";
+            } else {
+            document.querySelector("#fiche").style.display="none";
+            }
+        }
     </script>
 @endsection

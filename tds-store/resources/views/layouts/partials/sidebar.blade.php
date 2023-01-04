@@ -1,3 +1,11 @@
+
+<style>
+.h-sidebar{
+    height: 750px;
+}
+
+</style>
+
 <div class="col-lg-3 d-none d-lg-block">
     <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
         data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px; {{ couleur_background_2() }}">
@@ -10,70 +18,7 @@
             @php
                 $i = 0 ;
             @endphp
-            @foreach (priority_by_category_tree() as $item)
-                @php
-                    $i++ ;
-                @endphp
-                @if ($i <= 40)
-                    @if (sous_categories_menu($item->id)->count() == 0)
-                        <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
-                    @else
-                        <div class="nav-item dropdown" style="padding-top: 10px;">
-                            <a href="#" class="nav-link" data-toggle="dropdown"><i
-                                    class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
-
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                @foreach (sous_categories_menu($item->id) as $k)
-                                    <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                @endif
-            @endforeach
-            @foreach (priority_by_category_two() as $item)
-                @php
-                    $i++ ;
-                @endphp
-                @if ($i <= 40)
-                    @if (sous_categories_menu($item->id)->count() == 0)
-                        <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
-                    @else
-                        <div class="nav-item dropdown" style="padding-top: 10px;" >
-                            <a href="#" class="nav-link" data-toggle="dropdown"><i
-                                    class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
-
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                @foreach (sous_categories_menu($item->id) as $k)
-                                    <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                @endif
-            @endforeach
-            @foreach (priority_by_category_one() as $item)
-                @php
-                    $i++ ;
-                @endphp
-                @if ($i <= 40)
-                    @if (sous_categories_menu($item->id)->count() == 0)
-                        <a href="" class="nav-item nav-link">{{ $item->nom }}</a>
-                    @else
-                        <div class="nav-item dropdown" style="padding-top: 10px;">
-                            <a href="#" class="nav-link" data-toggle="dropdown"><i
-                                    class="fa fa-angle-down float-right mt-1"></i>{{ $item->nom }}</a>
-
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                @foreach (sous_categories_menu($item->id) as $k)
-                                    <a href="{{ route('root_sitepublic_all_produit_par_sous_categorie', [$item->slug, $k->slug])}}" class="dropdown-item">{{ $k->nom }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                @endif
-            @endforeach
-            @foreach (priority_by_category_zero() as $item)
+            @foreach (categorie_menu_side() as $item)
                 @php
                     $i++ ;
                 @endphp

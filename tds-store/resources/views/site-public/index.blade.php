@@ -19,6 +19,7 @@
         height: 120px;
         object-fit: contain;
     }
+
 </style>
 @endsection
 

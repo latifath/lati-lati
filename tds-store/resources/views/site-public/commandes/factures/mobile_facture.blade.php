@@ -130,7 +130,7 @@
                                         </tr>
                                         <tr class="">
                                             <td colspan="3" class="text-right"><strong>Expédition</strong></td>
-                                            <td class="">{{  info_livraison($commande->id) != null ? number_format(info_livraison($commande->id)->montant, '0', '.', ' ') . ' F CFA ' : 'À communiquer' }}</td>
+                                            <td class="">{{  verify_amount_livraison_exist(info_livraison($commande->id)) != null ? number_format(verify_amount_livraison_exist(info_livraison($commande->id)->montant), '0', '.', ' ') . ' F CFA ' : 'à communiquer'}}</td>
                                         </tr>
                                         @if ($commande->promotion != null)
                                             <tr class="">

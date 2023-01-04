@@ -20,17 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Priorité</label>
-                            <select class="custom-select {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px;" name="priority_order" >
-                                <option>Choisissez une priorité</option>
-                                @if(priority_by_category_tree()->count() >= 8)
-                                    <option value="3" disabled selected>Haute</option>
-                                @else
-                                    <option value="3">Haute</option>
-                                @endif
-                                <option value="2"> Moyenne</option>
-                                <option value="1"> Petite</option>
-                                <option value="0"> Plus petite</option>
-                            </select>
+                            <input class="form-control {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px;"  type="text" placeholder="entrez la catégorie" name="priority_order" id="edit_priority">
                             {!! $errors->first('priority_order', '<p class="text-danger">:message</p>') !!}
                         </div>
                     </div>
@@ -64,17 +54,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Priorité</label>
-                        <select class="custom-select {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px;" name="priority_order" >
-                            <option>Choisissez une priorité</option>
-                            @if(priority_by_category_tree()->count() >= 8)
-                            <option value="3" disabled selected>Haute</option>
-                            @else
-                            <option value="3">Haute</option>
-                            @endif
-                            <option value="2"> Moyenne</option>
-                            <option value="1"> Petite</option>
-                            <option value="0"> Plus petite</option>
-                        </select>
+                        <input class="form-control {{ $errors->has('priority_order') ? 'is-invalid' : '' }}" style="height: 50px; " type="text" placeholder="Entrez la catégorie" name="priority_order">
                         {!! $errors->first('priority_order', '<p class="text-danger">:message</p>') !!}
                     </div>
                 </div>

@@ -28,8 +28,8 @@
                             <th>Nom</th>
                             <th>Quantité</th>
                             <th>Prix</th>
-                            <th>Prix promo</th>
                             <th>Sous-catégorie</th>
+                            <th>Fiche technique</th>
                             <th style="width: 15%">Action</th>
                         </tr>
                         </thead>
@@ -40,8 +40,12 @@
                                     <td>{{ $produit->nom }}</td>
                                     <td>{{ $produit->quantite }}</td>
                                     <td>{{ $produit->prix }}</td>
-                                    <td>{{ $produit->prix_promotionnel }}</td>
                                     <td>{{ $produit->sous_categorie->nom }}</td>
+                                    @if($produit->file_id != null)
+                                    <td>#</td>
+                                    @else
+                                    <td></td>
+                                    @endif
                                     <td>
                                         <a href="{{ route('root_espace_admin_show_produit', $produit->id) }}">
                                             <button   data-toggle="tooltip" title="voir produit" class="btn btn-primary"><i class="fa fa-eye"></i></button>
@@ -51,6 +55,8 @@
                                             <button   data-toggle="tooltip" title="Galerie images" id="btn_add_image"  class="btn"  style="background-color:#ffc107; border: #ffc107; color: white;"><i class="fa fa-imdb"></i></button>
                                         </a>
                                         <button data-toggle="tooltip" title="Ajouter stock" id="btn_add_stock" class="btn" data-id={{ $produit->id}} style="background-color: #007bff; border: #007bff; color: white;"><i class="fa fa-plus"></i></button>
+
+                                        <button data-toggle="tooltip" title="Ajouter la fiche technique" id="btn_add_fiche_technique" class="btn btn-secondary" data-id={{ $produit->id}} data-nom={{ $produit->nom }}><i class="fa fa-plus"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -146,6 +152,8 @@
 
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
 
+
+
 @endsection
 
 @section('js')
@@ -162,7 +170,6 @@
         $('#quantite').val(quantite);
         $('#prix').val(prix);
         $('#description').val(description);
-
 
         $('#ModalModifieProduit').modal('show');
     });
@@ -185,6 +192,21 @@
        $('#ModalAjoutStock').modal('show');
     });
 
+    // ajout fiche technique
+    $(document).on('click', '#btn_add_fiche_technique', function(){
+
+        var ID = $(this).attr('data-id');
+
+        var nom = $(this).attr('data-nom');
+
+
+        $('#btn_add_fiche_id').val(ID);
+
+        $('#btn_add_fiche_nom').val(nom);
+
+        $('#ModalAjoutFiche').modal('show');
+    });
+
 </script>
 <script>
     function imprimer(divName) {
@@ -197,4 +219,3 @@
     }
 </script>
 @endsection
-

@@ -23,7 +23,7 @@ class Produit extends Model
             ];
     }
 
-    protected $fillable = [ 'sous_categorie_id', 'nom', 'description', 'slug', 'quantite', 'prix', 'prix_achat', 'prix_vente_500000', 'prix_vente_1000000', 'prix_vente_5000000', 'prix_vente_10000000', 'prix_vente_10000000_+', 'image_id', 'created_at', 'updated_at' ];
+    protected $fillable = [ 'sous_categorie_id', 'nom', 'description', 'slug', 'quantite', 'prix', 'prix_achat', 'prix_vente_500000', 'prix_vente_1000000', 'prix_vente_5000000', 'prix_vente_10000000', 'prix_vente_10000000_+', 'image_id', 'file_id', 'created_at', 'updated_at' ];
 
     public function promotions()
     {

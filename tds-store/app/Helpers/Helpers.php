@@ -46,7 +46,21 @@ if(!function_exists('verify_kkiapay_transaction')){
 
 if (!function_exists('categorie_menu')) {
     function categorie_menu(){
-        $categories = Categorie::orderBy('id', 'ASC')->get();
+        $categories = Categorie::orderBy('priority_order', 'ASC')->get();
+        return $categories;
+
+    }
+}
+if (!function_exists('categorie_menu_side')) {
+    function categorie_menu_side(){
+        $categories = Categorie::where('priority_order', '<=', 15)->orderBy('priority_order', 'ASC')->get();
+        return $categories;
+
+    }
+}
+if (!function_exists('categorie_menu_autre')) {
+    function categorie_menu_autre(){
+        $categories = Categorie::where('priority_order', '>', 8)->get();
         return $categories;
 
     }
@@ -340,50 +354,59 @@ if(!function_exists('client')) {
 
 // ordre de priorité des categories
 
-if (!function_exists('priority_by_category_tree')) {
-    function priority_by_category_tree(){
-        $categories = Categorie::where('priority_order', 3)->orderBy('id', 'DESC')->limit(8)->get();
-        return $categories;
+// if (!function_exists('priority_by_category_tree')) {
+//     function priority_by_category_tree(){
+//         $categories = Categorie::where('priority_order', 3)->orderBy('id', 'ASC')->limit(8)->get();
+//         return $categories;
 
-    }
-}
+//     }
+// }
 
-if (!function_exists('priority_by_category_two')) {
-    function priority_by_category_two(){
-        $categories = Categorie::where('priority_order', 2)->orderBy('id', 'DESC')->get();
-        return $categories;
+// if (!function_exists('priority_by_category_two')) {
+//     function priority_by_category_two(){
+//         $categories = Categorie::where('priority_order', 2)->orderBy('id', 'ASC')->get();
+//         return $categories;
 
-    }
-}
+//     }
+// }
 
-if (!function_exists('priority_by_category_one')) {
-    function priority_by_category_one(){
-        $categories = Categorie::where('priority_order', 1)->orderBy('id', 'DESC')->get();
-        return $categories;
+// if (!function_exists('priority_by_category_one')) {
+//     function priority_by_category_one(){
+//         $categories = Categorie::where('priority_order', 1)->orderBy('id', 'ASC')->get();
+//         return $categories;
 
-    }
-}
+//     }
+// }
 
-if (!function_exists('priority_by_category_zero')) {
-    function priority_by_category_zero(){
-        $categories = Categorie::where('priority_order', 0)->orderBy('id', 'DESC')->get();
-        return $categories;
+// if (!function_exists('priority_by_category_zero')) {
+//     function priority_by_category_zero(){
+//         $categories = Categorie::where('priority_order', 0)->orderBy('id', 'ASC')->get();
+//         return $categories;
 
-    }
-}
+//     }
+// }
 
 if(!function_exists('new_year')){
     function new_year(){
-        $date_debut = Carbon\Carbon::parse(date('Y') . "-12-20 00:00:00");
+        // $date_debut = Carbon\Carbon::parse(date('Y') . "-12-20 00:00:00");
 
-        $date_fin = Carbon\Carbon::parse(date('Y') + 1 . "-01-31 23:59:59");
+        // $date_fin = Carbon\Carbon::parse(date('Y') + 1 . "-12-30 23:59:59");
 
-        $dt = Carbon\Carbon::parse(new \DateTime());
+        // $dt = Carbon\Carbon::parse(new \DateTime());
 
-        if($date_debut < $dt && $date_fin > $dt){
+        // if($date_debut < $dt && $date_fin > $dt){
+        //     return true;
+        // }
+        // return false;
+        $date = Carbon\Carbon::parse(date('Y-m-d'));
+
+        $year = date('Y');
+
+        if($date->betweenIncluded($year . '-12-20', $year . '-12-31') or $date->betweenIncluded($year . '-01-01', $year . '-01-31'))
+        {
             return true;
         }
+            return false;
 
-        return false;
     }
 }
