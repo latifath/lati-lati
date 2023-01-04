@@ -1,7 +1,8 @@
 <style>
     .h-sidebar{
-        height: 700px;
+        height: 750px;
     }
+
 </style>
 <x-guest-layout>
     <x-jet-authentication-card>

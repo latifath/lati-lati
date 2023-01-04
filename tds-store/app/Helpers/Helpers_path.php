@@ -27,6 +27,38 @@ if (!function_exists('save_image')) {
     }
 }
 
+// fiche technique;
+
+if (!function_exists('save_produit')) {
+    function upload_produit($dir, $file, $name) {
+
+        $extension = new SplFileInfo($file->getClientOriginalName());
+
+        $filepath = $file->storeAs($dir, $name . '.' . $extension->getExtension(), 'public');
+
+        return $filepath;
+    }
+}
+
+if (!function_exists('save_produit')) {
+    function save_produit($file, $filepath, $name) {
+
+        $extension = new SplFileInfo($file->getClientOriginalName());
+
+        if($filepath != null){
+            $picture = Image::create([
+                'filename' => $name. '.' . $extension->getExtension(),
+                'mimetype' => $file->getClientMimeType()
+            ]);
+        } else{
+            $picture = null;
+        }
+        return $picture;
+    }
+}
+
+
+
 if (!function_exists('update_image')) {
     function update_image($dir, $file, $image) {
 
@@ -74,6 +106,12 @@ if (!function_exists('path_image_produit')) {
 if (!function_exists('path_image_publicite')) {
     function path_image_publicite() {
         return "storage/publicites/";
+    }
+}
+
+if (!function_exists('path_fiche_technique')) {
+    function path_fiche_technique() {
+        return "storage/produits/fiche_technique/";
     }
 }
 

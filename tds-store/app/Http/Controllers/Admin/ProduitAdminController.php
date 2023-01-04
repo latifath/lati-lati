@@ -63,7 +63,9 @@ class ProduitAdminController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $save = save_image('produits', $request->image);
+        $name = $request->nom;
+        $upload = upload_produit('produits', $request->image, $name);
+        $save  = save_produit($request->fichier, $upload, $name);
 
         if ($save != null) {
             $produit = Produit::create([
@@ -195,6 +197,48 @@ class ProduitAdminController extends Controller
         $image->delete();
 
         flashy()->error('Image #'. $request->id . 'supprimée avec succès');
+
+        return redirect()->route('root_espace_admin_index_produit');
+    }
+
+    public function create_fiche_technique(Request $request){
+
+        $request->validate([
+            'produit' => 'required',
+            'nom' => 'required',
+            'fichier' => 'required',
+        ]);
+
+        $name = $request->nom;
+        $upload = upload_produit('produits/fiche_technique', $request->fichier, $name);
+        $save  = save_produit($request->fichier, $upload, $name);
+        // $save = save_image('produits/fiche_technique', $request->fichier);
+
+        if ($save != null) {
+
+             Produit::findOrfail($request->produit)->update([
+                 'file_id' => $save->id,
+             ]);
+        }
+
+        flashy()->info('Fiche Technique ajoutée avec succès.');
+
+        return redirect()->back();
+    }
+
+    public function delete_technical_sheet(Request $request){
+
+        $produit = Produit::findOrfail($request->id);
+
+        $image = Image::findOrfail($produit->file_id);
+
+        delete_image_path(path_fiche_technique(), $image->filename);
+
+        $save = $produit->update([
+            'file_id' => null
+        ]);
+
+        flashy()->info('Fiche Technique ajoutée avec succès.');
 
         return redirect()->route('root_espace_admin_index_produit');
     }

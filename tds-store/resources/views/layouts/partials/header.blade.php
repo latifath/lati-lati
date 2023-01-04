@@ -120,7 +120,7 @@
                         @php
                         $i = 0
                         @endphp
-                        @foreach (priority_by_category_tree() as $item)
+                        @foreach (categorie_menu() as $item)
                             @php
                             $i++
                             @endphp
@@ -156,7 +156,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="border-right: 1px solid #ffff; {{ couleur_text_3() }};">Autres</a>
                                     <div class="header-menu-content" style="background-color:  #f5efef; border: 1px solid #ddd;">
                                         <div class="row">
-                                            @foreach (priority_by_category_two() as $item)
+                                            @foreach (categorie_menu_autre() as $item)
                                                 <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
                                                     <div class="mt-0">
                                                         <a href="#" class="nav-link">{{ $item->nom }}</a>
@@ -170,7 +170,7 @@
                                                     </ul>
                                                 </div>
                                             @endforeach
-                                            @foreach (priority_by_category_one() as $item)
+                                            {{-- @foreach (priority_by_category_one() as $item)
                                                 <div class="col-md-3 col-sm-4 mb-3" style="margin-bottom: 0 !important;">
                                                     <div class="mt-0">
                                                         <a href="#" class="nav-link">{{ $item->nom }}</a>
@@ -197,7 +197,7 @@
                                                         @endforeach
                                                     </ul>
                                                 </div>
-                                            @endforeach
+                                            @endforeach --}}
                                         </div>
                                     </div>
                             @endif

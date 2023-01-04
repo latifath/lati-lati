@@ -25,6 +25,8 @@
 
             <button data-toggle="tooltip" title="Supprimer produit" id="btn_delete_produit" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button>
 
+            <button data-toggle="tooltip" title="Retirer fiche technique" id="btn_delete_fiche_technique" data-id="{{ $produit->id }}" class="btn" style="{{ couleur_background_2() }}; {{ couleur_blanche() }}"><i class="fa fa-trash" aria-hidden="true"></i> Retirer</button>
+
         </div>
         <div class="table-responsive">
         <table class="table table-striped table-bordered dt-responsive nowrap mt-4">
@@ -55,10 +57,19 @@
             <tr >
                 <td>Produit</td>
                 <td>
-                <figure class="figure">
+                {{-- <figure class="figure"> --}}
                     <img src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" class="figure-img img-fluid rounded" alt="" height="50" width="60">
-                </figure></td>
+                {{-- </figure> --}}
+                </td>
             </tr>
+            @if($produit->file_id != null)
+            <tr >
+                <td>Fiche Technique</td>
+                <td>
+                    <iframe src="{{ path_image($produit->file_id) ? asset(path_fiche_technique() . path_image($produit->file_id)->filename) : ''}}" style="" height="1000px" width="100%"></iframe>
+                </td>
+            </tr>
+            @endif
         </table>
         </div>
     </div>
@@ -67,6 +78,33 @@
 @include('espace-admin.produits._modal')
 
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
+
+
+{{-- modal fiche technique --}}
+<div class="modal fade" id="DeleteFicheTechnique" aria-labelledby="DeleteFicheTechnique" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Suppression </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('root_espace_admin_produit_fiche_technique_delete', 0) }}"  method="POST">
+                @csrf
+                @method('delete')
+                <div class="modal-body">
+                    <input  class="form-control"  type="hidden" id="fiche_id" placeholder="" name="id" >
+                    <h5 class="text-center">Etes-vous sûr de vouloir retirer cette fiche ?</h5>
+                </div>
+                <div class="modal-footer" style="display:block;">
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-danger float-right">Oui, retirer</button>
+                </div>
+            </form>
+       </div>
+    </div>
+</div>
 
 @endsection
 
@@ -96,6 +134,15 @@
 
         $('#ModalModifieImageProduit').modal('show');
     });
+
+    $(document).on('click', '#btn_delete_fiche_technique', function(){
+        var id = $(this).attr('data-id');
+
+        $('#fiche_id').val(id);
+
+        $('#DeleteFicheTechnique').modal('show');
+    });
+
 </script>
 @endsection
 
