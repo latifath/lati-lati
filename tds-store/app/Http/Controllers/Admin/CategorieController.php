@@ -11,7 +11,7 @@ class CategorieController extends Controller
 {
     public function index(){
 
-      $categories =  Categorie::orderBy('priority_order','ASC')->select('id','nom','priority_order')->get();
+      $categories =  Categorie::orderBy('priority_order','ASC')->get();
 
       return view('/espace-admin.categories.index', compact('categories'));
     }
@@ -68,16 +68,19 @@ class CategorieController extends Controller
     public function updateOrder(Request $request){
 
         $categories = Categorie::all();
+
         foreach ($categories as $categorie)
         {
-            foreach ($request->categorie as $categorie)
+            foreach ($request->priority_order as $priority)
          {
-            if ($categorie['id'] == $categorie->id) {
-            $categorie->update(['priority_order' => $categorie['position']]);
+            if ($priority['id'] == $categorie->id) {
+                 $categorie->update(['priority_order' => $priority['position']]);
             }
-            }
-            return response('Update Successfully.', 200);
-            }
+        }
+            flashy()->success('ordre de priorité de la catégorie modifier avec succès');
+
+            return redirect()->back();
+        }
 
 
         // foreach ($categories as $categorie) {

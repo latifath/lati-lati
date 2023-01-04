@@ -10,6 +10,7 @@
 @section('head')
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
+{{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/> --}}
 
 @endsection
 <div class="row">
@@ -18,7 +19,7 @@
            <div class="card-header bg-success">
                 <h4 class="mt-3 header-title text-white d-inline-block " style="font-size: 24px;">Toutes les categories</h4>
                 <button id="btn_ajout_categorie" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}"><i class="fa fa-plus" aria-hidden="true"> Ajouter une catégorie</i></button>
-            </div>
+            </div><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <p>&nbsp;</p>
             <div class="card-body">
                 <div class="table-responsive">
@@ -69,6 +70,10 @@
 
 @section('js')
 
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
+<script type="text/javascript" src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+
 <script>
     $(document).on('click', '#btn_edit_categorie', function(){
         var ID = $(this).attr('data-id');
@@ -95,78 +100,49 @@
         $('#ModalAjoutCategorie').modal('show');
     });
 </script>
+<script type="text/javascript">
+    $(function () {
+    //   $("#table").DataTable();
 
-<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
-
-<script>
-  $(function () {
-    // $("#table").DataTable();
-
-    $( "#tablecontents" ).sortable({
-      items: "tr",
-      cursor: 'move',
-      opacity: 0.6,
-      update: function() {
-        var order = [];
-      $('tr.row1').each(function(index,element) {
-        order.push({
-          id: $(this).attr('data-id'),
-          position: index+1
-        });
-      });
-
-      $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "{{ route('root_update_categorie_order') }}",
-        data: {
-            order:order,
-          _token: '{{csrf_token()}}'
-        },
-        success: function(response) {
-            if (response.status == "success") {
-              console.log(response);
-            } else {
-              console.log(response);
-            }
+      $( "#tablecontents" ).sortable({
+        items: "tr",
+        cursor: 'move',
+        opacity: 0.6,
+        update: function() {
+            sendOrderToServer();
         }
       });
-        // alert("Sortable Event Updated!")
-    }
-});
 
-    // function sendOrderToServer() {
-    //   var order = [];
-    //   $('tr.row1').each(function(index,element) {
-    //     order.push({
-    //       id: $(this).attr('data-id'),
-    //       position: index+1
-    //     });
-    //   });
+      function sendOrderToServer() {
 
-    //   $.ajax({
-    //     type: "POST",
-    //     dataType: "json",
-    //     url: "{{ route('root_update_categorie_order') }}",
-    //     data: {
-    //         order:order,
-    //       _token: '{{csrf_token()}}'
-    //     },
-    //     success: function(response) {
-    //         if (response.status == "success") {
-    //           console.log(response);
-    //         } else {
-    //           console.log(response);
-    //         }
-    //     }
-    //   });
+        var order = [];
+        $('tr.row1').each(function(index,element) {
+          order.push({
+            id: $(this).attr('data-id'),
+            position: index+1
+          });
+        });
 
-    // }
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ route('root_update_categorie_order')}}",
+        //   data: {
+        //     order:order,
+        //     _token: '{{csrf_token()}}'
+        //   },
+          success: function(response) {
+              if (response.status == "success") {
+                console.log(response);
+              } else {
+                console.log(response);
+              }
+          }
+        });
 
-  });
+      }
+    });
 
-</script>
+  </script>
 
 @endsection
