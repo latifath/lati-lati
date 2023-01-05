@@ -121,9 +121,8 @@
                 id: $(this).attr('data-id'),
                 position: index+1
             });
-            alert(order);
         });
-        alert(order);
+        // alert(order);
         $.ajax({
           type: "POST",
           dataType: "json",
