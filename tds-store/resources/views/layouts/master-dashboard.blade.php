@@ -20,10 +20,10 @@
         <link href="{{  asset('dashbord/css/style.css') }}" rel="stylesheet"  type="text/css">
 
          <!-- DataTables -->
-         <link href="{{ asset('dashbord/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-         <link href="{{ asset('dashbord/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+         {{-- <link href="{{ asset('dashbord/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+         <link href="{{ asset('dashbord/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" /> --}}
          <!-- Responsive datatable examples -->
-         <link href="{{ asset('dashbord/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+         {{-- <link href="{{ asset('dashbord/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" /> --}}
 
          <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
@@ -170,12 +170,12 @@
 
 
         <!-- Required datatable js -->
-        <script src="{{ asset('dashbord/plugins/datatables/jquery.dataTables.min.js ')}}"></script>
+        {{-- <script src="{{ asset('dashbord/plugins/datatables/jquery.dataTables.min.js ')}}"></script>
         <script src="{{ asset('dashbord/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Responsive examples -->
         <script src="{{ asset('dashbord/plugins/datatables/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ asset('dashbord/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('dashbord/plugins/datatables/responsive.bootstrap4.min.js') }}"></script> --}}
 
         <!-- Datatable init js -->
         <script src="{{ asset('dashbord/pages/datatables.init.js') }}"></script>

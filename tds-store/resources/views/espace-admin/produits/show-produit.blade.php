@@ -30,13 +30,21 @@
         </div>
         <div class="table-responsive">
         <table class="table table-striped table-bordered dt-responsive nowrap mt-4">
+            <tr >
+                <td>Produit</td>
+                <td>
+                {{-- <figure class="figure"> --}}
+                    <img src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" class="figure-img img-fluid rounded" alt="" height="50" width="60">
+                {{-- </figure> --}}
+                </td>
+            </tr>
             <tr>
                 <td>Nom</td>
                 <td>{{ $produit->nom }}</td>
             </tr>
             <tr>
                 <td>Prix</td>
-                <td>{{ $produit->prix }}</td>
+                <td>{{ number_format($produit->prix, '0', '.', ' ')}} F CFA</td>
             </tr>
             <tr>
                 <td>Quantite</td>
@@ -54,14 +62,7 @@
                 <td>Description</td>
                 <td>{!! $produit->description !!}</td>
             </tr>
-            <tr >
-                <td>Produit</td>
-                <td>
-                {{-- <figure class="figure"> --}}
-                    <img src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" class="figure-img img-fluid rounded" alt="" height="50" width="60">
-                {{-- </figure> --}}
-                </td>
-            </tr>
+
             @if($produit->file_id != null)
             <tr >
                 <td>Fiche Technique</td>

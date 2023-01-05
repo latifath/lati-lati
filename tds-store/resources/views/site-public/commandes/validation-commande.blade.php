@@ -199,7 +199,7 @@
                             @endforeach
                         </ul>
                         @if (session("stock") != null)
-                            <p class="text-danger">Êtes-vous sûre de vouloir passer la commande? <br> si oui, cela veut dire que le reste des produits vous serez livré dès que le nouveau stock serait disponible.</p>
+                            <p class="text-danger">Êtes-vous sûr de vouloir passer la commande? <br> Si oui, cela veut dire que le reste des produits vous sera livré dès que le nouveau stock serait disponible.</p>
                         @endif
 
                     @endif
