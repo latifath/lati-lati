@@ -19,11 +19,11 @@
            <div class="card-header bg-success">
                 <h4 class="mt-3 header-title text-white d-inline-block " style="font-size: 24px;">Toutes les categories</h4>
                 <button id="btn_ajout_categorie" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}"><i class="fa fa-plus" aria-hidden="true"> Ajouter une catégorie</i></button>
-            </div><link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-            <p>&nbsp;</p>
+            </div>
+            {{-- <p>&nbsp;</p> --}}
             <div class="card-body">
                 <div class="table-responsive">
-                <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -117,21 +117,23 @@
 
         var order = [];
         $('tr.row1').each(function(index,element) {
-          order.push({
-            id: $(this).attr('data-id'),
-            position: index+1
-          });
+            order.push({
+                id: $(this).attr('data-id'),
+                position: index+1
+            });
+            alert(order);
         });
-
+        alert(order);
         $.ajax({
           type: "POST",
           dataType: "json",
           url: "{{ route('root_update_categorie_order')}}",
-        //   data: {
-        //     order:order,
-        //     _token: '{{csrf_token()}}'
-        //   },
+          data: {
+            order:order,
+            _token: '{{csrf_token()}}'
+          },
           success: function(response) {
+            alert('t');
               if (response.status == "success") {
                 console.log(response);
               } else {

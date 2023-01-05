@@ -8,10 +8,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
 <style>
-        .iti{
-            display : block !important;
-        }
-
+    .iti{
+        display : block !important;
+    }
     .select2-selection--single{
             height: 50px !important;
             border: 1px solid #ced4da !important;

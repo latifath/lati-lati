@@ -57,7 +57,7 @@ class ProduitAdminController extends Controller
         $request->validate([
             'nom'=> 'required',
             'quantite' => 'required|integer',
-            'prix' => 'required|integer',
+            'prix' => 'required|between:0,99.99',
             'description' => 'required',
             'sous_categorie' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
@@ -95,7 +95,7 @@ class ProduitAdminController extends Controller
         $request->validate([
             'nom'=> 'required',
             'quantite' => 'required|integer',
-            'prix' => 'required|integer',
+            'prix' => 'required|between:0,99.99',
             'description' => 'required',
             'sous_categorie' => 'required',
 
