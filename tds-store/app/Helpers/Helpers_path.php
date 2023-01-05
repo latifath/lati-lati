@@ -29,8 +29,8 @@ if (!function_exists('save_image')) {
 
 // fiche technique;
 
-if (!function_exists('save_produit')) {
-    function upload_produit($dir, $file, $name) {
+if (!function_exists('save_fiche')) {
+    function upload_fiche($dir, $file, $name) {
 
         $extension = new SplFileInfo($file->getClientOriginalName());
 
@@ -40,8 +40,8 @@ if (!function_exists('save_produit')) {
     }
 }
 
-if (!function_exists('save_produit')) {
-    function save_produit($file, $filepath, $name) {
+if (!function_exists('save_fiche')) {
+    function save_fiche($file, $filepath, $name) {
 
         $extension = new SplFileInfo($file->getClientOriginalName());
 
