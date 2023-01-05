@@ -62,10 +62,7 @@ class ProduitAdminController extends Controller
             'sous_categorie' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
-
-        $name = $request->nom;
-        $upload = upload_produit('produits', $request->image, $name);
-        $save  = save_produit($request->fichier, $upload, $name);
+        $save = save_image('produits', $request->image);
 
         if ($save != null) {
             $produit = Produit::create([
@@ -210,8 +207,8 @@ class ProduitAdminController extends Controller
         ]);
 
         $name = $request->nom;
-        $upload = upload_produit('produits/fiche_technique', $request->fichier, $name);
-        $save  = save_produit($request->fichier, $upload, $name);
+        $upload = upload_fiche('produits/fiche_technique', $request->fichier, $name);
+        $save  = save_fiche($request->fichier, $upload, $name);
         // $save = save_image('produits/fiche_technique', $request->fichier);
 
         if ($save != null) {
