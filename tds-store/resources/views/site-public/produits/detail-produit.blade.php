@@ -69,7 +69,7 @@
                     <div id="product-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner border" style="height: 400px;">
                             <div class="carousel-item active">
-                                    <img class="img-fluid-prod" src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" alt="Image">
+                                    <img class="w-100 h-100" src="{{ path_image($produit->image_id) ? asset(path_image_produit() . path_image($produit->image_id)->filename) : ''}}" alt="Image">
                             </div>
                             @foreach($produit->images as $image)
                                 <div class="carousel-item">

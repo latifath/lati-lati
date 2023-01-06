@@ -114,22 +114,30 @@
       });
 
       function sendOrderToServer() {
+          var order = [];
+          var token = $('meta[name="csrf-token"]').attr('content');
 
-        var order = [];
         $('tr.row1').each(function(index,element) {
-            order.push({
+            order.unshift({
                 id: $(this).attr('data-id'),
                 position: index+1
             });
         });
         // alert(order);
+        // alert('y');
+        //alert({{csrf_token()}});
+        // alert(token);
+        // alert('p');
         $.ajax({
           type: "POST",
           dataType: "json",
-          url: "{{ route('root_update_categorie_order')}}",
+          url: "{{ url('espace-admin/update/categorie_order') }}",
           data: {
             order:order,
-            _token: '{{csrf_token()}}'
+            _token: token
+          },
+          beforeSend: function (){
+            alert('op');
           },
           success: function(response) {
             alert('t');
@@ -144,6 +152,6 @@
       }
     });
 
-  </script>
+</script>
 
 @endsection
