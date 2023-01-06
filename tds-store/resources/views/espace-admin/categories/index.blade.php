@@ -7,12 +7,6 @@
     'infos3' => 'Toutes les catégories',
 ])
 <br>
-@section('head')
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
-{{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/> --}}
-
-@endsection
 <div class="row">
     <div class="col-md-12 col-12">
         <div class="card m-b-30">
@@ -20,20 +14,18 @@
                 <h4 class="mt-3 header-title text-white d-inline-block " style="font-size: 24px;">Toutes les categories</h4>
                 <button id="btn_ajout_categorie" class="float-right btn d-inline-block text-white border" style="font-size: 24px; {{ couleur_background_1() }}"><i class="fa fa-plus" aria-hidden="true"> Ajouter une catégorie</i></button>
             </div>
-            {{-- <p>&nbsp;</p> --}}
             <div class="card-body">
                 <div class="table-responsive">
                 <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                     <thead>
                     <tr>
                         <th>#</th>
-                        {{-- <th>Id</th> --}}
                         <th>Nom</th>
                         <th>Priorité</th>
-                        <th style="width: 15%">Action</th>
+                        <th style="width: 10%">Action</th>
                     </tr>
                     </thead>
-                    <tbody id="tablecontents">
+                    <tbody id="datatablecategories">
                         @foreach ($categories as $categorie)
                         <tr class="row1" data-id="{{ $categorie->id }}">
                             <td>
@@ -42,7 +34,6 @@
                                 <i class="fa fa-ellipsis-v"></i>
                                 </div>
                             </td>
-                            {{-- <td>{{ $key + 1 }}</td> --}}
                             <td>{{ $categorie->nom }}</td>
                             <td>{{ $categorie->priority_order }}</td>
                             <td>
@@ -71,8 +62,6 @@
 @section('js')
 
 <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
-{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
-<script type="text/javascript" src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
 
 <script>
     $(document).on('click', '#btn_edit_categorie', function(){
@@ -102,9 +91,7 @@
 </script>
 <script type="text/javascript">
     $(function () {
-    //   $("#table").DataTable();
-
-      $( "#tablecontents" ).sortable({
+      $( "#datatablecategories" ).sortable({
         items: "tr",
         cursor: 'move',
         opacity: 0.6,
@@ -123,24 +110,17 @@
                 position: index+1
             });
         });
-        // alert(order);
-        // alert('y');
-        //alert({{csrf_token()}});
-        // alert(token);
-        // alert('p');
+
         $.ajax({
           type: "POST",
           dataType: "json",
-          url: "{{ url('espace-admin/update/categorie_order') }}",
+          url: "{{ route('root_espace_admin_update_order') }}",
           data: {
             order:order,
             _token: token
           },
-          beforeSend: function (){
-            alert('op');
-          },
+
           success: function(response) {
-            alert('t');
               if (response.status == "success") {
                 console.log(response);
               } else {

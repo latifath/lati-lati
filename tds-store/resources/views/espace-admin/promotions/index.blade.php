@@ -57,6 +57,7 @@
 
 @endsection
 @section('js')
+
 <script>
 
     $(document).on('click', '#btn_ajout_promotion', function(){

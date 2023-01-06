@@ -113,7 +113,7 @@
 <div class="d-none">
     <div id='les_produits'>
         <h3  class="text-center">Toutes les produits</h3>
-        <table class="table table-striped table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
+        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
             <thead>
             <tr>
                 <th>N°</th>

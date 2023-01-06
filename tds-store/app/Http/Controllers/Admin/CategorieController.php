@@ -9,24 +9,27 @@ use App\Models\SousCategorie;
 
 class CategorieController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-      $categories =  Categorie::orderBy('priority_order','ASC')->get();
+        $categories =  Categorie::orderBy('priority_order', 'ASC')->get();
 
-      return view('/espace-admin.categories.index', compact('categories'));
+        return view('/espace-admin.categories.index', compact('categories'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $categorie = Categorie::findOrfail($id);
         $detail_cat = SousCategorie::where('categorie_id', $id)->get();
 
         return view('/espace-admin.categories.details-categorie', compact('detail_cat', 'categorie'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $request->validate([
-            'nom'=> 'required',
-            'priority_order'=> 'required',
+            'nom' => 'required',
+            'priority_order' => 'required',
         ]);
 
         Categorie::findOrfail($request->id)->update([
@@ -35,7 +38,7 @@ class CategorieController extends Controller
         ]);
 
 
-        flashy()->success('Catégorie #'. $request->id . 'modifiée avec succès');
+        flashy()->success('Catégorie #' . $request->id . 'modifiée avec succès');
 
         return redirect()->back();
     }
@@ -54,46 +57,32 @@ class CategorieController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
 
         $categorie = Categorie::findOrfail($request->id);
 
         $categorie->delete();
 
-        flashy()->error('Catégorie #'. $request->id . 'supprimée avec succès');
+        flashy()->error('Catégorie #' . $request->id . 'supprimée avec succès');
 
         return redirect()->back();
     }
 
-    public function updateOrder(Request $request){
-
+    public function updateOrder(Request $request)
+    {
         $categories = Categorie::all();
 
-        foreach ($categories as $categorie)
-        {
-            foreach ($request->priority_order as $priority)
-         {
-            if ($priority['id'] == $categorie->id) {
-                 $categorie->update(['priority_order' => $priority['position']]);
+        foreach ($categories as $category) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $category->id) {
+                    $category->update([
+                        'priority_order' => $order['position']
+                    ]);
+                }
             }
+
         }
-            flashy()->success('ordre de priorité de la catégorie modifier avec succès');
-
-            return redirect()->back();
-        }
-
-
-        // foreach ($categories as $categorie) {
-        //     $categorie->timestamps = false; // To disable update_at field updation
-        //     $id = $categorie->id;
-
-        //         foreach ($request->priority_order as $priority) {
-        //             if ($priority['id'] == $id) {
-        //                 $categorie->update(['priority_order' => $priority['position']]);
-        //             }
-        //         }
-        // }
-        //     flashy()->success('Ordre de tire modifier avec succès');
+        return response()->json('ordre de priorité de la catégorie modifier avec succès' , 200);
     }
-
 }

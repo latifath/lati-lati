@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class PartenaireAdminController extends Controller
 {
     public function index(){
-        $partenaires = Partenaire::all();
+        $partenaires = Partenaire::orderBy('number_order', 'ASC')->get();
         return view('espace-admin.partenaires.index', compact('partenaires'));
     }
 
@@ -19,7 +19,7 @@ class PartenaireAdminController extends Controller
     {
         $request->validate([
             'nom' => 'required|unique:partenaires,nom,except,id',
-            'ordre_de_numero' => 'required|unique:partenaires,number_order,except,id|integer',
+            'ordre_de_numero' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
@@ -43,7 +43,7 @@ class PartenaireAdminController extends Controller
 
         $request->validate([
             'nom' => 'required',
-            'ordre_de_numero' => 'required|unique:partenaires,number_order,except,id|integer',
+            'ordre_de_numero' => 'required|integer',
 
         ]);
 
@@ -97,5 +97,23 @@ class PartenaireAdminController extends Controller
         flashy()->error('Partenaire #'. $request->id . ' supprimé avec succès');
 
         return redirect()->back();
+    }
+
+    // Pour les tries
+    public function updateOrder(Request $request)
+    {
+        $partenaires = Partenaire::all();
+
+        foreach ($partenaires as $partenaire) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $partenaire->id) {
+                    $partenaire->update([
+                        'number_order' => $order['position']
+                    ]);
+                }
+            }
+
+        }
+        return response()->json('ordre de priorité du partenaire modifier avec succès' , 200);
     }
 }

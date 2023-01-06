@@ -213,6 +213,9 @@ Route::middleware('admin')->group(function () {
 
     Route::post('espace-admin/categorie/Ajouter', [CategorieController::class, 'store'])->name('root_espace_admin_store');
 
+    Route::post('espace-admin/categorie/update-order', [CategorieController::class, 'updateOrder'])->name('root_espace_admin_update_order');
+
+
     // gestion livraison
 
     Route::get('espace-admin/livraisons', [LivraisonController::class, 'index'])->name('root_espace_admin_index_livraison');
@@ -293,6 +296,9 @@ Route::middleware('admin')->group(function () {
 
     Route::delete('espace-admin/partenaires/{id}/supprimer', [PartenaireAdminController::class, 'delete'])->name('root_espace_admin_partenaire_delete');
 
+    Route::post('espace-admin/partenaires/update-order', [PartenaireAdminController::class, 'updateOrder'])->name('root_espace_admin_partenaire_update_order');
+
+
     // gestion stock
 
     Route::get('espace-admin/stocks', [StockAdminController::class, 'index'])->name('root_espace_admin_index_stock');
@@ -332,6 +338,8 @@ Route::middleware('admin')->group(function () {
 
     Route::delete('espace-admin/promotions/delete', [PromotionAdminController::class, 'delete'])->name('root_espace_admin_promotion_delete');
 
+
+
     // publicites
 
     Route::get('espace-admin/publicites', [PubliciteAdminController::class, 'index'])->name('root_espace_admin_publicites');
@@ -345,6 +353,8 @@ Route::middleware('admin')->group(function () {
     Route::delete('espace-admin/publicites/{id}/publicites', [PubliciteAdminController::class, 'delete'])->name('root_espace_admin_supprimer_publicites');
 
     Route::get('site-public/publicites', [PubliciteAdminController::class, 'index'])->name('root_site_public_publicite_index');
+
+    // Route::post('espace-admin/promotions/update-order', [CategorieController::class, 'updateOrder'])->name('root_espace_admin_promotion_update_order');
 
     // produit non livré
 
@@ -368,8 +378,6 @@ Route::middleware('admin')->group(function () {
 
     // Facture
     Route::get('espace-client/facture/{id}', [PaiementAdminController::class, 'facture_commande'])->name('root_facture');
-
-    Route::post('espace-admin/update/categorie_order', [CategorieController::class, 'updateOrder'])->name('root_update_categorie_order');
 
 });
 // end espace admin

@@ -21,7 +21,7 @@
                     <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>#</th>
                             <th>Nom</th>
                             <th>Logo</th>
                             <th>Numéro d'ordre</th>
@@ -29,11 +29,16 @@
                             <th style="width: 15%">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($partenaires as $key => $partenaire)
+                        <tbody id="datatablepartenaires">
+                            @foreach ($partenaires as $partenaire)
 
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
+                            <tr class="row1" data-id="{{ $partenaire->id }}">
+                                <td>
+                                    <div style="color:rgb(124,77,255); padding-left: 10px; float: left; font-size: 20px; cursor: pointer;">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    </div>
+                                </td>
                                 <td>{{ $partenaire->nom }}</td>
                                 <td>
                                     <img src="{{ asset(path_image_partenaire() . path_image($partenaire->image_id)->filename )}}" class="figure-img img-fluid rounded" alt="" height="40" width="50">
@@ -62,6 +67,8 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+
 <script>
     $(document).on('click', '#btn_edit_partenaire', function(){
         var id = $(this).attr('data-id');
@@ -95,6 +102,50 @@
 
         $('#ModalAjoutPartenaire').modal('show');
     });
+</script>
+<script type="text/javascript">
+    $(function () {
+      $( "#datatablepartenaires" ).sortable({
+        items: "tr",
+        cursor: 'move',
+        opacity: 0.6,
+        update: function() {
+            sendOrderToServer();
+        }
+      });
+
+      function sendOrderToServer() {
+          var order = [];
+          var token = $('meta[name="csrf-token"]').attr('content');
+
+        $('tr.row1').each(function(index,element) {
+            order.unshift({
+                id: $(this).attr('data-id'),
+                position: index+1
+            });
+        });
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ route('root_espace_admin_partenaire_update_order') }}",
+          data: {
+            order:order,
+            _token: token
+          },
+
+          success: function(response) {
+              if (response.status == "success") {
+                console.log(response);
+              } else {
+                console.log(response);
+              }
+          }
+        });
+
+      }
+    });
+
 </script>
 @endsection
 
