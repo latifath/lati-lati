@@ -354,7 +354,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('site-public/publicites', [PubliciteAdminController::class, 'index'])->name('root_site_public_publicite_index');
 
-    // Route::post('espace-admin/promotions/update-order', [CategorieController::class, 'updateOrder'])->name('root_espace_admin_promotion_update_order');
+    Route::post('espace-admin/publicités/update-order', [PubliciteAdminController::class, 'updateOrder'])->name('root_espace_admin_publicites_update_order');
 
     // produit non livré
 

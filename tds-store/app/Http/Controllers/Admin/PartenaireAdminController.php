@@ -19,7 +19,7 @@ class PartenaireAdminController extends Controller
     {
         $request->validate([
             'nom' => 'required|unique:partenaires,nom,except,id',
-            'ordre_de_numero' => 'required',
+            'ordre_de_numero' => 'requrequired|unique:partenaires,number_order,except,id|integerired',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:5048',
         ]);
 
@@ -43,7 +43,7 @@ class PartenaireAdminController extends Controller
 
         $request->validate([
             'nom' => 'required',
-            'ordre_de_numero' => 'required|integer',
+            'ordre_de_numero' => 'required|unique:partenaires,number_order,except,id|integer',
 
         ]);
 

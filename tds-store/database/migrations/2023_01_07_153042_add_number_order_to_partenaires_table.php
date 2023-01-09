@@ -14,7 +14,8 @@ class AddNumberOrderToPartenairesTable extends Migration
     public function up()
     {
         Schema::table('partenaires', function (Blueprint $table) {
-            $table->integer('number_order')->after('image_id')->unique()->nullable();
+            $table->integer('number_order')->after('image_id')->default(0);
+
         });
     }
 

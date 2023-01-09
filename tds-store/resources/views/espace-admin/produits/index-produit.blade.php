@@ -112,7 +112,7 @@
 
 <div class="d-none">
     <div id='les_produits'>
-        <h3  class="text-center">Toutes les produits</h3>
+        <h3  class="text-center">Tous les produits</h3>
         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
             <thead>
             <tr>
@@ -151,8 +151,6 @@
 @include('espace-admin.produits._modal');
 
 @include('layouts.modal', ["route" => route('root_espace_admin_produit_delete', 0), 'nom'=>'cet produit'])
-
-
 
 @endsection
 
@@ -195,12 +193,12 @@
     // ajout fiche technique
     $(document).on('click', '#btn_add_fiche_technique', function(){
 
-        var ID = $(this).attr('data-id');
+        var id = $(this).attr('data-id');
 
         var nom = $(this).attr('data-nom');
 
 
-        $('#btn_add_fiche_id').val(ID);
+        $('#btn_add_fiche_id').val(id);
 
         $('#btn_add_fiche_nom').val(nom);
 

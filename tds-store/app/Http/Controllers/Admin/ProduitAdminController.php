@@ -201,23 +201,21 @@ class ProduitAdminController extends Controller
     public function create_fiche_technique(Request $request){
 
         $request->validate([
-            'produit' => 'required',
-            'nom' => 'required',
+            'id' => 'required',
             'fichier' => 'required',
         ]);
 
-        $name = $request->nom;
-        $upload = upload_fiche('produits/fiche_technique', $request->fichier, $name);
-        $save  = save_fiche($request->fichier, $upload, $name);
-        // $save = save_image('produits/fiche_technique', $request->fichier);
+        // $name = str_replace(' ', '_', $request->nom);
+        // $upload = upload_fiche('produits/fiche_technique', $request->fichier, $name);
+        // $save  = save_fiche($request->fichier, $upload, $name);
+        $save = save_image('produits/fiche_technique', $request->fichier);
 
         if ($save != null) {
 
-             Produit::findOrfail($request->produit)->update([
+             Produit::findOrfail($request->id)->update([
                  'file_id' => $save->id,
              ]);
         }
-
         flashy()->info('Fiche Technique ajoutée avec succès.');
 
         return redirect()->back();

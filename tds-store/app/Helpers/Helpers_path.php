@@ -29,35 +29,33 @@ if (!function_exists('save_image')) {
 
 // fiche technique;
 
-if (!function_exists('save_fiche')) {
-    function upload_fiche($dir, $file, $name) {
+// if (!function_exists('save_fiche')) {
+//     function upload_fiche($dir, $file, $name) {
 
-        $extension = new SplFileInfo($file->getClientOriginalName());
+//         $extension = new SplFileInfo($file->getClientOriginalName());
 
-        $filepath = $file->storeAs($dir, $name . '.' . $extension->getExtension(), 'public');
+//         $filepath = $file->storeAs($dir, $name . '.' . $extension->getExtension(), 'public');
 
-        return $filepath;
-    }
-}
+//         return $filepath;
+//     }
+// }
 
-if (!function_exists('save_fiche')) {
-    function save_fiche($file, $filepath, $name) {
+// if (!function_exists('save_fiche')) {
+//     function save_fiche($file, $filepath, $name) {
 
-        $extension = new SplFileInfo($file->getClientOriginalName());
+//         $extension = new SplFileInfo($file->getClientOriginalName());
 
-        if($filepath != null){
-            $picture = Image::create([
-                'filename' => $name. '.' . $extension->getExtension(),
-                'mimetype' => $file->getClientMimeType()
-            ]);
-        } else{
-            $picture = null;
-        }
-        return $picture;
-    }
-}
-
-
+//         if($filepath != null){
+//             $picture = Image::create([
+//                 'filename' => $name. '.' . $extension->getExtension(),
+//                 'mimetype' => $file->getClientMimeType()
+//             ]);
+//         } else{
+//             $picture = null;
+//         }
+//         return $picture;
+//     }
+// }
 
 if (!function_exists('update_image')) {
     function update_image($dir, $file, $image) {

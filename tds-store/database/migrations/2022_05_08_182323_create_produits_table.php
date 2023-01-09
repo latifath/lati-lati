@@ -26,10 +26,6 @@ class CreateProduitsTable extends Migration
             $table->decimal('prix_vente', 10, 2)->nullable();
             $table->integer('image_id')->unsigned();
             $table->foreign('image_id')->references('id')->on('images')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreignId('file_id')->nullable()
-            ->constrained('images')
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

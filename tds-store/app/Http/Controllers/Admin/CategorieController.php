@@ -29,7 +29,7 @@ class CategorieController extends Controller
     {
         $request->validate([
             'nom' => 'required',
-            'priority_order' => 'required',
+            'priority_order' => 'required|unique:categories,priority_order,except,id|integer',
         ]);
 
         Categorie::findOrfail($request->id)->update([
@@ -48,7 +48,7 @@ class CategorieController extends Controller
         $request->validate([
 
             'nom' => 'required',
-            'priority_order' => 'required',
+            'priority_order' => 'required|unique:categorie,priority_order,except,id|integer',
         ]);
 
         Categorie::create($request->all());

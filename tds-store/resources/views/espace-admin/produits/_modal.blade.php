@@ -80,10 +80,7 @@
                 @csrf
                 <div class="modal-body">
 
-                    <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="produit" id="btn_add_fiche_id">
-
-                    <input class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="nom" id="btn_add_fiche_nom">
-
+                    <input class="form-control {{ $errors->has('produit') ? 'is-invalid' : '' }}" style="height: 50px;" type="hidden" placeholder="" name="id" id="btn_add_fiche_id">
                     <div class="form-group">
                         <label for="">Fiche Technique</label>
                         <input class="form-control {{ $errors->has('fichier') ? 'is-invalid' : '' }}" style="height: 50px;" type="file" placeholder="" name="fichier">
