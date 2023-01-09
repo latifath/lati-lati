@@ -7,44 +7,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     {{-- partage sur facebook et linkedin--}}
-    <meta property="og:title" content={{ $title ??  ''}} />
+    {{-- partage sur facebook et linkedin--}}
+    <meta property="og:title" content={{ $title ?? '' }} />
     <meta property="og:url" content={{ $url ?? '' }} />
     <meta property="og:image" content={{ $image ?? '' }} />
     <meta property="og:description" content={{ $description ?? '' }} />
-    <meta property="og:site_name" content={{ $site_name ?? ''  }} />
+    <meta property="og:site_name" content={{ $site_name ?? '' }} />
     <meta property="og:type" content={{ $type ?? '' }} />
-    <meta property="og:image:width" content={{ $image_widht ?? ''}}>
+    <meta property="og:image:width" content={{ $image_widht ?? '' }}>
     <meta property="og:image:height" content={{ $image_height ?? '' }}>
     <meta property="og:image:type" content={{ $image_type ?? '' }}>
 
-
     {{-- partage sur twitter --}}
-    <meta name="twitter:card" content={{ $tcard ?? '' }}/>
+    <meta name="twitter:card" content={{ $tcard ?? '' }} />
     <meta name="twitter:site" content={{ $tsite ?? '' }}>
     <meta name="twitter:title" content={{ $ttitle ?? '' }} />
     <meta name="twitter:description" content={{ $tdescription ?? '' }} />
     <!-- Twitter summary card avec image large de 280x150px -->
     <meta name="twitter:image:src" content={{ $timage ?? '' }} />
 
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NWZKWKW');
+        </script>
+        <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
-    <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
-   />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" media="all" rel="stylesheet"/>
+    <link href="{{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" media="all" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
@@ -52,11 +58,11 @@
     @yield('style')
 
     <style>
-        .tx:hover{
+        .tx:hover {
             color: #fff !important;
         }
 
-        .h-sidebar{
+        .h-sidebar {
             height: 1520px;
         }
     </style>
@@ -68,7 +74,10 @@
 </head>
 
 <body>
- @yield('head')
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWZKWKW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    @yield('head')
 
     @include('layouts.partials.header')
 
@@ -148,5 +157,3 @@
 </body>
 
 </html>
-
-
