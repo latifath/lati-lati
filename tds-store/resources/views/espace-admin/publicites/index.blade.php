@@ -22,7 +22,7 @@
                     <table  id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; {{ couleur_principal() }}">
                         <thead>
                         <tr>
-                            <td>N°</td>
+                            <td>#</td>
                             <th>Nom</th>
                             <th>Message</th>
                             <th>Numéro d'ordre</th>
@@ -30,10 +30,15 @@
                             <th style="width: 20%">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            @foreach($publicites as $key => $publicite)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
+                        <tbody id="datatablepublicites">
+                            @foreach($publicites as $publicite)
+                                <tr class="row1" data-id="{{ $publicite->id }}">
+                                    <td>
+                                        <div style="color:rgb(124,77,255); padding-left: 10px; float: left; font-size: 20px; cursor: pointer;">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </div>
+                                    </td>
                                     <td>{{ $publicite->nom }}</td>
                                     <td>{{ $publicite->message }}</td>
                                     <td>{{ $publicite->number_order }}</td>
@@ -64,6 +69,8 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+
 <script>
 
 $(document).on('click', '#btn_ajout_publicite', function(){
@@ -111,6 +118,51 @@ $(document).on('click', '#btn_delete_publicite', function(){
     $('#DeleteModalCenter').modal('show');
 });
 
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+      $( "#datatablepublicites" ).sortable({
+        items: "tr",
+        cursor: 'move',
+        opacity: 0.6,
+        update: function() {
+            sendOrderToServer();
+        }
+      });
+
+      function sendOrderToServer() {
+          var order = [];
+          var token = $('meta[name="csrf-token"]').attr('content');
+
+        $('tr.row1').each(function(index,element) {
+            order.unshift({
+                id: $(this).attr('data-id'),
+                position: index+1
+            });
+        });
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ route('root_espace_admin_publicites_update_order') }}",
+          data: {
+            order:order,
+            _token: token
+          },
+
+          success: function(response) {
+              if (response.status == "success") {
+                console.log(response);
+              } else {
+                console.log(response);
+              }
+          }
+        });
+
+      }
+    });
 
 </script>
 @endsection

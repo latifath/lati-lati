@@ -17,7 +17,6 @@ class CreatePublicitesTable extends Migration
             $table->increments('id');
             $table->string('nom')->unique();
             $table->string('message');
-            $table->integer('number_order')->unique()->nullable();
             $table->integer('image_id')->unsigned();
             $table->foreign('image_id')->references('id')->on('images')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();

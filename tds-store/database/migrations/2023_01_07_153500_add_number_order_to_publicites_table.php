@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFileIdToProduitsTable extends Migration
+class AddNumberOrderToPublicitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddFileIdToProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            $table->integer('file_id')->after('image_id')->nullable();
-
+        Schema::table('publicites', function (Blueprint $table) {
+            $table->integer('number_order')->after('image_id')->default(0);
         });
     }
 
@@ -26,8 +25,8 @@ class AddFileIdToProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            $table->dropColumn('file_id');
+        Schema::table('publicites', function (Blueprint $table) {
+            $table->dropColumn('number_order');
         });
     }
 }

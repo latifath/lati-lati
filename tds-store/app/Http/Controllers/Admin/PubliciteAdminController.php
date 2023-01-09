@@ -12,7 +12,7 @@ class PubliciteAdminController extends Controller
 {
     public function index(){
 
-        $publicites = Publicite::all();
+        $publicites = Publicite::orderBy('number_order', 'ASC')->get();
 
         return view('espace-admin.publicites.index', compact('publicites'));
 
@@ -99,6 +99,23 @@ class PubliciteAdminController extends Controller
         flashy()->error('Publicité #'. $request->id . 'supprimée avec succès');
 
         return redirect()->back();
+    }
+
+    public function updateOrder(Request $request)
+    {
+        $publicites = Publicite::all();
+
+        foreach ($publicites as $publicite) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $publicite->id) {
+                    $publicite->update([
+                        'number_order' => $order['position']
+                    ]);
+                }
+            }
+
+        }
+        return response()->json('ordre de priorité de la publicité modifier avec succès' , 200);
     }
 
 }
