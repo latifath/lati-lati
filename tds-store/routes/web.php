@@ -45,6 +45,8 @@ use App\Http\Controllers\Admin\ProduitNonLivrerAdminContoller;
 
 Route::get('/', [HomeController::class, 'index'])->name('root_index');
 
+Route::get('/tdsstoremaps', [HomeController::class, 'tdsstoremaps'])->name('root_tdsstoremaps');
+
 Route::get('/produits', [SitepublicController::class, 'produits'])->name('root_sitepublic_produits');
 
 Route::get('/p/{categorie}/{sous_categorie}', [SitepublicController::class, 'all_produit_par_sous_categorie'])->name('root_sitepublic_all_produit_par_sous_categorie');

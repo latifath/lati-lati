@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('site-public.index', compact('produits_latest', 'publicites', 'publicite_latest', 'partenaires'));
     }
 
+    public function tdsstoremaps()
+    {
+        return view('site-public.maps');
+    }
+
 
     public function showproduit(produit $id)
     {
